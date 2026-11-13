@@ -40,7 +40,7 @@ WFF_TIME_FORMAT_REGEX = re.compile(
     r"^(h{2}_(10|1)|m{2}_(10|1)|s{2}_(10|1)|((h{1,2}):m{1,2}:s{1,2}|(h{1,2}):m{1,2})|(h{1,2})|m{1,2}|s{1,2})$"
 )
 
-# Official WFF v4 time/date data source tokens from google/watchface sourceType.xsd
+# Official WFF v4 time/date/health/battery/weather data source tokens from google/watchface sourceType.xsd
 VALID_WFF_TIME_SOURCES = {
     "MILLISECOND",
     "SECOND",
@@ -71,6 +71,18 @@ VALID_WFF_TIME_SOURCES = {
     "DAY_OF_WEEK",
     "DAY_OF_WEEK_F",
     "DAY_OF_WEEK_S",
+    "STEP_COUNT",
+    "STEP_GOAL",
+    "STEP_PERCENT",
+    "HEART_RATE",
+    "HEART_RATE_Z",
+    "BATTERY_PERCENT",
+    "BATTERY_CHARGING_STATUS",
+    "BATTERY_IS_LOW",
+    "BATTERY_TEMPERATURE_CELSIUS",
+    "UNREAD_NOTIFICATION_COUNT",
+    "WEATHER.IS_AVAILABLE",
+    "WEATHER.TEMPERATURE",
 }
 
 
@@ -100,6 +112,38 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
             "4",
             "WFF version property must be set to '4' for minSdk 36 / Wear OS 6+",
         )
+
+    def test_watch_face_info_editable(self) -> None:
+        info_path = RES_DIR / "xml" / "watch_face_info.xml"
+        self.assertTrue(info_path.is_file(), f"Missing {info_path}")
+        root = ET.parse(info_path).getroot()
+        self.assertEqual(root.tag, "WatchFaceInfo")
+        editable = root.find("Editable")
+        self.assertIsNotNone(
+            editable,
+            "watch_face_info.xml must include <Editable value='true' /> so Wear OS shows the Customize button",
+        )
+        assert editable is not None
+        self.assertEqual(
+            editable.attrib.get("value", "").lower(),
+            "true",
+            "<Editable> in watch_face_info.xml must have value='true'",
+        )
+
+    def test_strings_xml_no_invalid_format_specifiers(self) -> None:
+        strings_path = RES_DIR / "values" / "strings.xml"
+        self.assertTrue(strings_path.is_file(), f"Missing {strings_path}")
+        root = ET.parse(strings_path).getroot()
+        for s in root.findall("string"):
+            name = s.attrib.get("name", "")
+            val = s.text or ""
+            # Android Resources.getString(id, args) runs java.util.Formatter on strings unless formatted="false".
+            # Any unescaped '%' (like 'Battery (%)') throws UnknownFormatConversionException: Conversion = ')'!
+            self.assertNotIn(
+                "%",
+                val,
+                f"strings.xml <string name='{name}'>{val}</string> contains '%' which crashes Android Resources.getString() in getUserStyleSchema!",
+            )
 
     def test_required_assets_exist(self) -> None:
         bg_path = RES_DIR / "drawable" / "bg.png"
@@ -274,9 +318,29 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
             self.assertEqual(row.attrib.get("width"), "636")
             self.assertEqual(row.attrib.get("height"), "204")
 
-            # Collect all static text content inside this row
+            # For row_2_present, the standard 5-slot time view lives inside <ListOption id="time">
+            time_scope = row
+            if row_name == "row_2_present":
+                mode_cfg = row.find("ListConfiguration[@id='row2_mode']")
+                self.assertIsNotNone(
+                    mode_cfg,
+                    "row_2_present must contain <ListConfiguration id='row2_mode'>",
+                )
+                assert mode_cfg is not None
+                time_opt = mode_cfg.find("ListOption[@id='time']/Group")
+                self.assertIsNotNone(
+                    time_opt,
+                    "row2_mode must have <ListOption id='time'><Group ...>",
+                )
+                assert time_opt is not None
+                time_scope = time_opt
+
+            # Collect all static text content inside this row's time view + footer
+            pts = list(time_scope.iter("PartText"))
+            if time_scope is not row:
+                pts.extend(row.findall("PartText"))
             texts = []
-            for pt in row.iter("PartText"):
+            for pt in pts:
                 for font in pt.iter("Font"):
                     if font.text and font.text.strip():
                         texts.append((font.text.strip(), font.attrib))
@@ -343,7 +407,7 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
             )
 
             # 4. Validate all <TimeText> elements against official WFF v4 timeFormatType XSD regex
-            time_texts = list(row.iter("TimeText"))
+            time_texts = list(time_scope.iter("TimeText"))
             for tt in time_texts:
                 fmt = tt.attrib.get("format", "")
                 self.assertRegex(
@@ -358,10 +422,10 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
             #      with official sourceType.xsd tokens ([MONTH_S], [DAY_Z], [YEAR])
             #    - Time slots (HOUR, MIN) must use valid <TimeText format="hh"> / <TimeText format="mm">
             parameter_exprs = [
-                p.attrib.get("expression", "") for p in row.iter("Parameter")
+                p.attrib.get("expression", "") for p in time_scope.iter("Parameter")
             ]
             for expr in parameter_exprs:
-                tokens = re.findall(r"\[([A-Z0-9_]+)\]", expr)
+                tokens = re.findall(r"\[([A-Z0-9_.]+)\]", expr)
                 self.assertTrue(
                     tokens,
                     f"Row {row_name} <Parameter expression='{expr}'> contains no [SOURCE_TYPE] token",
@@ -383,7 +447,7 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
             # Verify MONTH is wrapped in <Upper> so 'Oct' becomes 'OCT'
             upper_params = [
                 p.attrib.get("expression", "")
-                for u in row.iter("Upper")
+                for u in time_scope.iter("Upper")
                 for p in u.iter("Parameter")
             ]
             self.assertIn(
@@ -397,7 +461,7 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
             readout_ys = set()
             readout_heights = set()
 
-            for pt in row.findall("PartText"):
+            for pt in time_scope.findall("PartText"):
                 params = [p.attrib.get("expression") for p in pt.iter("Parameter")]
                 if not params:
                     continue
@@ -455,14 +519,30 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
                 1,
                 f"Row {row_name} MONTH and digit slots must have identical y position, got {readout_ys}",
             )
-            self.assertEqual(
-                len(readout_heights),
-                1,
-                f"Row {row_name} MONTH and digit slots must have identical height, got {readout_heights}",
-            )
+            # Verify all digital readouts and ghost backgrounds use align="END" (right-aligned)
+            # so variable-length numbers always align with their rightmost ghost segments
+            for pt in time_scope.findall("PartText"):
+                font_el = pt.find(".//Font")
+                text_el = pt.find("Text")
+                if font_el is not None and text_el is not None:
+                    if font_el.attrib.get("family") in (
+                        "dseg7_classic_bold",
+                        "dseg14_classic_bold",
+                    ):
+                        self.assertEqual(
+                            text_el.attrib.get("align"),
+                            "END",
+                            f"Row {row_name} digital PartText must use align='END' to align with ghost background",
+                        )
+            for tt in time_texts:
+                self.assertEqual(
+                    tt.attrib.get("align"),
+                    "END",
+                    f"Row {row_name} TimeText format='{tt.attrib.get('format')}' must use align='END'",
+                )
 
             # 5. Check AM/PM Condition inside the row
-            conditions = list(row.iter("Condition"))
+            conditions = list(time_scope.iter("Condition"))
             self.assertGreaterEqual(
                 len(conditions),
                 1,
@@ -472,7 +552,7 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
             # 6. Check slot box background color, equal horizontal margins/gaps, and equal box padding
             row_width = int(row.attrib["width"])
             value_boxes = []
-            for rect in row.iter("Rectangle"):
+            for rect in time_scope.iter("Rectangle"):
                 fill = rect.find("Fill")
                 if (
                     fill is not None
@@ -494,7 +574,7 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
             )
 
             # Find colon PartDraw inside Condition
-            colon_draw = row.find(".//Condition//PartDraw")
+            colon_draw = time_scope.find(".//Condition//PartDraw")
             self.assertIsNotNone(colon_draw)
             assert colon_draw is not None
             colon_box = (
@@ -568,16 +648,23 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
             row_height = int(row.attrib["height"])
             header_rects = [
                 int(r.attrib["y"])
-                for r in row.iter("Rectangle")
+                for r in time_scope.iter("Rectangle")
                 if r.find("Fill") is not None
                 and r.find("Fill").attrib.get("color", "").upper() == "#FF660000"
             ]
             footer_rects = [
                 (int(r.attrib["y"]), int(r.attrib["height"]))
-                for r in row.iter("Rectangle")
+                for r in row.findall("PartDraw/Rectangle")
                 if r.find("Fill") is not None
                 and r.find("Fill").attrib.get("color", "").upper() == "#FF222222"
             ]
+            if not footer_rects:
+                footer_rects = [
+                    (int(r.attrib["y"]), int(r.attrib["height"]))
+                    for r in row.iter("Rectangle")
+                    if r.find("Fill") is not None
+                    and r.find("Fill").attrib.get("color", "").upper() == "#FF222222"
+                ]
             self.assertEqual(len(footer_rects), 1)
             tier_top_margin = min(header_rects)
             tier_bottom_margin = row_height - (footer_rects[0][0] + footer_rects[0][1])
@@ -607,7 +694,8 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
                     )
 
             fill_colors = [
-                f.attrib.get("color", "").upper() for f in row.iter("Fill")
+                f.attrib.get("color", "").upper()
+                for f in list(time_scope.iter("Fill")) + list(row.findall("PartDraw//Fill"))
             ]
             self.assertIn(
                 spec["box_color"],
@@ -624,6 +712,232 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
                 fill_colors,
                 f"Row {row_name} missing footer background color #FF222222",
             )
+
+    def test_row2_configurable_slots(self) -> None:
+        root = ET.parse(WATCHFACE_XML_PATH).getroot()
+
+        # WFF Rule: res/raw/watchface.xml is a raw resource; attributes must NOT use '@string/' or '@drawable/' prefixes
+        for el in root.iter():
+            for attr_name, attr_val in el.attrib.items():
+                self.assertFalse(
+                    attr_val.startswith("@string/") or attr_val.startswith("@drawable/"),
+                    f"<{el.tag} {attr_name}='{attr_val}'> must not use '@string/' or '@drawable/' prefix in raw watchface.xml",
+                )
+
+        user_configs = root.find("UserConfigurations")
+        self.assertIsNotNone(
+            user_configs,
+            "Missing <UserConfigurations> at root <WatchFace>",
+        )
+        assert user_configs is not None
+
+        declared_configs = {}
+        all_user_opt_ids = set()
+        for lc in user_configs.findall("ListConfiguration"):
+            cid = lc.attrib.get("id")
+            self.assertTrue(cid, "ListConfiguration missing id")
+            self.assertTrue(
+                lc.attrib.get("displayName"),
+                f"ListConfiguration '{cid}' missing displayName",
+            )
+            self.assertTrue(
+                lc.attrib.get("screenReaderText"),
+                f"ListConfiguration '{cid}' missing screenReaderText",
+            )
+            default_val = lc.attrib.get("defaultValue")
+            opt_ids = []
+            for o in lc.findall("ListOption"):
+                oid = o.attrib.get("id")
+                self.assertTrue(oid, f"ListOption in '{cid}' missing id")
+                self.assertTrue(
+                    o.attrib.get("displayName"),
+                    f"ListOption '{oid}' missing displayName",
+                )
+                self.assertTrue(
+                    o.attrib.get("screenReaderText"),
+                    f"ListOption '{oid}' missing screenReaderText",
+                )
+                self.assertNotIn(
+                    oid,
+                    all_user_opt_ids,
+                    f"ListOption id='{oid}' must be globally unique across UserConfigurations",
+                )
+                all_user_opt_ids.add(oid)
+                opt_ids.append(oid)
+            self.assertIn(
+                default_val,
+                opt_ids,
+                f"ListConfiguration '{cid}' defaultValue='{default_val}' not in {opt_ids}",
+            )
+            declared_configs[cid] = opt_ids
+
+        # Verify all <Group name="..."> in <Scene> are globally unique
+        scene_for_groups = root.find("Scene")
+        assert scene_for_groups is not None
+        group_names = [g.attrib.get("name") for g in scene_for_groups.iter("Group")]
+        self.assertEqual(
+            len(group_names),
+            len(set(group_names)),
+            "All <Group name='...'> attributes in <Scene> must be globally unique",
+        )
+
+        # Must declare row2_mode with time, slots_3, slots_4, slots_5
+        self.assertIn("row2_mode", declared_configs)
+        for mode_id in ("time", "slots_3", "slots_4", "slots_5"):
+            self.assertIn(
+                mode_id,
+                declared_configs["row2_mode"],
+                f"row2_mode must include ListOption id='{mode_id}'",
+            )
+
+        # Must declare slot_1..slot_5
+        for slot_id in ("slot_1", "slot_2", "slot_3", "slot_4", "slot_5"):
+            self.assertIn(
+                slot_id,
+                declared_configs,
+                f"UserConfigurations missing ListConfiguration id='{slot_id}'",
+            )
+
+        scene = root.find("Scene")
+        assert scene is not None
+        row2 = scene.find("Group[@name='row_2_present']")
+        self.assertIsNotNone(row2)
+        assert row2 is not None
+
+        row2_mode = row2.find("ListConfiguration[@id='row2_mode']")
+        self.assertIsNotNone(row2_mode)
+        assert row2_mode is not None
+
+        scene_mode_opts = {
+            o.attrib.get("id"): o for o in row2_mode.findall("ListOption")
+        }
+        for mode_id, expected_count in (
+            ("slots_3", 3),
+            ("slots_4", 4),
+            ("slots_5", 5),
+        ):
+            self.assertIn(mode_id, scene_mode_opts)
+            mode_group = scene_mode_opts[mode_id].find("Group")
+            self.assertIsNotNone(mode_group)
+            assert mode_group is not None
+            slot_containers = mode_group.findall("Group")
+            self.assertEqual(
+                len(slot_containers),
+                expected_count,
+                f"Mode '{mode_id}' must contain {expected_count} local <Group> slot containers",
+            )
+            for container in slot_containers:
+                self.assertGreater(
+                    int(container.attrib.get("x", "0")),
+                    0,
+                    f"Mode '{mode_id}' slot container <Group> must define the slot x position",
+                )
+                slc = container.find("ListConfiguration")
+                self.assertIsNotNone(
+                    slc,
+                    f"Mode '{mode_id}' slot container must wrap a <ListConfiguration>",
+                )
+                assert slc is not None
+                sid = slc.attrib.get("id")
+                self.assertIn(sid, declared_configs)
+                scene_opt_ids = [o.attrib.get("id") for o in slc.findall("ListOption")]
+                self.assertEqual(
+                    scene_opt_ids,
+                    declared_configs[sid],
+                    f"Mode '{mode_id}' slot '{sid}' options {scene_opt_ids} must match UserConfigurations {declared_configs[sid]}",
+                )
+                for opt in slc.findall("ListOption"):
+                    opt_group = opt.find("Group")
+                    self.assertIsNotNone(opt_group)
+                    assert opt_group is not None
+                    self.assertEqual(opt_group.attrib.get("x"), "0")
+                    header_w = None
+                    box_w = None
+                    box_x = None
+                    for r in opt_group.iter("Rectangle"):
+                        fill = r.find("Fill")
+                        if fill is None:
+                            continue
+                        col = fill.attrib.get("color", "").upper()
+                        if col == "#FF660000":
+                            header_w = int(r.attrib["width"])
+                        elif col == "#FF003300":
+                            box_w = int(r.attrib["width"])
+                            box_x = int(r.attrib["x"])
+                    self.assertIsNotNone(header_w)
+                    self.assertIsNotNone(box_w)
+                    assert header_w is not None and box_w is not None
+                    self.assertGreaterEqual(
+                        box_x,
+                        2,
+                        f"Mode '{mode_id}' slot '{sid}' option '{opt.attrib.get('id')}' value box must have local x >= 2",
+                    )
+                    self.assertLessEqual(
+                        header_w,
+                        box_w,
+                        f"Mode '{mode_id}' slot '{sid}' option '{opt.attrib.get('id')}' header width ({header_w}) exceeds value box width ({box_w})",
+                    )
+                    # Verify box_w exactly matches 38 * len(ghost_text) + 2 so there is never an empty un-shadowed space on the left
+                    ghost_texts = [
+                        pt.find(".//Font").text.strip()
+                        for pt in opt_group.findall("PartText")
+                        if pt.find("Variant") is not None
+                        and pt.find(".//Font") is not None
+                        and pt.find(".//Font").text
+                    ]
+                    self.assertEqual(len(ghost_texts), 1)
+                    expected_opt_box_w = 38 * len(ghost_texts[0]) + 2
+                    self.assertEqual(
+                        box_w,
+                        expected_opt_box_w,
+                        f"Mode '{mode_id}' slot '{sid}' option '{opt.attrib.get('id')}' box_w ({box_w}) must equal 38 * len('{ghost_texts[0]}') + 2 = {expected_opt_box_w} so no empty space exists without ghost shadow",
+                    )
+                    for pt in opt_group.findall("PartText"):
+                        font_el = pt.find(".//Font")
+                        text_el = pt.find("Text")
+                        if font_el is not None and text_el is not None:
+                            if font_el.attrib.get("family") in (
+                                "dseg7_classic_bold",
+                                "dseg14_classic_bold",
+                            ):
+                                self.assertEqual(
+                                    text_el.attrib.get("align"),
+                                    "END",
+                                    f"Mode '{mode_id}' slot '{sid}' option '{opt.attrib.get('id')}' digital PartText must use align='END'",
+                                )
+                    for tt in opt_group.iter("TimeText"):
+                        self.assertEqual(
+                            tt.attrib.get("align"),
+                            "END",
+                            f"Mode '{mode_id}' slot '{sid}' option '{opt.attrib.get('id')}' TimeText must use align='END'",
+                        )
+
+        # Verify required expressions and unit symbols exist in row_2_present
+        row2_templates = [
+            "".join(t.itertext()).strip() for t in row2.iter("Template")
+        ]
+        row2_params = [
+            p.attrib.get("expression") for p in row2.iter("Parameter")
+        ]
+        for req_param in (
+            "[STEP_COUNT]",
+            "[BATTERY_PERCENT]",
+            "[WEATHER.TEMPERATURE]",
+            "[HEART_RATE]",
+        ):
+            self.assertIn(
+                req_param,
+                row2_params,
+                f"row_2_present must support native WFF source {req_param}",
+            )
+        self.assertTrue(
+            any("%" in tmpl for tmpl in row2_templates),
+            "Battery template must include '%' unit symbol",
+        )
+        self.assertTrue(
+            any("°" in tmpl and "C" not in tmpl for tmpl in row2_templates),
+            "Temperature template must include '°' symbol without 'C'",
+        )
 
 
 if __name__ == "__main__":

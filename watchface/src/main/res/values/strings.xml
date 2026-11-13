@@ -1,3 +1,31 @@
 <resources>
     <string name="watch_face_name">BTTF Time Circuit</string>
+
+    <!-- User Configuration Titles -->
+    <string name="cfg_row2_mode">Middle Row Mode</string>
+    <string name="cfg_slot_1">Middle Row — Slot 1</string>
+    <string name="cfg_slot_2">Middle Row — Slot 2</string>
+    <string name="cfg_slot_3">Middle Row — Slot 3 (Wide)</string>
+    <string name="cfg_slot_4">Middle Row — Slot 4</string>
+    <string name="cfg_slot_5">Middle Row — Slot 5</string>
+
+    <!-- Middle Row Mode Options -->
+    <string name="mode_time">Present Time (Default)</string>
+    <string name="mode_slots_3">3 Custom Slots</string>
+    <string name="mode_slots_4">4 Custom Slots</string>
+    <string name="mode_slots_5">5 Custom Slots</string>
+
+    <!-- Slot Metric Options (No '%' characters so Android Resources.getString Formatter does not throw UnknownFormatConversionException) -->
+    <string name="opt_steps">Steps</string>
+    <string name="opt_battery">Battery</string>
+    <string name="opt_temp">Temperature</string>
+    <string name="opt_heart">Heart Rate</string>
+    <string name="opt_day">Day of Week</string>
+    <string name="opt_month">Month</string>
+    <string name="opt_date">Day of Month</string>
+    <string name="opt_year">Year</string>
+    <string name="opt_hour">Hour</string>
+    <string name="opt_min">Minute</string>
+    <string name="opt_sec">Second</string>
+    <string name="opt_alerts">Notifications</string>
 </resources>
