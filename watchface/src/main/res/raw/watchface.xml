@@ -341,10 +341,14 @@
                 </PartDraw>
                 <Condition>
                     <Expressions>
-                        <Expression name="s1_short_text_has_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/" &amp;&amp; textLength([COMPLICATION.TITLE]) &gt; 6</Expression>
-                        <Expression name="s1_short_text_short_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (long > 6 chars) -->
+                        <Expression name="s1_short_text_long_title">textLength([COMPLICATION.TITLE]) &gt; 6 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (short <= 6 chars) -->
+                        <Expression name="s1_short_text_short_title">textLength([COMPLICATION.TITLE]) &gt; 0 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 2: Provider sends no title, but provides a monochromatic icon -->
+                        <Expression name="s1_short_text_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
-                    <Compare expression="s1_short_text_has_title">
+                    <Compare expression="s1_short_text_long_title">
                         <PartText x="23" y="21" width="112" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
@@ -366,6 +370,12 @@
                             </Text>
                         </PartText>
                     </Compare>
+                    <Compare expression="s1_short_text_has_icon">
+                        <PartImage x="64" y="29" width="30" height="24">
+                            <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                        </PartImage>
+                    </Compare>
+                    <!-- Stufe 3: Fallback text if neither title nor icon exists -->
                     <Default>
                         <PartText x="23" y="21" width="112" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
@@ -417,10 +427,14 @@
                 </PartDraw>
                 <Condition>
                     <Expressions>
-                        <Expression name="s1_ranged_value_has_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/" &amp;&amp; textLength([COMPLICATION.TITLE]) &gt; 6</Expression>
-                        <Expression name="s1_ranged_value_short_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (long > 6 chars) -->
+                        <Expression name="s1_ranged_value_long_title">textLength([COMPLICATION.TITLE]) &gt; 6 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (short <= 6 chars) -->
+                        <Expression name="s1_ranged_value_short_title">textLength([COMPLICATION.TITLE]) &gt; 0 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 2: Provider sends no title, but provides a monochromatic icon -->
+                        <Expression name="s1_ranged_value_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
-                    <Compare expression="s1_ranged_value_has_title">
+                    <Compare expression="s1_ranged_value_long_title">
                         <PartText x="23" y="21" width="112" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
@@ -442,6 +456,12 @@
                             </Text>
                         </PartText>
                     </Compare>
+                    <Compare expression="s1_ranged_value_has_icon">
+                        <PartImage x="64" y="29" width="30" height="24">
+                            <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                        </PartImage>
+                    </Compare>
+                    <!-- Stufe 3: Fallback text if neither title nor icon exists -->
                     <Default>
                         <PartText x="23" y="21" width="112" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
@@ -493,10 +513,14 @@
                 </PartDraw>
                 <Condition>
                     <Expressions>
-                        <Expression name="s1_goal_progress_has_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/" &amp;&amp; textLength([COMPLICATION.TITLE]) &gt; 6</Expression>
-                        <Expression name="s1_goal_progress_short_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (long > 6 chars) -->
+                        <Expression name="s1_goal_progress_long_title">textLength([COMPLICATION.TITLE]) &gt; 6 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (short <= 6 chars) -->
+                        <Expression name="s1_goal_progress_short_title">textLength([COMPLICATION.TITLE]) &gt; 0 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 2: Provider sends no title, but provides a monochromatic icon -->
+                        <Expression name="s1_goal_progress_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
-                    <Compare expression="s1_goal_progress_has_title">
+                    <Compare expression="s1_goal_progress_long_title">
                         <PartText x="23" y="21" width="112" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
@@ -518,6 +542,12 @@
                             </Text>
                         </PartText>
                     </Compare>
+                    <Compare expression="s1_goal_progress_has_icon">
+                        <PartImage x="64" y="29" width="30" height="24">
+                            <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                        </PartImage>
+                    </Compare>
+                    <!-- Stufe 3: Fallback text if neither title nor icon exists -->
                     <Default>
                         <PartText x="23" y="21" width="112" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
@@ -609,10 +639,14 @@
                 </PartDraw>
                 <Condition>
                     <Expressions>
-                        <Expression name="s2_short_text_has_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/" &amp;&amp; textLength([COMPLICATION.TITLE]) &gt; 6</Expression>
-                        <Expression name="s2_short_text_short_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (long > 6 chars) -->
+                        <Expression name="s2_short_text_long_title">textLength([COMPLICATION.TITLE]) &gt; 6 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (short <= 6 chars) -->
+                        <Expression name="s2_short_text_short_title">textLength([COMPLICATION.TITLE]) &gt; 0 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 2: Provider sends no title, but provides a monochromatic icon -->
+                        <Expression name="s2_short_text_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
-                    <Compare expression="s2_short_text_has_title">
+                    <Compare expression="s2_short_text_long_title">
                         <PartText x="4" y="21" width="74" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
@@ -634,6 +668,12 @@
                             </Text>
                         </PartText>
                     </Compare>
+                    <Compare expression="s2_short_text_has_icon">
+                        <PartImage x="26" y="29" width="30" height="24">
+                            <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                        </PartImage>
+                    </Compare>
+                    <!-- Stufe 3: Fallback text if neither title nor icon exists -->
                     <Default>
                         <PartText x="4" y="21" width="74" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
@@ -685,10 +725,14 @@
                 </PartDraw>
                 <Condition>
                     <Expressions>
-                        <Expression name="s2_ranged_value_has_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/" &amp;&amp; textLength([COMPLICATION.TITLE]) &gt; 6</Expression>
-                        <Expression name="s2_ranged_value_short_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (long > 6 chars) -->
+                        <Expression name="s2_ranged_value_long_title">textLength([COMPLICATION.TITLE]) &gt; 6 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (short <= 6 chars) -->
+                        <Expression name="s2_ranged_value_short_title">textLength([COMPLICATION.TITLE]) &gt; 0 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 2: Provider sends no title, but provides a monochromatic icon -->
+                        <Expression name="s2_ranged_value_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
-                    <Compare expression="s2_ranged_value_has_title">
+                    <Compare expression="s2_ranged_value_long_title">
                         <PartText x="4" y="21" width="74" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
@@ -710,6 +754,12 @@
                             </Text>
                         </PartText>
                     </Compare>
+                    <Compare expression="s2_ranged_value_has_icon">
+                        <PartImage x="26" y="29" width="30" height="24">
+                            <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                        </PartImage>
+                    </Compare>
+                    <!-- Stufe 3: Fallback text if neither title nor icon exists -->
                     <Default>
                         <PartText x="4" y="21" width="74" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
@@ -761,10 +811,14 @@
                 </PartDraw>
                 <Condition>
                     <Expressions>
-                        <Expression name="s2_goal_progress_has_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/" &amp;&amp; textLength([COMPLICATION.TITLE]) &gt; 6</Expression>
-                        <Expression name="s2_goal_progress_short_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (long > 6 chars) -->
+                        <Expression name="s2_goal_progress_long_title">textLength([COMPLICATION.TITLE]) &gt; 6 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (short <= 6 chars) -->
+                        <Expression name="s2_goal_progress_short_title">textLength([COMPLICATION.TITLE]) &gt; 0 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 2: Provider sends no title, but provides a monochromatic icon -->
+                        <Expression name="s2_goal_progress_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
-                    <Compare expression="s2_goal_progress_has_title">
+                    <Compare expression="s2_goal_progress_long_title">
                         <PartText x="4" y="21" width="74" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
@@ -786,6 +840,12 @@
                             </Text>
                         </PartText>
                     </Compare>
+                    <Compare expression="s2_goal_progress_has_icon">
+                        <PartImage x="26" y="29" width="30" height="24">
+                            <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                        </PartImage>
+                    </Compare>
+                    <!-- Stufe 3: Fallback text if neither title nor icon exists -->
                     <Default>
                         <PartText x="4" y="21" width="74" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
@@ -877,10 +937,14 @@
                 </PartDraw>
                 <Condition>
                     <Expressions>
-                        <Expression name="s3_short_text_has_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/" &amp;&amp; textLength([COMPLICATION.TITLE]) &gt; 6</Expression>
-                        <Expression name="s3_short_text_short_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (long > 6 chars) -->
+                        <Expression name="s3_short_text_long_title">textLength([COMPLICATION.TITLE]) &gt; 6 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (short <= 6 chars) -->
+                        <Expression name="s3_short_text_short_title">textLength([COMPLICATION.TITLE]) &gt; 0 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 2: Provider sends no title, but provides a monochromatic icon -->
+                        <Expression name="s3_short_text_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
-                    <Compare expression="s3_short_text_has_title">
+                    <Compare expression="s3_short_text_long_title">
                         <PartText x="4" y="21" width="74" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
@@ -902,6 +966,12 @@
                             </Text>
                         </PartText>
                     </Compare>
+                    <Compare expression="s3_short_text_has_icon">
+                        <PartImage x="26" y="29" width="30" height="24">
+                            <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                        </PartImage>
+                    </Compare>
+                    <!-- Stufe 3: Fallback text if neither title nor icon exists -->
                     <Default>
                         <PartText x="4" y="21" width="74" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
@@ -953,10 +1023,14 @@
                 </PartDraw>
                 <Condition>
                     <Expressions>
-                        <Expression name="s3_ranged_value_has_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/" &amp;&amp; textLength([COMPLICATION.TITLE]) &gt; 6</Expression>
-                        <Expression name="s3_ranged_value_short_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (long > 6 chars) -->
+                        <Expression name="s3_ranged_value_long_title">textLength([COMPLICATION.TITLE]) &gt; 6 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (short <= 6 chars) -->
+                        <Expression name="s3_ranged_value_short_title">textLength([COMPLICATION.TITLE]) &gt; 0 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 2: Provider sends no title, but provides a monochromatic icon -->
+                        <Expression name="s3_ranged_value_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
-                    <Compare expression="s3_ranged_value_has_title">
+                    <Compare expression="s3_ranged_value_long_title">
                         <PartText x="4" y="21" width="74" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
@@ -978,6 +1052,12 @@
                             </Text>
                         </PartText>
                     </Compare>
+                    <Compare expression="s3_ranged_value_has_icon">
+                        <PartImage x="26" y="29" width="30" height="24">
+                            <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                        </PartImage>
+                    </Compare>
+                    <!-- Stufe 3: Fallback text if neither title nor icon exists -->
                     <Default>
                         <PartText x="4" y="21" width="74" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
@@ -1029,10 +1109,14 @@
                 </PartDraw>
                 <Condition>
                     <Expressions>
-                        <Expression name="s3_goal_progress_has_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/" &amp;&amp; textLength([COMPLICATION.TITLE]) &gt; 6</Expression>
-                        <Expression name="s3_goal_progress_short_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (long > 6 chars) -->
+                        <Expression name="s3_goal_progress_long_title">textLength([COMPLICATION.TITLE]) &gt; 6 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (short <= 6 chars) -->
+                        <Expression name="s3_goal_progress_short_title">textLength([COMPLICATION.TITLE]) &gt; 0 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 2: Provider sends no title, but provides a monochromatic icon -->
+                        <Expression name="s3_goal_progress_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
-                    <Compare expression="s3_goal_progress_has_title">
+                    <Compare expression="s3_goal_progress_long_title">
                         <PartText x="4" y="21" width="74" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
@@ -1054,6 +1138,12 @@
                             </Text>
                         </PartText>
                     </Compare>
+                    <Compare expression="s3_goal_progress_has_icon">
+                        <PartImage x="26" y="29" width="30" height="24">
+                            <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                        </PartImage>
+                    </Compare>
+                    <!-- Stufe 3: Fallback text if neither title nor icon exists -->
                     <Default>
                         <PartText x="4" y="21" width="74" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
@@ -1166,7 +1256,7 @@
         <ComplicationSlot
             slotId="4"
             name="comp_slot_4"
-            displayName="cfg_slot_4"
+            displayName="cfg_slot_1"
             isCustomizable="TRUE"
             x="146"
             y="564"
@@ -1186,10 +1276,14 @@
                 </PartDraw>
                 <Condition>
                     <Expressions>
-                        <Expression name="s4_short_text_has_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/" &amp;&amp; textLength([COMPLICATION.TITLE]) &gt; 6</Expression>
-                        <Expression name="s4_short_text_short_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (long > 6 chars) -->
+                        <Expression name="s4_short_text_long_title">textLength([COMPLICATION.TITLE]) &gt; 6 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (short <= 6 chars) -->
+                        <Expression name="s4_short_text_short_title">textLength([COMPLICATION.TITLE]) &gt; 0 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 2: Provider sends no title, but provides a monochromatic icon -->
+                        <Expression name="s4_short_text_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
-                    <Compare expression="s4_short_text_has_title">
+                    <Compare expression="s4_short_text_long_title">
                         <PartText x="4" y="21" width="112" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
@@ -1211,6 +1305,12 @@
                             </Text>
                         </PartText>
                     </Compare>
+                    <Compare expression="s4_short_text_has_icon">
+                        <PartImage x="45" y="29" width="30" height="24">
+                            <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                        </PartImage>
+                    </Compare>
+                    <!-- Stufe 3: Fallback text if neither title nor icon exists -->
                     <Default>
                         <PartText x="4" y="21" width="112" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
@@ -1262,10 +1362,14 @@
                 </PartDraw>
                 <Condition>
                     <Expressions>
-                        <Expression name="s4_ranged_value_has_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/" &amp;&amp; textLength([COMPLICATION.TITLE]) &gt; 6</Expression>
-                        <Expression name="s4_ranged_value_short_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (long > 6 chars) -->
+                        <Expression name="s4_ranged_value_long_title">textLength([COMPLICATION.TITLE]) &gt; 6 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (short <= 6 chars) -->
+                        <Expression name="s4_ranged_value_short_title">textLength([COMPLICATION.TITLE]) &gt; 0 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 2: Provider sends no title, but provides a monochromatic icon -->
+                        <Expression name="s4_ranged_value_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
-                    <Compare expression="s4_ranged_value_has_title">
+                    <Compare expression="s4_ranged_value_long_title">
                         <PartText x="4" y="21" width="112" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
@@ -1287,6 +1391,12 @@
                             </Text>
                         </PartText>
                     </Compare>
+                    <Compare expression="s4_ranged_value_has_icon">
+                        <PartImage x="45" y="29" width="30" height="24">
+                            <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                        </PartImage>
+                    </Compare>
+                    <!-- Stufe 3: Fallback text if neither title nor icon exists -->
                     <Default>
                         <PartText x="4" y="21" width="112" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
@@ -1338,10 +1448,14 @@
                 </PartDraw>
                 <Condition>
                     <Expressions>
-                        <Expression name="s4_goal_progress_has_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/" &amp;&amp; textLength([COMPLICATION.TITLE]) &gt; 6</Expression>
-                        <Expression name="s4_goal_progress_short_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (long > 6 chars) -->
+                        <Expression name="s4_goal_progress_long_title">textLength([COMPLICATION.TITLE]) &gt; 6 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (short <= 6 chars) -->
+                        <Expression name="s4_goal_progress_short_title">textLength([COMPLICATION.TITLE]) &gt; 0 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 2: Provider sends no title, but provides a monochromatic icon -->
+                        <Expression name="s4_goal_progress_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
-                    <Compare expression="s4_goal_progress_has_title">
+                    <Compare expression="s4_goal_progress_long_title">
                         <PartText x="4" y="21" width="112" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
@@ -1363,6 +1477,12 @@
                             </Text>
                         </PartText>
                     </Compare>
+                    <Compare expression="s4_goal_progress_has_icon">
+                        <PartImage x="45" y="29" width="30" height="24">
+                            <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                        </PartImage>
+                    </Compare>
+                    <!-- Stufe 3: Fallback text if neither title nor icon exists -->
                     <Default>
                         <PartText x="4" y="21" width="112" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
@@ -1434,7 +1554,7 @@
         <ComplicationSlot
             slotId="5"
             name="comp_slot_5"
-            displayName="cfg_slot_5"
+            displayName="cfg_slot_2"
             isCustomizable="TRUE"
             x="278"
             y="564"
@@ -1454,10 +1574,14 @@
                 </PartDraw>
                 <Condition>
                     <Expressions>
-                        <Expression name="s5_short_text_has_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/" &amp;&amp; textLength([COMPLICATION.TITLE]) &gt; 6</Expression>
-                        <Expression name="s5_short_text_short_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (long > 6 chars) -->
+                        <Expression name="s5_short_text_long_title">textLength([COMPLICATION.TITLE]) &gt; 6 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (short <= 6 chars) -->
+                        <Expression name="s5_short_text_short_title">textLength([COMPLICATION.TITLE]) &gt; 0 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 2: Provider sends no title, but provides a monochromatic icon -->
+                        <Expression name="s5_short_text_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
-                    <Compare expression="s5_short_text_has_title">
+                    <Compare expression="s5_short_text_long_title">
                         <PartText x="4" y="21" width="112" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
@@ -1479,6 +1603,12 @@
                             </Text>
                         </PartText>
                     </Compare>
+                    <Compare expression="s5_short_text_has_icon">
+                        <PartImage x="45" y="29" width="30" height="24">
+                            <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                        </PartImage>
+                    </Compare>
+                    <!-- Stufe 3: Fallback text if neither title nor icon exists -->
                     <Default>
                         <PartText x="4" y="21" width="112" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
@@ -1530,10 +1660,14 @@
                 </PartDraw>
                 <Condition>
                     <Expressions>
-                        <Expression name="s5_ranged_value_has_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/" &amp;&amp; textLength([COMPLICATION.TITLE]) &gt; 6</Expression>
-                        <Expression name="s5_ranged_value_short_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (long > 6 chars) -->
+                        <Expression name="s5_ranged_value_long_title">textLength([COMPLICATION.TITLE]) &gt; 6 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (short <= 6 chars) -->
+                        <Expression name="s5_ranged_value_short_title">textLength([COMPLICATION.TITLE]) &gt; 0 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 2: Provider sends no title, but provides a monochromatic icon -->
+                        <Expression name="s5_ranged_value_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
-                    <Compare expression="s5_ranged_value_has_title">
+                    <Compare expression="s5_ranged_value_long_title">
                         <PartText x="4" y="21" width="112" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
@@ -1555,6 +1689,12 @@
                             </Text>
                         </PartText>
                     </Compare>
+                    <Compare expression="s5_ranged_value_has_icon">
+                        <PartImage x="45" y="29" width="30" height="24">
+                            <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                        </PartImage>
+                    </Compare>
+                    <!-- Stufe 3: Fallback text if neither title nor icon exists -->
                     <Default>
                         <PartText x="4" y="21" width="112" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
@@ -1606,10 +1746,14 @@
                 </PartDraw>
                 <Condition>
                     <Expressions>
-                        <Expression name="s5_goal_progress_has_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/" &amp;&amp; textLength([COMPLICATION.TITLE]) &gt; 6</Expression>
-                        <Expression name="s5_goal_progress_short_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (long > 6 chars) -->
+                        <Expression name="s5_goal_progress_long_title">textLength([COMPLICATION.TITLE]) &gt; 6 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (short <= 6 chars) -->
+                        <Expression name="s5_goal_progress_short_title">textLength([COMPLICATION.TITLE]) &gt; 0 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 2: Provider sends no title, but provides a monochromatic icon -->
+                        <Expression name="s5_goal_progress_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
-                    <Compare expression="s5_goal_progress_has_title">
+                    <Compare expression="s5_goal_progress_long_title">
                         <PartText x="4" y="21" width="112" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
@@ -1631,6 +1775,12 @@
                             </Text>
                         </PartText>
                     </Compare>
+                    <Compare expression="s5_goal_progress_has_icon">
+                        <PartImage x="45" y="29" width="30" height="24">
+                            <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                        </PartImage>
+                    </Compare>
+                    <!-- Stufe 3: Fallback text if neither title nor icon exists -->
                     <Default>
                         <PartText x="4" y="21" width="112" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
@@ -1702,7 +1852,7 @@
         <ComplicationSlot
             slotId="6"
             name="comp_slot_6"
-            displayName="cfg_slot_6"
+            displayName="cfg_slot_3"
             isCustomizable="TRUE"
             x="410"
             y="564"
@@ -1722,10 +1872,14 @@
                 </PartDraw>
                 <Condition>
                     <Expressions>
-                        <Expression name="s6_short_text_has_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/" &amp;&amp; textLength([COMPLICATION.TITLE]) &gt; 6</Expression>
-                        <Expression name="s6_short_text_short_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (long > 6 chars) -->
+                        <Expression name="s6_short_text_long_title">textLength([COMPLICATION.TITLE]) &gt; 6 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (short <= 6 chars) -->
+                        <Expression name="s6_short_text_short_title">textLength([COMPLICATION.TITLE]) &gt; 0 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 2: Provider sends no title, but provides a monochromatic icon -->
+                        <Expression name="s6_short_text_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
-                    <Compare expression="s6_short_text_has_title">
+                    <Compare expression="s6_short_text_long_title">
                         <PartText x="4" y="21" width="112" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
@@ -1747,6 +1901,12 @@
                             </Text>
                         </PartText>
                     </Compare>
+                    <Compare expression="s6_short_text_has_icon">
+                        <PartImage x="45" y="29" width="30" height="24">
+                            <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                        </PartImage>
+                    </Compare>
+                    <!-- Stufe 3: Fallback text if neither title nor icon exists -->
                     <Default>
                         <PartText x="4" y="21" width="112" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
@@ -1798,10 +1958,14 @@
                 </PartDraw>
                 <Condition>
                     <Expressions>
-                        <Expression name="s6_ranged_value_has_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/" &amp;&amp; textLength([COMPLICATION.TITLE]) &gt; 6</Expression>
-                        <Expression name="s6_ranged_value_short_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (long > 6 chars) -->
+                        <Expression name="s6_ranged_value_long_title">textLength([COMPLICATION.TITLE]) &gt; 6 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (short <= 6 chars) -->
+                        <Expression name="s6_ranged_value_short_title">textLength([COMPLICATION.TITLE]) &gt; 0 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 2: Provider sends no title, but provides a monochromatic icon -->
+                        <Expression name="s6_ranged_value_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
-                    <Compare expression="s6_ranged_value_has_title">
+                    <Compare expression="s6_ranged_value_long_title">
                         <PartText x="4" y="21" width="112" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
@@ -1823,6 +1987,12 @@
                             </Text>
                         </PartText>
                     </Compare>
+                    <Compare expression="s6_ranged_value_has_icon">
+                        <PartImage x="45" y="29" width="30" height="24">
+                            <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                        </PartImage>
+                    </Compare>
+                    <!-- Stufe 3: Fallback text if neither title nor icon exists -->
                     <Default>
                         <PartText x="4" y="21" width="112" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
@@ -1874,10 +2044,14 @@
                 </PartDraw>
                 <Condition>
                     <Expressions>
-                        <Expression name="s6_goal_progress_has_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/" &amp;&amp; textLength([COMPLICATION.TITLE]) &gt; 6</Expression>
-                        <Expression name="s6_goal_progress_short_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (long > 6 chars) -->
+                        <Expression name="s6_goal_progress_long_title">textLength([COMPLICATION.TITLE]) &gt; 6 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (short <= 6 chars) -->
+                        <Expression name="s6_goal_progress_short_title">textLength([COMPLICATION.TITLE]) &gt; 0 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 2: Provider sends no title, but provides a monochromatic icon -->
+                        <Expression name="s6_goal_progress_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
-                    <Compare expression="s6_goal_progress_has_title">
+                    <Compare expression="s6_goal_progress_long_title">
                         <PartText x="4" y="21" width="112" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
@@ -1899,6 +2073,12 @@
                             </Text>
                         </PartText>
                     </Compare>
+                    <Compare expression="s6_goal_progress_has_icon">
+                        <PartImage x="45" y="29" width="30" height="24">
+                            <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                        </PartImage>
+                    </Compare>
+                    <!-- Stufe 3: Fallback text if neither title nor icon exists -->
                     <Default>
                         <PartText x="4" y="21" width="112" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
@@ -1970,7 +2150,7 @@
         <ComplicationSlot
             slotId="7"
             name="comp_slot_7"
-            displayName="cfg_slot_7"
+            displayName="cfg_slot_4"
             isCustomizable="TRUE"
             x="570"
             y="564"
@@ -1990,10 +2170,14 @@
                 </PartDraw>
                 <Condition>
                     <Expressions>
-                        <Expression name="s7_short_text_has_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/" &amp;&amp; textLength([COMPLICATION.TITLE]) &gt; 6</Expression>
-                        <Expression name="s7_short_text_short_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (long > 6 chars) -->
+                        <Expression name="s7_short_text_long_title">textLength([COMPLICATION.TITLE]) &gt; 6 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (short <= 6 chars) -->
+                        <Expression name="s7_short_text_short_title">textLength([COMPLICATION.TITLE]) &gt; 0 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 2: Provider sends no title, but provides a monochromatic icon -->
+                        <Expression name="s7_short_text_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
-                    <Compare expression="s7_short_text_has_title">
+                    <Compare expression="s7_short_text_long_title">
                         <PartText x="4" y="21" width="74" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
@@ -2015,6 +2199,12 @@
                             </Text>
                         </PartText>
                     </Compare>
+                    <Compare expression="s7_short_text_has_icon">
+                        <PartImage x="26" y="29" width="30" height="24">
+                            <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                        </PartImage>
+                    </Compare>
+                    <!-- Stufe 3: Fallback text if neither title nor icon exists -->
                     <Default>
                         <PartText x="4" y="21" width="74" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
@@ -2066,10 +2256,14 @@
                 </PartDraw>
                 <Condition>
                     <Expressions>
-                        <Expression name="s7_ranged_value_has_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/" &amp;&amp; textLength([COMPLICATION.TITLE]) &gt; 6</Expression>
-                        <Expression name="s7_ranged_value_short_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (long > 6 chars) -->
+                        <Expression name="s7_ranged_value_long_title">textLength([COMPLICATION.TITLE]) &gt; 6 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (short <= 6 chars) -->
+                        <Expression name="s7_ranged_value_short_title">textLength([COMPLICATION.TITLE]) &gt; 0 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 2: Provider sends no title, but provides a monochromatic icon -->
+                        <Expression name="s7_ranged_value_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
-                    <Compare expression="s7_ranged_value_has_title">
+                    <Compare expression="s7_ranged_value_long_title">
                         <PartText x="4" y="21" width="74" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
@@ -2091,6 +2285,12 @@
                             </Text>
                         </PartText>
                     </Compare>
+                    <Compare expression="s7_ranged_value_has_icon">
+                        <PartImage x="26" y="29" width="30" height="24">
+                            <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                        </PartImage>
+                    </Compare>
+                    <!-- Stufe 3: Fallback text if neither title nor icon exists -->
                     <Default>
                         <PartText x="4" y="21" width="74" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
@@ -2142,10 +2342,14 @@
                 </PartDraw>
                 <Condition>
                     <Expressions>
-                        <Expression name="s7_goal_progress_has_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/" &amp;&amp; textLength([COMPLICATION.TITLE]) &gt; 6</Expression>
-                        <Expression name="s7_goal_progress_short_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (long > 6 chars) -->
+                        <Expression name="s7_goal_progress_long_title">textLength([COMPLICATION.TITLE]) &gt; 6 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (short <= 6 chars) -->
+                        <Expression name="s7_goal_progress_short_title">textLength([COMPLICATION.TITLE]) &gt; 0 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 2: Provider sends no title, but provides a monochromatic icon -->
+                        <Expression name="s7_goal_progress_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
-                    <Compare expression="s7_goal_progress_has_title">
+                    <Compare expression="s7_goal_progress_long_title">
                         <PartText x="4" y="21" width="74" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
@@ -2167,6 +2371,12 @@
                             </Text>
                         </PartText>
                     </Compare>
+                    <Compare expression="s7_goal_progress_has_icon">
+                        <PartImage x="26" y="29" width="30" height="24">
+                            <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                        </PartImage>
+                    </Compare>
+                    <!-- Stufe 3: Fallback text if neither title nor icon exists -->
                     <Default>
                         <PartText x="4" y="21" width="74" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
@@ -2238,7 +2448,7 @@
         <ComplicationSlot
             slotId="8"
             name="comp_slot_8"
-            displayName="cfg_slot_8"
+            displayName="cfg_slot_5"
             isCustomizable="TRUE"
             x="660"
             y="564"
@@ -2258,10 +2468,14 @@
                 </PartDraw>
                 <Condition>
                     <Expressions>
-                        <Expression name="s8_short_text_has_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/" &amp;&amp; textLength([COMPLICATION.TITLE]) &gt; 6</Expression>
-                        <Expression name="s8_short_text_short_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (long > 6 chars) -->
+                        <Expression name="s8_short_text_long_title">textLength([COMPLICATION.TITLE]) &gt; 6 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (short <= 6 chars) -->
+                        <Expression name="s8_short_text_short_title">textLength([COMPLICATION.TITLE]) &gt; 0 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 2: Provider sends no title, but provides a monochromatic icon -->
+                        <Expression name="s8_short_text_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
-                    <Compare expression="s8_short_text_has_title">
+                    <Compare expression="s8_short_text_long_title">
                         <PartText x="4" y="21" width="74" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
@@ -2283,6 +2497,12 @@
                             </Text>
                         </PartText>
                     </Compare>
+                    <Compare expression="s8_short_text_has_icon">
+                        <PartImage x="26" y="29" width="30" height="24">
+                            <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                        </PartImage>
+                    </Compare>
+                    <!-- Stufe 3: Fallback text if neither title nor icon exists -->
                     <Default>
                         <PartText x="4" y="21" width="74" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
@@ -2334,10 +2554,14 @@
                 </PartDraw>
                 <Condition>
                     <Expressions>
-                        <Expression name="s8_ranged_value_has_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/" &amp;&amp; textLength([COMPLICATION.TITLE]) &gt; 6</Expression>
-                        <Expression name="s8_ranged_value_short_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (long > 6 chars) -->
+                        <Expression name="s8_ranged_value_long_title">textLength([COMPLICATION.TITLE]) &gt; 6 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (short <= 6 chars) -->
+                        <Expression name="s8_ranged_value_short_title">textLength([COMPLICATION.TITLE]) &gt; 0 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 2: Provider sends no title, but provides a monochromatic icon -->
+                        <Expression name="s8_ranged_value_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
-                    <Compare expression="s8_ranged_value_has_title">
+                    <Compare expression="s8_ranged_value_long_title">
                         <PartText x="4" y="21" width="74" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
@@ -2359,6 +2583,12 @@
                             </Text>
                         </PartText>
                     </Compare>
+                    <Compare expression="s8_ranged_value_has_icon">
+                        <PartImage x="26" y="29" width="30" height="24">
+                            <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                        </PartImage>
+                    </Compare>
+                    <!-- Stufe 3: Fallback text if neither title nor icon exists -->
                     <Default>
                         <PartText x="4" y="21" width="74" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
@@ -2410,10 +2640,14 @@
                 </PartDraw>
                 <Condition>
                     <Expressions>
-                        <Expression name="s8_goal_progress_has_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/" &amp;&amp; textLength([COMPLICATION.TITLE]) &gt; 6</Expression>
-                        <Expression name="s8_goal_progress_short_title">[COMPLICATION.TITLE] != "" &amp;&amp; [COMPLICATION.TITLE] != null &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (long > 6 chars) -->
+                        <Expression name="s8_goal_progress_long_title">textLength([COMPLICATION.TITLE]) &gt; 6 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 1: Provider sends a valid Title (short <= 6 chars) -->
+                        <Expression name="s8_goal_progress_short_title">textLength([COMPLICATION.TITLE]) &gt; 0 &amp;&amp; [COMPLICATION.TITLE] != "/EMPTY/"</Expression>
+                        <!-- Stufe 2: Provider sends no title, but provides a monochromatic icon -->
+                        <Expression name="s8_goal_progress_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
-                    <Compare expression="s8_goal_progress_has_title">
+                    <Compare expression="s8_goal_progress_long_title">
                         <PartText x="4" y="21" width="74" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
@@ -2435,6 +2669,12 @@
                             </Text>
                         </PartText>
                     </Compare>
+                    <Compare expression="s8_goal_progress_has_icon">
+                        <PartImage x="26" y="29" width="30" height="24">
+                            <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                        </PartImage>
+                    </Compare>
+                    <!-- Stufe 3: Fallback text if neither title nor icon exists -->
                     <Default>
                         <PartText x="4" y="21" width="74" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
