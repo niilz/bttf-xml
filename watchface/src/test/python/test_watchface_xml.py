@@ -22,6 +22,7 @@ Verifies all requirements defined in SPEC.md:
 """
 
 import pathlib
+import re
 import unittest
 import xml.etree.ElementTree as ET
 
@@ -32,6 +33,44 @@ RES_DIR = WATCHFACE_DIR / "res"
 WATCHFACE_XML_PATH = RES_DIR / "raw" / "watchface.xml"
 
 ANDROID_NS = "{http://schemas.android.com/apk/res/android}"
+
+# Official WFF v4 XSD regex for <TimeText format="..."> from google/watchface timeText.xsd
+WFF_TIME_FORMAT_REGEX = re.compile(
+    r"^(h{2}_(10|1)|m{2}_(10|1)|s{2}_(10|1)|((h{1,2}):m{1,2}:s{1,2}|(h{1,2}):m{1,2})|(h{1,2})|m{1,2}|s{1,2})$"
+)
+
+# Official WFF v4 time/date data source tokens from google/watchface sourceType.xsd
+VALID_WFF_TIME_SOURCES = {
+    "MILLISECOND",
+    "SECOND",
+    "SECOND_Z",
+    "MINUTE",
+    "MINUTE_Z",
+    "AMPM_STATE",
+    "AMPM_POSITION",
+    "AMPM_STRING",
+    "AMPM_STRING_ENG",
+    "AMPM_STRING_SHORT",
+    "DAY",
+    "DAY_Z",
+    "MONTH",
+    "MONTH_Z",
+    "MONTH_F",
+    "MONTH_S",
+    "YEAR",
+    "YEAR_S",
+    "HOUR_0_11",
+    "HOUR_0_11_Z",
+    "HOUR_1_12",
+    "HOUR_1_12_Z",
+    "HOUR_0_23",
+    "HOUR_0_23_Z",
+    "HOUR_1_24",
+    "HOUR_1_24_Z",
+    "DAY_OF_WEEK",
+    "DAY_OF_WEEK_F",
+    "DAY_OF_WEEK_S",
+}
 
 
 class TestBttfWatchFaceSpec(unittest.TestCase):
@@ -222,10 +261,59 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
                 f"Row {row_name} must have 1 ghost '8888' segment (YEAR)",
             )
 
-            # 4. Check DigitalClock TimeText elements for MMM, dd, yyyy, HH, mm
+            # 4. Validate all <TimeText> elements against official WFF v4 timeFormatType XSD regex
             time_texts = list(row.iter("TimeText"))
+            for tt in time_texts:
+                fmt = tt.attrib.get("format", "")
+                self.assertRegex(
+                    fmt,
+                    WFF_TIME_FORMAT_REGEX,
+                    f"Row {row_name} has invalid WFF <TimeText format='{fmt}'>; "
+                    f"WFF timeText.xsd only permits lowercase h/hh, m/mm, s/ss patterns (date formats like MMM/dd/yyyy or uppercase HH render blank!)",
+                )
+
+            # 5. Check that all 5 dynamic slots (MONTH, DAY, YEAR, HOUR, MIN) have valid WFF bindings:
+            #    - Date slots (MONTH, DAY, YEAR) must use <PartText><Text>...<Template><Parameter expression="[...]"/></Template>
+            #      with official sourceType.xsd tokens ([MONTH_S], [DAY_Z], [YEAR])
+            #    - Time slots (HOUR, MIN) must use valid <TimeText format="hh"> / <TimeText format="mm">
+            parameter_exprs = [
+                p.attrib.get("expression", "") for p in row.iter("Parameter")
+            ]
+            for expr in parameter_exprs:
+                tokens = re.findall(r"\[([A-Z0-9_]+)\]", expr)
+                self.assertTrue(
+                    tokens,
+                    f"Row {row_name} <Parameter expression='{expr}'> contains no [SOURCE_TYPE] token",
+                )
+                for token in tokens:
+                    self.assertIn(
+                        token,
+                        VALID_WFF_TIME_SOURCES,
+                        f"Row {row_name} uses invalid WFF source token [{token}]",
+                    )
+
+            for required_date_expr in ("[MONTH_S]", "[DAY_Z]", "[YEAR]"):
+                self.assertIn(
+                    required_date_expr,
+                    parameter_exprs,
+                    f"Row {row_name} missing <Template><Parameter expression='{required_date_expr}'/></Template>",
+                )
+
+            # Verify MONTH is wrapped in <Upper> so 'Oct' becomes 'OCT'
+            upper_params = [
+                p.attrib.get("expression", "")
+                for u in row.iter("Upper")
+                for p in u.iter("Parameter")
+            ]
+            self.assertIn(
+                "[MONTH_S]",
+                upper_params,
+                f"Row {row_name} [MONTH_S] must be wrapped in <Upper> for 3-letter uppercase month",
+            )
+
+            # Verify HOUR ('hh') and MIN ('mm') TimeText elements exist and use dseg7_classic_bold
             formats = {tt.attrib.get("format"): tt for tt in time_texts}
-            for fmt in ("MMM", "dd", "yyyy", "HH", "mm"):
+            for fmt in ("hh", "mm"):
                 self.assertIn(
                     fmt,
                     formats,
@@ -238,12 +326,11 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
                     tt_font.attrib.get("color", "").upper(),
                     spec["primary_color"],
                 )
-                if fmt != "MMM":
-                    self.assertEqual(
-                        tt_font.attrib.get("family"),
-                        "dseg7_classic_bold",
-                        f"Row {row_name} format '{fmt}' must use dseg7_classic_bold font",
-                    )
+                self.assertEqual(
+                    tt_font.attrib.get("family"),
+                    "dseg7_classic_bold",
+                    f"Row {row_name} format '{fmt}' must use dseg7_classic_bold font",
+                )
 
             # 5. Check AM/PM Condition inside the row
             conditions = list(row.iter("Condition"))

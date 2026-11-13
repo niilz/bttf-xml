@@ -149,18 +149,35 @@
                 </Text>
             </PartText>
 
-            <!-- Active Digital Readouts (#FFFF0000) -->
+            <!-- Active Digital Readouts (#FFFF0000)
+                 WFF <TimeText> only supports h/hh, m/mm, s/ss patterns (timeText.xsd).
+                 Calendar fields (MONTH, DAY, YEAR) use <PartText> + <Template> with
+                 official sourceType.xsd data sources ([MONTH_S], [DAY_Z], [YEAR]). -->
+            <PartText x="7" y="30" width="60" height="34">
+                <Text align="CENTER">
+                    <Font family="SYNC_TO_DEVICE" size="24" weight="BOLD" color="#FFFF0000">
+                        <Upper>
+                            <Template>%s<Parameter expression="[MONTH_S]" /></Template>
+                        </Upper>
+                    </Font>
+                </Text>
+            </PartText>
+            <PartText x="74" y="32" width="42" height="32">
+                <Text align="CENTER">
+                    <Font family="dseg7_classic_bold" size="26" color="#FFFF0000">
+                        <Template>%s<Parameter expression="[DAY_Z]" /></Template>
+                    </Font>
+                </Text>
+            </PartText>
+            <PartText x="123" y="32" width="78" height="32">
+                <Text align="CENTER">
+                    <Font family="dseg7_classic_bold" size="26" color="#FFFF0000">
+                        <Template>%s<Parameter expression="[YEAR]" /></Template>
+                    </Font>
+                </Text>
+            </PartText>
             <DigitalClock x="0" y="0" width="318" height="106">
-                <TimeText x="7" y="30" width="60" height="34" format="MMM" align="CENTER">
-                    <Font family="SYNC_TO_DEVICE" size="24" weight="BOLD" color="#FFFF0000" />
-                </TimeText>
-                <TimeText x="74" y="32" width="42" height="32" format="dd" align="CENTER">
-                    <Font family="dseg7_classic_bold" size="26" color="#FFFF0000" />
-                </TimeText>
-                <TimeText x="123" y="32" width="78" height="32" format="yyyy" align="CENTER">
-                    <Font family="dseg7_classic_bold" size="26" color="#FFFF0000" />
-                </TimeText>
-                <TimeText x="221" y="32" width="42" height="32" format="HH" align="CENTER">
+                <TimeText x="221" y="32" width="42" height="32" format="hh" hourFormat="24" align="CENTER">
                     <Font family="dseg7_classic_bold" size="26" color="#FFFF0000" />
                 </TimeText>
                 <TimeText x="270" y="32" width="42" height="32" format="mm" align="CENTER">
@@ -303,17 +320,31 @@
             </PartText>
 
             <!-- Active Digital Readouts (#FF00FF00) -->
+            <PartText x="7" y="30" width="60" height="34">
+                <Text align="CENTER">
+                    <Font family="SYNC_TO_DEVICE" size="24" weight="BOLD" color="#FF00FF00">
+                        <Upper>
+                            <Template>%s<Parameter expression="[MONTH_S]" /></Template>
+                        </Upper>
+                    </Font>
+                </Text>
+            </PartText>
+            <PartText x="74" y="32" width="42" height="32">
+                <Text align="CENTER">
+                    <Font family="dseg7_classic_bold" size="26" color="#FF00FF00">
+                        <Template>%s<Parameter expression="[DAY_Z]" /></Template>
+                    </Font>
+                </Text>
+            </PartText>
+            <PartText x="123" y="32" width="78" height="32">
+                <Text align="CENTER">
+                    <Font family="dseg7_classic_bold" size="26" color="#FF00FF00">
+                        <Template>%s<Parameter expression="[YEAR]" /></Template>
+                    </Font>
+                </Text>
+            </PartText>
             <DigitalClock x="0" y="0" width="318" height="106">
-                <TimeText x="7" y="30" width="60" height="34" format="MMM" align="CENTER">
-                    <Font family="SYNC_TO_DEVICE" size="24" weight="BOLD" color="#FF00FF00" />
-                </TimeText>
-                <TimeText x="74" y="32" width="42" height="32" format="dd" align="CENTER">
-                    <Font family="dseg7_classic_bold" size="26" color="#FF00FF00" />
-                </TimeText>
-                <TimeText x="123" y="32" width="78" height="32" format="yyyy" align="CENTER">
-                    <Font family="dseg7_classic_bold" size="26" color="#FF00FF00" />
-                </TimeText>
-                <TimeText x="221" y="32" width="42" height="32" format="HH" align="CENTER">
+                <TimeText x="221" y="32" width="42" height="32" format="hh" hourFormat="24" align="CENTER">
                     <Font family="dseg7_classic_bold" size="26" color="#FF00FF00" />
                 </TimeText>
                 <TimeText x="270" y="32" width="42" height="32" format="mm" align="CENTER">
@@ -454,17 +485,31 @@
             </PartText>
 
             <!-- Active Digital Readouts (#FFFFFF00) -->
+            <PartText x="7" y="30" width="60" height="34">
+                <Text align="CENTER">
+                    <Font family="SYNC_TO_DEVICE" size="24" weight="BOLD" color="#FFFFFF00">
+                        <Upper>
+                            <Template>%s<Parameter expression="[MONTH_S]" /></Template>
+                        </Upper>
+                    </Font>
+                </Text>
+            </PartText>
+            <PartText x="74" y="32" width="42" height="32">
+                <Text align="CENTER">
+                    <Font family="dseg7_classic_bold" size="26" color="#FFFFFF00">
+                        <Template>%s<Parameter expression="[DAY_Z]" /></Template>
+                    </Font>
+                </Text>
+            </PartText>
+            <PartText x="123" y="32" width="78" height="32">
+                <Text align="CENTER">
+                    <Font family="dseg7_classic_bold" size="26" color="#FFFFFF00">
+                        <Template>%s<Parameter expression="[YEAR]" /></Template>
+                    </Font>
+                </Text>
+            </PartText>
             <DigitalClock x="0" y="0" width="318" height="106">
-                <TimeText x="7" y="30" width="60" height="34" format="MMM" align="CENTER">
-                    <Font family="SYNC_TO_DEVICE" size="24" weight="BOLD" color="#FFFFFF00" />
-                </TimeText>
-                <TimeText x="74" y="32" width="42" height="32" format="dd" align="CENTER">
-                    <Font family="dseg7_classic_bold" size="26" color="#FFFFFF00" />
-                </TimeText>
-                <TimeText x="123" y="32" width="78" height="32" format="yyyy" align="CENTER">
-                    <Font family="dseg7_classic_bold" size="26" color="#FFFFFF00" />
-                </TimeText>
-                <TimeText x="221" y="32" width="42" height="32" format="HH" align="CENTER">
+                <TimeText x="221" y="32" width="42" height="32" format="hh" hourFormat="24" align="CENTER">
                     <Font family="dseg7_classic_bold" size="26" color="#FFFFFF00" />
                 </TimeText>
                 <TimeText x="270" y="32" width="42" height="32" format="mm" align="CENTER">

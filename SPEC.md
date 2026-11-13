@@ -131,12 +131,12 @@ Derived from `DrawService.updateNumbers(maxNumbersPerRow=19, maxNumbersPerCol=10
 
 | Slot | Header Label | Content / Format | Char Count | Box `x` | Box `width` |
 | :--- | :--- | :--- | :---: | :---: | :---: |
-| **1. Month** | `MONTH` | 3-letter uppercase month (`MMM`) | 3 | `7` | `60` |
-| **2. Day** | `DAY` | 2-digit day of month (`dd`) | 2 | `74` | `42` |
-| **3. Year** | `YEAR` | 4-digit year (`yyyy`) | 4 | `123` | `78` |
+| **1. Month** | `MONTH` | `<PartText>` + `<Upper><Template>%s<Parameter expression="[MONTH_S]"/></Template></Upper>` | 3 | `7` | `60` |
+| **2. Day** | `DAY` | `<PartText>` + `<Template>%s<Parameter expression="[DAY_Z]"/></Template>` | 2 | `74` | `42` |
+| **3. Year** | `YEAR` | `<PartText>` + `<Template>%s<Parameter expression="[YEAR]"/></Template>` | 4 | `123` | `78` |
 | **4. Colon** | *(none)* | Upper (AM) & Lower (PM) dots (`r = 4 px`) | — | `206` | `10` |
-| **5. Hour** | `HOUR` | 2-digit hour (`HH` or `hh`) | 2 | `221` | `42` |
-| **6. Minute** | `MIN` | 2-digit minute (`mm`) | 2 | `270` | `42` |
+| **5. Hour** | `HOUR` | `<DigitalClock>` + `<TimeText format="hh" hourFormat="24">` | 2 | `221` | `42` |
+| **6. Minute** | `MIN` | `<DigitalClock>` + `<TimeText format="mm">` | 2 | `270` | `42` |
 
 ### 5.4 Component Implementation in WFF XML
 
