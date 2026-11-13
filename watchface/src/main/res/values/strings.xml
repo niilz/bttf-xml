@@ -1,4 +1,3 @@
 <resources>
-    <string name="watch_face_name">bttfxml</string>
-    <string name="greeting">Hello, world!</string>
+    <string name="watch_face_name">BTTF Time Circuit</string>
 </resources>
