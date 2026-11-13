@@ -1,51 +1,44 @@
-# Specification (Phase 4): Native Wear OS Complication Slots (`ComplicationSlot`)
+# Specification (Phase 4): Native Wear OS Complication Slots with Balanced DeLorean Layout
 
 - **Status:** Implemented & Verified in Emulator
-- **Branch:** `feat/complication-slots`
-- **Base Tag:** `v0.4.0-listconfig-slots`
+- **Branch:** `feat/custom-slot-layout-and-battery-symbol`
+- **Base Tag:** `v0.5.0-dynamic-complication-slots`
 - **Target Standard:** Android Watch Face Format (WFF v4, `minSdk = 36`, `compileSdk = 37`, `android:hasCode="false"`)
 
 ---
 
-## 1. Overview & Objective
+## 1. Overview & Architecture
 
-Replace the fixed internal `<ListConfiguration>` metrics with **8 native Wear OS `<ComplicationSlot>` elements** (4 in Middle Row 2, 4 in Bottom Row 3):
-- Users get the **complete native Wear OS / Samsung Complication Picker** (Battery, Weather / Feels Like, Sunrise/Sunset, World Clock, Heart Rate BPM, Steps, Day & Date, Unread Notifications, Empty, etc.).
-- Complication readouts render in our authentic **14-segment digital font** (`dseg14_classic_bold.ttf`) over full-width ghost segment backgrounds (`~~~` / `~~~~~`).
-- Header badges dynamically adapt to the provider's `[COMPLICATION.TITLE]` (truncated gracefully if too long, with automatic fallback when empty).
-- Clicking or tapping on a complication slot in the editor opens the full Wear OS `ProviderChooserActivity`.
-
----
-
-## 2. Slot Layout & Geometry (Row 2 & Row 3)
-
-Across the `636 px` panel width, both Row 2 (`y = 349`, Green `#FF00FF00`) and Row 3 (`y = 564`, Yellow `#FFFFFF00`) provide **4 slots** with `24 px` outer margins and `16 px` inter-slot gaps:
-
-| Slot # | Row | Default Provider | Fallback Badge | Value Box Width | Ghost Text | Supported Complication Types |
-| :---: | :---: | :--- | :---: | :---: | :---: | :--- |
-| **1** | Row 2 | `DAY_OF_WEEK` | `DAY` | `116 px` (3 chars) | `~~~` | `SHORT_TEXT`, `RANGED_VALUE`, `GOAL_PROGRESS`, `EMPTY` |
-| **2** | Row 2 | `WATCH_BATTERY` | `BATT` | `116 px` (3 chars) | `~~~` | `SHORT_TEXT`, `RANGED_VALUE`, `GOAL_PROGRESS`, `EMPTY` |
-| **3** | Row 2 | `STEP_COUNT` | `STEPS` | `192 px` (5 chars) | `~~~~~` | `SHORT_TEXT`, `RANGED_VALUE`, `GOAL_PROGRESS`, `EMPTY` |
-| **4** | Row 2 | `HEART_RATE` | `HEART` | `116 px` (3 chars) | `~~~` | `SHORT_TEXT`, `RANGED_VALUE`, `GOAL_PROGRESS`, `EMPTY` |
-| **5** | Row 3 | `DAY_OF_WEEK` | `DAY` | `116 px` (3 chars) | `~~~` | `SHORT_TEXT`, `RANGED_VALUE`, `GOAL_PROGRESS`, `EMPTY` |
-| **6** | Row 3 | `DATE` | `DATE` | `116 px` (3 chars) | `~~~` | `SHORT_TEXT`, `RANGED_VALUE`, `GOAL_PROGRESS`, `EMPTY` |
-| **7** | Row 3 | `WORLD_CLOCK` | `WORLD` | `192 px` (5 chars) | `~~~~~` | `SHORT_TEXT`, `RANGED_VALUE`, `GOAL_PROGRESS`, `EMPTY` |
-| **8** | Row 3 | `UNREAD_NOTIFICATION_COUNT` | `ALRT` | `116 px` (3 chars) | `~~~` | `SHORT_TEXT`, `RANGED_VALUE`, `GOAL_PROGRESS`, `EMPTY` |
+Full DeLorean visual parity using maximum font size (`size="62"`) and native Wear OS ComplicationSlots:
+- **Top Row 1 (Red `#FFFF0000`):** Immutable target time circuit (`DESTINATION TIME`).
+- **Middle Row 2 (Green `#FF00FF00`):** 3 ComplicationSlots (`5, 3, [COLON], 3`) + AM/PM indicator dots.
+- **Bottom Row 3 (Yellow `#FFFFFF00`):** 4 ComplicationSlots (`3, 3, 3, [COLON], 3`) + AM/PM indicator dots.
+- **Battery Symbol Adaptation:** When battery is `< 100` (e.g. `85`), the readout displays `85°` (using the DeLorean degree symbol) to maintain a complete 3-character readout aligned with the `88°` ghost segments. When battery is `100`, it displays `100`.
 
 ---
 
-## 3. Font Enhancements & Punctuation Alignment
+## 2. Slot Layout & Alignment (`636 px` Panel Tier)
 
-1. **Integrated `°` (degree symbol) into `dseg14_classic_bold.ttf`:**
-   - Both 7-segment and 14-segment text now support numbers, uppercase letters (`A`–`Z`), `%`, `°`, `:`, `-`, and `.`.
-2. **Zero-Width Punctuation (`.`, `:`, `,`):**
-   - Inter-digit punctuation (such as `10:10AM` or thousands separators like `8,418`) has its glyph width set to `0` and is centered inside the segment gap so that digits remain perfectly aligned with their ghost segments.
+The AM/PM indicator dots in **all three rows** are aligned at the identical horizontal position:
+`x = 412..428` (`width = 16 px`).
+
+### Middle Row 2 (`y = 349`, Height `204 px`, Green)
+- **Slot 1 (Left, 5 chars, `width = 192 px`, `x = 160`):** Default `STEP_COUNT` (Steps up to `99999`).
+- **Slot 2 (Mid-Left, 3 chars, `width = 116 px`, `x = 400`):** Default `WATCH_BATTERY` (`100` or `85°`).
+- **AM/PM Indicator Dots:** `x = 544` (`412..428` in row group).
+- **Slot 3 (Right, 3 chars, `width = 116 px`, `x = 606`):** Default `HEART_RATE` (e.g. `116` BPM).
+
+### Bottom Row 3 (`y = 564`, Height `204 px`, Yellow)
+- **Slot 4 (Left, 3 chars, `width = 116 px`, `x = 148`):** Default `DAY_OF_WEEK` (`FRI`).
+- **Slot 5 (Mid-Left 1, 3 chars, `width = 116 px`, `x = 280`):** Default `DATE` (`13`).
+- **Slot 6 (Mid-Left 2, 3 chars, `width = 116 px`, `x = 412`):** Default `WATCH_BATTERY` (`100` or `85°`).
+- **AM/PM Indicator Dots:** `x = 544` (`412..428` in row group).
+- **Slot 7 (Right, 3 chars, `width = 116 px`, `x = 606`):** Default `UNREAD_NOTIFICATION_COUNT` (`ALRT`).
 
 ---
 
-## 4. Header Label Formatting & Overlap Prevention
+## 3. Font Metrics & Ghost Alignment
 
-Header labels utilize WFF expressions to handle provider-supplied titles:
-1. If `[COMPLICATION.TITLE]` is provided and longer than 6 characters, it is truncated via `subText([COMPLICATION.TITLE], 0, 6)`.
-2. If `[COMPLICATION.TITLE]` is empty or equals `"/EMPTY/"`, the fallback label is displayed (`DAY`, `BATT`, `STEPS`, `HEART`, `DATE`, `WORLD`, `ALRT`).
-3. Label badges never exceed the value box width (`header_w <= box_w`), guaranteeing zero label overlap.
+- All numbers, letters, `%`, and `°` are rendered with maximum size `size="62"` in `dseg14_classic_bold.ttf`.
+- Zero-width punctuation (`.`, `,`, `:`) prevents digit shifting.
+- Value boxes automatically shrink to `38 * len(ghost) + 2` when fewer characters are returned, preventing blank un-shadowed space.

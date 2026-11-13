@@ -726,21 +726,21 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
         comp_slots = scene.findall("ComplicationSlot")
         self.assertEqual(
             len(comp_slots),
-            8,
-            "Scene must contain 8 <ComplicationSlot> elements (4 in Row 2, 4 in Row 3)",
+            7,
+            "Scene must contain 7 <ComplicationSlot> elements (3 in Row 2, 4 in Row 3)",
         )
 
         slot_ids = [cs.attrib.get("slotId") for cs in comp_slots]
         self.assertEqual(
             slot_ids,
-            ["1", "2", "3", "4", "5", "6", "7", "8"],
-            "ComplicationSlot slotId attributes must be '1'..'8'",
+            ["1", "2", "3", "4", "5", "6", "7"],
+            "ComplicationSlot slotId attributes must be '1'..'7'",
         )
 
         for cs in comp_slots:
             sid = int(cs.attrib["slotId"])
             y = int(cs.attrib["y"])
-            if sid <= 4:
+            if sid <= 3:
                 self.assertEqual(y, 349, f"ComplicationSlot {sid} must be in Row 2 (y=349)")
                 expected_primary = "#FF00FF00"
                 expected_ghost = "#FF006600"
@@ -777,7 +777,6 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
                 if req_type == "EMPTY":
                     continue
                 comp = comps[req_type]
-                # Check box colors, anti-overlap, ghost text, and align="END"
                 header_w = None
                 box_w = None
                 for r in comp.iter("Rectangle"):
@@ -794,7 +793,6 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
                 assert header_w is not None and box_w is not None
                 self.assertLessEqual(header_w, box_w)
 
-                # Verify [COMPLICATION.TEXT] and [COMPLICATION.TITLE] bindings
                 params = [p.attrib.get("expression", "") for p in comp.iter("Parameter")]
                 self.assertTrue(
                     any("COMPLICATION.TEXT" in p for p in params),
@@ -805,7 +803,6 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
                     f"ComplicationSlot {sid} ({req_type}) must bind [COMPLICATION.TITLE]",
                 )
 
-                # Verify digital font uses dseg14_classic_bold and align="END"
                 for pt in comp.iter("PartText"):
                     font_el = pt.find(".//Font")
                     text_el = pt.find("Text")
@@ -817,6 +814,21 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
                             self.assertEqual(text_el.attrib.get("align"), "END")
                             col = font_el.attrib.get("color", "").upper()
                             self.assertIn(col, (expected_primary, expected_ghost))
+
+        # Verify AM/PM indicator dots exist in Row 2 and Row 3 at exact same x as Row 1
+        for row_grp_name in ("row_2_present", "row_3_departed"):
+            row_grp = scene.find(f"Group[@name='{row_grp_name}']")
+            self.assertIsNotNone(row_grp)
+            assert row_grp is not None
+            colon_draws = row_grp.findall(".//Condition//PartDraw")
+            self.assertEqual(
+                len(colon_draws),
+                2,
+                f"{row_grp_name} must contain AM/PM colon indicator dots inside <Condition>",
+            )
+            for cd in colon_draws:
+                self.assertEqual(cd.attrib.get("x"), "412")
+                self.assertEqual(cd.attrib.get("width"), "16")
 
 
 if __name__ == "__main__":
