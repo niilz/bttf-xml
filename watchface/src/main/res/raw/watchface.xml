@@ -328,7 +328,7 @@
             width="158"
             height="140"
             supportedTypes="SHORT_TEXT RANGED_VALUE GOAL_PROGRESS EMPTY">
-            <BoundingRoundBox x="0" y="22" width="158" height="118" cornerRadius="8" outlinePadding="3" />
+            <BoundingBox x="0" y="24" width="158" height="114" />
             <DefaultProviderPolicy
                 defaultSystemProvider="WATCH_BATTERY"
                 defaultSystemProviderType="SHORT_TEXT" />
@@ -596,7 +596,7 @@
             width="82"
             height="140"
             supportedTypes="SHORT_TEXT RANGED_VALUE GOAL_PROGRESS EMPTY">
-            <BoundingRoundBox x="0" y="22" width="82" height="118" cornerRadius="8" outlinePadding="3" />
+            <BoundingBox x="0" y="24" width="82" height="114" />
             <DefaultProviderPolicy
                 defaultSystemProvider="HEART_RATE"
                 defaultSystemProviderType="SHORT_TEXT" />
@@ -864,7 +864,7 @@
             width="82"
             height="140"
             supportedTypes="SHORT_TEXT RANGED_VALUE GOAL_PROGRESS EMPTY">
-            <BoundingRoundBox x="0" y="22" width="82" height="118" cornerRadius="8" outlinePadding="3" />
+            <BoundingBox x="0" y="24" width="82" height="114" />
             <DefaultProviderPolicy
                 defaultSystemProvider="UNREAD_NOTIFICATION_COUNT"
                 defaultSystemProviderType="SHORT_TEXT" />
@@ -1173,7 +1173,7 @@
             width="120"
             height="140"
             supportedTypes="SHORT_TEXT RANGED_VALUE GOAL_PROGRESS EMPTY">
-            <BoundingRoundBox x="0" y="22" width="120" height="118" cornerRadius="8" outlinePadding="3" />
+            <BoundingBox x="0" y="24" width="120" height="114" />
             <DefaultProviderPolicy
                 defaultSystemProvider="DAY_OF_WEEK"
                 defaultSystemProviderType="SHORT_TEXT" />
@@ -1441,7 +1441,7 @@
             width="120"
             height="140"
             supportedTypes="SHORT_TEXT RANGED_VALUE GOAL_PROGRESS EMPTY">
-            <BoundingRoundBox x="0" y="22" width="120" height="118" cornerRadius="8" outlinePadding="3" />
+            <BoundingBox x="0" y="24" width="120" height="114" />
             <DefaultProviderPolicy
                 defaultSystemProvider="DATE"
                 defaultSystemProviderType="SHORT_TEXT" />
@@ -1709,7 +1709,7 @@
             width="120"
             height="140"
             supportedTypes="SHORT_TEXT RANGED_VALUE GOAL_PROGRESS EMPTY">
-            <BoundingRoundBox x="0" y="22" width="120" height="118" cornerRadius="8" outlinePadding="3" />
+            <BoundingBox x="0" y="24" width="120" height="114" />
             <DefaultProviderPolicy
                 defaultSystemProvider="WATCH_BATTERY"
                 defaultSystemProviderType="SHORT_TEXT" />
@@ -1977,7 +1977,7 @@
             width="82"
             height="140"
             supportedTypes="SHORT_TEXT RANGED_VALUE GOAL_PROGRESS EMPTY">
-            <BoundingRoundBox x="0" y="22" width="82" height="118" cornerRadius="8" outlinePadding="3" />
+            <BoundingBox x="0" y="24" width="82" height="114" />
             <DefaultProviderPolicy
                 defaultSystemProvider="SUNRISE_SUNSET"
                 defaultSystemProviderType="SHORT_TEXT" />
@@ -2245,7 +2245,7 @@
             width="82"
             height="140"
             supportedTypes="SHORT_TEXT RANGED_VALUE GOAL_PROGRESS EMPTY">
-            <BoundingRoundBox x="0" y="22" width="82" height="118" cornerRadius="8" outlinePadding="3" />
+            <BoundingBox x="0" y="24" width="82" height="114" />
             <DefaultProviderPolicy
                 defaultSystemProvider="WORLD_CLOCK"
                 defaultSystemProviderType="SHORT_TEXT" />
