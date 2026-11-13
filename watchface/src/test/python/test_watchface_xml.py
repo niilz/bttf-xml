@@ -726,15 +726,15 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
         comp_slots = scene.findall("ComplicationSlot")
         self.assertEqual(
             len(comp_slots),
-            7,
-            "Scene must contain 7 <ComplicationSlot> elements (3 in Row 2, 4 in Row 3)",
+            8,
+            "Scene must contain 8 <ComplicationSlot> elements (3 in Row 2, 5 in Row 3)",
         )
 
         slot_ids = [cs.attrib.get("slotId") for cs in comp_slots]
         self.assertEqual(
             slot_ids,
-            ["1", "2", "3", "4", "5", "6", "7"],
-            "ComplicationSlot slotId attributes must be '1'..'7'",
+            ["1", "2", "3", "4", "5", "6", "7", "8"],
+            "ComplicationSlot slotId attributes must be '1'..'8'",
         )
 
         for cs in comp_slots:
@@ -829,6 +829,31 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
             for cd in colon_draws:
                 self.assertEqual(cd.attrib.get("x"), "412")
                 self.assertEqual(cd.attrib.get("width"), "16")
+
+        # Verify Row 2 hardcoded STEPS slot at (22..214, width 192)
+        row2_grp = scene.find("Group[@name='row_2_present']")
+        self.assertIsNotNone(row2_grp)
+        assert row2_grp is not None
+        steps_pt = None
+        for pt in row2_grp.findall("PartText"):
+            params = [p.attrib.get("expression") for p in pt.iter("Parameter")]
+            if "[STEP_COUNT]" in params:
+                steps_pt = pt
+                break
+        self.assertIsNotNone(steps_pt, "Row 2 must contain hardcoded STEPS [STEP_COUNT] PartText")
+        assert steps_pt is not None
+        self.assertEqual(steps_pt.attrib.get("x"), "22")
+        self.assertEqual(steps_pt.attrib.get("width"), "191")
+
+        # Verify rightmost split slots (Slots 2 & 3 in Row 2, Slots 7 & 8 in Row 3) exactly match Row 1 HOUR & MIN coordinates
+        row_slots_by_id = {int(cs.attrib["slotId"]): cs for cs in comp_slots}
+        for sid_pair, expected_y in (((2, 3), 349), ((7, 8), 564)):
+            s_left = row_slots_by_id[sid_pair[0]]
+            s_right = row_slots_by_id[sid_pair[1]]
+            self.assertEqual(int(s_left.attrib["x"]), 132 + 440 - 2)
+            self.assertEqual(int(s_left.attrib["width"]), 78 + 4)
+            self.assertEqual(int(s_right.attrib["x"]), 132 + 530 - 2)
+            self.assertEqual(int(s_right.attrib["width"]), 78 + 4)
 
 
 if __name__ == "__main__":
