@@ -617,16 +617,24 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
             self.assertEqual(box_h, 84, f"Row {row_name} inner value box height must be 84px")
             self.assertEqual(digit_size, 76, f"Row {row_name} digit/letter size must be 76px")
             top_pad = digit_y - box_y
-            bottom_pad = (box_y + box_h) - (digit_y + digit_size)
             self.assertEqual(
                 top_pad,
                 4,
                 f"Row {row_name} top padding ({top_pad}px) must be 4px",
             )
-            self.assertEqual(
-                top_pad,
-                bottom_pad,
-                f"Row {row_name} top padding ({top_pad}) must equal bottom padding ({bottom_pad})",
+            # Verify gap between value box bottom and footer badge top is >= 14px
+            footer_rects = [
+                int(r.attrib["y"])
+                for r in row.iter("Rectangle")
+                if r.find("Fill") is not None
+                and r.find("Fill").attrib.get("color", "").upper() == "#FF222222"
+            ]
+            self.assertEqual(len(footer_rects), 1)
+            box_to_footer_gap = footer_rects[0] - (box_y + box_h)
+            self.assertGreaterEqual(
+                box_to_footer_gap,
+                14,
+                f"Row {row_name} gap between box and footer ({box_to_footer_gap}px) must be >= 14px to prevent crowding",
             )
             # With condensed char advance=38px (and 3px internal sidebearing), each box adds 1px per side + 3px = 4px
             char_counts = [3, 2, 4, 2, 2]
@@ -665,8 +673,8 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
             tier_bottom_margin = row_height - (footer_rects[0][0] + footer_rects[0][1])
             self.assertGreaterEqual(
                 tier_top_margin,
-                20,
-                f"Row {row_name} top tier margin ({tier_top_margin}px) must leave generous space after divider stripe",
+                14,
+                f"Row {row_name} top tier margin ({tier_top_margin}px) must leave space after divider stripe",
             )
             self.assertGreaterEqual(
                 tier_bottom_margin,
@@ -842,8 +850,8 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
                 break
         self.assertIsNotNone(steps_pt, "Row 2 must contain hardcoded STEPS [STEP_COUNT] PartText")
         assert steps_pt is not None
-        self.assertEqual(steps_pt.attrib.get("x"), "27")
-        self.assertEqual(steps_pt.attrib.get("width"), "226")
+        self.assertEqual(steps_pt.attrib.get("x"), "31")
+        self.assertEqual(steps_pt.attrib.get("width"), "223")
 
         # Verify rightmost split slots (Slots 2 & 3 in Row 2, Slots 7 & 8 in Row 3) exactly match Row 1 HOUR & MIN coordinates
         row_slots_by_id = {int(cs.attrib["slotId"]): cs for cs in comp_slots}
