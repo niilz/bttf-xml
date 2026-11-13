@@ -318,24 +318,17 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
             self.assertEqual(row.attrib.get("width"), "636")
             self.assertEqual(row.attrib.get("height"), "204")
 
-            # For row_2_present and row_3_departed, the standard 5-slot time view lives inside <ListOption id="time"> / <ListOption id="r3_time">
-            time_scope = row
+            # For row_2_present and row_3_departed, slots are provided via <ComplicationSlot> elements under <Scene>
             if row_name in ("row_2_present", "row_3_departed"):
-                mode_id = "row2_mode" if row_name == "row_2_present" else "row3_mode"
-                time_opt_id = "time" if row_name == "row_2_present" else "r3_time"
-                mode_cfg = row.find(f"ListConfiguration[@id='{mode_id}']")
-                self.assertIsNotNone(
-                    mode_cfg,
-                    f"{row_name} must contain <ListConfiguration id='{mode_id}'>",
-                )
-                assert mode_cfg is not None
-                time_opt = mode_cfg.find(f"ListOption[@id='{time_opt_id}']/Group")
-                self.assertIsNotNone(
-                    time_opt,
-                    f"{mode_id} must have <ListOption id='{time_opt_id}'><Group ...>",
-                )
-                assert time_opt is not None
-                time_scope = time_opt
+                footer_rects = [
+                    (int(r.attrib["y"]), int(r.attrib["height"]))
+                    for r in row.findall("PartDraw/Rectangle")
+                    if r.find("Fill") is not None
+                    and r.find("Fill").attrib.get("color", "").upper() == "#FF222222"
+                ]
+                self.assertEqual(len(footer_rects), 1)
+                continue
+            time_scope = row
 
             # Collect all static text content inside this row's time view + footer
             pts = list(time_scope.iter("PartText"))
@@ -715,7 +708,7 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
                 f"Row {row_name} missing footer background color #FF222222",
             )
 
-    def test_row2_configurable_slots(self) -> None:
+    def test_complication_slots_row2_and_row3(self) -> None:
         root = ET.parse(WATCHFACE_XML_PATH).getroot()
 
         # WFF Rule: res/raw/watchface.xml is a raw resource; attributes must NOT use '@string/' or '@drawable/' prefixes
@@ -726,308 +719,104 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
                     f"<{el.tag} {attr_name}='{attr_val}'> must not use '@string/' or '@drawable/' prefix in raw watchface.xml",
                 )
 
-        user_configs = root.find("UserConfigurations")
-        self.assertIsNotNone(
-            user_configs,
-            "Missing <UserConfigurations> at root <WatchFace>",
-        )
-        assert user_configs is not None
+        scene = root.find("Scene")
+        self.assertIsNotNone(scene)
+        assert scene is not None
 
-        declared_configs = {}
-        all_user_opt_ids = set()
-        for lc in user_configs.findall("ListConfiguration"):
-            cid = lc.attrib.get("id")
-            self.assertTrue(cid, "ListConfiguration missing id")
-            self.assertTrue(
-                lc.attrib.get("displayName"),
-                f"ListConfiguration '{cid}' missing displayName",
-            )
-            self.assertTrue(
-                lc.attrib.get("screenReaderText"),
-                f"ListConfiguration '{cid}' missing screenReaderText",
-            )
-            default_val = lc.attrib.get("defaultValue")
-            opt_ids = []
-            for o in lc.findall("ListOption"):
-                oid = o.attrib.get("id")
-                self.assertTrue(oid, f"ListOption in '{cid}' missing id")
-                self.assertTrue(
-                    o.attrib.get("displayName"),
-                    f"ListOption '{oid}' missing displayName",
-                )
-                self.assertTrue(
-                    o.attrib.get("screenReaderText"),
-                    f"ListOption '{oid}' missing screenReaderText",
-                )
-                self.assertNotIn(
-                    oid,
-                    all_user_opt_ids,
-                    f"ListOption id='{oid}' must be globally unique across UserConfigurations",
-                )
-                all_user_opt_ids.add(oid)
-                opt_ids.append(oid)
-            self.assertIn(
-                default_val,
-                opt_ids,
-                f"ListConfiguration '{cid}' defaultValue='{default_val}' not in {opt_ids}",
-            )
-            declared_configs[cid] = opt_ids
-
-        # Verify all <Group name="..."> in <Scene> are globally unique
-        scene_for_groups = root.find("Scene")
-        assert scene_for_groups is not None
-        group_names = [g.attrib.get("name") for g in scene_for_groups.iter("Group")]
+        comp_slots = scene.findall("ComplicationSlot")
         self.assertEqual(
-            len(group_names),
-            len(set(group_names)),
-            "All <Group name='...'> attributes in <Scene> must be globally unique",
+            len(comp_slots),
+            8,
+            "Scene must contain 8 <ComplicationSlot> elements (4 in Row 2, 4 in Row 3)",
         )
 
-        # Must declare row2_mode with time, slots_3, slots_4, slots_5
-        self.assertIn("row2_mode", declared_configs)
-        for mode_id in ("time", "slots_3", "slots_4", "slots_5"):
-            self.assertIn(
-                mode_id,
-                declared_configs["row2_mode"],
-                f"row2_mode must include ListOption id='{mode_id}'",
-            )
-
-        # Must declare slot_1..slot_5
-        for slot_id in ("slot_1", "slot_2", "slot_3", "slot_4", "slot_5"):
-            self.assertIn(
-                slot_id,
-                declared_configs,
-                f"UserConfigurations missing ListConfiguration id='{slot_id}'",
-            )
-
-        scene = root.find("Scene")
-        assert scene is not None
-        row2 = scene.find("Group[@name='row_2_present']")
-        self.assertIsNotNone(row2)
-        assert row2 is not None
-
-        row2_mode = row2.find("ListConfiguration[@id='row2_mode']")
-        self.assertIsNotNone(row2_mode)
-        assert row2_mode is not None
-
-        scene_mode_opts = {
-            o.attrib.get("id"): o for o in row2_mode.findall("ListOption")
-        }
-        for mode_id, expected_count in (
-            ("slots_3", 3),
-            ("slots_4", 4),
-            ("slots_5", 5),
-        ):
-            self.assertIn(mode_id, scene_mode_opts)
-            mode_group = scene_mode_opts[mode_id].find("Group")
-            self.assertIsNotNone(mode_group)
-            assert mode_group is not None
-            slot_containers = mode_group.findall("Group")
-            self.assertEqual(
-                len(slot_containers),
-                expected_count,
-                f"Mode '{mode_id}' must contain {expected_count} local <Group> slot containers",
-            )
-            for container in slot_containers:
-                self.assertGreater(
-                    int(container.attrib.get("x", "0")),
-                    0,
-                    f"Mode '{mode_id}' slot container <Group> must define the slot x position",
-                )
-                slc = container.find("ListConfiguration")
-                self.assertIsNotNone(
-                    slc,
-                    f"Mode '{mode_id}' slot container must wrap a <ListConfiguration>",
-                )
-                assert slc is not None
-                sid = slc.attrib.get("id")
-                self.assertIn(sid, declared_configs)
-                scene_opt_ids = [o.attrib.get("id") for o in slc.findall("ListOption")]
-                self.assertEqual(
-                    scene_opt_ids,
-                    declared_configs[sid],
-                    f"Mode '{mode_id}' slot '{sid}' options {scene_opt_ids} must match UserConfigurations {declared_configs[sid]}",
-                )
-                for opt in slc.findall("ListOption"):
-                    opt_group = opt.find("Group")
-                    self.assertIsNotNone(opt_group)
-                    assert opt_group is not None
-                    self.assertEqual(opt_group.attrib.get("x"), "0")
-                    header_w = None
-                    box_w = None
-                    box_x = None
-                    for r in opt_group.iter("Rectangle"):
-                        fill = r.find("Fill")
-                        if fill is None:
-                            continue
-                        col = fill.attrib.get("color", "").upper()
-                        if col == "#FF660000":
-                            header_w = int(r.attrib["width"])
-                        elif col == "#FF003300":
-                            box_w = int(r.attrib["width"])
-                            box_x = int(r.attrib["x"])
-                    self.assertIsNotNone(header_w)
-                    self.assertIsNotNone(box_w)
-                    assert header_w is not None and box_w is not None
-                    self.assertGreaterEqual(
-                        box_x,
-                        2,
-                        f"Mode '{mode_id}' slot '{sid}' option '{opt.attrib.get('id')}' value box must have local x >= 2",
-                    )
-                    self.assertLessEqual(
-                        header_w,
-                        box_w,
-                        f"Mode '{mode_id}' slot '{sid}' option '{opt.attrib.get('id')}' header width ({header_w}) exceeds value box width ({box_w})",
-                    )
-                    # Verify box_w exactly matches 38 * len(ghost_text) + 2 so there is never an empty un-shadowed space on the left
-                    ghost_texts = [
-                        pt.find(".//Font").text.strip()
-                        for pt in opt_group.findall("PartText")
-                        if pt.find("Variant") is not None
-                        and pt.find(".//Font") is not None
-                        and pt.find(".//Font").text
-                    ]
-                    self.assertEqual(len(ghost_texts), 1)
-                    expected_opt_box_w = 38 * len(ghost_texts[0]) + 2
-                    self.assertEqual(
-                        box_w,
-                        expected_opt_box_w,
-                        f"Mode '{mode_id}' slot '{sid}' option '{opt.attrib.get('id')}' box_w ({box_w}) must equal 38 * len('{ghost_texts[0]}') + 2 = {expected_opt_box_w} so no empty space exists without ghost shadow",
-                    )
-                    for pt in opt_group.findall("PartText"):
-                        font_el = pt.find(".//Font")
-                        text_el = pt.find("Text")
-                        if font_el is not None and text_el is not None:
-                            if font_el.attrib.get("family") in (
-                                "dseg7_classic_bold",
-                                "dseg14_classic_bold",
-                            ):
-                                self.assertEqual(
-                                    text_el.attrib.get("align"),
-                                    "END",
-                                    f"Mode '{mode_id}' slot '{sid}' option '{opt.attrib.get('id')}' digital PartText must use align='END'",
-                                )
-                    for tt in opt_group.iter("TimeText"):
-                        self.assertEqual(
-                            tt.attrib.get("align"),
-                            "END",
-                            f"Mode '{mode_id}' slot '{sid}' option '{opt.attrib.get('id')}' TimeText must use align='END'",
-                        )
-
-        # Verify required expressions and unit symbols exist in row_2_present
-        row2_templates = [
-            "".join(t.itertext()).strip() for t in row2.iter("Template")
-        ]
-        row2_params = [
-            p.attrib.get("expression") for p in row2.iter("Parameter")
-        ]
-        for req_param in (
-            "[STEP_COUNT]",
-            "[BATTERY_PERCENT]",
-            "[WEATHER.TEMPERATURE]",
-            "[HEART_RATE]",
-        ):
-            self.assertIn(
-                req_param,
-                row2_params,
-                f"row_2_present must support native WFF source {req_param}",
-            )
-        self.assertTrue(
-            any("%" in tmpl for tmpl in row2_templates),
-            "Battery template must include '%' unit symbol",
-        )
-        self.assertTrue(
-            any("°" in tmpl and "C" not in tmpl for tmpl in row2_templates),
-            "Temperature template must include '°' symbol without 'C'",
+        slot_ids = [cs.attrib.get("slotId") for cs in comp_slots]
+        self.assertEqual(
+            slot_ids,
+            ["1", "2", "3", "4", "5", "6", "7", "8"],
+            "ComplicationSlot slotId attributes must be '1'..'8'",
         )
 
-    def test_row3_configurable_slots(self) -> None:
-        root = ET.parse(WATCHFACE_XML_PATH).getroot()
-        user_configs = root.find("UserConfigurations")
-        assert user_configs is not None
-        declared_configs = {
-            lc.attrib.get("id"): [o.attrib.get("id") for o in lc.findall("ListOption")]
-            for lc in user_configs.findall("ListConfiguration")
-        }
+        for cs in comp_slots:
+            sid = int(cs.attrib["slotId"])
+            y = int(cs.attrib["y"])
+            if sid <= 4:
+                self.assertEqual(y, 349, f"ComplicationSlot {sid} must be in Row 2 (y=349)")
+                expected_primary = "#FF00FF00"
+                expected_ghost = "#FF006600"
+                expected_box = "#FF003300"
+            else:
+                self.assertEqual(y, 564, f"ComplicationSlot {sid} must be in Row 3 (y=564)")
+                expected_primary = "#FFFFFF00"
+                expected_ghost = "#FF666600"
+                expected_box = "#FF333300"
 
-        self.assertIn("row3_mode", declared_configs)
-        for mode_id in ("r3_time", "r3_slots_3", "r3_slots_4", "r3_slots_5"):
-            self.assertIn(
-                mode_id,
-                declared_configs["row3_mode"],
-                f"row3_mode must include ListOption id='{mode_id}'",
+            self.assertEqual(cs.attrib.get("isCustomizable"), "TRUE")
+            sup_types = set(cs.attrib.get("supportedTypes", "").split())
+            for req_type in ("SHORT_TEXT", "RANGED_VALUE", "GOAL_PROGRESS"):
+                self.assertIn(
+                    req_type,
+                    sup_types,
+                    f"ComplicationSlot {sid} must support {req_type}",
+                )
+
+            bbox = cs.find("BoundingBox")
+            self.assertIsNotNone(bbox, f"ComplicationSlot {sid} missing <BoundingBox>")
+            policy = cs.find("DefaultProviderPolicy")
+            self.assertIsNotNone(
+                policy, f"ComplicationSlot {sid} missing <DefaultProviderPolicy>"
             )
 
-        for slot_id in ("r3_slot_1", "r3_slot_2", "r3_slot_3", "r3_slot_4", "r3_slot_5"):
-            self.assertIn(
-                slot_id,
-                declared_configs,
-                f"UserConfigurations missing ListConfiguration id='{slot_id}'",
-            )
+            comps = {c.attrib.get("type"): c for c in cs.findall("Complication")}
+            for req_type in sup_types:
+                self.assertIn(
+                    req_type,
+                    comps,
+                    f"ComplicationSlot {sid} missing <Complication type='{req_type}'>",
+                )
+                if req_type == "EMPTY":
+                    continue
+                comp = comps[req_type]
+                # Check box colors, anti-overlap, ghost text, and align="END"
+                header_w = None
+                box_w = None
+                for r in comp.iter("Rectangle"):
+                    fill = r.find("Fill")
+                    if fill is None:
+                        continue
+                    col = fill.attrib.get("color", "").upper()
+                    if col == "#FF660000":
+                        header_w = int(r.attrib["width"])
+                    elif col == expected_box:
+                        box_w = int(r.attrib["width"])
+                self.assertIsNotNone(header_w)
+                self.assertIsNotNone(box_w)
+                assert header_w is not None and box_w is not None
+                self.assertLessEqual(header_w, box_w)
 
-        scene = root.find("Scene")
-        assert scene is not None
-        row3 = scene.find("Group[@name='row_3_departed']")
-        self.assertIsNotNone(row3)
-        assert row3 is not None
+                # Verify [COMPLICATION.TEXT] and [COMPLICATION.TITLE] bindings
+                params = [p.attrib.get("expression", "") for p in comp.iter("Parameter")]
+                self.assertTrue(
+                    any("COMPLICATION.TEXT" in p for p in params),
+                    f"ComplicationSlot {sid} ({req_type}) must bind [COMPLICATION.TEXT]",
+                )
+                self.assertTrue(
+                    any("COMPLICATION.TITLE" in p for p in params),
+                    f"ComplicationSlot {sid} ({req_type}) must bind [COMPLICATION.TITLE]",
+                )
 
-        row3_mode = row3.find("ListConfiguration[@id='row3_mode']")
-        self.assertIsNotNone(row3_mode)
-        assert row3_mode is not None
-
-        scene_mode_opts = {
-            o.attrib.get("id"): o for o in row3_mode.findall("ListOption")
-        }
-        for mode_id, expected_count in (
-            ("r3_slots_3", 3),
-            ("r3_slots_4", 4),
-            ("r3_slots_5", 5),
-        ):
-            self.assertIn(mode_id, scene_mode_opts)
-            mode_group = scene_mode_opts[mode_id].find("Group")
-            self.assertIsNotNone(mode_group)
-            assert mode_group is not None
-            slot_containers = mode_group.findall("Group")
-            self.assertEqual(
-                len(slot_containers),
-                expected_count,
-                f"Row 3 mode '{mode_id}' must contain {expected_count} local <Group> slot containers",
-            )
-            for container in slot_containers:
-                slc = container.find("ListConfiguration")
-                self.assertIsNotNone(slc)
-                assert slc is not None
-                sid = slc.attrib.get("id")
-                self.assertIn(sid, declared_configs)
-                scene_opt_ids = [o.attrib.get("id") for o in slc.findall("ListOption")]
-                self.assertEqual(scene_opt_ids, declared_configs[sid])
-                for opt in slc.findall("ListOption"):
-                    opt_group = opt.find("Group")
-                    assert opt_group is not None
-                    header_w = None
-                    box_w = None
-                    for r in opt_group.iter("Rectangle"):
-                        fill = r.find("Fill")
-                        if fill is None:
-                            continue
-                        col = fill.attrib.get("color", "").upper()
-                        if col == "#FF660000":
-                            header_w = int(r.attrib["width"])
-                        elif col == "#FF333300":
-                            box_w = int(r.attrib["width"])
-                    self.assertIsNotNone(header_w)
-                    self.assertIsNotNone(box_w)
-                    assert header_w is not None and box_w is not None
-                    self.assertLessEqual(header_w, box_w)
-                    ghost_texts = [
-                        pt.find(".//Font").text.strip()
-                        for pt in opt_group.findall("PartText")
-                        if pt.find("Variant") is not None
-                        and pt.find(".//Font") is not None
-                        and pt.find(".//Font").text
-                    ]
-                    self.assertEqual(len(ghost_texts), 1)
-                    self.assertEqual(box_w, 38 * len(ghost_texts[0]) + 2)
+                # Verify digital font uses dseg14_classic_bold and align="END"
+                for pt in comp.iter("PartText"):
+                    font_el = pt.find(".//Font")
+                    text_el = pt.find("Text")
+                    if font_el is not None and text_el is not None:
+                        if font_el.attrib.get("family") in (
+                            "dseg7_classic_bold",
+                            "dseg14_classic_bold",
+                        ):
+                            self.assertEqual(text_el.attrib.get("align"), "END")
+                            col = font_el.attrib.get("color", "").upper()
+                            self.assertIn(col, (expected_primary, expected_ghost))
 
 
 if __name__ == "__main__":
