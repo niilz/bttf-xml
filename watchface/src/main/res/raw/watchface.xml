@@ -319,7 +319,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s1_short_text_has_icon">
-                        <PartImage x="76" y="29" width="34" height="26">
+                        <PartImage x="76" y="29" width="34" height="26" tintColor="#FFFFFFFF">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
@@ -339,7 +339,7 @@
                 </PartText>
                 <Condition>
                     <Expressions>
-                        <Expression name="s1_short_text_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "BATT" == "BATT")</Expression>
+                        <Expression name="s1_short_text_is_batt_deg">([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || [COMPLICATION.TEXT] =~ ".*%.*")</Expression>
                     </Expressions>
                     <Compare expression="s1_short_text_is_batt_deg">
                         <PartText x="2" y="76" width="181" height="76">
@@ -401,7 +401,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s1_ranged_value_has_icon">
-                        <PartImage x="76" y="29" width="34" height="26">
+                        <PartImage x="76" y="29" width="34" height="26" tintColor="#FFFFFFFF">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
@@ -421,7 +421,7 @@
                 </PartText>
                 <Condition>
                     <Expressions>
-                        <Expression name="s1_ranged_value_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "BATT" == "BATT")</Expression>
+                        <Expression name="s1_ranged_value_is_batt_deg">([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || [COMPLICATION.TEXT] =~ ".*%.*")</Expression>
                     </Expressions>
                     <Compare expression="s1_ranged_value_is_batt_deg">
                         <PartText x="2" y="76" width="181" height="76">
@@ -483,7 +483,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s1_goal_progress_has_icon">
-                        <PartImage x="76" y="29" width="34" height="26">
+                        <PartImage x="76" y="29" width="34" height="26" tintColor="#FFFFFFFF">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
@@ -503,7 +503,7 @@
                 </PartText>
                 <Condition>
                     <Expressions>
-                        <Expression name="s1_goal_progress_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "BATT" == "BATT")</Expression>
+                        <Expression name="s1_goal_progress_is_batt_deg">([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || [COMPLICATION.TEXT] =~ ".*%.*")</Expression>
                     </Expressions>
                     <Compare expression="s1_goal_progress_is_batt_deg">
                         <PartText x="2" y="76" width="181" height="76">
@@ -605,7 +605,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s2_short_text_has_icon">
-                        <PartImage x="31" y="29" width="34" height="26">
+                        <PartImage x="31" y="29" width="34" height="26" tintColor="#FFFFFFFF">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
@@ -625,7 +625,7 @@
                 </PartText>
                 <Condition>
                     <Expressions>
-                        <Expression name="s2_short_text_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "BPM" == "BATT")</Expression>
+                        <Expression name="s2_short_text_is_batt_deg">([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || [COMPLICATION.TEXT] =~ ".*%.*")</Expression>
                     </Expressions>
                     <Compare expression="s2_short_text_is_batt_deg">
                         <PartText x="2" y="76" width="91" height="76">
@@ -687,7 +687,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s2_ranged_value_has_icon">
-                        <PartImage x="31" y="29" width="34" height="26">
+                        <PartImage x="31" y="29" width="34" height="26" tintColor="#FFFFFFFF">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
@@ -707,7 +707,7 @@
                 </PartText>
                 <Condition>
                     <Expressions>
-                        <Expression name="s2_ranged_value_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "BPM" == "BATT")</Expression>
+                        <Expression name="s2_ranged_value_is_batt_deg">([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || [COMPLICATION.TEXT] =~ ".*%.*")</Expression>
                     </Expressions>
                     <Compare expression="s2_ranged_value_is_batt_deg">
                         <PartText x="2" y="76" width="91" height="76">
@@ -769,7 +769,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s2_goal_progress_has_icon">
-                        <PartImage x="31" y="29" width="34" height="26">
+                        <PartImage x="31" y="29" width="34" height="26" tintColor="#FFFFFFFF">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
@@ -789,7 +789,7 @@
                 </PartText>
                 <Condition>
                     <Expressions>
-                        <Expression name="s2_goal_progress_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "BPM" == "BATT")</Expression>
+                        <Expression name="s2_goal_progress_is_batt_deg">([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || [COMPLICATION.TEXT] =~ ".*%.*")</Expression>
                     </Expressions>
                     <Compare expression="s2_goal_progress_is_batt_deg">
                         <PartText x="2" y="76" width="91" height="76">
@@ -891,7 +891,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s3_short_text_has_icon">
-                        <PartImage x="31" y="29" width="34" height="26">
+                        <PartImage x="31" y="29" width="34" height="26" tintColor="#FFFFFFFF">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
@@ -911,7 +911,7 @@
                 </PartText>
                 <Condition>
                     <Expressions>
-                        <Expression name="s3_short_text_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "ALRT" == "BATT")</Expression>
+                        <Expression name="s3_short_text_is_batt_deg">([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || [COMPLICATION.TEXT] =~ ".*%.*")</Expression>
                     </Expressions>
                     <Compare expression="s3_short_text_is_batt_deg">
                         <PartText x="2" y="76" width="91" height="76">
@@ -973,7 +973,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s3_ranged_value_has_icon">
-                        <PartImage x="31" y="29" width="34" height="26">
+                        <PartImage x="31" y="29" width="34" height="26" tintColor="#FFFFFFFF">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
@@ -993,7 +993,7 @@
                 </PartText>
                 <Condition>
                     <Expressions>
-                        <Expression name="s3_ranged_value_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "ALRT" == "BATT")</Expression>
+                        <Expression name="s3_ranged_value_is_batt_deg">([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || [COMPLICATION.TEXT] =~ ".*%.*")</Expression>
                     </Expressions>
                     <Compare expression="s3_ranged_value_is_batt_deg">
                         <PartText x="2" y="76" width="91" height="76">
@@ -1055,7 +1055,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s3_goal_progress_has_icon">
-                        <PartImage x="31" y="29" width="34" height="26">
+                        <PartImage x="31" y="29" width="34" height="26" tintColor="#FFFFFFFF">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
@@ -1075,7 +1075,7 @@
                 </PartText>
                 <Condition>
                     <Expressions>
-                        <Expression name="s3_goal_progress_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "ALRT" == "BATT")</Expression>
+                        <Expression name="s3_goal_progress_is_batt_deg">([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || [COMPLICATION.TEXT] =~ ".*%.*")</Expression>
                     </Expressions>
                     <Compare expression="s3_goal_progress_is_batt_deg">
                         <PartText x="2" y="76" width="91" height="76">
@@ -1219,7 +1219,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s4_short_text_has_icon">
-                        <PartImage x="53" y="29" width="34" height="26">
+                        <PartImage x="53" y="29" width="34" height="26" tintColor="#FFFFFFFF">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
@@ -1239,7 +1239,7 @@
                 </PartText>
                 <Condition>
                     <Expressions>
-                        <Expression name="s4_short_text_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "DAY" == "BATT")</Expression>
+                        <Expression name="s4_short_text_is_batt_deg">([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || [COMPLICATION.TEXT] =~ ".*%.*")</Expression>
                     </Expressions>
                     <Compare expression="s4_short_text_is_batt_deg">
                         <PartText x="2" y="76" width="135" height="76">
@@ -1301,7 +1301,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s4_ranged_value_has_icon">
-                        <PartImage x="53" y="29" width="34" height="26">
+                        <PartImage x="53" y="29" width="34" height="26" tintColor="#FFFFFFFF">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
@@ -1321,7 +1321,7 @@
                 </PartText>
                 <Condition>
                     <Expressions>
-                        <Expression name="s4_ranged_value_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "DAY" == "BATT")</Expression>
+                        <Expression name="s4_ranged_value_is_batt_deg">([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || [COMPLICATION.TEXT] =~ ".*%.*")</Expression>
                     </Expressions>
                     <Compare expression="s4_ranged_value_is_batt_deg">
                         <PartText x="2" y="76" width="135" height="76">
@@ -1383,7 +1383,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s4_goal_progress_has_icon">
-                        <PartImage x="53" y="29" width="34" height="26">
+                        <PartImage x="53" y="29" width="34" height="26" tintColor="#FFFFFFFF">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
@@ -1403,7 +1403,7 @@
                 </PartText>
                 <Condition>
                     <Expressions>
-                        <Expression name="s4_goal_progress_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "DAY" == "BATT")</Expression>
+                        <Expression name="s4_goal_progress_is_batt_deg">([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || [COMPLICATION.TEXT] =~ ".*%.*")</Expression>
                     </Expressions>
                     <Compare expression="s4_goal_progress_is_batt_deg">
                         <PartText x="2" y="76" width="135" height="76">
@@ -1505,7 +1505,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s5_short_text_has_icon">
-                        <PartImage x="53" y="29" width="34" height="26">
+                        <PartImage x="53" y="29" width="34" height="26" tintColor="#FFFFFFFF">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
@@ -1525,7 +1525,7 @@
                 </PartText>
                 <Condition>
                     <Expressions>
-                        <Expression name="s5_short_text_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "DATE" == "BATT")</Expression>
+                        <Expression name="s5_short_text_is_batt_deg">([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || [COMPLICATION.TEXT] =~ ".*%.*")</Expression>
                     </Expressions>
                     <Compare expression="s5_short_text_is_batt_deg">
                         <PartText x="2" y="76" width="135" height="76">
@@ -1587,7 +1587,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s5_ranged_value_has_icon">
-                        <PartImage x="53" y="29" width="34" height="26">
+                        <PartImage x="53" y="29" width="34" height="26" tintColor="#FFFFFFFF">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
@@ -1607,7 +1607,7 @@
                 </PartText>
                 <Condition>
                     <Expressions>
-                        <Expression name="s5_ranged_value_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "DATE" == "BATT")</Expression>
+                        <Expression name="s5_ranged_value_is_batt_deg">([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || [COMPLICATION.TEXT] =~ ".*%.*")</Expression>
                     </Expressions>
                     <Compare expression="s5_ranged_value_is_batt_deg">
                         <PartText x="2" y="76" width="135" height="76">
@@ -1669,7 +1669,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s5_goal_progress_has_icon">
-                        <PartImage x="53" y="29" width="34" height="26">
+                        <PartImage x="53" y="29" width="34" height="26" tintColor="#FFFFFFFF">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
@@ -1689,7 +1689,7 @@
                 </PartText>
                 <Condition>
                     <Expressions>
-                        <Expression name="s5_goal_progress_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "DATE" == "BATT")</Expression>
+                        <Expression name="s5_goal_progress_is_batt_deg">([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || [COMPLICATION.TEXT] =~ ".*%.*")</Expression>
                     </Expressions>
                     <Compare expression="s5_goal_progress_is_batt_deg">
                         <PartText x="2" y="76" width="135" height="76">
@@ -1791,7 +1791,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s6_short_text_has_icon">
-                        <PartImage x="53" y="29" width="34" height="26">
+                        <PartImage x="53" y="29" width="34" height="26" tintColor="#FFFFFFFF">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
@@ -1811,7 +1811,7 @@
                 </PartText>
                 <Condition>
                     <Expressions>
-                        <Expression name="s6_short_text_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "BATT" == "BATT")</Expression>
+                        <Expression name="s6_short_text_is_batt_deg">([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || [COMPLICATION.TEXT] =~ ".*%.*")</Expression>
                     </Expressions>
                     <Compare expression="s6_short_text_is_batt_deg">
                         <PartText x="2" y="76" width="135" height="76">
@@ -1873,7 +1873,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s6_ranged_value_has_icon">
-                        <PartImage x="53" y="29" width="34" height="26">
+                        <PartImage x="53" y="29" width="34" height="26" tintColor="#FFFFFFFF">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
@@ -1893,7 +1893,7 @@
                 </PartText>
                 <Condition>
                     <Expressions>
-                        <Expression name="s6_ranged_value_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "BATT" == "BATT")</Expression>
+                        <Expression name="s6_ranged_value_is_batt_deg">([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || [COMPLICATION.TEXT] =~ ".*%.*")</Expression>
                     </Expressions>
                     <Compare expression="s6_ranged_value_is_batt_deg">
                         <PartText x="2" y="76" width="135" height="76">
@@ -1955,7 +1955,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s6_goal_progress_has_icon">
-                        <PartImage x="53" y="29" width="34" height="26">
+                        <PartImage x="53" y="29" width="34" height="26" tintColor="#FFFFFFFF">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
@@ -1975,7 +1975,7 @@
                 </PartText>
                 <Condition>
                     <Expressions>
-                        <Expression name="s6_goal_progress_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "BATT" == "BATT")</Expression>
+                        <Expression name="s6_goal_progress_is_batt_deg">([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || [COMPLICATION.TEXT] =~ ".*%.*")</Expression>
                     </Expressions>
                     <Compare expression="s6_goal_progress_is_batt_deg">
                         <PartText x="2" y="76" width="135" height="76">
@@ -2077,7 +2077,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s7_short_text_has_icon">
-                        <PartImage x="31" y="29" width="34" height="26">
+                        <PartImage x="31" y="29" width="34" height="26" tintColor="#FFFFFFFF">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
@@ -2097,7 +2097,7 @@
                 </PartText>
                 <Condition>
                     <Expressions>
-                        <Expression name="s7_short_text_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "SUN" == "BATT")</Expression>
+                        <Expression name="s7_short_text_is_batt_deg">([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || [COMPLICATION.TEXT] =~ ".*%.*")</Expression>
                     </Expressions>
                     <Compare expression="s7_short_text_is_batt_deg">
                         <PartText x="2" y="76" width="91" height="76">
@@ -2159,7 +2159,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s7_ranged_value_has_icon">
-                        <PartImage x="31" y="29" width="34" height="26">
+                        <PartImage x="31" y="29" width="34" height="26" tintColor="#FFFFFFFF">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
@@ -2179,7 +2179,7 @@
                 </PartText>
                 <Condition>
                     <Expressions>
-                        <Expression name="s7_ranged_value_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "SUN" == "BATT")</Expression>
+                        <Expression name="s7_ranged_value_is_batt_deg">([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || [COMPLICATION.TEXT] =~ ".*%.*")</Expression>
                     </Expressions>
                     <Compare expression="s7_ranged_value_is_batt_deg">
                         <PartText x="2" y="76" width="91" height="76">
@@ -2241,7 +2241,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s7_goal_progress_has_icon">
-                        <PartImage x="31" y="29" width="34" height="26">
+                        <PartImage x="31" y="29" width="34" height="26" tintColor="#FFFFFFFF">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
@@ -2261,7 +2261,7 @@
                 </PartText>
                 <Condition>
                     <Expressions>
-                        <Expression name="s7_goal_progress_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "SUN" == "BATT")</Expression>
+                        <Expression name="s7_goal_progress_is_batt_deg">([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || [COMPLICATION.TEXT] =~ ".*%.*")</Expression>
                     </Expressions>
                     <Compare expression="s7_goal_progress_is_batt_deg">
                         <PartText x="2" y="76" width="91" height="76">
@@ -2363,7 +2363,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s8_short_text_has_icon">
-                        <PartImage x="31" y="29" width="34" height="26">
+                        <PartImage x="31" y="29" width="34" height="26" tintColor="#FFFFFFFF">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
@@ -2383,7 +2383,7 @@
                 </PartText>
                 <Condition>
                     <Expressions>
-                        <Expression name="s8_short_text_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "NYC" == "BATT")</Expression>
+                        <Expression name="s8_short_text_is_batt_deg">([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || [COMPLICATION.TEXT] =~ ".*%.*")</Expression>
                     </Expressions>
                     <Compare expression="s8_short_text_is_batt_deg">
                         <PartText x="2" y="76" width="91" height="76">
@@ -2445,7 +2445,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s8_ranged_value_has_icon">
-                        <PartImage x="31" y="29" width="34" height="26">
+                        <PartImage x="31" y="29" width="34" height="26" tintColor="#FFFFFFFF">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
@@ -2465,7 +2465,7 @@
                 </PartText>
                 <Condition>
                     <Expressions>
-                        <Expression name="s8_ranged_value_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "NYC" == "BATT")</Expression>
+                        <Expression name="s8_ranged_value_is_batt_deg">([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || [COMPLICATION.TEXT] =~ ".*%.*")</Expression>
                     </Expressions>
                     <Compare expression="s8_ranged_value_is_batt_deg">
                         <PartText x="2" y="76" width="91" height="76">
@@ -2527,7 +2527,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s8_goal_progress_has_icon">
-                        <PartImage x="31" y="29" width="34" height="26">
+                        <PartImage x="31" y="29" width="34" height="26" tintColor="#FFFFFFFF">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
@@ -2547,7 +2547,7 @@
                 </PartText>
                 <Condition>
                     <Expressions>
-                        <Expression name="s8_goal_progress_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "NYC" == "BATT")</Expression>
+                        <Expression name="s8_goal_progress_is_batt_deg">([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || [COMPLICATION.TEXT] =~ ".*%.*")</Expression>
                     </Expressions>
                     <Compare expression="s8_goal_progress_is_batt_deg">
                         <PartText x="2" y="76" width="91" height="76">
