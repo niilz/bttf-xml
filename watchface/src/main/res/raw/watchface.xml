@@ -1,74 +1,548 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ==============================================================================
+  Back to the Future (DeLorean Time Circuit) — Watch Face Format (WFF v4)
+  ==============================================================================
+  Reference Canvas: 450 x 450 px (automatically scaled by Wear OS WFF engine
+  to any circular display resolution).
+
+  Inscribed Dashboard Square:
+  A circle of radius r = 225 has an inscribed square of side floor(r * sqrt(2))
+  = 318 px, positioned at top-left origin (x = 66, y = 66).
+  The 318 x 318 dashboard is divided into 3 equal horizontal rows of 106 px height:
+    - Row 1 (Red    #FFFF0000): y =  66, height = 106 ("DESTINATION TIME")
+    - Row 2 (Green  #FF00FF00): y = 172, height = 106 ("PRESENT TIME")
+    - Row 3 (Yellow #FFFFFF00): y = 278, height = 106 ("LAST TIME DEPARTED")
+-->
 <WatchFace
-    height="450"
-    width="450">
+    width="450"
+    height="450">
+
     <Metadata
         key="CLOCK_TYPE"
         value="DIGITAL" />
-    <Scene>
-        <DigitalClock
-            height="450"
-            width="450"
-            x="0"
-            y="0">
-            <TimeText
-                format="hh:mm"
-                height="100"
-                width="450"
-                x="0"
-                y="175">
-                <Variant
-                    mode="AMBIENT"
-                    target="alpha"
-                    value="0" />
-                <Font
-                    color="#ffffffff"
-                    family="SYNC_TO_DEVICE"
-                    size="128" />
-            </TimeText>
-            <TimeText
-                alpha="0"
-                format="hh:mm"
-                height="100"
-                width="450"
-                x="0"
-                y="175">
-                <Variant
-                    mode="AMBIENT"
-                    target="alpha"
-                    value="255" />
-                <Font
-                    color="#ffffffff"
-                    family="SYNC_TO_DEVICE"
-                    size="128"
-                    weight="THIN" />
-            </TimeText>
-        </DigitalClock>
+    <Metadata
+        key="STEP_GOAL"
+        value="10000" />
+
+    <Scene backgroundColor="#FF000000">
+
+        <!-- ===================================================================
+             Metallic 3-Tier Time Circuit Panel Background (bg.png)
+             Hidden in Ambient (AOD) mode to conserve battery and prevent burn-in.
+             =================================================================== -->
+        <PartImage
+            x="66"
+            y="66"
+            width="318"
+            height="318"
+            alpha="255">
+            <Variant
+                mode="AMBIENT"
+                target="alpha"
+                value="0" />
+            <Image resource="bg" />
+        </PartImage>
+
+        <!-- ===================================================================
+             ROW 1: DESTINATION TIME (Red #FFFF0000)
+             Origin: (66, 66), Size: 318 x 106
+             Colors:
+               - Primary LED: #FFFF0000
+               - Ghost "8"  : #FF660000 (60% blended with black)
+               - Value Box  : #FF330000 (80% blended with black)
+             =================================================================== -->
         <Group
-            name="hello_world"
-            height="450"
-            width="450"
-            x="0"
-            y="0">
-            <PartText
-                height="50"
-                width="450"
+            name="row_1_destination"
+            x="66"
+            y="66"
+            width="318"
+            height="106">
+
+            <!-- Slot Frames, Darkened Value Boxes, Header Badges & Footer Badge -->
+            <PartDraw
                 x="0"
-                y="285">
+                y="0"
+                width="318"
+                height="106"
+                alpha="255">
                 <Variant
                     mode="AMBIENT"
                     target="alpha"
                     value="0" />
-                <Text>
-                    <Font
-                        color="#ffffffff"
-                        family="SYNC_TO_DEVICE"
-                        size="36">
-                        <Template>%s
-                            <Parameter expression="greeting" />
-                        </Template>
+
+                <!-- Header Label Backgrounds (#FF660000) -->
+                <Rectangle x="7"   y="6" width="60" height="18"><Fill color="#FF660000" /></Rectangle>
+                <Rectangle x="74"  y="6" width="42" height="18"><Fill color="#FF660000" /></Rectangle>
+                <Rectangle x="135" y="6" width="54" height="18"><Fill color="#FF660000" /></Rectangle>
+                <Rectangle x="218" y="6" width="48" height="18"><Fill color="#FF660000" /></Rectangle>
+                <Rectangle x="273" y="6" width="36" height="18"><Fill color="#FF660000" /></Rectangle>
+
+                <!-- Outer Slot Frames (#FF111111) -->
+                <Rectangle x="6"   y="27" width="62" height="42"><Fill color="#FF111111" /></Rectangle>
+                <Rectangle x="73"  y="27" width="44" height="42"><Fill color="#FF111111" /></Rectangle>
+                <Rectangle x="122" y="27" width="80" height="42"><Fill color="#FF111111" /></Rectangle>
+                <Rectangle x="220" y="27" width="44" height="42"><Fill color="#FF111111" /></Rectangle>
+                <Rectangle x="269" y="27" width="44" height="42"><Fill color="#FF111111" /></Rectangle>
+
+                <!-- Inner Darkened Row-Color Value Boxes (#FF330000) -->
+                <Rectangle x="7"   y="28" width="60" height="40"><Fill color="#FF330000" /></Rectangle>
+                <Rectangle x="74"  y="28" width="42" height="40"><Fill color="#FF330000" /></Rectangle>
+                <Rectangle x="123" y="28" width="78" height="40"><Fill color="#FF330000" /></Rectangle>
+                <Rectangle x="221" y="28" width="42" height="40"><Fill color="#FF330000" /></Rectangle>
+                <Rectangle x="270" y="28" width="42" height="40"><Fill color="#FF330000" /></Rectangle>
+
+                <!-- Footer Label Background (#FF222222) -->
+                <Rectangle x="89"  y="74" width="140" height="18"><Fill color="#FF222222" /></Rectangle>
+            </PartDraw>
+
+            <!-- Header Labels: MONTH, DAY, YEAR, HOUR, MIN -->
+            <PartText x="7" y="6" width="60" height="18">
+                <Text align="CENTER">
+                    <Font family="SYNC_TO_DEVICE" size="13" weight="BOLD" color="#FFFFFFFF">MONTH</Font>
+                </Text>
+            </PartText>
+            <PartText x="74" y="6" width="42" height="18">
+                <Text align="CENTER">
+                    <Font family="SYNC_TO_DEVICE" size="13" weight="BOLD" color="#FFFFFFFF">DAY</Font>
+                </Text>
+            </PartText>
+            <PartText x="135" y="6" width="54" height="18">
+                <Text align="CENTER">
+                    <Font family="SYNC_TO_DEVICE" size="13" weight="BOLD" color="#FFFFFFFF">YEAR</Font>
+                </Text>
+            </PartText>
+            <PartText x="218" y="6" width="48" height="18">
+                <Text align="CENTER">
+                    <Font family="SYNC_TO_DEVICE" size="13" weight="BOLD" color="#FFFFFFFF">HOUR</Font>
+                </Text>
+            </PartText>
+            <PartText x="273" y="6" width="36" height="18">
+                <Text align="CENTER">
+                    <Font family="SYNC_TO_DEVICE" size="13" weight="BOLD" color="#FFFFFFFF">MIN</Font>
+                </Text>
+            </PartText>
+
+            <!-- Inactive 7-Segment Ghost "8" Background Layer (#FF660000) -->
+            <PartText x="74" y="32" width="42" height="32">
+                <Variant mode="AMBIENT" target="alpha" value="0" />
+                <Text align="CENTER">
+                    <Font family="dseg7_classic_bold" size="26" color="#FF660000">88</Font>
+                </Text>
+            </PartText>
+            <PartText x="123" y="32" width="78" height="32">
+                <Variant mode="AMBIENT" target="alpha" value="0" />
+                <Text align="CENTER">
+                    <Font family="dseg7_classic_bold" size="26" color="#FF660000">8888</Font>
+                </Text>
+            </PartText>
+            <PartText x="221" y="32" width="42" height="32">
+                <Variant mode="AMBIENT" target="alpha" value="0" />
+                <Text align="CENTER">
+                    <Font family="dseg7_classic_bold" size="26" color="#FF660000">88</Font>
+                </Text>
+            </PartText>
+            <PartText x="270" y="32" width="42" height="32">
+                <Variant mode="AMBIENT" target="alpha" value="0" />
+                <Text align="CENTER">
+                    <Font family="dseg7_classic_bold" size="26" color="#FF660000">88</Font>
+                </Text>
+            </PartText>
+
+            <!-- Active Digital Readouts (#FFFF0000)
+                 WFF <TimeText> only supports h/hh, m/mm, s/ss patterns (timeText.xsd).
+                 Calendar fields (MONTH, DAY, YEAR) use <PartText> + <Template> with
+                 official sourceType.xsd data sources ([MONTH_S], [DAY_Z], [YEAR]). -->
+            <PartText x="7" y="30" width="60" height="34">
+                <Text align="CENTER">
+                    <Font family="SYNC_TO_DEVICE" size="24" weight="BOLD" color="#FFFF0000">
+                        <Upper>
+                            <Template>%s<Parameter expression="[MONTH_S]" /></Template>
+                        </Upper>
                     </Font>
                 </Text>
             </PartText>
+            <PartText x="74" y="32" width="42" height="32">
+                <Text align="CENTER">
+                    <Font family="dseg7_classic_bold" size="26" color="#FFFF0000">
+                        <Template>%s<Parameter expression="[DAY_Z]" /></Template>
+                    </Font>
+                </Text>
+            </PartText>
+            <PartText x="123" y="32" width="78" height="32">
+                <Text align="CENTER">
+                    <Font family="dseg7_classic_bold" size="26" color="#FFFF0000">
+                        <Template>%s<Parameter expression="[YEAR]" /></Template>
+                    </Font>
+                </Text>
+            </PartText>
+            <DigitalClock x="0" y="0" width="318" height="106">
+                <TimeText x="221" y="32" width="42" height="32" format="hh" hourFormat="24" align="CENTER">
+                    <Font family="dseg7_classic_bold" size="26" color="#FFFF0000" />
+                </TimeText>
+                <TimeText x="270" y="32" width="42" height="32" format="mm" align="CENTER">
+                    <Font family="dseg7_classic_bold" size="26" color="#FFFF0000" />
+                </TimeText>
+            </DigitalClock>
+
+            <!-- AM/PM Colon Indicator Dots (Upper = AM, Lower = PM) -->
+            <Condition>
+                <Expressions>
+                    <Expression name="row1_is_am">[AMPM_POSITION] == 0</Expression>
+                </Expressions>
+                <Compare expression="row1_is_am">
+                    <PartDraw x="206" y="28" width="10" height="40">
+                        <Ellipse x="1" y="8"  width="8" height="8"><Fill color="#FFFFFF00" /></Ellipse>
+                        <Ellipse x="1" y="24" width="8" height="8"><Fill color="#FF4D4D00" /></Ellipse>
+                    </PartDraw>
+                </Compare>
+                <Default>
+                    <PartDraw x="206" y="28" width="10" height="40">
+                        <Ellipse x="1" y="8"  width="8" height="8"><Fill color="#FF4D4D00" /></Ellipse>
+                        <Ellipse x="1" y="24" width="8" height="8"><Fill color="#FFFFFF00" /></Ellipse>
+                    </PartDraw>
+                </Default>
+            </Condition>
+
+            <!-- Footer Label: DESTINATION TIME -->
+            <PartText x="89" y="74" width="140" height="18">
+                <Text align="CENTER">
+                    <Font family="SYNC_TO_DEVICE" size="13" weight="BOLD" color="#FFFFFFFF">DESTINATION TIME</Font>
+                </Text>
+            </PartText>
         </Group>
+
+        <!-- ===================================================================
+             ROW 2: PRESENT TIME (Green #FF00FF00)
+             Origin: (66, 172), Size: 318 x 106
+             Colors:
+               - Primary LED: #FF00FF00
+               - Ghost "8"  : #FF006600 (60% blended with black)
+               - Value Box  : #FF003300 (80% blended with black)
+             Note: Structured as a self-contained Group so Phase 2 can replace
+             or augment slots with <ComplicationSlot> elements.
+             =================================================================== -->
+        <Group
+            name="row_2_present"
+            x="66"
+            y="172"
+            width="318"
+            height="106">
+
+            <!-- Slot Frames, Darkened Value Boxes, Header Badges & Footer Badge -->
+            <PartDraw
+                x="0"
+                y="0"
+                width="318"
+                height="106"
+                alpha="255">
+                <Variant
+                    mode="AMBIENT"
+                    target="alpha"
+                    value="0" />
+
+                <!-- Header Label Backgrounds (#FF660000) -->
+                <Rectangle x="7"   y="6" width="60" height="18"><Fill color="#FF660000" /></Rectangle>
+                <Rectangle x="74"  y="6" width="42" height="18"><Fill color="#FF660000" /></Rectangle>
+                <Rectangle x="135" y="6" width="54" height="18"><Fill color="#FF660000" /></Rectangle>
+                <Rectangle x="218" y="6" width="48" height="18"><Fill color="#FF660000" /></Rectangle>
+                <Rectangle x="273" y="6" width="36" height="18"><Fill color="#FF660000" /></Rectangle>
+
+                <!-- Outer Slot Frames (#FF111111) -->
+                <Rectangle x="6"   y="27" width="62" height="42"><Fill color="#FF111111" /></Rectangle>
+                <Rectangle x="73"  y="27" width="44" height="42"><Fill color="#FF111111" /></Rectangle>
+                <Rectangle x="122" y="27" width="80" height="42"><Fill color="#FF111111" /></Rectangle>
+                <Rectangle x="220" y="27" width="44" height="42"><Fill color="#FF111111" /></Rectangle>
+                <Rectangle x="269" y="27" width="44" height="42"><Fill color="#FF111111" /></Rectangle>
+
+                <!-- Inner Darkened Row-Color Value Boxes (#FF003300) -->
+                <Rectangle x="7"   y="28" width="60" height="40"><Fill color="#FF003300" /></Rectangle>
+                <Rectangle x="74"  y="28" width="42" height="40"><Fill color="#FF003300" /></Rectangle>
+                <Rectangle x="123" y="28" width="78" height="40"><Fill color="#FF003300" /></Rectangle>
+                <Rectangle x="221" y="28" width="42" height="40"><Fill color="#FF003300" /></Rectangle>
+                <Rectangle x="270" y="28" width="42" height="40"><Fill color="#FF003300" /></Rectangle>
+
+                <!-- Footer Label Background (#FF222222) -->
+                <Rectangle x="104" y="74" width="110" height="18"><Fill color="#FF222222" /></Rectangle>
+            </PartDraw>
+
+            <!-- Header Labels: MONTH, DAY, YEAR, HOUR, MIN -->
+            <PartText x="7" y="6" width="60" height="18">
+                <Text align="CENTER">
+                    <Font family="SYNC_TO_DEVICE" size="13" weight="BOLD" color="#FFFFFFFF">MONTH</Font>
+                </Text>
+            </PartText>
+            <PartText x="74" y="6" width="42" height="18">
+                <Text align="CENTER">
+                    <Font family="SYNC_TO_DEVICE" size="13" weight="BOLD" color="#FFFFFFFF">DAY</Font>
+                </Text>
+            </PartText>
+            <PartText x="135" y="6" width="54" height="18">
+                <Text align="CENTER">
+                    <Font family="SYNC_TO_DEVICE" size="13" weight="BOLD" color="#FFFFFFFF">YEAR</Font>
+                </Text>
+            </PartText>
+            <PartText x="218" y="6" width="48" height="18">
+                <Text align="CENTER">
+                    <Font family="SYNC_TO_DEVICE" size="13" weight="BOLD" color="#FFFFFFFF">HOUR</Font>
+                </Text>
+            </PartText>
+            <PartText x="273" y="6" width="36" height="18">
+                <Text align="CENTER">
+                    <Font family="SYNC_TO_DEVICE" size="13" weight="BOLD" color="#FFFFFFFF">MIN</Font>
+                </Text>
+            </PartText>
+
+            <!-- Inactive 7-Segment Ghost "8" Background Layer (#FF006600) -->
+            <PartText x="74" y="32" width="42" height="32">
+                <Variant mode="AMBIENT" target="alpha" value="0" />
+                <Text align="CENTER">
+                    <Font family="dseg7_classic_bold" size="26" color="#FF006600">88</Font>
+                </Text>
+            </PartText>
+            <PartText x="123" y="32" width="78" height="32">
+                <Variant mode="AMBIENT" target="alpha" value="0" />
+                <Text align="CENTER">
+                    <Font family="dseg7_classic_bold" size="26" color="#FF006600">8888</Font>
+                </Text>
+            </PartText>
+            <PartText x="221" y="32" width="42" height="32">
+                <Variant mode="AMBIENT" target="alpha" value="0" />
+                <Text align="CENTER">
+                    <Font family="dseg7_classic_bold" size="26" color="#FF006600">88</Font>
+                </Text>
+            </PartText>
+            <PartText x="270" y="32" width="42" height="32">
+                <Variant mode="AMBIENT" target="alpha" value="0" />
+                <Text align="CENTER">
+                    <Font family="dseg7_classic_bold" size="26" color="#FF006600">88</Font>
+                </Text>
+            </PartText>
+
+            <!-- Active Digital Readouts (#FF00FF00) -->
+            <PartText x="7" y="30" width="60" height="34">
+                <Text align="CENTER">
+                    <Font family="SYNC_TO_DEVICE" size="24" weight="BOLD" color="#FF00FF00">
+                        <Upper>
+                            <Template>%s<Parameter expression="[MONTH_S]" /></Template>
+                        </Upper>
+                    </Font>
+                </Text>
+            </PartText>
+            <PartText x="74" y="32" width="42" height="32">
+                <Text align="CENTER">
+                    <Font family="dseg7_classic_bold" size="26" color="#FF00FF00">
+                        <Template>%s<Parameter expression="[DAY_Z]" /></Template>
+                    </Font>
+                </Text>
+            </PartText>
+            <PartText x="123" y="32" width="78" height="32">
+                <Text align="CENTER">
+                    <Font family="dseg7_classic_bold" size="26" color="#FF00FF00">
+                        <Template>%s<Parameter expression="[YEAR]" /></Template>
+                    </Font>
+                </Text>
+            </PartText>
+            <DigitalClock x="0" y="0" width="318" height="106">
+                <TimeText x="221" y="32" width="42" height="32" format="hh" hourFormat="24" align="CENTER">
+                    <Font family="dseg7_classic_bold" size="26" color="#FF00FF00" />
+                </TimeText>
+                <TimeText x="270" y="32" width="42" height="32" format="mm" align="CENTER">
+                    <Font family="dseg7_classic_bold" size="26" color="#FF00FF00" />
+                </TimeText>
+            </DigitalClock>
+
+            <!-- AM/PM Colon Indicator Dots (Upper = AM, Lower = PM) -->
+            <Condition>
+                <Expressions>
+                    <Expression name="row2_is_am">[AMPM_POSITION] == 0</Expression>
+                </Expressions>
+                <Compare expression="row2_is_am">
+                    <PartDraw x="206" y="28" width="10" height="40">
+                        <Ellipse x="1" y="8"  width="8" height="8"><Fill color="#FFFFFF00" /></Ellipse>
+                        <Ellipse x="1" y="24" width="8" height="8"><Fill color="#FF4D4D00" /></Ellipse>
+                    </PartDraw>
+                </Compare>
+                <Default>
+                    <PartDraw x="206" y="28" width="10" height="40">
+                        <Ellipse x="1" y="8"  width="8" height="8"><Fill color="#FF4D4D00" /></Ellipse>
+                        <Ellipse x="1" y="24" width="8" height="8"><Fill color="#FFFFFF00" /></Ellipse>
+                    </PartDraw>
+                </Default>
+            </Condition>
+
+            <!-- Footer Label: PRESENT TIME -->
+            <PartText x="104" y="74" width="110" height="18">
+                <Text align="CENTER">
+                    <Font family="SYNC_TO_DEVICE" size="13" weight="BOLD" color="#FFFFFFFF">PRESENT TIME</Font>
+                </Text>
+            </PartText>
+        </Group>
+
+        <!-- ===================================================================
+             ROW 3: LAST TIME DEPARTED (Yellow #FFFFFF00)
+             Origin: (66, 278), Size: 318 x 106
+             Colors:
+               - Primary LED: #FFFFFF00
+               - Ghost "8"  : #FF666600 (60% blended with black)
+               - Value Box  : #FF333300 (80% blended with black)
+             =================================================================== -->
+        <Group
+            name="row_3_departed"
+            x="66"
+            y="278"
+            width="318"
+            height="106">
+
+            <!-- Slot Frames, Darkened Value Boxes, Header Badges & Footer Badge -->
+            <PartDraw
+                x="0"
+                y="0"
+                width="318"
+                height="106"
+                alpha="255">
+                <Variant
+                    mode="AMBIENT"
+                    target="alpha"
+                    value="0" />
+
+                <!-- Header Label Backgrounds (#FF660000) -->
+                <Rectangle x="7"   y="6" width="60" height="18"><Fill color="#FF660000" /></Rectangle>
+                <Rectangle x="74"  y="6" width="42" height="18"><Fill color="#FF660000" /></Rectangle>
+                <Rectangle x="135" y="6" width="54" height="18"><Fill color="#FF660000" /></Rectangle>
+                <Rectangle x="218" y="6" width="48" height="18"><Fill color="#FF660000" /></Rectangle>
+                <Rectangle x="273" y="6" width="36" height="18"><Fill color="#FF660000" /></Rectangle>
+
+                <!-- Outer Slot Frames (#FF111111) -->
+                <Rectangle x="6"   y="27" width="62" height="42"><Fill color="#FF111111" /></Rectangle>
+                <Rectangle x="73"  y="27" width="44" height="42"><Fill color="#FF111111" /></Rectangle>
+                <Rectangle x="122" y="27" width="80" height="42"><Fill color="#FF111111" /></Rectangle>
+                <Rectangle x="220" y="27" width="44" height="42"><Fill color="#FF111111" /></Rectangle>
+                <Rectangle x="269" y="27" width="44" height="42"><Fill color="#FF111111" /></Rectangle>
+
+                <!-- Inner Darkened Row-Color Value Boxes (#FF333300) -->
+                <Rectangle x="7"   y="28" width="60" height="40"><Fill color="#FF333300" /></Rectangle>
+                <Rectangle x="74"  y="28" width="42" height="40"><Fill color="#FF333300" /></Rectangle>
+                <Rectangle x="123" y="28" width="78" height="40"><Fill color="#FF333300" /></Rectangle>
+                <Rectangle x="221" y="28" width="42" height="40"><Fill color="#FF333300" /></Rectangle>
+                <Rectangle x="270" y="28" width="42" height="40"><Fill color="#FF333300" /></Rectangle>
+
+                <!-- Footer Label Background (#FF222222) -->
+                <Rectangle x="79"  y="74" width="160" height="18"><Fill color="#FF222222" /></Rectangle>
+            </PartDraw>
+
+            <!-- Header Labels: MONTH, DAY, YEAR, HOUR, MIN -->
+            <PartText x="7" y="6" width="60" height="18">
+                <Text align="CENTER">
+                    <Font family="SYNC_TO_DEVICE" size="13" weight="BOLD" color="#FFFFFFFF">MONTH</Font>
+                </Text>
+            </PartText>
+            <PartText x="74" y="6" width="42" height="18">
+                <Text align="CENTER">
+                    <Font family="SYNC_TO_DEVICE" size="13" weight="BOLD" color="#FFFFFFFF">DAY</Font>
+                </Text>
+            </PartText>
+            <PartText x="135" y="6" width="54" height="18">
+                <Text align="CENTER">
+                    <Font family="SYNC_TO_DEVICE" size="13" weight="BOLD" color="#FFFFFFFF">YEAR</Font>
+                </Text>
+            </PartText>
+            <PartText x="218" y="6" width="48" height="18">
+                <Text align="CENTER">
+                    <Font family="SYNC_TO_DEVICE" size="13" weight="BOLD" color="#FFFFFFFF">HOUR</Font>
+                </Text>
+            </PartText>
+            <PartText x="273" y="6" width="36" height="18">
+                <Text align="CENTER">
+                    <Font family="SYNC_TO_DEVICE" size="13" weight="BOLD" color="#FFFFFFFF">MIN</Font>
+                </Text>
+            </PartText>
+
+            <!-- Inactive 7-Segment Ghost "8" Background Layer (#FF666600) -->
+            <PartText x="74" y="32" width="42" height="32">
+                <Variant mode="AMBIENT" target="alpha" value="0" />
+                <Text align="CENTER">
+                    <Font family="dseg7_classic_bold" size="26" color="#FF666600">88</Font>
+                </Text>
+            </PartText>
+            <PartText x="123" y="32" width="78" height="32">
+                <Variant mode="AMBIENT" target="alpha" value="0" />
+                <Text align="CENTER">
+                    <Font family="dseg7_classic_bold" size="26" color="#FF666600">8888</Font>
+                </Text>
+            </PartText>
+            <PartText x="221" y="32" width="42" height="32">
+                <Variant mode="AMBIENT" target="alpha" value="0" />
+                <Text align="CENTER">
+                    <Font family="dseg7_classic_bold" size="26" color="#FF666600">88</Font>
+                </Text>
+            </PartText>
+            <PartText x="270" y="32" width="42" height="32">
+                <Variant mode="AMBIENT" target="alpha" value="0" />
+                <Text align="CENTER">
+                    <Font family="dseg7_classic_bold" size="26" color="#FF666600">88</Font>
+                </Text>
+            </PartText>
+
+            <!-- Active Digital Readouts (#FFFFFF00) -->
+            <PartText x="7" y="30" width="60" height="34">
+                <Text align="CENTER">
+                    <Font family="SYNC_TO_DEVICE" size="24" weight="BOLD" color="#FFFFFF00">
+                        <Upper>
+                            <Template>%s<Parameter expression="[MONTH_S]" /></Template>
+                        </Upper>
+                    </Font>
+                </Text>
+            </PartText>
+            <PartText x="74" y="32" width="42" height="32">
+                <Text align="CENTER">
+                    <Font family="dseg7_classic_bold" size="26" color="#FFFFFF00">
+                        <Template>%s<Parameter expression="[DAY_Z]" /></Template>
+                    </Font>
+                </Text>
+            </PartText>
+            <PartText x="123" y="32" width="78" height="32">
+                <Text align="CENTER">
+                    <Font family="dseg7_classic_bold" size="26" color="#FFFFFF00">
+                        <Template>%s<Parameter expression="[YEAR]" /></Template>
+                    </Font>
+                </Text>
+            </PartText>
+            <DigitalClock x="0" y="0" width="318" height="106">
+                <TimeText x="221" y="32" width="42" height="32" format="hh" hourFormat="24" align="CENTER">
+                    <Font family="dseg7_classic_bold" size="26" color="#FFFFFF00" />
+                </TimeText>
+                <TimeText x="270" y="32" width="42" height="32" format="mm" align="CENTER">
+                    <Font family="dseg7_classic_bold" size="26" color="#FFFFFF00" />
+                </TimeText>
+            </DigitalClock>
+
+            <!-- AM/PM Colon Indicator Dots (Upper = AM, Lower = PM) -->
+            <Condition>
+                <Expressions>
+                    <Expression name="row3_is_am">[AMPM_POSITION] == 0</Expression>
+                </Expressions>
+                <Compare expression="row3_is_am">
+                    <PartDraw x="206" y="28" width="10" height="40">
+                        <Ellipse x="1" y="8"  width="8" height="8"><Fill color="#FFFFFF00" /></Ellipse>
+                        <Ellipse x="1" y="24" width="8" height="8"><Fill color="#FF4D4D00" /></Ellipse>
+                    </PartDraw>
+                </Compare>
+                <Default>
+                    <PartDraw x="206" y="28" width="10" height="40">
+                        <Ellipse x="1" y="8"  width="8" height="8"><Fill color="#FF4D4D00" /></Ellipse>
+                        <Ellipse x="1" y="24" width="8" height="8"><Fill color="#FFFFFF00" /></Ellipse>
+                    </PartDraw>
+                </Default>
+            </Condition>
+
+            <!-- Footer Label: LAST TIME DEPARTED -->
+            <PartText x="79" y="74" width="160" height="18">
+                <Text align="CENTER">
+                    <Font family="SYNC_TO_DEVICE" size="13" weight="BOLD" color="#FFFFFFFF">LAST TIME DEPARTED</Font>
+                </Text>
+            </PartText>
+        </Group>
+
     </Scene>
 </WatchFace>
