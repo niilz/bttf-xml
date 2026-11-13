@@ -4,10 +4,9 @@
   Back to the Future (DeLorean Time Circuit) — Watch Face Format (WFF v4)
   ==============================================================================
   Reference Canvas: 900 x 900 px.
-  Enlarged Dashboard: bg.png is scaled to 720 x 720 px (origin x=90, y=90).
-  Corners reach 59 px outside the circular display edge so the metallic panel
-  fills the screen with generous visibility.
-  Digit Size: 68 px (char width 40 px) inside 76 px value boxes.
+  Enlarged Dashboard: bg.png scaled to 720 x 720 px (origin x=90, y=90).
+  Shifted downwards for extra horizontal clearance in Row 1 & Row 3.
+  Digit Size: 76 px inside 84 px value boxes.
 -->
 <WatchFace
     width="900"
@@ -38,12 +37,12 @@
 
         <!-- ===================================================================
              ROW 1: DESTINATION TIME (Red #FFFF0000)
-             Origin: (90, 100), Size: 720 x 230
+             Origin: (90, 125), Size: 720 x 230
              =================================================================== -->
         <Group
             name="row_1_destination"
             x="90"
-            y="100"
+            y="125"
             width="720"
             height="230">
 
@@ -59,143 +58,143 @@
                     value="0" />
 
                 <!-- Header Label Backgrounds (#FF660000) -->
-                <Rectangle x="72"  y="24" width="122" height="34"><Fill color="#FF660000" /></Rectangle>
-                <Rectangle x="200" y="24" width="82"  height="34"><Fill color="#FF660000" /></Rectangle>
-                <Rectangle x="288" y="24" width="162" height="34"><Fill color="#FF660000" /></Rectangle>
-                <Rectangle x="478" y="24" width="82"  height="34"><Fill color="#FF660000" /></Rectangle>
-                <Rectangle x="566" y="24" width="82"  height="34"><Fill color="#FF660000" /></Rectangle>
+                <Rectangle x="34"  y="24" width="136" height="34"><Fill color="#FF660000" /></Rectangle>
+                <Rectangle x="178" y="24" width="92"  height="34"><Fill color="#FF660000" /></Rectangle>
+                <Rectangle x="278" y="24" width="182" height="34"><Fill color="#FF660000" /></Rectangle>
+                <Rectangle x="494" y="24" width="92"  height="34"><Fill color="#FF660000" /></Rectangle>
+                <Rectangle x="594" y="24" width="92"  height="34"><Fill color="#FF660000" /></Rectangle>
 
                 <!-- Outer Slot Frames (#FF111111) -->
-                <Rectangle x="70"  y="62" width="126" height="80"><Fill color="#FF111111" /></Rectangle>
-                <Rectangle x="198" y="62" width="86"  height="80"><Fill color="#FF111111" /></Rectangle>
-                <Rectangle x="286" y="62" width="166" height="80"><Fill color="#FF111111" /></Rectangle>
-                <Rectangle x="476" y="62" width="86"  height="80"><Fill color="#FF111111" /></Rectangle>
-                <Rectangle x="564" y="62" width="86"  height="80"><Fill color="#FF111111" /></Rectangle>
+                <Rectangle x="32"  y="70" width="140" height="88"><Fill color="#FF111111" /></Rectangle>
+                <Rectangle x="176" y="70" width="96"  height="88"><Fill color="#FF111111" /></Rectangle>
+                <Rectangle x="276" y="70" width="186" height="88"><Fill color="#FF111111" /></Rectangle>
+                <Rectangle x="492" y="70" width="96"  height="88"><Fill color="#FF111111" /></Rectangle>
+                <Rectangle x="592" y="70" width="96"  height="88"><Fill color="#FF111111" /></Rectangle>
 
-                <!-- Inner Darkened Row-Color Value Boxes (#FF330000, height=76) -->
-                <Rectangle x="72"  y="64" width="122" height="76"><Fill color="#FF330000" /></Rectangle>
-                <Rectangle x="200" y="64" width="82"  height="76"><Fill color="#FF330000" /></Rectangle>
-                <Rectangle x="288" y="64" width="162" height="76"><Fill color="#FF330000" /></Rectangle>
-                <Rectangle x="478" y="64" width="82"  height="76"><Fill color="#FF330000" /></Rectangle>
-                <Rectangle x="566" y="64" width="82"  height="76"><Fill color="#FF330000" /></Rectangle>
+                <!-- Inner Darkened Row-Color Value Boxes (#FF330000, height=84) -->
+                <Rectangle x="34"  y="72" width="136" height="84"><Fill color="#FF330000" /></Rectangle>
+                <Rectangle x="178" y="72" width="92"  height="84"><Fill color="#FF330000" /></Rectangle>
+                <Rectangle x="278" y="72" width="182" height="84"><Fill color="#FF330000" /></Rectangle>
+                <Rectangle x="494" y="72" width="92"  height="84"><Fill color="#FF330000" /></Rectangle>
+                <Rectangle x="594" y="72" width="92"  height="84"><Fill color="#FF330000" /></Rectangle>
 
                 <!-- Footer Label Background (#FF222222) -->
-                <Rectangle x="212" y="150" width="296" height="34"><Fill color="#FF222222" /></Rectangle>
+                <Rectangle x="212" y="160" width="296" height="34"><Fill color="#FF222222" /></Rectangle>
             </PartDraw>
 
             <!-- Header Labels: MONTH, DAY, YEAR, HOUR, MIN -->
-            <PartText x="72" y="21" width="122" height="40">
+            <PartText x="34" y="21" width="136" height="40">
                 <Text align="CENTER">
                     <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">MONTH</Font>
                 </Text>
             </PartText>
-            <PartText x="200" y="21" width="82" height="40">
+            <PartText x="178" y="21" width="92" height="40">
                 <Text align="CENTER">
                     <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">DAY</Font>
                 </Text>
             </PartText>
-            <PartText x="288" y="21" width="162" height="40">
+            <PartText x="278" y="21" width="182" height="40">
                 <Text align="CENTER">
                     <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">YEAR</Font>
                 </Text>
             </PartText>
-            <PartText x="478" y="21" width="82" height="40">
+            <PartText x="494" y="21" width="92" height="40">
                 <Text align="CENTER">
                     <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">HOUR</Font>
                 </Text>
             </PartText>
-            <PartText x="566" y="21" width="82" height="40">
+            <PartText x="594" y="21" width="92" height="40">
                 <Text align="CENTER">
                     <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">MIN</Font>
                 </Text>
             </PartText>
 
-            <!-- Inactive Ghost Background Layer (#FF660000, size=68) -->
-            <PartText x="72" y="68" width="121" height="68">
+            <!-- Inactive Ghost Background Layer (#FF660000, size=76) -->
+            <PartText x="34" y="76" width="135" height="76">
                 <Variant mode="AMBIENT" target="alpha" value="0" />
                 <Text align="END">
-                    <Font family="dseg14_classic_bold" size="68" color="#FF660000">~~~</Font>
+                    <Font family="dseg14_classic_bold" size="76" color="#FF660000">~~~</Font>
                 </Text>
             </PartText>
-            <PartText x="200" y="68" width="81" height="68">
+            <PartText x="178" y="76" width="91" height="76">
                 <Variant mode="AMBIENT" target="alpha" value="0" />
                 <Text align="END">
-                    <Font family="dseg7_classic_bold" size="68" color="#FF660000">88</Font>
+                    <Font family="dseg7_classic_bold" size="76" color="#FF660000">88</Font>
                 </Text>
             </PartText>
-            <PartText x="288" y="68" width="161" height="68">
+            <PartText x="278" y="76" width="181" height="76">
                 <Variant mode="AMBIENT" target="alpha" value="0" />
                 <Text align="END">
-                    <Font family="dseg7_classic_bold" size="68" color="#FF660000">8888</Font>
+                    <Font family="dseg7_classic_bold" size="76" color="#FF660000">8888</Font>
                 </Text>
             </PartText>
-            <PartText x="478" y="68" width="81" height="68">
+            <PartText x="494" y="76" width="91" height="76">
                 <Variant mode="AMBIENT" target="alpha" value="0" />
                 <Text align="END">
-                    <Font family="dseg7_classic_bold" size="68" color="#FF660000">88</Font>
+                    <Font family="dseg7_classic_bold" size="76" color="#FF660000">88</Font>
                 </Text>
             </PartText>
-            <PartText x="566" y="68" width="81" height="68">
+            <PartText x="594" y="76" width="91" height="76">
                 <Variant mode="AMBIENT" target="alpha" value="0" />
                 <Text align="END">
-                    <Font family="dseg7_classic_bold" size="68" color="#FF660000">88</Font>
+                    <Font family="dseg7_classic_bold" size="76" color="#FF660000">88</Font>
                 </Text>
             </PartText>
 
-            <!-- Active Digital Readouts (#FFFF0000, size=68) -->
-            <PartText x="72" y="68" width="121" height="68">
+            <!-- Active Digital Readouts (#FFFF0000, size=76) -->
+            <PartText x="34" y="76" width="135" height="76">
                 <Text align="END">
-                    <Font family="dseg14_classic_bold" size="68" color="#FFFF0000">
+                    <Font family="dseg14_classic_bold" size="76" color="#FFFF0000">
                         <Upper>
                             <Template>%s<Parameter expression="[MONTH_S]" /></Template>
                         </Upper>
                     </Font>
                 </Text>
             </PartText>
-            <PartText x="200" y="68" width="81" height="68">
+            <PartText x="178" y="76" width="91" height="76">
                 <Text align="END">
-                    <Font family="dseg7_classic_bold" size="68" color="#FFFF0000">
+                    <Font family="dseg7_classic_bold" size="76" color="#FFFF0000">
                         <Template>%s<Parameter expression="[DAY_Z]" /></Template>
                     </Font>
                 </Text>
             </PartText>
-            <PartText x="288" y="68" width="161" height="68">
+            <PartText x="278" y="76" width="181" height="76">
                 <Text align="END">
-                    <Font family="dseg7_classic_bold" size="68" color="#FFFF0000">
+                    <Font family="dseg7_classic_bold" size="76" color="#FFFF0000">
                         <Template>%s<Parameter expression="[YEAR]" /></Template>
                     </Font>
                 </Text>
             </PartText>
             <DigitalClock x="0" y="0" width="720" height="230">
-                <TimeText x="478" y="68" width="81" height="68" format="hh" hourFormat="24" align="END">
-                    <Font family="dseg7_classic_bold" size="68" color="#FFFF0000" />
+                <TimeText x="494" y="76" width="91" height="76" format="hh" hourFormat="24" align="END">
+                    <Font family="dseg7_classic_bold" size="76" color="#FFFF0000" />
                 </TimeText>
-                <TimeText x="566" y="68" width="81" height="68" format="mm" align="END">
-                    <Font family="dseg7_classic_bold" size="68" color="#FFFF0000" />
+                <TimeText x="594" y="76" width="91" height="76" format="mm" align="END">
+                    <Font family="dseg7_classic_bold" size="76" color="#FFFF0000" />
                 </TimeText>
             </DigitalClock>
 
-            <!-- AM/PM Colon Indicator Dots at x=456 (canvas x=546) -->
+            <!-- AM/PM Colon Indicator Dots at x=464 (canvas x=554) -->
             <Condition>
                 <Expressions>
                     <Expression name="row1_is_am">[AMPM_POSITION] == 0</Expression>
                 </Expressions>
                 <Compare expression="row1_is_am">
-                    <PartDraw x="456" y="67" width="16" height="70">
-                        <Ellipse x="0" y="13" width="16" height="16"><Fill color="#FFFFFF00" /></Ellipse>
-                        <Ellipse x="0" y="41" width="16" height="16"><Fill color="#FF4D4D00" /></Ellipse>
+                    <PartDraw x="468" y="75" width="18" height="78">
+                        <Ellipse x="1" y="15" width="16" height="16"><Fill color="#FFFFFF00" /></Ellipse>
+                        <Ellipse x="1" y="47" width="16" height="16"><Fill color="#FF4D4D00" /></Ellipse>
                     </PartDraw>
                 </Compare>
                 <Default>
-                    <PartDraw x="456" y="67" width="16" height="70">
-                        <Ellipse x="0" y="13" width="16" height="16"><Fill color="#FF4D4D00" /></Ellipse>
-                        <Ellipse x="0" y="41" width="16" height="16"><Fill color="#FFFFFF00" /></Ellipse>
+                    <PartDraw x="468" y="75" width="18" height="78">
+                        <Ellipse x="1" y="15" width="16" height="16"><Fill color="#FF4D4D00" /></Ellipse>
+                        <Ellipse x="1" y="47" width="16" height="16"><Fill color="#FFFFFF00" /></Ellipse>
                     </PartDraw>
                 </Default>
             </Condition>
 
             <!-- Footer Label: DESTINATION TIME -->
-            <PartText x="212" y="147" width="296" height="40">
+            <PartText x="212" y="157" width="296" height="40">
                 <Text align="CENTER">
                     <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">DESTINATION TIME</Font>
                 </Text>
@@ -204,56 +203,56 @@
 
         <!-- ===================================================================
              ROW 2: PRESENT TIME (Green #FF00FF00)
-             Origin: (90, 345), Size: 720 x 230
+             Origin: (90, 358), Size: 720 x 230
              =================================================================== -->
         <Group
             name="row_2_present"
             x="90"
-            y="345"
+            y="358"
             width="720"
             height="230">
 
-            <!-- Hardcoded STEPS Slot (5 chars = 202 px, rel x = 64..266) -->
+            <!-- Hardcoded STEPS Slot (5 chars = 227 px, rel x = 27..254) -->
             <PartDraw x="0" y="0" width="720" height="230" alpha="255">
                 <Variant mode="AMBIENT" target="alpha" value="0" />
-                <Rectangle x="107" y="24" width="116" height="34"><Fill color="#FF660000" /></Rectangle>
-                <Rectangle x="62"  y="62" width="206" height="80"><Fill color="#FF111111" /></Rectangle>
-                <Rectangle x="64"  y="64" width="202" height="76"><Fill color="#FF003300" /></Rectangle>
+                <Rectangle x="77"  y="24" width="126" height="34"><Fill color="#FF660000" /></Rectangle>
+                <Rectangle x="25"  y="70" width="231" height="88"><Fill color="#FF111111" /></Rectangle>
+                <Rectangle x="27"  y="72" width="227" height="84"><Fill color="#FF003300" /></Rectangle>
             </PartDraw>
-            <PartText x="107" y="21" width="116" height="40">
+            <PartText x="77" y="21" width="126" height="40">
                 <Text align="CENTER">
                     <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">STEPS</Font>
                 </Text>
             </PartText>
-            <PartText x="64" y="68" width="201" height="68">
+            <PartText x="27" y="76" width="226" height="76">
                 <Variant mode="AMBIENT" target="alpha" value="0" />
                 <Text align="END">
-                    <Font family="dseg14_classic_bold" size="68" color="#FF006600">~~~~~</Font>
+                    <Font family="dseg14_classic_bold" size="76" color="#FF006600">~~~~~</Font>
                 </Text>
             </PartText>
-            <PartText x="64" y="68" width="201" height="68">
+            <PartText x="27" y="76" width="226" height="76">
                 <Text align="END">
-                    <Font family="dseg14_classic_bold" size="68" color="#FF00FF00">
+                    <Font family="dseg14_classic_bold" size="76" color="#FF00FF00">
                         <Template>%s<Parameter expression="[STEP_COUNT]" /></Template>
                     </Font>
                 </Text>
             </PartText>
 
-            <!-- AM/PM Colon Indicator Dots at x=456 (canvas x=546) -->
+            <!-- AM/PM Colon Indicator Dots at x=464 (canvas x=554) -->
             <Condition>
                 <Expressions>
                     <Expression name="row2_is_am">[AMPM_POSITION] == 0</Expression>
                 </Expressions>
                 <Compare expression="row2_is_am">
-                    <PartDraw x="456" y="67" width="16" height="70">
-                        <Ellipse x="0" y="13" width="16" height="16"><Fill color="#FFFFFF00" /></Ellipse>
-                        <Ellipse x="0" y="41" width="16" height="16"><Fill color="#FF4D4D00" /></Ellipse>
+                    <PartDraw x="468" y="75" width="18" height="78">
+                        <Ellipse x="1" y="15" width="16" height="16"><Fill color="#FFFFFF00" /></Ellipse>
+                        <Ellipse x="1" y="47" width="16" height="16"><Fill color="#FF4D4D00" /></Ellipse>
                     </PartDraw>
                 </Compare>
                 <Default>
-                    <PartDraw x="456" y="67" width="16" height="70">
-                        <Ellipse x="0" y="13" width="16" height="16"><Fill color="#FF4D4D00" /></Ellipse>
-                        <Ellipse x="0" y="41" width="16" height="16"><Fill color="#FFFFFF00" /></Ellipse>
+                    <PartDraw x="468" y="75" width="18" height="78">
+                        <Ellipse x="1" y="15" width="16" height="16"><Fill color="#FF4D4D00" /></Ellipse>
+                        <Ellipse x="1" y="47" width="16" height="16"><Fill color="#FFFFFF00" /></Ellipse>
                     </PartDraw>
                 </Default>
             </Condition>
@@ -261,9 +260,9 @@
             <!-- Shared Row 2 Footer Badge & Label: PRESENT TIME -->
             <PartDraw x="0" y="0" width="720" height="230" alpha="255">
                 <Variant mode="AMBIENT" target="alpha" value="0" />
-                <Rectangle x="244" y="150" width="232" height="34"><Fill color="#FF222222" /></Rectangle>
+                <Rectangle x="244" y="160" width="232" height="34"><Fill color="#FF222222" /></Rectangle>
             </PartDraw>
-            <PartText x="244" y="147" width="232" height="40">
+            <PartText x="244" y="157" width="232" height="40">
                 <Text align="CENTER">
                     <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">PRESENT TIME</Font>
                 </Text>
@@ -275,21 +274,21 @@
             name="comp_slot_1"
             displayName="cfg_slot_1"
             isCustomizable="TRUE"
-            x="366"
-            y="345"
-            width="166"
-            height="144"
+            x="356"
+            y="358"
+            width="186"
+            height="152"
             supportedTypes="SHORT_TEXT RANGED_VALUE GOAL_PROGRESS EMPTY">
-            <BoundingBox x="0" y="24" width="166" height="118" />
+            <BoundingBox x="0" y="24" width="186" height="136" />
             <DefaultProviderPolicy
                 defaultSystemProvider="WATCH_BATTERY"
                 defaultSystemProviderType="SHORT_TEXT" />
             <Complication type="SHORT_TEXT">
-                <PartDraw x="0" y="0" width="166" height="144" alpha="255">
+                <PartDraw x="0" y="0" width="186" height="152" alpha="255">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
-                    <Rectangle x="25" y="24" width="116" height="34"><Fill color="#FF660000" /></Rectangle>
-                    <Rectangle x="0" y="62" width="166" height="80"><Fill color="#FF111111" /></Rectangle>
-                    <Rectangle x="2" y="64" width="162" height="76"><Fill color="#FF003300" /></Rectangle>
+                    <Rectangle x="34" y="24" width="126" height="34"><Fill color="#FF660000" /></Rectangle>
+                    <Rectangle x="0" y="70" width="186" height="88"><Fill color="#FF111111" /></Rectangle>
+                    <Rectangle x="2" y="72" width="182" height="84"><Fill color="#FF003300" /></Rectangle>
                 </PartDraw>
                 <Condition>
                     <Expressions>
@@ -298,7 +297,7 @@
                         <Expression name="s1_short_text_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
                     <Compare expression="s1_short_text_long_title">
-                        <PartText x="27" y="21" width="112" height="40">
+                        <PartText x="32" y="21" width="122" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -309,7 +308,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s1_short_text_short_title">
-                        <PartText x="27" y="21" width="112" height="40">
+                        <PartText x="32" y="21" width="122" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -320,22 +319,22 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s1_short_text_has_icon">
-                        <PartImage x="68" y="29" width="30" height="24">
+                        <PartImage x="76" y="29" width="34" height="26">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
                     <Default>
-                        <PartText x="27" y="21" width="112" height="40">
+                        <PartText x="32" y="21" width="122" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">BATT</Font>
                             </Text>
                         </PartText>
                     </Default>
                 </Condition>
-                <PartText x="2" y="68" width="161" height="68">
+                <PartText x="2" y="76" width="181" height="76">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
                     <Text align="END">
-                        <Font family="dseg14_classic_bold" size="68" color="#FF006600">~~~~</Font>
+                        <Font family="dseg14_classic_bold" size="76" color="#FF006600">~~~~</Font>
                     </Text>
                 </PartText>
                 <Condition>
@@ -343,9 +342,9 @@
                         <Expression name="s1_short_text_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "BATT" == "BATT")</Expression>
                     </Expressions>
                     <Compare expression="s1_short_text_is_batt_deg">
-                        <PartText x="2" y="68" width="161" height="68">
+                        <PartText x="2" y="76" width="181" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FF00FF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FF00FF00">
                                     <Upper>
                                         <Template>%s%%<Parameter expression="subText([COMPLICATION.TEXT], 0, 2)" /></Template>
                                     </Upper>
@@ -354,9 +353,9 @@
                         </PartText>
                     </Compare>
                     <Default>
-                        <PartText x="2" y="68" width="161" height="68">
+                        <PartText x="2" y="76" width="181" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FF00FF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FF00FF00">
                                     <Upper>
                                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                                     </Upper>
@@ -367,11 +366,11 @@
                 </Condition>
             </Complication>
             <Complication type="RANGED_VALUE">
-                <PartDraw x="0" y="0" width="166" height="144" alpha="255">
+                <PartDraw x="0" y="0" width="186" height="152" alpha="255">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
-                    <Rectangle x="25" y="24" width="116" height="34"><Fill color="#FF660000" /></Rectangle>
-                    <Rectangle x="0" y="62" width="166" height="80"><Fill color="#FF111111" /></Rectangle>
-                    <Rectangle x="2" y="64" width="162" height="76"><Fill color="#FF003300" /></Rectangle>
+                    <Rectangle x="34" y="24" width="126" height="34"><Fill color="#FF660000" /></Rectangle>
+                    <Rectangle x="0" y="70" width="186" height="88"><Fill color="#FF111111" /></Rectangle>
+                    <Rectangle x="2" y="72" width="182" height="84"><Fill color="#FF003300" /></Rectangle>
                 </PartDraw>
                 <Condition>
                     <Expressions>
@@ -380,7 +379,7 @@
                         <Expression name="s1_ranged_value_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
                     <Compare expression="s1_ranged_value_long_title">
-                        <PartText x="27" y="21" width="112" height="40">
+                        <PartText x="32" y="21" width="122" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -391,7 +390,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s1_ranged_value_short_title">
-                        <PartText x="27" y="21" width="112" height="40">
+                        <PartText x="32" y="21" width="122" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -402,22 +401,22 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s1_ranged_value_has_icon">
-                        <PartImage x="68" y="29" width="30" height="24">
+                        <PartImage x="76" y="29" width="34" height="26">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
                     <Default>
-                        <PartText x="27" y="21" width="112" height="40">
+                        <PartText x="32" y="21" width="122" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">BATT</Font>
                             </Text>
                         </PartText>
                     </Default>
                 </Condition>
-                <PartText x="2" y="68" width="161" height="68">
+                <PartText x="2" y="76" width="181" height="76">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
                     <Text align="END">
-                        <Font family="dseg14_classic_bold" size="68" color="#FF006600">~~~~</Font>
+                        <Font family="dseg14_classic_bold" size="76" color="#FF006600">~~~~</Font>
                     </Text>
                 </PartText>
                 <Condition>
@@ -425,9 +424,9 @@
                         <Expression name="s1_ranged_value_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "BATT" == "BATT")</Expression>
                     </Expressions>
                     <Compare expression="s1_ranged_value_is_batt_deg">
-                        <PartText x="2" y="68" width="161" height="68">
+                        <PartText x="2" y="76" width="181" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FF00FF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FF00FF00">
                                     <Upper>
                                         <Template>%s%%<Parameter expression="subText([COMPLICATION.TEXT], 0, 2)" /></Template>
                                     </Upper>
@@ -436,9 +435,9 @@
                         </PartText>
                     </Compare>
                     <Default>
-                        <PartText x="2" y="68" width="161" height="68">
+                        <PartText x="2" y="76" width="181" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FF00FF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FF00FF00">
                                     <Upper>
                                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                                     </Upper>
@@ -449,11 +448,11 @@
                 </Condition>
             </Complication>
             <Complication type="GOAL_PROGRESS">
-                <PartDraw x="0" y="0" width="166" height="144" alpha="255">
+                <PartDraw x="0" y="0" width="186" height="152" alpha="255">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
-                    <Rectangle x="25" y="24" width="116" height="34"><Fill color="#FF660000" /></Rectangle>
-                    <Rectangle x="0" y="62" width="166" height="80"><Fill color="#FF111111" /></Rectangle>
-                    <Rectangle x="2" y="64" width="162" height="76"><Fill color="#FF003300" /></Rectangle>
+                    <Rectangle x="34" y="24" width="126" height="34"><Fill color="#FF660000" /></Rectangle>
+                    <Rectangle x="0" y="70" width="186" height="88"><Fill color="#FF111111" /></Rectangle>
+                    <Rectangle x="2" y="72" width="182" height="84"><Fill color="#FF003300" /></Rectangle>
                 </PartDraw>
                 <Condition>
                     <Expressions>
@@ -462,7 +461,7 @@
                         <Expression name="s1_goal_progress_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
                     <Compare expression="s1_goal_progress_long_title">
-                        <PartText x="27" y="21" width="112" height="40">
+                        <PartText x="32" y="21" width="122" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -473,7 +472,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s1_goal_progress_short_title">
-                        <PartText x="27" y="21" width="112" height="40">
+                        <PartText x="32" y="21" width="122" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -484,22 +483,22 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s1_goal_progress_has_icon">
-                        <PartImage x="68" y="29" width="30" height="24">
+                        <PartImage x="76" y="29" width="34" height="26">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
                     <Default>
-                        <PartText x="27" y="21" width="112" height="40">
+                        <PartText x="32" y="21" width="122" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">BATT</Font>
                             </Text>
                         </PartText>
                     </Default>
                 </Condition>
-                <PartText x="2" y="68" width="161" height="68">
+                <PartText x="2" y="76" width="181" height="76">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
                     <Text align="END">
-                        <Font family="dseg14_classic_bold" size="68" color="#FF006600">~~~~</Font>
+                        <Font family="dseg14_classic_bold" size="76" color="#FF006600">~~~~</Font>
                     </Text>
                 </PartText>
                 <Condition>
@@ -507,9 +506,9 @@
                         <Expression name="s1_goal_progress_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "BATT" == "BATT")</Expression>
                     </Expressions>
                     <Compare expression="s1_goal_progress_is_batt_deg">
-                        <PartText x="2" y="68" width="161" height="68">
+                        <PartText x="2" y="76" width="181" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FF00FF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FF00FF00">
                                     <Upper>
                                         <Template>%s%%<Parameter expression="subText([COMPLICATION.TEXT], 0, 2)" /></Template>
                                     </Upper>
@@ -518,9 +517,9 @@
                         </PartText>
                     </Compare>
                     <Default>
-                        <PartText x="2" y="68" width="161" height="68">
+                        <PartText x="2" y="76" width="181" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FF00FF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FF00FF00">
                                     <Upper>
                                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                                     </Upper>
@@ -531,26 +530,26 @@
                 </Condition>
             </Complication>
             <Complication type="EMPTY">
-                <PartDraw x="0" y="0" width="166" height="144" alpha="255">
+                <PartDraw x="0" y="0" width="186" height="152" alpha="255">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
-                    <Rectangle x="25" y="24" width="116" height="34"><Fill color="#FF660000" /></Rectangle>
-                    <Rectangle x="0" y="62" width="166" height="80"><Fill color="#FF111111" /></Rectangle>
-                    <Rectangle x="2" y="64" width="162" height="76"><Fill color="#FF003300" /></Rectangle>
+                    <Rectangle x="34" y="24" width="126" height="34"><Fill color="#FF660000" /></Rectangle>
+                    <Rectangle x="0" y="70" width="186" height="88"><Fill color="#FF111111" /></Rectangle>
+                    <Rectangle x="2" y="72" width="182" height="84"><Fill color="#FF003300" /></Rectangle>
                 </PartDraw>
-                <PartText x="27" y="21" width="112" height="40">
+                <PartText x="32" y="21" width="122" height="40">
                     <Text align="CENTER">
                         <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">NONE</Font>
                     </Text>
                 </PartText>
-                <PartText x="2" y="68" width="161" height="68">
+                <PartText x="2" y="76" width="181" height="76">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
                     <Text align="END">
-                        <Font family="dseg14_classic_bold" size="68" color="#FF006600">~~~~</Font>
+                        <Font family="dseg14_classic_bold" size="76" color="#FF006600">~~~~</Font>
                     </Text>
                 </PartText>
-                <PartText x="2" y="68" width="161" height="68">
+                <PartText x="2" y="76" width="181" height="76">
                     <Text align="END">
-                        <Font family="dseg14_classic_bold" size="68" color="#FF00FF00">----</Font>
+                        <Font family="dseg14_classic_bold" size="76" color="#FF00FF00">----</Font>
                     </Text>
                 </PartText>
             </Complication>
@@ -561,21 +560,21 @@
             name="comp_slot_2"
             displayName="cfg_slot_2"
             isCustomizable="TRUE"
-            x="566"
-            y="345"
-            width="86"
-            height="144"
+            x="584"
+            y="358"
+            width="96"
+            height="152"
             supportedTypes="SHORT_TEXT RANGED_VALUE GOAL_PROGRESS EMPTY">
-            <BoundingBox x="0" y="24" width="86" height="118" />
+            <BoundingBox x="0" y="24" width="96" height="136" />
             <DefaultProviderPolicy
                 defaultSystemProvider="HEART_RATE"
                 defaultSystemProviderType="SHORT_TEXT" />
             <Complication type="SHORT_TEXT">
-                <PartDraw x="0" y="0" width="86" height="144" alpha="255">
+                <PartDraw x="0" y="0" width="96" height="152" alpha="255">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
-                    <Rectangle x="2" y="24" width="82" height="34"><Fill color="#FF660000" /></Rectangle>
-                    <Rectangle x="0" y="62" width="86" height="80"><Fill color="#FF111111" /></Rectangle>
-                    <Rectangle x="2" y="64" width="82" height="76"><Fill color="#FF003300" /></Rectangle>
+                    <Rectangle x="2" y="24" width="92" height="34"><Fill color="#FF660000" /></Rectangle>
+                    <Rectangle x="0" y="70" width="96" height="88"><Fill color="#FF111111" /></Rectangle>
+                    <Rectangle x="2" y="72" width="92" height="84"><Fill color="#FF003300" /></Rectangle>
                 </PartDraw>
                 <Condition>
                     <Expressions>
@@ -584,7 +583,7 @@
                         <Expression name="s2_short_text_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
                     <Compare expression="s2_short_text_long_title">
-                        <PartText x="4" y="21" width="78" height="40">
+                        <PartText x="4" y="21" width="88" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -595,7 +594,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s2_short_text_short_title">
-                        <PartText x="4" y="21" width="78" height="40">
+                        <PartText x="4" y="21" width="88" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -606,22 +605,22 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s2_short_text_has_icon">
-                        <PartImage x="28" y="29" width="30" height="24">
+                        <PartImage x="31" y="29" width="34" height="26">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
                     <Default>
-                        <PartText x="4" y="21" width="78" height="40">
+                        <PartText x="4" y="21" width="88" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">BPM</Font>
                             </Text>
                         </PartText>
                     </Default>
                 </Condition>
-                <PartText x="2" y="68" width="81" height="68">
+                <PartText x="2" y="76" width="91" height="76">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
                     <Text align="END">
-                        <Font family="dseg14_classic_bold" size="68" color="#FF006600">~~</Font>
+                        <Font family="dseg14_classic_bold" size="76" color="#FF006600">~~</Font>
                     </Text>
                 </PartText>
                 <Condition>
@@ -629,9 +628,9 @@
                         <Expression name="s2_short_text_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "BPM" == "BATT")</Expression>
                     </Expressions>
                     <Compare expression="s2_short_text_is_batt_deg">
-                        <PartText x="2" y="68" width="81" height="68">
+                        <PartText x="2" y="76" width="91" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FF00FF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FF00FF00">
                                     <Upper>
                                         <Template>%s%%<Parameter expression="subText([COMPLICATION.TEXT], 0, 2)" /></Template>
                                     </Upper>
@@ -640,9 +639,9 @@
                         </PartText>
                     </Compare>
                     <Default>
-                        <PartText x="2" y="68" width="81" height="68">
+                        <PartText x="2" y="76" width="91" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FF00FF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FF00FF00">
                                     <Upper>
                                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                                     </Upper>
@@ -653,11 +652,11 @@
                 </Condition>
             </Complication>
             <Complication type="RANGED_VALUE">
-                <PartDraw x="0" y="0" width="86" height="144" alpha="255">
+                <PartDraw x="0" y="0" width="96" height="152" alpha="255">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
-                    <Rectangle x="2" y="24" width="82" height="34"><Fill color="#FF660000" /></Rectangle>
-                    <Rectangle x="0" y="62" width="86" height="80"><Fill color="#FF111111" /></Rectangle>
-                    <Rectangle x="2" y="64" width="82" height="76"><Fill color="#FF003300" /></Rectangle>
+                    <Rectangle x="2" y="24" width="92" height="34"><Fill color="#FF660000" /></Rectangle>
+                    <Rectangle x="0" y="70" width="96" height="88"><Fill color="#FF111111" /></Rectangle>
+                    <Rectangle x="2" y="72" width="92" height="84"><Fill color="#FF003300" /></Rectangle>
                 </PartDraw>
                 <Condition>
                     <Expressions>
@@ -666,7 +665,7 @@
                         <Expression name="s2_ranged_value_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
                     <Compare expression="s2_ranged_value_long_title">
-                        <PartText x="4" y="21" width="78" height="40">
+                        <PartText x="4" y="21" width="88" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -677,7 +676,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s2_ranged_value_short_title">
-                        <PartText x="4" y="21" width="78" height="40">
+                        <PartText x="4" y="21" width="88" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -688,22 +687,22 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s2_ranged_value_has_icon">
-                        <PartImage x="28" y="29" width="30" height="24">
+                        <PartImage x="31" y="29" width="34" height="26">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
                     <Default>
-                        <PartText x="4" y="21" width="78" height="40">
+                        <PartText x="4" y="21" width="88" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">BPM</Font>
                             </Text>
                         </PartText>
                     </Default>
                 </Condition>
-                <PartText x="2" y="68" width="81" height="68">
+                <PartText x="2" y="76" width="91" height="76">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
                     <Text align="END">
-                        <Font family="dseg14_classic_bold" size="68" color="#FF006600">~~</Font>
+                        <Font family="dseg14_classic_bold" size="76" color="#FF006600">~~</Font>
                     </Text>
                 </PartText>
                 <Condition>
@@ -711,9 +710,9 @@
                         <Expression name="s2_ranged_value_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "BPM" == "BATT")</Expression>
                     </Expressions>
                     <Compare expression="s2_ranged_value_is_batt_deg">
-                        <PartText x="2" y="68" width="81" height="68">
+                        <PartText x="2" y="76" width="91" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FF00FF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FF00FF00">
                                     <Upper>
                                         <Template>%s%%<Parameter expression="subText([COMPLICATION.TEXT], 0, 2)" /></Template>
                                     </Upper>
@@ -722,9 +721,9 @@
                         </PartText>
                     </Compare>
                     <Default>
-                        <PartText x="2" y="68" width="81" height="68">
+                        <PartText x="2" y="76" width="91" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FF00FF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FF00FF00">
                                     <Upper>
                                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                                     </Upper>
@@ -735,11 +734,11 @@
                 </Condition>
             </Complication>
             <Complication type="GOAL_PROGRESS">
-                <PartDraw x="0" y="0" width="86" height="144" alpha="255">
+                <PartDraw x="0" y="0" width="96" height="152" alpha="255">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
-                    <Rectangle x="2" y="24" width="82" height="34"><Fill color="#FF660000" /></Rectangle>
-                    <Rectangle x="0" y="62" width="86" height="80"><Fill color="#FF111111" /></Rectangle>
-                    <Rectangle x="2" y="64" width="82" height="76"><Fill color="#FF003300" /></Rectangle>
+                    <Rectangle x="2" y="24" width="92" height="34"><Fill color="#FF660000" /></Rectangle>
+                    <Rectangle x="0" y="70" width="96" height="88"><Fill color="#FF111111" /></Rectangle>
+                    <Rectangle x="2" y="72" width="92" height="84"><Fill color="#FF003300" /></Rectangle>
                 </PartDraw>
                 <Condition>
                     <Expressions>
@@ -748,7 +747,7 @@
                         <Expression name="s2_goal_progress_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
                     <Compare expression="s2_goal_progress_long_title">
-                        <PartText x="4" y="21" width="78" height="40">
+                        <PartText x="4" y="21" width="88" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -759,7 +758,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s2_goal_progress_short_title">
-                        <PartText x="4" y="21" width="78" height="40">
+                        <PartText x="4" y="21" width="88" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -770,22 +769,22 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s2_goal_progress_has_icon">
-                        <PartImage x="28" y="29" width="30" height="24">
+                        <PartImage x="31" y="29" width="34" height="26">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
                     <Default>
-                        <PartText x="4" y="21" width="78" height="40">
+                        <PartText x="4" y="21" width="88" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">BPM</Font>
                             </Text>
                         </PartText>
                     </Default>
                 </Condition>
-                <PartText x="2" y="68" width="81" height="68">
+                <PartText x="2" y="76" width="91" height="76">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
                     <Text align="END">
-                        <Font family="dseg14_classic_bold" size="68" color="#FF006600">~~</Font>
+                        <Font family="dseg14_classic_bold" size="76" color="#FF006600">~~</Font>
                     </Text>
                 </PartText>
                 <Condition>
@@ -793,9 +792,9 @@
                         <Expression name="s2_goal_progress_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "BPM" == "BATT")</Expression>
                     </Expressions>
                     <Compare expression="s2_goal_progress_is_batt_deg">
-                        <PartText x="2" y="68" width="81" height="68">
+                        <PartText x="2" y="76" width="91" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FF00FF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FF00FF00">
                                     <Upper>
                                         <Template>%s%%<Parameter expression="subText([COMPLICATION.TEXT], 0, 2)" /></Template>
                                     </Upper>
@@ -804,9 +803,9 @@
                         </PartText>
                     </Compare>
                     <Default>
-                        <PartText x="2" y="68" width="81" height="68">
+                        <PartText x="2" y="76" width="91" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FF00FF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FF00FF00">
                                     <Upper>
                                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                                     </Upper>
@@ -817,26 +816,26 @@
                 </Condition>
             </Complication>
             <Complication type="EMPTY">
-                <PartDraw x="0" y="0" width="86" height="144" alpha="255">
+                <PartDraw x="0" y="0" width="96" height="152" alpha="255">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
-                    <Rectangle x="2" y="24" width="82" height="34"><Fill color="#FF660000" /></Rectangle>
-                    <Rectangle x="0" y="62" width="86" height="80"><Fill color="#FF111111" /></Rectangle>
-                    <Rectangle x="2" y="64" width="82" height="76"><Fill color="#FF003300" /></Rectangle>
+                    <Rectangle x="2" y="24" width="92" height="34"><Fill color="#FF660000" /></Rectangle>
+                    <Rectangle x="0" y="70" width="96" height="88"><Fill color="#FF111111" /></Rectangle>
+                    <Rectangle x="2" y="72" width="92" height="84"><Fill color="#FF003300" /></Rectangle>
                 </PartDraw>
-                <PartText x="4" y="21" width="78" height="40">
+                <PartText x="4" y="21" width="88" height="40">
                     <Text align="CENTER">
                         <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">NONE</Font>
                     </Text>
                 </PartText>
-                <PartText x="2" y="68" width="81" height="68">
+                <PartText x="2" y="76" width="91" height="76">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
                     <Text align="END">
-                        <Font family="dseg14_classic_bold" size="68" color="#FF006600">~~</Font>
+                        <Font family="dseg14_classic_bold" size="76" color="#FF006600">~~</Font>
                     </Text>
                 </PartText>
-                <PartText x="2" y="68" width="81" height="68">
+                <PartText x="2" y="76" width="91" height="76">
                     <Text align="END">
-                        <Font family="dseg14_classic_bold" size="68" color="#FF00FF00">--</Font>
+                        <Font family="dseg14_classic_bold" size="76" color="#FF00FF00">--</Font>
                     </Text>
                 </PartText>
             </Complication>
@@ -847,21 +846,21 @@
             name="comp_slot_3"
             displayName="cfg_slot_3"
             isCustomizable="TRUE"
-            x="654"
-            y="345"
-            width="86"
-            height="144"
+            x="688"
+            y="358"
+            width="96"
+            height="152"
             supportedTypes="SHORT_TEXT RANGED_VALUE GOAL_PROGRESS EMPTY">
-            <BoundingBox x="0" y="24" width="86" height="118" />
+            <BoundingBox x="0" y="24" width="96" height="136" />
             <DefaultProviderPolicy
                 defaultSystemProvider="UNREAD_NOTIFICATION_COUNT"
                 defaultSystemProviderType="SHORT_TEXT" />
             <Complication type="SHORT_TEXT">
-                <PartDraw x="0" y="0" width="86" height="144" alpha="255">
+                <PartDraw x="0" y="0" width="96" height="152" alpha="255">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
-                    <Rectangle x="2" y="24" width="82" height="34"><Fill color="#FF660000" /></Rectangle>
-                    <Rectangle x="0" y="62" width="86" height="80"><Fill color="#FF111111" /></Rectangle>
-                    <Rectangle x="2" y="64" width="82" height="76"><Fill color="#FF003300" /></Rectangle>
+                    <Rectangle x="2" y="24" width="92" height="34"><Fill color="#FF660000" /></Rectangle>
+                    <Rectangle x="0" y="70" width="96" height="88"><Fill color="#FF111111" /></Rectangle>
+                    <Rectangle x="2" y="72" width="92" height="84"><Fill color="#FF003300" /></Rectangle>
                 </PartDraw>
                 <Condition>
                     <Expressions>
@@ -870,7 +869,7 @@
                         <Expression name="s3_short_text_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
                     <Compare expression="s3_short_text_long_title">
-                        <PartText x="4" y="21" width="78" height="40">
+                        <PartText x="4" y="21" width="88" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -881,7 +880,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s3_short_text_short_title">
-                        <PartText x="4" y="21" width="78" height="40">
+                        <PartText x="4" y="21" width="88" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -892,22 +891,22 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s3_short_text_has_icon">
-                        <PartImage x="28" y="29" width="30" height="24">
+                        <PartImage x="31" y="29" width="34" height="26">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
                     <Default>
-                        <PartText x="4" y="21" width="78" height="40">
+                        <PartText x="4" y="21" width="88" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">ALRT</Font>
                             </Text>
                         </PartText>
                     </Default>
                 </Condition>
-                <PartText x="2" y="68" width="81" height="68">
+                <PartText x="2" y="76" width="91" height="76">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
                     <Text align="END">
-                        <Font family="dseg14_classic_bold" size="68" color="#FF006600">~~</Font>
+                        <Font family="dseg14_classic_bold" size="76" color="#FF006600">~~</Font>
                     </Text>
                 </PartText>
                 <Condition>
@@ -915,9 +914,9 @@
                         <Expression name="s3_short_text_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "ALRT" == "BATT")</Expression>
                     </Expressions>
                     <Compare expression="s3_short_text_is_batt_deg">
-                        <PartText x="2" y="68" width="81" height="68">
+                        <PartText x="2" y="76" width="91" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FF00FF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FF00FF00">
                                     <Upper>
                                         <Template>%s%%<Parameter expression="subText([COMPLICATION.TEXT], 0, 2)" /></Template>
                                     </Upper>
@@ -926,9 +925,9 @@
                         </PartText>
                     </Compare>
                     <Default>
-                        <PartText x="2" y="68" width="81" height="68">
+                        <PartText x="2" y="76" width="91" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FF00FF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FF00FF00">
                                     <Upper>
                                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                                     </Upper>
@@ -939,11 +938,11 @@
                 </Condition>
             </Complication>
             <Complication type="RANGED_VALUE">
-                <PartDraw x="0" y="0" width="86" height="144" alpha="255">
+                <PartDraw x="0" y="0" width="96" height="152" alpha="255">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
-                    <Rectangle x="2" y="24" width="82" height="34"><Fill color="#FF660000" /></Rectangle>
-                    <Rectangle x="0" y="62" width="86" height="80"><Fill color="#FF111111" /></Rectangle>
-                    <Rectangle x="2" y="64" width="82" height="76"><Fill color="#FF003300" /></Rectangle>
+                    <Rectangle x="2" y="24" width="92" height="34"><Fill color="#FF660000" /></Rectangle>
+                    <Rectangle x="0" y="70" width="96" height="88"><Fill color="#FF111111" /></Rectangle>
+                    <Rectangle x="2" y="72" width="92" height="84"><Fill color="#FF003300" /></Rectangle>
                 </PartDraw>
                 <Condition>
                     <Expressions>
@@ -952,7 +951,7 @@
                         <Expression name="s3_ranged_value_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
                     <Compare expression="s3_ranged_value_long_title">
-                        <PartText x="4" y="21" width="78" height="40">
+                        <PartText x="4" y="21" width="88" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -963,7 +962,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s3_ranged_value_short_title">
-                        <PartText x="4" y="21" width="78" height="40">
+                        <PartText x="4" y="21" width="88" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -974,22 +973,22 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s3_ranged_value_has_icon">
-                        <PartImage x="28" y="29" width="30" height="24">
+                        <PartImage x="31" y="29" width="34" height="26">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
                     <Default>
-                        <PartText x="4" y="21" width="78" height="40">
+                        <PartText x="4" y="21" width="88" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">ALRT</Font>
                             </Text>
                         </PartText>
                     </Default>
                 </Condition>
-                <PartText x="2" y="68" width="81" height="68">
+                <PartText x="2" y="76" width="91" height="76">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
                     <Text align="END">
-                        <Font family="dseg14_classic_bold" size="68" color="#FF006600">~~</Font>
+                        <Font family="dseg14_classic_bold" size="76" color="#FF006600">~~</Font>
                     </Text>
                 </PartText>
                 <Condition>
@@ -997,9 +996,9 @@
                         <Expression name="s3_ranged_value_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "ALRT" == "BATT")</Expression>
                     </Expressions>
                     <Compare expression="s3_ranged_value_is_batt_deg">
-                        <PartText x="2" y="68" width="81" height="68">
+                        <PartText x="2" y="76" width="91" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FF00FF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FF00FF00">
                                     <Upper>
                                         <Template>%s%%<Parameter expression="subText([COMPLICATION.TEXT], 0, 2)" /></Template>
                                     </Upper>
@@ -1008,9 +1007,9 @@
                         </PartText>
                     </Compare>
                     <Default>
-                        <PartText x="2" y="68" width="81" height="68">
+                        <PartText x="2" y="76" width="91" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FF00FF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FF00FF00">
                                     <Upper>
                                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                                     </Upper>
@@ -1021,11 +1020,11 @@
                 </Condition>
             </Complication>
             <Complication type="GOAL_PROGRESS">
-                <PartDraw x="0" y="0" width="86" height="144" alpha="255">
+                <PartDraw x="0" y="0" width="96" height="152" alpha="255">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
-                    <Rectangle x="2" y="24" width="82" height="34"><Fill color="#FF660000" /></Rectangle>
-                    <Rectangle x="0" y="62" width="86" height="80"><Fill color="#FF111111" /></Rectangle>
-                    <Rectangle x="2" y="64" width="82" height="76"><Fill color="#FF003300" /></Rectangle>
+                    <Rectangle x="2" y="24" width="92" height="34"><Fill color="#FF660000" /></Rectangle>
+                    <Rectangle x="0" y="70" width="96" height="88"><Fill color="#FF111111" /></Rectangle>
+                    <Rectangle x="2" y="72" width="92" height="84"><Fill color="#FF003300" /></Rectangle>
                 </PartDraw>
                 <Condition>
                     <Expressions>
@@ -1034,7 +1033,7 @@
                         <Expression name="s3_goal_progress_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
                     <Compare expression="s3_goal_progress_long_title">
-                        <PartText x="4" y="21" width="78" height="40">
+                        <PartText x="4" y="21" width="88" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -1045,7 +1044,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s3_goal_progress_short_title">
-                        <PartText x="4" y="21" width="78" height="40">
+                        <PartText x="4" y="21" width="88" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -1056,22 +1055,22 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s3_goal_progress_has_icon">
-                        <PartImage x="28" y="29" width="30" height="24">
+                        <PartImage x="31" y="29" width="34" height="26">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
                     <Default>
-                        <PartText x="4" y="21" width="78" height="40">
+                        <PartText x="4" y="21" width="88" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">ALRT</Font>
                             </Text>
                         </PartText>
                     </Default>
                 </Condition>
-                <PartText x="2" y="68" width="81" height="68">
+                <PartText x="2" y="76" width="91" height="76">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
                     <Text align="END">
-                        <Font family="dseg14_classic_bold" size="68" color="#FF006600">~~</Font>
+                        <Font family="dseg14_classic_bold" size="76" color="#FF006600">~~</Font>
                     </Text>
                 </PartText>
                 <Condition>
@@ -1079,9 +1078,9 @@
                         <Expression name="s3_goal_progress_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "ALRT" == "BATT")</Expression>
                     </Expressions>
                     <Compare expression="s3_goal_progress_is_batt_deg">
-                        <PartText x="2" y="68" width="81" height="68">
+                        <PartText x="2" y="76" width="91" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FF00FF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FF00FF00">
                                     <Upper>
                                         <Template>%s%%<Parameter expression="subText([COMPLICATION.TEXT], 0, 2)" /></Template>
                                     </Upper>
@@ -1090,9 +1089,9 @@
                         </PartText>
                     </Compare>
                     <Default>
-                        <PartText x="2" y="68" width="81" height="68">
+                        <PartText x="2" y="76" width="91" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FF00FF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FF00FF00">
                                     <Upper>
                                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                                     </Upper>
@@ -1103,26 +1102,26 @@
                 </Condition>
             </Complication>
             <Complication type="EMPTY">
-                <PartDraw x="0" y="0" width="86" height="144" alpha="255">
+                <PartDraw x="0" y="0" width="96" height="152" alpha="255">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
-                    <Rectangle x="2" y="24" width="82" height="34"><Fill color="#FF660000" /></Rectangle>
-                    <Rectangle x="0" y="62" width="86" height="80"><Fill color="#FF111111" /></Rectangle>
-                    <Rectangle x="2" y="64" width="82" height="76"><Fill color="#FF003300" /></Rectangle>
+                    <Rectangle x="2" y="24" width="92" height="34"><Fill color="#FF660000" /></Rectangle>
+                    <Rectangle x="0" y="70" width="96" height="88"><Fill color="#FF111111" /></Rectangle>
+                    <Rectangle x="2" y="72" width="92" height="84"><Fill color="#FF003300" /></Rectangle>
                 </PartDraw>
-                <PartText x="4" y="21" width="78" height="40">
+                <PartText x="4" y="21" width="88" height="40">
                     <Text align="CENTER">
                         <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">NONE</Font>
                     </Text>
                 </PartText>
-                <PartText x="2" y="68" width="81" height="68">
+                <PartText x="2" y="76" width="91" height="76">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
                     <Text align="END">
-                        <Font family="dseg14_classic_bold" size="68" color="#FF006600">~~</Font>
+                        <Font family="dseg14_classic_bold" size="76" color="#FF006600">~~</Font>
                     </Text>
                 </PartText>
-                <PartText x="2" y="68" width="81" height="68">
+                <PartText x="2" y="76" width="91" height="76">
                     <Text align="END">
-                        <Font family="dseg14_classic_bold" size="68" color="#FF00FF00">--</Font>
+                        <Font family="dseg14_classic_bold" size="76" color="#FF00FF00">--</Font>
                     </Text>
                 </PartText>
             </Complication>
@@ -1130,30 +1129,30 @@
 
         <!-- ===================================================================
              ROW 3: LAST TIME DEPARTED (Yellow #FFFFFF00)
-             Origin: (90, 578), Size: 720 x 230
+             Origin: (90, 588), Size: 720 x 230
              =================================================================== -->
         <Group
             name="row_3_departed"
             x="90"
-            y="578"
+            y="588"
             width="720"
             height="230">
 
-            <!-- AM/PM Colon Indicator Dots at x=456 (canvas x=546) -->
+            <!-- AM/PM Colon Indicator Dots at x=464 (canvas x=554) -->
             <Condition>
                 <Expressions>
                     <Expression name="row3_is_am">[AMPM_POSITION] == 0</Expression>
                 </Expressions>
                 <Compare expression="row3_is_am">
-                    <PartDraw x="456" y="67" width="16" height="70">
-                        <Ellipse x="0" y="13" width="16" height="16"><Fill color="#FFFFFF00" /></Ellipse>
-                        <Ellipse x="0" y="41" width="16" height="16"><Fill color="#FF4D4D00" /></Ellipse>
+                    <PartDraw x="468" y="75" width="18" height="78">
+                        <Ellipse x="1" y="15" width="16" height="16"><Fill color="#FFFFFF00" /></Ellipse>
+                        <Ellipse x="1" y="47" width="16" height="16"><Fill color="#FF4D4D00" /></Ellipse>
                     </PartDraw>
                 </Compare>
                 <Default>
-                    <PartDraw x="456" y="67" width="16" height="70">
-                        <Ellipse x="0" y="13" width="16" height="16"><Fill color="#FF4D4D00" /></Ellipse>
-                        <Ellipse x="0" y="41" width="16" height="16"><Fill color="#FFFFFF00" /></Ellipse>
+                    <PartDraw x="468" y="75" width="18" height="78">
+                        <Ellipse x="1" y="15" width="16" height="16"><Fill color="#FF4D4D00" /></Ellipse>
+                        <Ellipse x="1" y="47" width="16" height="16"><Fill color="#FFFFFF00" /></Ellipse>
                     </PartDraw>
                 </Default>
             </Condition>
@@ -1161,9 +1160,9 @@
             <!-- Shared Row 3 Footer Badge & Label: LAST TIME DEPARTED -->
             <PartDraw x="0" y="0" width="720" height="230" alpha="255">
                 <Variant mode="AMBIENT" target="alpha" value="0" />
-                <Rectangle x="192" y="150" width="336" height="34"><Fill color="#FF222222" /></Rectangle>
+                <Rectangle x="192" y="160" width="336" height="34"><Fill color="#FF222222" /></Rectangle>
             </PartDraw>
-            <PartText x="192" y="147" width="336" height="40">
+            <PartText x="192" y="157" width="336" height="40">
                 <Text align="CENTER">
                     <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">LAST TIME DEPARTED</Font>
                 </Text>
@@ -1175,21 +1174,21 @@
             name="comp_slot_4"
             displayName="cfg_slot_4"
             isCustomizable="TRUE"
-            x="152"
-            y="578"
-            width="126"
-            height="144"
+            x="115"
+            y="588"
+            width="140"
+            height="152"
             supportedTypes="SHORT_TEXT RANGED_VALUE GOAL_PROGRESS EMPTY">
-            <BoundingBox x="0" y="24" width="126" height="118" />
+            <BoundingBox x="0" y="24" width="140" height="136" />
             <DefaultProviderPolicy
                 defaultSystemProvider="DAY_OF_WEEK"
                 defaultSystemProviderType="SHORT_TEXT" />
             <Complication type="SHORT_TEXT">
-                <PartDraw x="0" y="0" width="126" height="144" alpha="255">
+                <PartDraw x="0" y="0" width="140" height="152" alpha="255">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
-                    <Rectangle x="5" y="24" width="116" height="34"><Fill color="#FF660000" /></Rectangle>
-                    <Rectangle x="0" y="62" width="126" height="80"><Fill color="#FF111111" /></Rectangle>
-                    <Rectangle x="2" y="64" width="122" height="76"><Fill color="#FF333300" /></Rectangle>
+                    <Rectangle x="7" y="24" width="126" height="34"><Fill color="#FF660000" /></Rectangle>
+                    <Rectangle x="0" y="70" width="140" height="88"><Fill color="#FF111111" /></Rectangle>
+                    <Rectangle x="2" y="72" width="136" height="84"><Fill color="#FF333300" /></Rectangle>
                 </PartDraw>
                 <Condition>
                     <Expressions>
@@ -1198,7 +1197,7 @@
                         <Expression name="s4_short_text_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
                     <Compare expression="s4_short_text_long_title">
-                        <PartText x="7" y="21" width="112" height="40">
+                        <PartText x="9" y="21" width="122" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -1209,7 +1208,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s4_short_text_short_title">
-                        <PartText x="7" y="21" width="112" height="40">
+                        <PartText x="9" y="21" width="122" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -1220,22 +1219,22 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s4_short_text_has_icon">
-                        <PartImage x="48" y="29" width="30" height="24">
+                        <PartImage x="53" y="29" width="34" height="26">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
                     <Default>
-                        <PartText x="7" y="21" width="112" height="40">
+                        <PartText x="9" y="21" width="122" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">DAY</Font>
                             </Text>
                         </PartText>
                     </Default>
                 </Condition>
-                <PartText x="2" y="68" width="121" height="68">
+                <PartText x="2" y="76" width="135" height="76">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
                     <Text align="END">
-                        <Font family="dseg14_classic_bold" size="68" color="#FF666600">~~~</Font>
+                        <Font family="dseg14_classic_bold" size="76" color="#FF666600">~~~</Font>
                     </Text>
                 </PartText>
                 <Condition>
@@ -1243,9 +1242,9 @@
                         <Expression name="s4_short_text_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "DAY" == "BATT")</Expression>
                     </Expressions>
                     <Compare expression="s4_short_text_is_batt_deg">
-                        <PartText x="2" y="68" width="121" height="68">
+                        <PartText x="2" y="76" width="135" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FFFFFF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FFFFFF00">
                                     <Upper>
                                         <Template>%s%%<Parameter expression="subText([COMPLICATION.TEXT], 0, 2)" /></Template>
                                     </Upper>
@@ -1254,9 +1253,9 @@
                         </PartText>
                     </Compare>
                     <Default>
-                        <PartText x="2" y="68" width="121" height="68">
+                        <PartText x="2" y="76" width="135" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FFFFFF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FFFFFF00">
                                     <Upper>
                                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                                     </Upper>
@@ -1267,11 +1266,11 @@
                 </Condition>
             </Complication>
             <Complication type="RANGED_VALUE">
-                <PartDraw x="0" y="0" width="126" height="144" alpha="255">
+                <PartDraw x="0" y="0" width="140" height="152" alpha="255">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
-                    <Rectangle x="5" y="24" width="116" height="34"><Fill color="#FF660000" /></Rectangle>
-                    <Rectangle x="0" y="62" width="126" height="80"><Fill color="#FF111111" /></Rectangle>
-                    <Rectangle x="2" y="64" width="122" height="76"><Fill color="#FF333300" /></Rectangle>
+                    <Rectangle x="7" y="24" width="126" height="34"><Fill color="#FF660000" /></Rectangle>
+                    <Rectangle x="0" y="70" width="140" height="88"><Fill color="#FF111111" /></Rectangle>
+                    <Rectangle x="2" y="72" width="136" height="84"><Fill color="#FF333300" /></Rectangle>
                 </PartDraw>
                 <Condition>
                     <Expressions>
@@ -1280,7 +1279,7 @@
                         <Expression name="s4_ranged_value_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
                     <Compare expression="s4_ranged_value_long_title">
-                        <PartText x="7" y="21" width="112" height="40">
+                        <PartText x="9" y="21" width="122" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -1291,7 +1290,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s4_ranged_value_short_title">
-                        <PartText x="7" y="21" width="112" height="40">
+                        <PartText x="9" y="21" width="122" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -1302,22 +1301,22 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s4_ranged_value_has_icon">
-                        <PartImage x="48" y="29" width="30" height="24">
+                        <PartImage x="53" y="29" width="34" height="26">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
                     <Default>
-                        <PartText x="7" y="21" width="112" height="40">
+                        <PartText x="9" y="21" width="122" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">DAY</Font>
                             </Text>
                         </PartText>
                     </Default>
                 </Condition>
-                <PartText x="2" y="68" width="121" height="68">
+                <PartText x="2" y="76" width="135" height="76">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
                     <Text align="END">
-                        <Font family="dseg14_classic_bold" size="68" color="#FF666600">~~~</Font>
+                        <Font family="dseg14_classic_bold" size="76" color="#FF666600">~~~</Font>
                     </Text>
                 </PartText>
                 <Condition>
@@ -1325,9 +1324,9 @@
                         <Expression name="s4_ranged_value_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "DAY" == "BATT")</Expression>
                     </Expressions>
                     <Compare expression="s4_ranged_value_is_batt_deg">
-                        <PartText x="2" y="68" width="121" height="68">
+                        <PartText x="2" y="76" width="135" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FFFFFF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FFFFFF00">
                                     <Upper>
                                         <Template>%s%%<Parameter expression="subText([COMPLICATION.TEXT], 0, 2)" /></Template>
                                     </Upper>
@@ -1336,9 +1335,9 @@
                         </PartText>
                     </Compare>
                     <Default>
-                        <PartText x="2" y="68" width="121" height="68">
+                        <PartText x="2" y="76" width="135" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FFFFFF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FFFFFF00">
                                     <Upper>
                                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                                     </Upper>
@@ -1349,11 +1348,11 @@
                 </Condition>
             </Complication>
             <Complication type="GOAL_PROGRESS">
-                <PartDraw x="0" y="0" width="126" height="144" alpha="255">
+                <PartDraw x="0" y="0" width="140" height="152" alpha="255">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
-                    <Rectangle x="5" y="24" width="116" height="34"><Fill color="#FF660000" /></Rectangle>
-                    <Rectangle x="0" y="62" width="126" height="80"><Fill color="#FF111111" /></Rectangle>
-                    <Rectangle x="2" y="64" width="122" height="76"><Fill color="#FF333300" /></Rectangle>
+                    <Rectangle x="7" y="24" width="126" height="34"><Fill color="#FF660000" /></Rectangle>
+                    <Rectangle x="0" y="70" width="140" height="88"><Fill color="#FF111111" /></Rectangle>
+                    <Rectangle x="2" y="72" width="136" height="84"><Fill color="#FF333300" /></Rectangle>
                 </PartDraw>
                 <Condition>
                     <Expressions>
@@ -1362,7 +1361,7 @@
                         <Expression name="s4_goal_progress_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
                     <Compare expression="s4_goal_progress_long_title">
-                        <PartText x="7" y="21" width="112" height="40">
+                        <PartText x="9" y="21" width="122" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -1373,7 +1372,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s4_goal_progress_short_title">
-                        <PartText x="7" y="21" width="112" height="40">
+                        <PartText x="9" y="21" width="122" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -1384,22 +1383,22 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s4_goal_progress_has_icon">
-                        <PartImage x="48" y="29" width="30" height="24">
+                        <PartImage x="53" y="29" width="34" height="26">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
                     <Default>
-                        <PartText x="7" y="21" width="112" height="40">
+                        <PartText x="9" y="21" width="122" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">DAY</Font>
                             </Text>
                         </PartText>
                     </Default>
                 </Condition>
-                <PartText x="2" y="68" width="121" height="68">
+                <PartText x="2" y="76" width="135" height="76">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
                     <Text align="END">
-                        <Font family="dseg14_classic_bold" size="68" color="#FF666600">~~~</Font>
+                        <Font family="dseg14_classic_bold" size="76" color="#FF666600">~~~</Font>
                     </Text>
                 </PartText>
                 <Condition>
@@ -1407,9 +1406,9 @@
                         <Expression name="s4_goal_progress_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "DAY" == "BATT")</Expression>
                     </Expressions>
                     <Compare expression="s4_goal_progress_is_batt_deg">
-                        <PartText x="2" y="68" width="121" height="68">
+                        <PartText x="2" y="76" width="135" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FFFFFF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FFFFFF00">
                                     <Upper>
                                         <Template>%s%%<Parameter expression="subText([COMPLICATION.TEXT], 0, 2)" /></Template>
                                     </Upper>
@@ -1418,9 +1417,9 @@
                         </PartText>
                     </Compare>
                     <Default>
-                        <PartText x="2" y="68" width="121" height="68">
+                        <PartText x="2" y="76" width="135" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FFFFFF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FFFFFF00">
                                     <Upper>
                                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                                     </Upper>
@@ -1431,26 +1430,26 @@
                 </Condition>
             </Complication>
             <Complication type="EMPTY">
-                <PartDraw x="0" y="0" width="126" height="144" alpha="255">
+                <PartDraw x="0" y="0" width="140" height="152" alpha="255">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
-                    <Rectangle x="5" y="24" width="116" height="34"><Fill color="#FF660000" /></Rectangle>
-                    <Rectangle x="0" y="62" width="126" height="80"><Fill color="#FF111111" /></Rectangle>
-                    <Rectangle x="2" y="64" width="122" height="76"><Fill color="#FF333300" /></Rectangle>
+                    <Rectangle x="7" y="24" width="126" height="34"><Fill color="#FF660000" /></Rectangle>
+                    <Rectangle x="0" y="70" width="140" height="88"><Fill color="#FF111111" /></Rectangle>
+                    <Rectangle x="2" y="72" width="136" height="84"><Fill color="#FF333300" /></Rectangle>
                 </PartDraw>
-                <PartText x="7" y="21" width="112" height="40">
+                <PartText x="9" y="21" width="122" height="40">
                     <Text align="CENTER">
                         <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">NONE</Font>
                     </Text>
                 </PartText>
-                <PartText x="2" y="68" width="121" height="68">
+                <PartText x="2" y="76" width="135" height="76">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
                     <Text align="END">
-                        <Font family="dseg14_classic_bold" size="68" color="#FF666600">~~~</Font>
+                        <Font family="dseg14_classic_bold" size="76" color="#FF666600">~~~</Font>
                     </Text>
                 </PartText>
-                <PartText x="2" y="68" width="121" height="68">
+                <PartText x="2" y="76" width="135" height="76">
                     <Text align="END">
-                        <Font family="dseg14_classic_bold" size="68" color="#FFFFFF00">---</Font>
+                        <Font family="dseg14_classic_bold" size="76" color="#FFFFFF00">---</Font>
                     </Text>
                 </PartText>
             </Complication>
@@ -1461,21 +1460,21 @@
             name="comp_slot_5"
             displayName="cfg_slot_1"
             isCustomizable="TRUE"
-            x="282"
-            y="578"
-            width="126"
-            height="144"
+            x="261"
+            y="588"
+            width="140"
+            height="152"
             supportedTypes="SHORT_TEXT RANGED_VALUE GOAL_PROGRESS EMPTY">
-            <BoundingBox x="0" y="24" width="126" height="118" />
+            <BoundingBox x="0" y="24" width="140" height="136" />
             <DefaultProviderPolicy
                 defaultSystemProvider="DATE"
                 defaultSystemProviderType="SHORT_TEXT" />
             <Complication type="SHORT_TEXT">
-                <PartDraw x="0" y="0" width="126" height="144" alpha="255">
+                <PartDraw x="0" y="0" width="140" height="152" alpha="255">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
-                    <Rectangle x="5" y="24" width="116" height="34"><Fill color="#FF660000" /></Rectangle>
-                    <Rectangle x="0" y="62" width="126" height="80"><Fill color="#FF111111" /></Rectangle>
-                    <Rectangle x="2" y="64" width="122" height="76"><Fill color="#FF333300" /></Rectangle>
+                    <Rectangle x="7" y="24" width="126" height="34"><Fill color="#FF660000" /></Rectangle>
+                    <Rectangle x="0" y="70" width="140" height="88"><Fill color="#FF111111" /></Rectangle>
+                    <Rectangle x="2" y="72" width="136" height="84"><Fill color="#FF333300" /></Rectangle>
                 </PartDraw>
                 <Condition>
                     <Expressions>
@@ -1484,7 +1483,7 @@
                         <Expression name="s5_short_text_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
                     <Compare expression="s5_short_text_long_title">
-                        <PartText x="7" y="21" width="112" height="40">
+                        <PartText x="9" y="21" width="122" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -1495,7 +1494,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s5_short_text_short_title">
-                        <PartText x="7" y="21" width="112" height="40">
+                        <PartText x="9" y="21" width="122" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -1506,22 +1505,22 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s5_short_text_has_icon">
-                        <PartImage x="48" y="29" width="30" height="24">
+                        <PartImage x="53" y="29" width="34" height="26">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
                     <Default>
-                        <PartText x="7" y="21" width="112" height="40">
+                        <PartText x="9" y="21" width="122" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">DATE</Font>
                             </Text>
                         </PartText>
                     </Default>
                 </Condition>
-                <PartText x="2" y="68" width="121" height="68">
+                <PartText x="2" y="76" width="135" height="76">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
                     <Text align="END">
-                        <Font family="dseg14_classic_bold" size="68" color="#FF666600">~~~</Font>
+                        <Font family="dseg14_classic_bold" size="76" color="#FF666600">~~~</Font>
                     </Text>
                 </PartText>
                 <Condition>
@@ -1529,9 +1528,9 @@
                         <Expression name="s5_short_text_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "DATE" == "BATT")</Expression>
                     </Expressions>
                     <Compare expression="s5_short_text_is_batt_deg">
-                        <PartText x="2" y="68" width="121" height="68">
+                        <PartText x="2" y="76" width="135" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FFFFFF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FFFFFF00">
                                     <Upper>
                                         <Template>%s%%<Parameter expression="subText([COMPLICATION.TEXT], 0, 2)" /></Template>
                                     </Upper>
@@ -1540,9 +1539,9 @@
                         </PartText>
                     </Compare>
                     <Default>
-                        <PartText x="2" y="68" width="121" height="68">
+                        <PartText x="2" y="76" width="135" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FFFFFF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FFFFFF00">
                                     <Upper>
                                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                                     </Upper>
@@ -1553,11 +1552,11 @@
                 </Condition>
             </Complication>
             <Complication type="RANGED_VALUE">
-                <PartDraw x="0" y="0" width="126" height="144" alpha="255">
+                <PartDraw x="0" y="0" width="140" height="152" alpha="255">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
-                    <Rectangle x="5" y="24" width="116" height="34"><Fill color="#FF660000" /></Rectangle>
-                    <Rectangle x="0" y="62" width="126" height="80"><Fill color="#FF111111" /></Rectangle>
-                    <Rectangle x="2" y="64" width="122" height="76"><Fill color="#FF333300" /></Rectangle>
+                    <Rectangle x="7" y="24" width="126" height="34"><Fill color="#FF660000" /></Rectangle>
+                    <Rectangle x="0" y="70" width="140" height="88"><Fill color="#FF111111" /></Rectangle>
+                    <Rectangle x="2" y="72" width="136" height="84"><Fill color="#FF333300" /></Rectangle>
                 </PartDraw>
                 <Condition>
                     <Expressions>
@@ -1566,7 +1565,7 @@
                         <Expression name="s5_ranged_value_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
                     <Compare expression="s5_ranged_value_long_title">
-                        <PartText x="7" y="21" width="112" height="40">
+                        <PartText x="9" y="21" width="122" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -1577,7 +1576,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s5_ranged_value_short_title">
-                        <PartText x="7" y="21" width="112" height="40">
+                        <PartText x="9" y="21" width="122" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -1588,22 +1587,22 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s5_ranged_value_has_icon">
-                        <PartImage x="48" y="29" width="30" height="24">
+                        <PartImage x="53" y="29" width="34" height="26">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
                     <Default>
-                        <PartText x="7" y="21" width="112" height="40">
+                        <PartText x="9" y="21" width="122" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">DATE</Font>
                             </Text>
                         </PartText>
                     </Default>
                 </Condition>
-                <PartText x="2" y="68" width="121" height="68">
+                <PartText x="2" y="76" width="135" height="76">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
                     <Text align="END">
-                        <Font family="dseg14_classic_bold" size="68" color="#FF666600">~~~</Font>
+                        <Font family="dseg14_classic_bold" size="76" color="#FF666600">~~~</Font>
                     </Text>
                 </PartText>
                 <Condition>
@@ -1611,9 +1610,9 @@
                         <Expression name="s5_ranged_value_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "DATE" == "BATT")</Expression>
                     </Expressions>
                     <Compare expression="s5_ranged_value_is_batt_deg">
-                        <PartText x="2" y="68" width="121" height="68">
+                        <PartText x="2" y="76" width="135" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FFFFFF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FFFFFF00">
                                     <Upper>
                                         <Template>%s%%<Parameter expression="subText([COMPLICATION.TEXT], 0, 2)" /></Template>
                                     </Upper>
@@ -1622,9 +1621,9 @@
                         </PartText>
                     </Compare>
                     <Default>
-                        <PartText x="2" y="68" width="121" height="68">
+                        <PartText x="2" y="76" width="135" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FFFFFF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FFFFFF00">
                                     <Upper>
                                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                                     </Upper>
@@ -1635,11 +1634,11 @@
                 </Condition>
             </Complication>
             <Complication type="GOAL_PROGRESS">
-                <PartDraw x="0" y="0" width="126" height="144" alpha="255">
+                <PartDraw x="0" y="0" width="140" height="152" alpha="255">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
-                    <Rectangle x="5" y="24" width="116" height="34"><Fill color="#FF660000" /></Rectangle>
-                    <Rectangle x="0" y="62" width="126" height="80"><Fill color="#FF111111" /></Rectangle>
-                    <Rectangle x="2" y="64" width="122" height="76"><Fill color="#FF333300" /></Rectangle>
+                    <Rectangle x="7" y="24" width="126" height="34"><Fill color="#FF660000" /></Rectangle>
+                    <Rectangle x="0" y="70" width="140" height="88"><Fill color="#FF111111" /></Rectangle>
+                    <Rectangle x="2" y="72" width="136" height="84"><Fill color="#FF333300" /></Rectangle>
                 </PartDraw>
                 <Condition>
                     <Expressions>
@@ -1648,7 +1647,7 @@
                         <Expression name="s5_goal_progress_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
                     <Compare expression="s5_goal_progress_long_title">
-                        <PartText x="7" y="21" width="112" height="40">
+                        <PartText x="9" y="21" width="122" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -1659,7 +1658,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s5_goal_progress_short_title">
-                        <PartText x="7" y="21" width="112" height="40">
+                        <PartText x="9" y="21" width="122" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -1670,22 +1669,22 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s5_goal_progress_has_icon">
-                        <PartImage x="48" y="29" width="30" height="24">
+                        <PartImage x="53" y="29" width="34" height="26">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
                     <Default>
-                        <PartText x="7" y="21" width="112" height="40">
+                        <PartText x="9" y="21" width="122" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">DATE</Font>
                             </Text>
                         </PartText>
                     </Default>
                 </Condition>
-                <PartText x="2" y="68" width="121" height="68">
+                <PartText x="2" y="76" width="135" height="76">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
                     <Text align="END">
-                        <Font family="dseg14_classic_bold" size="68" color="#FF666600">~~~</Font>
+                        <Font family="dseg14_classic_bold" size="76" color="#FF666600">~~~</Font>
                     </Text>
                 </PartText>
                 <Condition>
@@ -1693,9 +1692,9 @@
                         <Expression name="s5_goal_progress_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "DATE" == "BATT")</Expression>
                     </Expressions>
                     <Compare expression="s5_goal_progress_is_batt_deg">
-                        <PartText x="2" y="68" width="121" height="68">
+                        <PartText x="2" y="76" width="135" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FFFFFF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FFFFFF00">
                                     <Upper>
                                         <Template>%s%%<Parameter expression="subText([COMPLICATION.TEXT], 0, 2)" /></Template>
                                     </Upper>
@@ -1704,9 +1703,9 @@
                         </PartText>
                     </Compare>
                     <Default>
-                        <PartText x="2" y="68" width="121" height="68">
+                        <PartText x="2" y="76" width="135" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FFFFFF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FFFFFF00">
                                     <Upper>
                                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                                     </Upper>
@@ -1717,26 +1716,26 @@
                 </Condition>
             </Complication>
             <Complication type="EMPTY">
-                <PartDraw x="0" y="0" width="126" height="144" alpha="255">
+                <PartDraw x="0" y="0" width="140" height="152" alpha="255">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
-                    <Rectangle x="5" y="24" width="116" height="34"><Fill color="#FF660000" /></Rectangle>
-                    <Rectangle x="0" y="62" width="126" height="80"><Fill color="#FF111111" /></Rectangle>
-                    <Rectangle x="2" y="64" width="122" height="76"><Fill color="#FF333300" /></Rectangle>
+                    <Rectangle x="7" y="24" width="126" height="34"><Fill color="#FF660000" /></Rectangle>
+                    <Rectangle x="0" y="70" width="140" height="88"><Fill color="#FF111111" /></Rectangle>
+                    <Rectangle x="2" y="72" width="136" height="84"><Fill color="#FF333300" /></Rectangle>
                 </PartDraw>
-                <PartText x="7" y="21" width="112" height="40">
+                <PartText x="9" y="21" width="122" height="40">
                     <Text align="CENTER">
                         <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">NONE</Font>
                     </Text>
                 </PartText>
-                <PartText x="2" y="68" width="121" height="68">
+                <PartText x="2" y="76" width="135" height="76">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
                     <Text align="END">
-                        <Font family="dseg14_classic_bold" size="68" color="#FF666600">~~~</Font>
+                        <Font family="dseg14_classic_bold" size="76" color="#FF666600">~~~</Font>
                     </Text>
                 </PartText>
-                <PartText x="2" y="68" width="121" height="68">
+                <PartText x="2" y="76" width="135" height="76">
                     <Text align="END">
-                        <Font family="dseg14_classic_bold" size="68" color="#FFFFFF00">---</Font>
+                        <Font family="dseg14_classic_bold" size="76" color="#FFFFFF00">---</Font>
                     </Text>
                 </PartText>
             </Complication>
@@ -1747,21 +1746,21 @@
             name="comp_slot_6"
             displayName="cfg_slot_2"
             isCustomizable="TRUE"
-            x="412"
-            y="578"
-            width="126"
-            height="144"
+            x="407"
+            y="588"
+            width="140"
+            height="152"
             supportedTypes="SHORT_TEXT RANGED_VALUE GOAL_PROGRESS EMPTY">
-            <BoundingBox x="0" y="24" width="126" height="118" />
+            <BoundingBox x="0" y="24" width="140" height="136" />
             <DefaultProviderPolicy
                 defaultSystemProvider="WATCH_BATTERY"
                 defaultSystemProviderType="SHORT_TEXT" />
             <Complication type="SHORT_TEXT">
-                <PartDraw x="0" y="0" width="126" height="144" alpha="255">
+                <PartDraw x="0" y="0" width="140" height="152" alpha="255">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
-                    <Rectangle x="5" y="24" width="116" height="34"><Fill color="#FF660000" /></Rectangle>
-                    <Rectangle x="0" y="62" width="126" height="80"><Fill color="#FF111111" /></Rectangle>
-                    <Rectangle x="2" y="64" width="122" height="76"><Fill color="#FF333300" /></Rectangle>
+                    <Rectangle x="7" y="24" width="126" height="34"><Fill color="#FF660000" /></Rectangle>
+                    <Rectangle x="0" y="70" width="140" height="88"><Fill color="#FF111111" /></Rectangle>
+                    <Rectangle x="2" y="72" width="136" height="84"><Fill color="#FF333300" /></Rectangle>
                 </PartDraw>
                 <Condition>
                     <Expressions>
@@ -1770,7 +1769,7 @@
                         <Expression name="s6_short_text_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
                     <Compare expression="s6_short_text_long_title">
-                        <PartText x="7" y="21" width="112" height="40">
+                        <PartText x="9" y="21" width="122" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -1781,7 +1780,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s6_short_text_short_title">
-                        <PartText x="7" y="21" width="112" height="40">
+                        <PartText x="9" y="21" width="122" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -1792,22 +1791,22 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s6_short_text_has_icon">
-                        <PartImage x="48" y="29" width="30" height="24">
+                        <PartImage x="53" y="29" width="34" height="26">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
                     <Default>
-                        <PartText x="7" y="21" width="112" height="40">
+                        <PartText x="9" y="21" width="122" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">BATT</Font>
                             </Text>
                         </PartText>
                     </Default>
                 </Condition>
-                <PartText x="2" y="68" width="121" height="68">
+                <PartText x="2" y="76" width="135" height="76">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
                     <Text align="END">
-                        <Font family="dseg14_classic_bold" size="68" color="#FF666600">~~~</Font>
+                        <Font family="dseg14_classic_bold" size="76" color="#FF666600">~~~</Font>
                     </Text>
                 </PartText>
                 <Condition>
@@ -1815,9 +1814,9 @@
                         <Expression name="s6_short_text_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "BATT" == "BATT")</Expression>
                     </Expressions>
                     <Compare expression="s6_short_text_is_batt_deg">
-                        <PartText x="2" y="68" width="121" height="68">
+                        <PartText x="2" y="76" width="135" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FFFFFF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FFFFFF00">
                                     <Upper>
                                         <Template>%s%%<Parameter expression="subText([COMPLICATION.TEXT], 0, 2)" /></Template>
                                     </Upper>
@@ -1826,9 +1825,9 @@
                         </PartText>
                     </Compare>
                     <Default>
-                        <PartText x="2" y="68" width="121" height="68">
+                        <PartText x="2" y="76" width="135" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FFFFFF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FFFFFF00">
                                     <Upper>
                                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                                     </Upper>
@@ -1839,11 +1838,11 @@
                 </Condition>
             </Complication>
             <Complication type="RANGED_VALUE">
-                <PartDraw x="0" y="0" width="126" height="144" alpha="255">
+                <PartDraw x="0" y="0" width="140" height="152" alpha="255">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
-                    <Rectangle x="5" y="24" width="116" height="34"><Fill color="#FF660000" /></Rectangle>
-                    <Rectangle x="0" y="62" width="126" height="80"><Fill color="#FF111111" /></Rectangle>
-                    <Rectangle x="2" y="64" width="122" height="76"><Fill color="#FF333300" /></Rectangle>
+                    <Rectangle x="7" y="24" width="126" height="34"><Fill color="#FF660000" /></Rectangle>
+                    <Rectangle x="0" y="70" width="140" height="88"><Fill color="#FF111111" /></Rectangle>
+                    <Rectangle x="2" y="72" width="136" height="84"><Fill color="#FF333300" /></Rectangle>
                 </PartDraw>
                 <Condition>
                     <Expressions>
@@ -1852,7 +1851,7 @@
                         <Expression name="s6_ranged_value_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
                     <Compare expression="s6_ranged_value_long_title">
-                        <PartText x="7" y="21" width="112" height="40">
+                        <PartText x="9" y="21" width="122" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -1863,7 +1862,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s6_ranged_value_short_title">
-                        <PartText x="7" y="21" width="112" height="40">
+                        <PartText x="9" y="21" width="122" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -1874,22 +1873,22 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s6_ranged_value_has_icon">
-                        <PartImage x="48" y="29" width="30" height="24">
+                        <PartImage x="53" y="29" width="34" height="26">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
                     <Default>
-                        <PartText x="7" y="21" width="112" height="40">
+                        <PartText x="9" y="21" width="122" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">BATT</Font>
                             </Text>
                         </PartText>
                     </Default>
                 </Condition>
-                <PartText x="2" y="68" width="121" height="68">
+                <PartText x="2" y="76" width="135" height="76">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
                     <Text align="END">
-                        <Font family="dseg14_classic_bold" size="68" color="#FF666600">~~~</Font>
+                        <Font family="dseg14_classic_bold" size="76" color="#FF666600">~~~</Font>
                     </Text>
                 </PartText>
                 <Condition>
@@ -1897,9 +1896,9 @@
                         <Expression name="s6_ranged_value_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "BATT" == "BATT")</Expression>
                     </Expressions>
                     <Compare expression="s6_ranged_value_is_batt_deg">
-                        <PartText x="2" y="68" width="121" height="68">
+                        <PartText x="2" y="76" width="135" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FFFFFF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FFFFFF00">
                                     <Upper>
                                         <Template>%s%%<Parameter expression="subText([COMPLICATION.TEXT], 0, 2)" /></Template>
                                     </Upper>
@@ -1908,9 +1907,9 @@
                         </PartText>
                     </Compare>
                     <Default>
-                        <PartText x="2" y="68" width="121" height="68">
+                        <PartText x="2" y="76" width="135" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FFFFFF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FFFFFF00">
                                     <Upper>
                                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                                     </Upper>
@@ -1921,11 +1920,11 @@
                 </Condition>
             </Complication>
             <Complication type="GOAL_PROGRESS">
-                <PartDraw x="0" y="0" width="126" height="144" alpha="255">
+                <PartDraw x="0" y="0" width="140" height="152" alpha="255">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
-                    <Rectangle x="5" y="24" width="116" height="34"><Fill color="#FF660000" /></Rectangle>
-                    <Rectangle x="0" y="62" width="126" height="80"><Fill color="#FF111111" /></Rectangle>
-                    <Rectangle x="2" y="64" width="122" height="76"><Fill color="#FF333300" /></Rectangle>
+                    <Rectangle x="7" y="24" width="126" height="34"><Fill color="#FF660000" /></Rectangle>
+                    <Rectangle x="0" y="70" width="140" height="88"><Fill color="#FF111111" /></Rectangle>
+                    <Rectangle x="2" y="72" width="136" height="84"><Fill color="#FF333300" /></Rectangle>
                 </PartDraw>
                 <Condition>
                     <Expressions>
@@ -1934,7 +1933,7 @@
                         <Expression name="s6_goal_progress_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
                     <Compare expression="s6_goal_progress_long_title">
-                        <PartText x="7" y="21" width="112" height="40">
+                        <PartText x="9" y="21" width="122" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -1945,7 +1944,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s6_goal_progress_short_title">
-                        <PartText x="7" y="21" width="112" height="40">
+                        <PartText x="9" y="21" width="122" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -1956,22 +1955,22 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s6_goal_progress_has_icon">
-                        <PartImage x="48" y="29" width="30" height="24">
+                        <PartImage x="53" y="29" width="34" height="26">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
                     <Default>
-                        <PartText x="7" y="21" width="112" height="40">
+                        <PartText x="9" y="21" width="122" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">BATT</Font>
                             </Text>
                         </PartText>
                     </Default>
                 </Condition>
-                <PartText x="2" y="68" width="121" height="68">
+                <PartText x="2" y="76" width="135" height="76">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
                     <Text align="END">
-                        <Font family="dseg14_classic_bold" size="68" color="#FF666600">~~~</Font>
+                        <Font family="dseg14_classic_bold" size="76" color="#FF666600">~~~</Font>
                     </Text>
                 </PartText>
                 <Condition>
@@ -1979,9 +1978,9 @@
                         <Expression name="s6_goal_progress_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "BATT" == "BATT")</Expression>
                     </Expressions>
                     <Compare expression="s6_goal_progress_is_batt_deg">
-                        <PartText x="2" y="68" width="121" height="68">
+                        <PartText x="2" y="76" width="135" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FFFFFF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FFFFFF00">
                                     <Upper>
                                         <Template>%s%%<Parameter expression="subText([COMPLICATION.TEXT], 0, 2)" /></Template>
                                     </Upper>
@@ -1990,9 +1989,9 @@
                         </PartText>
                     </Compare>
                     <Default>
-                        <PartText x="2" y="68" width="121" height="68">
+                        <PartText x="2" y="76" width="135" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FFFFFF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FFFFFF00">
                                     <Upper>
                                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                                     </Upper>
@@ -2003,26 +2002,26 @@
                 </Condition>
             </Complication>
             <Complication type="EMPTY">
-                <PartDraw x="0" y="0" width="126" height="144" alpha="255">
+                <PartDraw x="0" y="0" width="140" height="152" alpha="255">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
-                    <Rectangle x="5" y="24" width="116" height="34"><Fill color="#FF660000" /></Rectangle>
-                    <Rectangle x="0" y="62" width="126" height="80"><Fill color="#FF111111" /></Rectangle>
-                    <Rectangle x="2" y="64" width="122" height="76"><Fill color="#FF333300" /></Rectangle>
+                    <Rectangle x="7" y="24" width="126" height="34"><Fill color="#FF660000" /></Rectangle>
+                    <Rectangle x="0" y="70" width="140" height="88"><Fill color="#FF111111" /></Rectangle>
+                    <Rectangle x="2" y="72" width="136" height="84"><Fill color="#FF333300" /></Rectangle>
                 </PartDraw>
-                <PartText x="7" y="21" width="112" height="40">
+                <PartText x="9" y="21" width="122" height="40">
                     <Text align="CENTER">
                         <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">NONE</Font>
                     </Text>
                 </PartText>
-                <PartText x="2" y="68" width="121" height="68">
+                <PartText x="2" y="76" width="135" height="76">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
                     <Text align="END">
-                        <Font family="dseg14_classic_bold" size="68" color="#FF666600">~~~</Font>
+                        <Font family="dseg14_classic_bold" size="76" color="#FF666600">~~~</Font>
                     </Text>
                 </PartText>
-                <PartText x="2" y="68" width="121" height="68">
+                <PartText x="2" y="76" width="135" height="76">
                     <Text align="END">
-                        <Font family="dseg14_classic_bold" size="68" color="#FFFFFF00">---</Font>
+                        <Font family="dseg14_classic_bold" size="76" color="#FFFFFF00">---</Font>
                     </Text>
                 </PartText>
             </Complication>
@@ -2033,21 +2032,21 @@
             name="comp_slot_7"
             displayName="cfg_slot_3"
             isCustomizable="TRUE"
-            x="566"
-            y="578"
-            width="86"
-            height="144"
+            x="584"
+            y="588"
+            width="96"
+            height="152"
             supportedTypes="SHORT_TEXT RANGED_VALUE GOAL_PROGRESS EMPTY">
-            <BoundingBox x="0" y="24" width="86" height="118" />
+            <BoundingBox x="0" y="24" width="96" height="136" />
             <DefaultProviderPolicy
                 defaultSystemProvider="SUNRISE_SUNSET"
                 defaultSystemProviderType="SHORT_TEXT" />
             <Complication type="SHORT_TEXT">
-                <PartDraw x="0" y="0" width="86" height="144" alpha="255">
+                <PartDraw x="0" y="0" width="96" height="152" alpha="255">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
-                    <Rectangle x="2" y="24" width="82" height="34"><Fill color="#FF660000" /></Rectangle>
-                    <Rectangle x="0" y="62" width="86" height="80"><Fill color="#FF111111" /></Rectangle>
-                    <Rectangle x="2" y="64" width="82" height="76"><Fill color="#FF333300" /></Rectangle>
+                    <Rectangle x="2" y="24" width="92" height="34"><Fill color="#FF660000" /></Rectangle>
+                    <Rectangle x="0" y="70" width="96" height="88"><Fill color="#FF111111" /></Rectangle>
+                    <Rectangle x="2" y="72" width="92" height="84"><Fill color="#FF333300" /></Rectangle>
                 </PartDraw>
                 <Condition>
                     <Expressions>
@@ -2056,7 +2055,7 @@
                         <Expression name="s7_short_text_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
                     <Compare expression="s7_short_text_long_title">
-                        <PartText x="4" y="21" width="78" height="40">
+                        <PartText x="4" y="21" width="88" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -2067,7 +2066,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s7_short_text_short_title">
-                        <PartText x="4" y="21" width="78" height="40">
+                        <PartText x="4" y="21" width="88" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -2078,22 +2077,22 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s7_short_text_has_icon">
-                        <PartImage x="28" y="29" width="30" height="24">
+                        <PartImage x="31" y="29" width="34" height="26">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
                     <Default>
-                        <PartText x="4" y="21" width="78" height="40">
+                        <PartText x="4" y="21" width="88" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">SUN</Font>
                             </Text>
                         </PartText>
                     </Default>
                 </Condition>
-                <PartText x="2" y="68" width="81" height="68">
+                <PartText x="2" y="76" width="91" height="76">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
                     <Text align="END">
-                        <Font family="dseg14_classic_bold" size="68" color="#FF666600">~~</Font>
+                        <Font family="dseg14_classic_bold" size="76" color="#FF666600">~~</Font>
                     </Text>
                 </PartText>
                 <Condition>
@@ -2101,9 +2100,9 @@
                         <Expression name="s7_short_text_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "SUN" == "BATT")</Expression>
                     </Expressions>
                     <Compare expression="s7_short_text_is_batt_deg">
-                        <PartText x="2" y="68" width="81" height="68">
+                        <PartText x="2" y="76" width="91" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FFFFFF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FFFFFF00">
                                     <Upper>
                                         <Template>%s%%<Parameter expression="subText([COMPLICATION.TEXT], 0, 2)" /></Template>
                                     </Upper>
@@ -2112,9 +2111,9 @@
                         </PartText>
                     </Compare>
                     <Default>
-                        <PartText x="2" y="68" width="81" height="68">
+                        <PartText x="2" y="76" width="91" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FFFFFF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FFFFFF00">
                                     <Upper>
                                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                                     </Upper>
@@ -2125,11 +2124,11 @@
                 </Condition>
             </Complication>
             <Complication type="RANGED_VALUE">
-                <PartDraw x="0" y="0" width="86" height="144" alpha="255">
+                <PartDraw x="0" y="0" width="96" height="152" alpha="255">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
-                    <Rectangle x="2" y="24" width="82" height="34"><Fill color="#FF660000" /></Rectangle>
-                    <Rectangle x="0" y="62" width="86" height="80"><Fill color="#FF111111" /></Rectangle>
-                    <Rectangle x="2" y="64" width="82" height="76"><Fill color="#FF333300" /></Rectangle>
+                    <Rectangle x="2" y="24" width="92" height="34"><Fill color="#FF660000" /></Rectangle>
+                    <Rectangle x="0" y="70" width="96" height="88"><Fill color="#FF111111" /></Rectangle>
+                    <Rectangle x="2" y="72" width="92" height="84"><Fill color="#FF333300" /></Rectangle>
                 </PartDraw>
                 <Condition>
                     <Expressions>
@@ -2138,7 +2137,7 @@
                         <Expression name="s7_ranged_value_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
                     <Compare expression="s7_ranged_value_long_title">
-                        <PartText x="4" y="21" width="78" height="40">
+                        <PartText x="4" y="21" width="88" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -2149,7 +2148,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s7_ranged_value_short_title">
-                        <PartText x="4" y="21" width="78" height="40">
+                        <PartText x="4" y="21" width="88" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -2160,22 +2159,22 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s7_ranged_value_has_icon">
-                        <PartImage x="28" y="29" width="30" height="24">
+                        <PartImage x="31" y="29" width="34" height="26">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
                     <Default>
-                        <PartText x="4" y="21" width="78" height="40">
+                        <PartText x="4" y="21" width="88" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">SUN</Font>
                             </Text>
                         </PartText>
                     </Default>
                 </Condition>
-                <PartText x="2" y="68" width="81" height="68">
+                <PartText x="2" y="76" width="91" height="76">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
                     <Text align="END">
-                        <Font family="dseg14_classic_bold" size="68" color="#FF666600">~~</Font>
+                        <Font family="dseg14_classic_bold" size="76" color="#FF666600">~~</Font>
                     </Text>
                 </PartText>
                 <Condition>
@@ -2183,9 +2182,9 @@
                         <Expression name="s7_ranged_value_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "SUN" == "BATT")</Expression>
                     </Expressions>
                     <Compare expression="s7_ranged_value_is_batt_deg">
-                        <PartText x="2" y="68" width="81" height="68">
+                        <PartText x="2" y="76" width="91" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FFFFFF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FFFFFF00">
                                     <Upper>
                                         <Template>%s%%<Parameter expression="subText([COMPLICATION.TEXT], 0, 2)" /></Template>
                                     </Upper>
@@ -2194,9 +2193,9 @@
                         </PartText>
                     </Compare>
                     <Default>
-                        <PartText x="2" y="68" width="81" height="68">
+                        <PartText x="2" y="76" width="91" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FFFFFF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FFFFFF00">
                                     <Upper>
                                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                                     </Upper>
@@ -2207,11 +2206,11 @@
                 </Condition>
             </Complication>
             <Complication type="GOAL_PROGRESS">
-                <PartDraw x="0" y="0" width="86" height="144" alpha="255">
+                <PartDraw x="0" y="0" width="96" height="152" alpha="255">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
-                    <Rectangle x="2" y="24" width="82" height="34"><Fill color="#FF660000" /></Rectangle>
-                    <Rectangle x="0" y="62" width="86" height="80"><Fill color="#FF111111" /></Rectangle>
-                    <Rectangle x="2" y="64" width="82" height="76"><Fill color="#FF333300" /></Rectangle>
+                    <Rectangle x="2" y="24" width="92" height="34"><Fill color="#FF660000" /></Rectangle>
+                    <Rectangle x="0" y="70" width="96" height="88"><Fill color="#FF111111" /></Rectangle>
+                    <Rectangle x="2" y="72" width="92" height="84"><Fill color="#FF333300" /></Rectangle>
                 </PartDraw>
                 <Condition>
                     <Expressions>
@@ -2220,7 +2219,7 @@
                         <Expression name="s7_goal_progress_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
                     <Compare expression="s7_goal_progress_long_title">
-                        <PartText x="4" y="21" width="78" height="40">
+                        <PartText x="4" y="21" width="88" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -2231,7 +2230,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s7_goal_progress_short_title">
-                        <PartText x="4" y="21" width="78" height="40">
+                        <PartText x="4" y="21" width="88" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -2242,22 +2241,22 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s7_goal_progress_has_icon">
-                        <PartImage x="28" y="29" width="30" height="24">
+                        <PartImage x="31" y="29" width="34" height="26">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
                     <Default>
-                        <PartText x="4" y="21" width="78" height="40">
+                        <PartText x="4" y="21" width="88" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">SUN</Font>
                             </Text>
                         </PartText>
                     </Default>
                 </Condition>
-                <PartText x="2" y="68" width="81" height="68">
+                <PartText x="2" y="76" width="91" height="76">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
                     <Text align="END">
-                        <Font family="dseg14_classic_bold" size="68" color="#FF666600">~~</Font>
+                        <Font family="dseg14_classic_bold" size="76" color="#FF666600">~~</Font>
                     </Text>
                 </PartText>
                 <Condition>
@@ -2265,9 +2264,9 @@
                         <Expression name="s7_goal_progress_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "SUN" == "BATT")</Expression>
                     </Expressions>
                     <Compare expression="s7_goal_progress_is_batt_deg">
-                        <PartText x="2" y="68" width="81" height="68">
+                        <PartText x="2" y="76" width="91" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FFFFFF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FFFFFF00">
                                     <Upper>
                                         <Template>%s%%<Parameter expression="subText([COMPLICATION.TEXT], 0, 2)" /></Template>
                                     </Upper>
@@ -2276,9 +2275,9 @@
                         </PartText>
                     </Compare>
                     <Default>
-                        <PartText x="2" y="68" width="81" height="68">
+                        <PartText x="2" y="76" width="91" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FFFFFF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FFFFFF00">
                                     <Upper>
                                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                                     </Upper>
@@ -2289,26 +2288,26 @@
                 </Condition>
             </Complication>
             <Complication type="EMPTY">
-                <PartDraw x="0" y="0" width="86" height="144" alpha="255">
+                <PartDraw x="0" y="0" width="96" height="152" alpha="255">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
-                    <Rectangle x="2" y="24" width="82" height="34"><Fill color="#FF660000" /></Rectangle>
-                    <Rectangle x="0" y="62" width="86" height="80"><Fill color="#FF111111" /></Rectangle>
-                    <Rectangle x="2" y="64" width="82" height="76"><Fill color="#FF333300" /></Rectangle>
+                    <Rectangle x="2" y="24" width="92" height="34"><Fill color="#FF660000" /></Rectangle>
+                    <Rectangle x="0" y="70" width="96" height="88"><Fill color="#FF111111" /></Rectangle>
+                    <Rectangle x="2" y="72" width="92" height="84"><Fill color="#FF333300" /></Rectangle>
                 </PartDraw>
-                <PartText x="4" y="21" width="78" height="40">
+                <PartText x="4" y="21" width="88" height="40">
                     <Text align="CENTER">
                         <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">NONE</Font>
                     </Text>
                 </PartText>
-                <PartText x="2" y="68" width="81" height="68">
+                <PartText x="2" y="76" width="91" height="76">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
                     <Text align="END">
-                        <Font family="dseg14_classic_bold" size="68" color="#FF666600">~~</Font>
+                        <Font family="dseg14_classic_bold" size="76" color="#FF666600">~~</Font>
                     </Text>
                 </PartText>
-                <PartText x="2" y="68" width="81" height="68">
+                <PartText x="2" y="76" width="91" height="76">
                     <Text align="END">
-                        <Font family="dseg14_classic_bold" size="68" color="#FFFFFF00">--</Font>
+                        <Font family="dseg14_classic_bold" size="76" color="#FFFFFF00">--</Font>
                     </Text>
                 </PartText>
             </Complication>
@@ -2319,21 +2318,21 @@
             name="comp_slot_8"
             displayName="cfg_slot_4"
             isCustomizable="TRUE"
-            x="654"
-            y="578"
-            width="86"
-            height="144"
+            x="688"
+            y="588"
+            width="96"
+            height="152"
             supportedTypes="SHORT_TEXT RANGED_VALUE GOAL_PROGRESS EMPTY">
-            <BoundingBox x="0" y="24" width="86" height="118" />
+            <BoundingBox x="0" y="24" width="96" height="136" />
             <DefaultProviderPolicy
                 defaultSystemProvider="WORLD_CLOCK"
                 defaultSystemProviderType="SHORT_TEXT" />
             <Complication type="SHORT_TEXT">
-                <PartDraw x="0" y="0" width="86" height="144" alpha="255">
+                <PartDraw x="0" y="0" width="96" height="152" alpha="255">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
-                    <Rectangle x="2" y="24" width="82" height="34"><Fill color="#FF660000" /></Rectangle>
-                    <Rectangle x="0" y="62" width="86" height="80"><Fill color="#FF111111" /></Rectangle>
-                    <Rectangle x="2" y="64" width="82" height="76"><Fill color="#FF333300" /></Rectangle>
+                    <Rectangle x="2" y="24" width="92" height="34"><Fill color="#FF660000" /></Rectangle>
+                    <Rectangle x="0" y="70" width="96" height="88"><Fill color="#FF111111" /></Rectangle>
+                    <Rectangle x="2" y="72" width="92" height="84"><Fill color="#FF333300" /></Rectangle>
                 </PartDraw>
                 <Condition>
                     <Expressions>
@@ -2342,7 +2341,7 @@
                         <Expression name="s8_short_text_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
                     <Compare expression="s8_short_text_long_title">
-                        <PartText x="4" y="21" width="78" height="40">
+                        <PartText x="4" y="21" width="88" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -2353,7 +2352,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s8_short_text_short_title">
-                        <PartText x="4" y="21" width="78" height="40">
+                        <PartText x="4" y="21" width="88" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -2364,22 +2363,22 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s8_short_text_has_icon">
-                        <PartImage x="28" y="29" width="30" height="24">
+                        <PartImage x="31" y="29" width="34" height="26">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
                     <Default>
-                        <PartText x="4" y="21" width="78" height="40">
+                        <PartText x="4" y="21" width="88" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">NYC</Font>
                             </Text>
                         </PartText>
                     </Default>
                 </Condition>
-                <PartText x="2" y="68" width="81" height="68">
+                <PartText x="2" y="76" width="91" height="76">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
                     <Text align="END">
-                        <Font family="dseg14_classic_bold" size="68" color="#FF666600">~~</Font>
+                        <Font family="dseg14_classic_bold" size="76" color="#FF666600">~~</Font>
                     </Text>
                 </PartText>
                 <Condition>
@@ -2387,9 +2386,9 @@
                         <Expression name="s8_short_text_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "NYC" == "BATT")</Expression>
                     </Expressions>
                     <Compare expression="s8_short_text_is_batt_deg">
-                        <PartText x="2" y="68" width="81" height="68">
+                        <PartText x="2" y="76" width="91" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FFFFFF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FFFFFF00">
                                     <Upper>
                                         <Template>%s%%<Parameter expression="subText([COMPLICATION.TEXT], 0, 2)" /></Template>
                                     </Upper>
@@ -2398,9 +2397,9 @@
                         </PartText>
                     </Compare>
                     <Default>
-                        <PartText x="2" y="68" width="81" height="68">
+                        <PartText x="2" y="76" width="91" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FFFFFF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FFFFFF00">
                                     <Upper>
                                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                                     </Upper>
@@ -2411,11 +2410,11 @@
                 </Condition>
             </Complication>
             <Complication type="RANGED_VALUE">
-                <PartDraw x="0" y="0" width="86" height="144" alpha="255">
+                <PartDraw x="0" y="0" width="96" height="152" alpha="255">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
-                    <Rectangle x="2" y="24" width="82" height="34"><Fill color="#FF660000" /></Rectangle>
-                    <Rectangle x="0" y="62" width="86" height="80"><Fill color="#FF111111" /></Rectangle>
-                    <Rectangle x="2" y="64" width="82" height="76"><Fill color="#FF333300" /></Rectangle>
+                    <Rectangle x="2" y="24" width="92" height="34"><Fill color="#FF660000" /></Rectangle>
+                    <Rectangle x="0" y="70" width="96" height="88"><Fill color="#FF111111" /></Rectangle>
+                    <Rectangle x="2" y="72" width="92" height="84"><Fill color="#FF333300" /></Rectangle>
                 </PartDraw>
                 <Condition>
                     <Expressions>
@@ -2424,7 +2423,7 @@
                         <Expression name="s8_ranged_value_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
                     <Compare expression="s8_ranged_value_long_title">
-                        <PartText x="4" y="21" width="78" height="40">
+                        <PartText x="4" y="21" width="88" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -2435,7 +2434,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s8_ranged_value_short_title">
-                        <PartText x="4" y="21" width="78" height="40">
+                        <PartText x="4" y="21" width="88" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -2446,22 +2445,22 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s8_ranged_value_has_icon">
-                        <PartImage x="28" y="29" width="30" height="24">
+                        <PartImage x="31" y="29" width="34" height="26">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
                     <Default>
-                        <PartText x="4" y="21" width="78" height="40">
+                        <PartText x="4" y="21" width="88" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">NYC</Font>
                             </Text>
                         </PartText>
                     </Default>
                 </Condition>
-                <PartText x="2" y="68" width="81" height="68">
+                <PartText x="2" y="76" width="91" height="76">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
                     <Text align="END">
-                        <Font family="dseg14_classic_bold" size="68" color="#FF666600">~~</Font>
+                        <Font family="dseg14_classic_bold" size="76" color="#FF666600">~~</Font>
                     </Text>
                 </PartText>
                 <Condition>
@@ -2469,9 +2468,9 @@
                         <Expression name="s8_ranged_value_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "NYC" == "BATT")</Expression>
                     </Expressions>
                     <Compare expression="s8_ranged_value_is_batt_deg">
-                        <PartText x="2" y="68" width="81" height="68">
+                        <PartText x="2" y="76" width="91" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FFFFFF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FFFFFF00">
                                     <Upper>
                                         <Template>%s%%<Parameter expression="subText([COMPLICATION.TEXT], 0, 2)" /></Template>
                                     </Upper>
@@ -2480,9 +2479,9 @@
                         </PartText>
                     </Compare>
                     <Default>
-                        <PartText x="2" y="68" width="81" height="68">
+                        <PartText x="2" y="76" width="91" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FFFFFF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FFFFFF00">
                                     <Upper>
                                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                                     </Upper>
@@ -2493,11 +2492,11 @@
                 </Condition>
             </Complication>
             <Complication type="GOAL_PROGRESS">
-                <PartDraw x="0" y="0" width="86" height="144" alpha="255">
+                <PartDraw x="0" y="0" width="96" height="152" alpha="255">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
-                    <Rectangle x="2" y="24" width="82" height="34"><Fill color="#FF660000" /></Rectangle>
-                    <Rectangle x="0" y="62" width="86" height="80"><Fill color="#FF111111" /></Rectangle>
-                    <Rectangle x="2" y="64" width="82" height="76"><Fill color="#FF333300" /></Rectangle>
+                    <Rectangle x="2" y="24" width="92" height="34"><Fill color="#FF660000" /></Rectangle>
+                    <Rectangle x="0" y="70" width="96" height="88"><Fill color="#FF111111" /></Rectangle>
+                    <Rectangle x="2" y="72" width="92" height="84"><Fill color="#FF333300" /></Rectangle>
                 </PartDraw>
                 <Condition>
                     <Expressions>
@@ -2506,7 +2505,7 @@
                         <Expression name="s8_goal_progress_has_icon">[COMPLICATION.MONOCHROMATIC_IMAGE] != "" &amp;&amp; [COMPLICATION.MONOCHROMATIC_IMAGE] != null</Expression>
                     </Expressions>
                     <Compare expression="s8_goal_progress_long_title">
-                        <PartText x="4" y="21" width="78" height="40">
+                        <PartText x="4" y="21" width="88" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -2517,7 +2516,7 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s8_goal_progress_short_title">
-                        <PartText x="4" y="21" width="78" height="40">
+                        <PartText x="4" y="21" width="88" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">
                                     <Upper>
@@ -2528,22 +2527,22 @@
                         </PartText>
                     </Compare>
                     <Compare expression="s8_goal_progress_has_icon">
-                        <PartImage x="28" y="29" width="30" height="24">
+                        <PartImage x="31" y="29" width="34" height="26">
                             <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                         </PartImage>
                     </Compare>
                     <Default>
-                        <PartText x="4" y="21" width="78" height="40">
+                        <PartText x="4" y="21" width="88" height="40">
                             <Text align="CENTER" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
                                 <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">NYC</Font>
                             </Text>
                         </PartText>
                     </Default>
                 </Condition>
-                <PartText x="2" y="68" width="81" height="68">
+                <PartText x="2" y="76" width="91" height="76">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
                     <Text align="END">
-                        <Font family="dseg14_classic_bold" size="68" color="#FF666600">~~</Font>
+                        <Font family="dseg14_classic_bold" size="76" color="#FF666600">~~</Font>
                     </Text>
                 </PartText>
                 <Condition>
@@ -2551,9 +2550,9 @@
                         <Expression name="s8_goal_progress_is_batt_deg">[COMPLICATION.TEXT] != "100" &amp;&amp; ([COMPLICATION.TITLE] == "Battery" || [COMPLICATION.TITLE] == "BATT" || [COMPLICATION.TITLE] == "BAT" || "NYC" == "BATT")</Expression>
                     </Expressions>
                     <Compare expression="s8_goal_progress_is_batt_deg">
-                        <PartText x="2" y="68" width="81" height="68">
+                        <PartText x="2" y="76" width="91" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FFFFFF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FFFFFF00">
                                     <Upper>
                                         <Template>%s%%<Parameter expression="subText([COMPLICATION.TEXT], 0, 2)" /></Template>
                                     </Upper>
@@ -2562,9 +2561,9 @@
                         </PartText>
                     </Compare>
                     <Default>
-                        <PartText x="2" y="68" width="81" height="68">
+                        <PartText x="2" y="76" width="91" height="76">
                             <Text align="END">
-                                <Font family="dseg14_classic_bold" size="68" color="#FFFFFF00">
+                                <Font family="dseg14_classic_bold" size="76" color="#FFFFFF00">
                                     <Upper>
                                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                                     </Upper>
@@ -2575,26 +2574,26 @@
                 </Condition>
             </Complication>
             <Complication type="EMPTY">
-                <PartDraw x="0" y="0" width="86" height="144" alpha="255">
+                <PartDraw x="0" y="0" width="96" height="152" alpha="255">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
-                    <Rectangle x="2" y="24" width="82" height="34"><Fill color="#FF660000" /></Rectangle>
-                    <Rectangle x="0" y="62" width="86" height="80"><Fill color="#FF111111" /></Rectangle>
-                    <Rectangle x="2" y="64" width="82" height="76"><Fill color="#FF333300" /></Rectangle>
+                    <Rectangle x="2" y="24" width="92" height="34"><Fill color="#FF660000" /></Rectangle>
+                    <Rectangle x="0" y="70" width="96" height="88"><Fill color="#FF111111" /></Rectangle>
+                    <Rectangle x="2" y="72" width="92" height="84"><Fill color="#FF333300" /></Rectangle>
                 </PartDraw>
-                <PartText x="4" y="21" width="78" height="40">
+                <PartText x="4" y="21" width="88" height="40">
                     <Text align="CENTER">
                         <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">NONE</Font>
                     </Text>
                 </PartText>
-                <PartText x="2" y="68" width="81" height="68">
+                <PartText x="2" y="76" width="91" height="76">
                     <Variant mode="AMBIENT" target="alpha" value="0" />
                     <Text align="END">
-                        <Font family="dseg14_classic_bold" size="68" color="#FF666600">~~</Font>
+                        <Font family="dseg14_classic_bold" size="76" color="#FF666600">~~</Font>
                     </Text>
                 </PartText>
-                <PartText x="2" y="68" width="81" height="68">
+                <PartText x="2" y="76" width="91" height="76">
                     <Text align="END">
-                        <Font family="dseg14_classic_bold" size="68" color="#FFFFFF00">--</Font>
+                        <Font family="dseg14_classic_bold" size="76" color="#FFFFFF00">--</Font>
                     </Text>
                 </PartText>
             </Complication>
