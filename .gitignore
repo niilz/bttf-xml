@@ -1,0 +1,55 @@
+# Built application & package files
+*.apk
+*.ap_
+*.aab
+*.aar
+
+# Files for the ART/Dalvik VM
+*.dex
+
+# Java class files
+*.class
+
+# Generated files & build directories
+bin/
+gen/
+out/
+build/
+**/build/
+
+# Gradle files
+.gradle/
+buildOutputCleanup/
+
+# Android Studio & IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Android Studio local configuration
+local.properties
+.cxx/
+
+# Signing / Keystore files
+*.jks
+*.keystore
+
+# Log files & crash dumps
+*.log
+hs_err_pid*
+
+# OS-specific files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Project-specific / Tooling
+.local
+AGENTS.md
+tmp/
+.pi/
