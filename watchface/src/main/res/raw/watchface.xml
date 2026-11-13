@@ -113,6 +113,52 @@
             <ListOption id="s5_date" displayName="opt_date" screenReaderText="opt_date" />
             <ListOption id="s5_alerts" displayName="opt_alerts" screenReaderText="opt_alerts" />
         </ListConfiguration>
+
+        <ListConfiguration id="row3_mode" displayName="cfg_row3_mode" screenReaderText="cfg_row3_mode" defaultValue="r3_time">
+            <ListOption id="r3_time" displayName="mode_time" screenReaderText="mode_time" />
+            <ListOption id="r3_slots_3" displayName="mode_slots_3" screenReaderText="mode_slots_3" />
+            <ListOption id="r3_slots_4" displayName="mode_slots_4" screenReaderText="mode_slots_4" />
+            <ListOption id="r3_slots_5" displayName="mode_slots_5" screenReaderText="mode_slots_5" />
+        </ListConfiguration>
+
+        <ListConfiguration id="r3_slot_1" displayName="cfg_r3_slot_1" screenReaderText="cfg_r3_slot_1" defaultValue="r3s1_battery">
+            <ListOption id="r3s1_battery" displayName="opt_battery" screenReaderText="opt_battery" />
+            <ListOption id="r3s1_temp" displayName="opt_temp" screenReaderText="opt_temp" />
+            <ListOption id="r3s1_heart" displayName="opt_heart" screenReaderText="opt_heart" />
+            <ListOption id="r3s1_day" displayName="opt_day" screenReaderText="opt_day" />
+            <ListOption id="r3s1_month" displayName="opt_month" screenReaderText="opt_month" />
+        </ListConfiguration>
+
+        <ListConfiguration id="r3_slot_2" displayName="cfg_r3_slot_2" screenReaderText="cfg_r3_slot_2" defaultValue="r3s2_temp">
+            <ListOption id="r3s2_temp" displayName="opt_temp" screenReaderText="opt_temp" />
+            <ListOption id="r3s2_battery" displayName="opt_battery" screenReaderText="opt_battery" />
+            <ListOption id="r3s2_heart" displayName="opt_heart" screenReaderText="opt_heart" />
+            <ListOption id="r3s2_day" displayName="opt_day" screenReaderText="opt_day" />
+            <ListOption id="r3s2_date" displayName="opt_date" screenReaderText="opt_date" />
+        </ListConfiguration>
+
+        <ListConfiguration id="r3_slot_3" displayName="cfg_r3_slot_3" screenReaderText="cfg_r3_slot_3" defaultValue="r3s3_steps">
+            <ListOption id="r3s3_steps" displayName="opt_steps" screenReaderText="opt_steps" />
+            <ListOption id="r3s3_year" displayName="opt_year" screenReaderText="opt_year" />
+            <ListOption id="r3s3_battery" displayName="opt_battery" screenReaderText="opt_battery" />
+            <ListOption id="r3s3_temp" displayName="opt_temp" screenReaderText="opt_temp" />
+            <ListOption id="r3s3_heart" displayName="opt_heart" screenReaderText="opt_heart" />
+        </ListConfiguration>
+
+        <ListConfiguration id="r3_slot_4" displayName="cfg_r3_slot_4" screenReaderText="cfg_r3_slot_4" defaultValue="r3s4_heart">
+            <ListOption id="r3s4_heart" displayName="opt_heart" screenReaderText="opt_heart" />
+            <ListOption id="r3s4_hour" displayName="opt_hour" screenReaderText="opt_hour" />
+            <ListOption id="r3s4_temp" displayName="opt_temp" screenReaderText="opt_temp" />
+            <ListOption id="r3s4_date" displayName="opt_date" screenReaderText="opt_date" />
+            <ListOption id="r3s4_alerts" displayName="opt_alerts" screenReaderText="opt_alerts" />
+        </ListConfiguration>
+
+        <ListConfiguration id="r3_slot_5" displayName="cfg_r3_slot_5" screenReaderText="cfg_r3_slot_5" defaultValue="r3s5_min">
+            <ListOption id="r3s5_min" displayName="opt_min" screenReaderText="opt_min" />
+            <ListOption id="r3s5_sec" displayName="opt_sec" screenReaderText="opt_sec" />
+            <ListOption id="r3s5_date" displayName="opt_date" screenReaderText="opt_date" />
+            <ListOption id="r3s5_alerts" displayName="opt_alerts" screenReaderText="opt_alerts" />
+        </ListConfiguration>
     </UserConfigurations>
 
     <Scene backgroundColor="#FF000000">
@@ -2224,155 +2270,1900 @@
             width="636"
             height="204">
 
-            <!-- Slot Frames, Darkened Value Boxes, Header Badges & Footer Badge -->
-            <PartDraw
-                x="0"
-                y="0"
-                width="636"
-                height="204"
-                alpha="255">
-                <Variant
-                    mode="AMBIENT"
-                    target="alpha"
-                    value="0" />
+            <ListConfiguration id="row3_mode">
+                <!-- Mode 1: Standard 5-Slot DeLorean Last Time Departed -->
+                <ListOption id="r3_time">
+                    <Group name="row3_mode_time" x="0" y="0" width="636" height="204">
+                        <PartDraw x="0" y="0" width="636" height="204" alpha="255">
+                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                            <Rectangle x="28"  y="24" width="116" height="34"><Fill color="#FF660000" /></Rectangle>
+                            <Rectangle x="156" y="24" width="78"  height="34"><Fill color="#FF660000" /></Rectangle>
+                            <Rectangle x="269" y="24" width="108" height="34"><Fill color="#FF660000" /></Rectangle>
+                            <Rectangle x="433" y="24" width="92"  height="34"><Fill color="#FF660000" /></Rectangle>
+                            <Rectangle x="531" y="24" width="76"  height="34"><Fill color="#FF660000" /></Rectangle>
 
-                <!-- Header Label Backgrounds (#FF660000, y=24, height=34) -->
-                <Rectangle x="28"  y="24" width="116" height="34"><Fill color="#FF660000" /></Rectangle>
-                <Rectangle x="156" y="24" width="78"  height="34"><Fill color="#FF660000" /></Rectangle>
-                <Rectangle x="269" y="24" width="108" height="34"><Fill color="#FF660000" /></Rectangle>
-                <Rectangle x="433" y="24" width="92"  height="34"><Fill color="#FF660000" /></Rectangle>
-                <Rectangle x="531" y="24" width="76"  height="34"><Fill color="#FF660000" /></Rectangle>
+                            <Rectangle x="26"  y="64" width="120" height="74"><Fill color="#FF111111" /></Rectangle>
+                            <Rectangle x="154" y="64" width="82"  height="74"><Fill color="#FF111111" /></Rectangle>
+                            <Rectangle x="244" y="64" width="158" height="74"><Fill color="#FF111111" /></Rectangle>
+                            <Rectangle x="438" y="64" width="82"  height="74"><Fill color="#FF111111" /></Rectangle>
+                            <Rectangle x="528" y="64" width="82"  height="74"><Fill color="#FF111111" /></Rectangle>
 
-                <!-- Outer Slot Frames (#FF111111, 2 px border around 70 px value boxes) -->
-                <Rectangle x="26"  y="64" width="120" height="74"><Fill color="#FF111111" /></Rectangle>
-                <Rectangle x="154" y="64" width="82"  height="74"><Fill color="#FF111111" /></Rectangle>
-                <Rectangle x="244" y="64" width="158" height="74"><Fill color="#FF111111" /></Rectangle>
-                <Rectangle x="438" y="64" width="82"  height="74"><Fill color="#FF111111" /></Rectangle>
-                <Rectangle x="528" y="64" width="82"  height="74"><Fill color="#FF111111" /></Rectangle>
+                            <Rectangle x="28"  y="66" width="116" height="70"><Fill color="#FF333300" /></Rectangle>
+                            <Rectangle x="156" y="66" width="78"  height="70"><Fill color="#FF333300" /></Rectangle>
+                            <Rectangle x="246" y="66" width="154" height="70"><Fill color="#FF333300" /></Rectangle>
+                            <Rectangle x="440" y="66" width="78"  height="70"><Fill color="#FF333300" /></Rectangle>
+                            <Rectangle x="530" y="66" width="78"  height="70"><Fill color="#FF333300" /></Rectangle>
+                        </PartDraw>
 
-                <!-- Inner Darkened Row-Color Value Boxes (#FF333300, y=66, height=70) -->
-                <Rectangle x="28"  y="66" width="116" height="70"><Fill color="#FF333300" /></Rectangle>
-                <Rectangle x="156" y="66" width="78"  height="70"><Fill color="#FF333300" /></Rectangle>
-                <Rectangle x="246" y="66" width="154" height="70"><Fill color="#FF333300" /></Rectangle>
-                <Rectangle x="440" y="66" width="78"  height="70"><Fill color="#FF333300" /></Rectangle>
-                <Rectangle x="530" y="66" width="78"  height="70"><Fill color="#FF333300" /></Rectangle>
+                        <PartText x="28" y="21" width="116" height="40">
+                            <Text align="CENTER">
+                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">MONTH</Font>
+                            </Text>
+                        </PartText>
+                        <PartText x="156" y="21" width="78" height="40">
+                            <Text align="CENTER">
+                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">DAY</Font>
+                            </Text>
+                        </PartText>
+                        <PartText x="269" y="21" width="108" height="40">
+                            <Text align="CENTER">
+                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">YEAR</Font>
+                            </Text>
+                        </PartText>
+                        <PartText x="433" y="21" width="92" height="40">
+                            <Text align="CENTER">
+                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">HOUR</Font>
+                            </Text>
+                        </PartText>
+                        <PartText x="531" y="21" width="76" height="40">
+                            <Text align="CENTER">
+                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">MIN</Font>
+                            </Text>
+                        </PartText>
 
-                <!-- Footer Label Background (#FF222222, y=146, height=34) -->
+                        <PartText x="28" y="70" width="115" height="62">
+                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                            <Text align="END">
+                                <Font family="dseg14_classic_bold" size="62" color="#FF666600">~~~</Font>
+                            </Text>
+                        </PartText>
+                        <PartText x="156" y="70" width="77" height="62">
+                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                            <Text align="END">
+                                <Font family="dseg7_classic_bold" size="62" color="#FF666600">88</Font>
+                            </Text>
+                        </PartText>
+                        <PartText x="246" y="70" width="153" height="62">
+                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                            <Text align="END">
+                                <Font family="dseg7_classic_bold" size="62" color="#FF666600">8888</Font>
+                            </Text>
+                        </PartText>
+                        <PartText x="440" y="70" width="77" height="62">
+                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                            <Text align="END">
+                                <Font family="dseg7_classic_bold" size="62" color="#FF666600">88</Font>
+                            </Text>
+                        </PartText>
+                        <PartText x="530" y="70" width="77" height="62">
+                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                            <Text align="END">
+                                <Font family="dseg7_classic_bold" size="62" color="#FF666600">88</Font>
+                            </Text>
+                        </PartText>
+
+                        <PartText x="28" y="70" width="115" height="62">
+                            <Text align="END">
+                                <Font family="dseg14_classic_bold" size="62" color="#FFFFFF00">
+                                    <Upper>
+                                        <Template>%s<Parameter expression="[MONTH_S]" /></Template>
+                                    </Upper>
+                                </Font>
+                            </Text>
+                        </PartText>
+                        <PartText x="156" y="70" width="77" height="62">
+                            <Text align="END">
+                                <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00">
+                                    <Template>%s<Parameter expression="[DAY_Z]" /></Template>
+                                </Font>
+                            </Text>
+                        </PartText>
+                        <PartText x="246" y="70" width="153" height="62">
+                            <Text align="END">
+                                <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00">
+                                    <Template>%s<Parameter expression="[YEAR]" /></Template>
+                                </Font>
+                            </Text>
+                        </PartText>
+                        <DigitalClock x="0" y="0" width="636" height="204">
+                            <TimeText x="440" y="70" width="77" height="62" format="hh" hourFormat="24" align="END">
+                                <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00" />
+                            </TimeText>
+                            <TimeText x="530" y="70" width="77" height="62" format="mm" align="END">
+                                <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00" />
+                            </TimeText>
+                        </DigitalClock>
+
+                        <Condition>
+                            <Expressions>
+                                <Expression name="row3_is_am">[AMPM_POSITION] == 0</Expression>
+                            </Expressions>
+                            <Compare expression="row3_is_am">
+                                <PartDraw x="412" y="66" width="16" height="70">
+                                    <Ellipse x="0" y="13" width="16" height="16"><Fill color="#FFFFFF00" /></Ellipse>
+                                    <Ellipse x="0" y="41" width="16" height="16"><Fill color="#FF4D4D00" /></Ellipse>
+                                </PartDraw>
+                            </Compare>
+                            <Default>
+                                <PartDraw x="412" y="66" width="16" height="70">
+                                    <Ellipse x="0" y="13" width="16" height="16"><Fill color="#FF4D4D00" /></Ellipse>
+                                    <Ellipse x="0" y="41" width="16" height="16"><Fill color="#FFFFFF00" /></Ellipse>
+                                </PartDraw>
+                            </Default>
+                        </Condition>
+                    </Group>
+                </ListOption>
+
+                <!-- Mode 2: 3 Custom Digital Slots (Yellow) -->
+                <ListOption id="r3_slots_3">
+                    <Group name="row3_mode_slots_3" x="0" y="0" width="636" height="204">
+                        <Group name="r3_s3_r3_slot_1" x="34" y="0" width="120" height="204">
+                            <ListConfiguration id="r3_slot_1">
+                                <ListOption id="r3s1_battery">
+                                    <Group name="grp_r3_s3_r3s1_battery" x="0" y="0" width="120" height="204">
+                                        <PartDraw x="0" y="0" width="120" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="14" y="24" width="92" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="0" y="64" width="120" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="2" y="66" width="116" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="14" y="21" width="92" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">BATT</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="115" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg14_classic_bold" size="62" color="#FF666600">88~</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="115" height="62">
+                                            <Text align="END">
+                                                <Font family="dseg14_classic_bold" size="62" color="#FFFFFF00"><Template>%s%%<Parameter expression="[BATTERY_PERCENT]" /></Template></Font>
+                                            </Text>
+                                        </PartText>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s1_temp">
+                                    <Group name="grp_r3_s3_r3s1_temp" x="0" y="0" width="120" height="204">
+                                        <PartDraw x="0" y="0" width="120" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="12" y="24" width="96" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="0" y="64" width="120" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="2" y="66" width="116" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="12" y="21" width="96" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">TEMP</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="115" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FF666600">88°</Font>
+                                            </Text>
+                                        </PartText>
+                                        <Condition>
+                                            <Expressions>
+                                                <Expression name="grp_r3_s3_r3s1_temp_weather_ok">[WEATHER.IS_AVAILABLE]</Expression>
+                                            </Expressions>
+                                            <Compare expression="grp_r3_s3_r3s1_temp_weather_ok">
+                                                <PartText x="2" y="70" width="115" height="62">
+                                                    <Text align="END">
+                                                        <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00"><Template>%s°<Parameter expression="[WEATHER.TEMPERATURE]" /></Template></Font>
+                                                    </Text>
+                                                </PartText>
+                                            </Compare>
+                                            <Default>
+                                                <PartText x="2" y="70" width="115" height="62">
+                                                    <Text align="END">
+                                                        <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00">--°</Font>
+                                                    </Text>
+                                                </PartText>
+                                            </Default>
+                                        </Condition>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s1_heart">
+                                    <Group name="grp_r3_s3_r3s1_heart" x="0" y="0" width="120" height="204">
+                                        <PartDraw x="0" y="0" width="120" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="6" y="24" width="108" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="0" y="64" width="120" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="2" y="66" width="116" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="6" y="21" width="108" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">HEART</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="115" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FF666600">888</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="115" height="62">
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00"><Template>%s<Parameter expression="[HEART_RATE]" /></Template></Font>
+                                            </Text>
+                                        </PartText>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s1_day">
+                                    <Group name="grp_r3_s3_r3s1_day" x="0" y="0" width="120" height="204">
+                                        <PartDraw x="0" y="0" width="120" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="21" y="24" width="78" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="0" y="64" width="120" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="2" y="66" width="116" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="21" y="21" width="78" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">DAY</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="115" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg14_classic_bold" size="62" color="#FF666600">~~~</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="115" height="62">
+                                            <Text align="END">
+                                                <Font family="dseg14_classic_bold" size="62" color="#FFFFFF00"><Upper><Template>%s<Parameter expression="[DAY_OF_WEEK_S]" /></Template></Upper></Font>
+                                            </Text>
+                                        </PartText>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s1_month">
+                                    <Group name="grp_r3_s3_r3s1_month" x="0" y="0" width="120" height="204">
+                                        <PartDraw x="0" y="0" width="120" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="2" y="24" width="116" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="0" y="64" width="120" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="2" y="66" width="116" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="2" y="21" width="116" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">MONTH</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="115" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg14_classic_bold" size="62" color="#FF666600">~~~</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="115" height="62">
+                                            <Text align="END">
+                                                <Font family="dseg14_classic_bold" size="62" color="#FFFFFF00"><Upper><Template>%s<Parameter expression="[MONTH_S]" /></Template></Upper></Font>
+                                            </Text>
+                                        </PartText>
+                                    </Group>
+                                </ListOption>
+                            </ListConfiguration>
+                        </Group>
+                        <Group name="r3_s3_r3_slot_2" x="202" y="0" width="120" height="204">
+                            <ListConfiguration id="r3_slot_2">
+                                <ListOption id="r3s2_temp">
+                                    <Group name="grp_r3_s3_r3s2_temp" x="0" y="0" width="120" height="204">
+                                        <PartDraw x="0" y="0" width="120" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="12" y="24" width="96" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="0" y="64" width="120" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="2" y="66" width="116" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="12" y="21" width="96" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">TEMP</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="115" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FF666600">88°</Font>
+                                            </Text>
+                                        </PartText>
+                                        <Condition>
+                                            <Expressions>
+                                                <Expression name="grp_r3_s3_r3s2_temp_weather_ok">[WEATHER.IS_AVAILABLE]</Expression>
+                                            </Expressions>
+                                            <Compare expression="grp_r3_s3_r3s2_temp_weather_ok">
+                                                <PartText x="2" y="70" width="115" height="62">
+                                                    <Text align="END">
+                                                        <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00"><Template>%s°<Parameter expression="[WEATHER.TEMPERATURE]" /></Template></Font>
+                                                    </Text>
+                                                </PartText>
+                                            </Compare>
+                                            <Default>
+                                                <PartText x="2" y="70" width="115" height="62">
+                                                    <Text align="END">
+                                                        <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00">--°</Font>
+                                                    </Text>
+                                                </PartText>
+                                            </Default>
+                                        </Condition>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s2_battery">
+                                    <Group name="grp_r3_s3_r3s2_battery" x="0" y="0" width="120" height="204">
+                                        <PartDraw x="0" y="0" width="120" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="14" y="24" width="92" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="0" y="64" width="120" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="2" y="66" width="116" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="14" y="21" width="92" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">BATT</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="115" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg14_classic_bold" size="62" color="#FF666600">88~</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="115" height="62">
+                                            <Text align="END">
+                                                <Font family="dseg14_classic_bold" size="62" color="#FFFFFF00"><Template>%s%%<Parameter expression="[BATTERY_PERCENT]" /></Template></Font>
+                                            </Text>
+                                        </PartText>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s2_heart">
+                                    <Group name="grp_r3_s3_r3s2_heart" x="0" y="0" width="120" height="204">
+                                        <PartDraw x="0" y="0" width="120" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="6" y="24" width="108" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="0" y="64" width="120" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="2" y="66" width="116" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="6" y="21" width="108" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">HEART</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="115" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FF666600">888</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="115" height="62">
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00"><Template>%s<Parameter expression="[HEART_RATE]" /></Template></Font>
+                                            </Text>
+                                        </PartText>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s2_day">
+                                    <Group name="grp_r3_s3_r3s2_day" x="0" y="0" width="120" height="204">
+                                        <PartDraw x="0" y="0" width="120" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="21" y="24" width="78" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="0" y="64" width="120" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="2" y="66" width="116" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="21" y="21" width="78" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">DAY</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="115" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg14_classic_bold" size="62" color="#FF666600">~~~</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="115" height="62">
+                                            <Text align="END">
+                                                <Font family="dseg14_classic_bold" size="62" color="#FFFFFF00"><Upper><Template>%s<Parameter expression="[DAY_OF_WEEK_S]" /></Template></Upper></Font>
+                                            </Text>
+                                        </PartText>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s2_date">
+                                    <Group name="grp_r3_s3_r3s2_date" x="0" y="0" width="120" height="204">
+                                        <PartDraw x="0" y="0" width="120" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="21" y="24" width="78" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="19" y="64" width="82" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="21" y="66" width="78" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="21" y="21" width="78" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">DAY</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="21" y="70" width="77" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FF666600">88</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="21" y="70" width="77" height="62">
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00"><Template>%s<Parameter expression="[DAY_Z]" /></Template></Font>
+                                            </Text>
+                                        </PartText>
+                                    </Group>
+                                </ListOption>
+                            </ListConfiguration>
+                        </Group>
+                        <Group name="r3_s3_r3_slot_3" x="370" y="0" width="196" height="204">
+                            <ListConfiguration id="r3_slot_3">
+                                <ListOption id="r3s3_steps">
+                                    <Group name="grp_r3_s3_r3s3_steps" x="0" y="0" width="196" height="204">
+                                        <PartDraw x="0" y="0" width="196" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="44" y="24" width="108" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="0" y="64" width="196" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="2" y="66" width="192" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="44" y="21" width="108" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">STEPS</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="191" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FF666600">88888</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="191" height="62">
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00"><Template>%s<Parameter expression="[STEP_COUNT]" /></Template></Font>
+                                            </Text>
+                                        </PartText>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s3_year">
+                                    <Group name="grp_r3_s3_r3s3_year" x="0" y="0" width="196" height="204">
+                                        <PartDraw x="0" y="0" width="196" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="44" y="24" width="108" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="19" y="64" width="158" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="21" y="66" width="154" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="44" y="21" width="108" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">YEAR</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="21" y="70" width="153" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FF666600">8888</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="21" y="70" width="153" height="62">
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00"><Template>%s<Parameter expression="[YEAR]" /></Template></Font>
+                                            </Text>
+                                        </PartText>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s3_battery">
+                                    <Group name="grp_r3_s3_r3s3_battery" x="0" y="0" width="196" height="204">
+                                        <PartDraw x="0" y="0" width="196" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="52" y="24" width="92" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="38" y="64" width="120" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="40" y="66" width="116" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="52" y="21" width="92" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">BATT</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="40" y="70" width="115" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg14_classic_bold" size="62" color="#FF666600">88~</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="40" y="70" width="115" height="62">
+                                            <Text align="END">
+                                                <Font family="dseg14_classic_bold" size="62" color="#FFFFFF00"><Template>%s%%<Parameter expression="[BATTERY_PERCENT]" /></Template></Font>
+                                            </Text>
+                                        </PartText>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s3_temp">
+                                    <Group name="grp_r3_s3_r3s3_temp" x="0" y="0" width="196" height="204">
+                                        <PartDraw x="0" y="0" width="196" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="50" y="24" width="96" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="38" y="64" width="120" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="40" y="66" width="116" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="50" y="21" width="96" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">TEMP</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="40" y="70" width="115" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FF666600">88°</Font>
+                                            </Text>
+                                        </PartText>
+                                        <Condition>
+                                            <Expressions>
+                                                <Expression name="grp_r3_s3_r3s3_temp_weather_ok">[WEATHER.IS_AVAILABLE]</Expression>
+                                            </Expressions>
+                                            <Compare expression="grp_r3_s3_r3s3_temp_weather_ok">
+                                                <PartText x="40" y="70" width="115" height="62">
+                                                    <Text align="END">
+                                                        <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00"><Template>%s°<Parameter expression="[WEATHER.TEMPERATURE]" /></Template></Font>
+                                                    </Text>
+                                                </PartText>
+                                            </Compare>
+                                            <Default>
+                                                <PartText x="40" y="70" width="115" height="62">
+                                                    <Text align="END">
+                                                        <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00">--°</Font>
+                                                    </Text>
+                                                </PartText>
+                                            </Default>
+                                        </Condition>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s3_heart">
+                                    <Group name="grp_r3_s3_r3s3_heart" x="0" y="0" width="196" height="204">
+                                        <PartDraw x="0" y="0" width="196" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="44" y="24" width="108" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="38" y="64" width="120" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="40" y="66" width="116" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="44" y="21" width="108" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">HEART</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="40" y="70" width="115" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FF666600">888</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="40" y="70" width="115" height="62">
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00"><Template>%s<Parameter expression="[HEART_RATE]" /></Template></Font>
+                                            </Text>
+                                        </PartText>
+                                    </Group>
+                                </ListOption>
+                            </ListConfiguration>
+                        </Group>
+                    </Group>
+                </ListOption>
+
+                <!-- Mode 3: 4 Custom Digital Slots (Yellow) -->
+                <ListOption id="r3_slots_4">
+                    <Group name="row3_mode_slots_4" x="0" y="0" width="636" height="204">
+                        <Group name="r3_s4_r3_slot_1" x="22" y="0" width="120" height="204">
+                            <ListConfiguration id="r3_slot_1">
+                                <ListOption id="r3s1_battery">
+                                    <Group name="grp_r3_s4_r3s1_battery" x="0" y="0" width="120" height="204">
+                                        <PartDraw x="0" y="0" width="120" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="14" y="24" width="92" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="0" y="64" width="120" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="2" y="66" width="116" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="14" y="21" width="92" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">BATT</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="115" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg14_classic_bold" size="62" color="#FF666600">88~</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="115" height="62">
+                                            <Text align="END">
+                                                <Font family="dseg14_classic_bold" size="62" color="#FFFFFF00"><Template>%s%%<Parameter expression="[BATTERY_PERCENT]" /></Template></Font>
+                                            </Text>
+                                        </PartText>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s1_temp">
+                                    <Group name="grp_r3_s4_r3s1_temp" x="0" y="0" width="120" height="204">
+                                        <PartDraw x="0" y="0" width="120" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="12" y="24" width="96" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="0" y="64" width="120" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="2" y="66" width="116" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="12" y="21" width="96" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">TEMP</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="115" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FF666600">88°</Font>
+                                            </Text>
+                                        </PartText>
+                                        <Condition>
+                                            <Expressions>
+                                                <Expression name="grp_r3_s4_r3s1_temp_weather_ok">[WEATHER.IS_AVAILABLE]</Expression>
+                                            </Expressions>
+                                            <Compare expression="grp_r3_s4_r3s1_temp_weather_ok">
+                                                <PartText x="2" y="70" width="115" height="62">
+                                                    <Text align="END">
+                                                        <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00"><Template>%s°<Parameter expression="[WEATHER.TEMPERATURE]" /></Template></Font>
+                                                    </Text>
+                                                </PartText>
+                                            </Compare>
+                                            <Default>
+                                                <PartText x="2" y="70" width="115" height="62">
+                                                    <Text align="END">
+                                                        <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00">--°</Font>
+                                                    </Text>
+                                                </PartText>
+                                            </Default>
+                                        </Condition>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s1_heart">
+                                    <Group name="grp_r3_s4_r3s1_heart" x="0" y="0" width="120" height="204">
+                                        <PartDraw x="0" y="0" width="120" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="6" y="24" width="108" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="0" y="64" width="120" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="2" y="66" width="116" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="6" y="21" width="108" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">HEART</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="115" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FF666600">888</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="115" height="62">
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00"><Template>%s<Parameter expression="[HEART_RATE]" /></Template></Font>
+                                            </Text>
+                                        </PartText>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s1_day">
+                                    <Group name="grp_r3_s4_r3s1_day" x="0" y="0" width="120" height="204">
+                                        <PartDraw x="0" y="0" width="120" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="21" y="24" width="78" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="0" y="64" width="120" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="2" y="66" width="116" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="21" y="21" width="78" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">DAY</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="115" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg14_classic_bold" size="62" color="#FF666600">~~~</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="115" height="62">
+                                            <Text align="END">
+                                                <Font family="dseg14_classic_bold" size="62" color="#FFFFFF00"><Upper><Template>%s<Parameter expression="[DAY_OF_WEEK_S]" /></Template></Upper></Font>
+                                            </Text>
+                                        </PartText>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s1_month">
+                                    <Group name="grp_r3_s4_r3s1_month" x="0" y="0" width="120" height="204">
+                                        <PartDraw x="0" y="0" width="120" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="2" y="24" width="116" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="0" y="64" width="120" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="2" y="66" width="116" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="2" y="21" width="116" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">MONTH</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="115" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg14_classic_bold" size="62" color="#FF666600">~~~</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="115" height="62">
+                                            <Text align="END">
+                                                <Font family="dseg14_classic_bold" size="62" color="#FFFFFF00"><Upper><Template>%s<Parameter expression="[MONTH_S]" /></Template></Upper></Font>
+                                            </Text>
+                                        </PartText>
+                                    </Group>
+                                </ListOption>
+                            </ListConfiguration>
+                        </Group>
+                        <Group name="r3_s4_r3_slot_2" x="154" y="0" width="120" height="204">
+                            <ListConfiguration id="r3_slot_2">
+                                <ListOption id="r3s2_temp">
+                                    <Group name="grp_r3_s4_r3s2_temp" x="0" y="0" width="120" height="204">
+                                        <PartDraw x="0" y="0" width="120" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="12" y="24" width="96" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="0" y="64" width="120" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="2" y="66" width="116" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="12" y="21" width="96" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">TEMP</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="115" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FF666600">88°</Font>
+                                            </Text>
+                                        </PartText>
+                                        <Condition>
+                                            <Expressions>
+                                                <Expression name="grp_r3_s4_r3s2_temp_weather_ok">[WEATHER.IS_AVAILABLE]</Expression>
+                                            </Expressions>
+                                            <Compare expression="grp_r3_s4_r3s2_temp_weather_ok">
+                                                <PartText x="2" y="70" width="115" height="62">
+                                                    <Text align="END">
+                                                        <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00"><Template>%s°<Parameter expression="[WEATHER.TEMPERATURE]" /></Template></Font>
+                                                    </Text>
+                                                </PartText>
+                                            </Compare>
+                                            <Default>
+                                                <PartText x="2" y="70" width="115" height="62">
+                                                    <Text align="END">
+                                                        <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00">--°</Font>
+                                                    </Text>
+                                                </PartText>
+                                            </Default>
+                                        </Condition>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s2_battery">
+                                    <Group name="grp_r3_s4_r3s2_battery" x="0" y="0" width="120" height="204">
+                                        <PartDraw x="0" y="0" width="120" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="14" y="24" width="92" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="0" y="64" width="120" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="2" y="66" width="116" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="14" y="21" width="92" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">BATT</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="115" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg14_classic_bold" size="62" color="#FF666600">88~</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="115" height="62">
+                                            <Text align="END">
+                                                <Font family="dseg14_classic_bold" size="62" color="#FFFFFF00"><Template>%s%%<Parameter expression="[BATTERY_PERCENT]" /></Template></Font>
+                                            </Text>
+                                        </PartText>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s2_heart">
+                                    <Group name="grp_r3_s4_r3s2_heart" x="0" y="0" width="120" height="204">
+                                        <PartDraw x="0" y="0" width="120" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="6" y="24" width="108" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="0" y="64" width="120" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="2" y="66" width="116" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="6" y="21" width="108" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">HEART</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="115" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FF666600">888</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="115" height="62">
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00"><Template>%s<Parameter expression="[HEART_RATE]" /></Template></Font>
+                                            </Text>
+                                        </PartText>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s2_day">
+                                    <Group name="grp_r3_s4_r3s2_day" x="0" y="0" width="120" height="204">
+                                        <PartDraw x="0" y="0" width="120" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="21" y="24" width="78" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="0" y="64" width="120" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="2" y="66" width="116" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="21" y="21" width="78" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">DAY</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="115" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg14_classic_bold" size="62" color="#FF666600">~~~</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="115" height="62">
+                                            <Text align="END">
+                                                <Font family="dseg14_classic_bold" size="62" color="#FFFFFF00"><Upper><Template>%s<Parameter expression="[DAY_OF_WEEK_S]" /></Template></Upper></Font>
+                                            </Text>
+                                        </PartText>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s2_date">
+                                    <Group name="grp_r3_s4_r3s2_date" x="0" y="0" width="120" height="204">
+                                        <PartDraw x="0" y="0" width="120" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="21" y="24" width="78" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="19" y="64" width="82" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="21" y="66" width="78" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="21" y="21" width="78" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">DAY</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="21" y="70" width="77" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FF666600">88</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="21" y="70" width="77" height="62">
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00"><Template>%s<Parameter expression="[DAY_Z]" /></Template></Font>
+                                            </Text>
+                                        </PartText>
+                                    </Group>
+                                </ListOption>
+                            </ListConfiguration>
+                        </Group>
+                        <Group name="r3_s4_r3_slot_3" x="286" y="0" width="196" height="204">
+                            <ListConfiguration id="r3_slot_3">
+                                <ListOption id="r3s3_steps">
+                                    <Group name="grp_r3_s4_r3s3_steps" x="0" y="0" width="196" height="204">
+                                        <PartDraw x="0" y="0" width="196" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="44" y="24" width="108" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="0" y="64" width="196" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="2" y="66" width="192" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="44" y="21" width="108" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">STEPS</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="191" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FF666600">88888</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="191" height="62">
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00"><Template>%s<Parameter expression="[STEP_COUNT]" /></Template></Font>
+                                            </Text>
+                                        </PartText>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s3_year">
+                                    <Group name="grp_r3_s4_r3s3_year" x="0" y="0" width="196" height="204">
+                                        <PartDraw x="0" y="0" width="196" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="44" y="24" width="108" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="19" y="64" width="158" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="21" y="66" width="154" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="44" y="21" width="108" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">YEAR</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="21" y="70" width="153" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FF666600">8888</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="21" y="70" width="153" height="62">
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00"><Template>%s<Parameter expression="[YEAR]" /></Template></Font>
+                                            </Text>
+                                        </PartText>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s3_battery">
+                                    <Group name="grp_r3_s4_r3s3_battery" x="0" y="0" width="196" height="204">
+                                        <PartDraw x="0" y="0" width="196" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="52" y="24" width="92" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="38" y="64" width="120" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="40" y="66" width="116" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="52" y="21" width="92" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">BATT</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="40" y="70" width="115" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg14_classic_bold" size="62" color="#FF666600">88~</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="40" y="70" width="115" height="62">
+                                            <Text align="END">
+                                                <Font family="dseg14_classic_bold" size="62" color="#FFFFFF00"><Template>%s%%<Parameter expression="[BATTERY_PERCENT]" /></Template></Font>
+                                            </Text>
+                                        </PartText>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s3_temp">
+                                    <Group name="grp_r3_s4_r3s3_temp" x="0" y="0" width="196" height="204">
+                                        <PartDraw x="0" y="0" width="196" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="50" y="24" width="96" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="38" y="64" width="120" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="40" y="66" width="116" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="50" y="21" width="96" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">TEMP</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="40" y="70" width="115" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FF666600">88°</Font>
+                                            </Text>
+                                        </PartText>
+                                        <Condition>
+                                            <Expressions>
+                                                <Expression name="grp_r3_s4_r3s3_temp_weather_ok">[WEATHER.IS_AVAILABLE]</Expression>
+                                            </Expressions>
+                                            <Compare expression="grp_r3_s4_r3s3_temp_weather_ok">
+                                                <PartText x="40" y="70" width="115" height="62">
+                                                    <Text align="END">
+                                                        <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00"><Template>%s°<Parameter expression="[WEATHER.TEMPERATURE]" /></Template></Font>
+                                                    </Text>
+                                                </PartText>
+                                            </Compare>
+                                            <Default>
+                                                <PartText x="40" y="70" width="115" height="62">
+                                                    <Text align="END">
+                                                        <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00">--°</Font>
+                                                    </Text>
+                                                </PartText>
+                                            </Default>
+                                        </Condition>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s3_heart">
+                                    <Group name="grp_r3_s4_r3s3_heart" x="0" y="0" width="196" height="204">
+                                        <PartDraw x="0" y="0" width="196" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="44" y="24" width="108" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="38" y="64" width="120" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="40" y="66" width="116" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="44" y="21" width="108" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">HEART</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="40" y="70" width="115" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FF666600">888</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="40" y="70" width="115" height="62">
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00"><Template>%s<Parameter expression="[HEART_RATE]" /></Template></Font>
+                                            </Text>
+                                        </PartText>
+                                    </Group>
+                                </ListOption>
+                            </ListConfiguration>
+                        </Group>
+                        <Group name="r3_s4_r3_slot_4" x="494" y="0" width="120" height="204">
+                            <ListConfiguration id="r3_slot_4">
+                                <ListOption id="r3s4_heart">
+                                    <Group name="grp_r3_s4_r3s4_heart" x="0" y="0" width="120" height="204">
+                                        <PartDraw x="0" y="0" width="120" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="6" y="24" width="108" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="0" y="64" width="120" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="2" y="66" width="116" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="6" y="21" width="108" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">HEART</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="115" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FF666600">888</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="115" height="62">
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00"><Template>%s<Parameter expression="[HEART_RATE]" /></Template></Font>
+                                            </Text>
+                                        </PartText>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s4_hour">
+                                    <Group name="grp_r3_s4_r3s4_hour" x="0" y="0" width="120" height="204">
+                                        <PartDraw x="0" y="0" width="120" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="21" y="24" width="78" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="19" y="64" width="82" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="21" y="66" width="78" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="21" y="21" width="78" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">HOUR</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="21" y="70" width="77" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FF666600">88</Font>
+                                            </Text>
+                                        </PartText>
+                                        <DigitalClock x="0" y="0" width="120" height="204">
+                                            <TimeText x="21" y="70" width="77" height="62" format="hh" hourFormat="24" align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00" />
+                                            </TimeText>
+                                        </DigitalClock>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s4_temp">
+                                    <Group name="grp_r3_s4_r3s4_temp" x="0" y="0" width="120" height="204">
+                                        <PartDraw x="0" y="0" width="120" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="12" y="24" width="96" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="0" y="64" width="120" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="2" y="66" width="116" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="12" y="21" width="96" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">TEMP</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="115" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FF666600">88°</Font>
+                                            </Text>
+                                        </PartText>
+                                        <Condition>
+                                            <Expressions>
+                                                <Expression name="grp_r3_s4_r3s4_temp_weather_ok">[WEATHER.IS_AVAILABLE]</Expression>
+                                            </Expressions>
+                                            <Compare expression="grp_r3_s4_r3s4_temp_weather_ok">
+                                                <PartText x="2" y="70" width="115" height="62">
+                                                    <Text align="END">
+                                                        <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00"><Template>%s°<Parameter expression="[WEATHER.TEMPERATURE]" /></Template></Font>
+                                                    </Text>
+                                                </PartText>
+                                            </Compare>
+                                            <Default>
+                                                <PartText x="2" y="70" width="115" height="62">
+                                                    <Text align="END">
+                                                        <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00">--°</Font>
+                                                    </Text>
+                                                </PartText>
+                                            </Default>
+                                        </Condition>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s4_date">
+                                    <Group name="grp_r3_s4_r3s4_date" x="0" y="0" width="120" height="204">
+                                        <PartDraw x="0" y="0" width="120" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="21" y="24" width="78" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="19" y="64" width="82" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="21" y="66" width="78" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="21" y="21" width="78" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">DAY</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="21" y="70" width="77" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FF666600">88</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="21" y="70" width="77" height="62">
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00"><Template>%s<Parameter expression="[DAY_Z]" /></Template></Font>
+                                            </Text>
+                                        </PartText>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s4_alerts">
+                                    <Group name="grp_r3_s4_r3s4_alerts" x="0" y="0" width="120" height="204">
+                                        <PartDraw x="0" y="0" width="120" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="21" y="24" width="78" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="19" y="64" width="82" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="21" y="66" width="78" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="21" y="21" width="78" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">ALRT</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="21" y="70" width="77" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FF666600">88</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="21" y="70" width="77" height="62">
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00"><Template>%s<Parameter expression="[UNREAD_NOTIFICATION_COUNT]" /></Template></Font>
+                                            </Text>
+                                        </PartText>
+                                    </Group>
+                                </ListOption>
+                            </ListConfiguration>
+                        </Group>
+                    </Group>
+                </ListOption>
+
+                <!-- Mode 4: 5 Custom Digital Slots (Yellow) -->
+                <ListOption id="r3_slots_5">
+                    <Group name="row3_mode_slots_5" x="0" y="0" width="636" height="204">
+                        <Group name="r3_s5_r3_slot_1" x="21" y="0" width="120" height="204">
+                            <ListConfiguration id="r3_slot_1">
+                                <ListOption id="r3s1_battery">
+                                    <Group name="grp_r3_s5_r3s1_battery" x="0" y="0" width="120" height="204">
+                                        <PartDraw x="0" y="0" width="120" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="14" y="24" width="92" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="0" y="64" width="120" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="2" y="66" width="116" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="14" y="21" width="92" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">BATT</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="115" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg14_classic_bold" size="62" color="#FF666600">88~</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="115" height="62">
+                                            <Text align="END">
+                                                <Font family="dseg14_classic_bold" size="62" color="#FFFFFF00"><Template>%s%%<Parameter expression="[BATTERY_PERCENT]" /></Template></Font>
+                                            </Text>
+                                        </PartText>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s1_temp">
+                                    <Group name="grp_r3_s5_r3s1_temp" x="0" y="0" width="120" height="204">
+                                        <PartDraw x="0" y="0" width="120" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="12" y="24" width="96" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="0" y="64" width="120" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="2" y="66" width="116" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="12" y="21" width="96" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">TEMP</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="115" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FF666600">88°</Font>
+                                            </Text>
+                                        </PartText>
+                                        <Condition>
+                                            <Expressions>
+                                                <Expression name="grp_r3_s5_r3s1_temp_weather_ok">[WEATHER.IS_AVAILABLE]</Expression>
+                                            </Expressions>
+                                            <Compare expression="grp_r3_s5_r3s1_temp_weather_ok">
+                                                <PartText x="2" y="70" width="115" height="62">
+                                                    <Text align="END">
+                                                        <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00"><Template>%s°<Parameter expression="[WEATHER.TEMPERATURE]" /></Template></Font>
+                                                    </Text>
+                                                </PartText>
+                                            </Compare>
+                                            <Default>
+                                                <PartText x="2" y="70" width="115" height="62">
+                                                    <Text align="END">
+                                                        <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00">--°</Font>
+                                                    </Text>
+                                                </PartText>
+                                            </Default>
+                                        </Condition>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s1_heart">
+                                    <Group name="grp_r3_s5_r3s1_heart" x="0" y="0" width="120" height="204">
+                                        <PartDraw x="0" y="0" width="120" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="6" y="24" width="108" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="0" y="64" width="120" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="2" y="66" width="116" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="6" y="21" width="108" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">HEART</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="115" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FF666600">888</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="115" height="62">
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00"><Template>%s<Parameter expression="[HEART_RATE]" /></Template></Font>
+                                            </Text>
+                                        </PartText>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s1_day">
+                                    <Group name="grp_r3_s5_r3s1_day" x="0" y="0" width="120" height="204">
+                                        <PartDraw x="0" y="0" width="120" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="21" y="24" width="78" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="0" y="64" width="120" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="2" y="66" width="116" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="21" y="21" width="78" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">DAY</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="115" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg14_classic_bold" size="62" color="#FF666600">~~~</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="115" height="62">
+                                            <Text align="END">
+                                                <Font family="dseg14_classic_bold" size="62" color="#FFFFFF00"><Upper><Template>%s<Parameter expression="[DAY_OF_WEEK_S]" /></Template></Upper></Font>
+                                            </Text>
+                                        </PartText>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s1_month">
+                                    <Group name="grp_r3_s5_r3s1_month" x="0" y="0" width="120" height="204">
+                                        <PartDraw x="0" y="0" width="120" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="2" y="24" width="116" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="0" y="64" width="120" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="2" y="66" width="116" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="2" y="21" width="116" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">MONTH</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="115" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg14_classic_bold" size="62" color="#FF666600">~~~</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="115" height="62">
+                                            <Text align="END">
+                                                <Font family="dseg14_classic_bold" size="62" color="#FFFFFF00"><Upper><Template>%s<Parameter expression="[MONTH_S]" /></Template></Upper></Font>
+                                            </Text>
+                                        </PartText>
+                                    </Group>
+                                </ListOption>
+                            </ListConfiguration>
+                        </Group>
+                        <Group name="r3_s5_r3_slot_2" x="147" y="0" width="82" height="204">
+                            <ListConfiguration id="r3_slot_2">
+                                <ListOption id="r3s2_temp">
+                                    <Group name="grp_r3_s5_r3s2_temp" x="0" y="0" width="82" height="204">
+                                        <PartDraw x="0" y="0" width="82" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="2" y="24" width="78" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="0" y="64" width="82" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="2" y="66" width="78" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="2" y="21" width="78" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">TEMP</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="77" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FF666600">88</Font>
+                                            </Text>
+                                        </PartText>
+                                        <Condition>
+                                            <Expressions>
+                                                <Expression name="grp_r3_s5_r3s2_temp_weather_ok">[WEATHER.IS_AVAILABLE]</Expression>
+                                            </Expressions>
+                                            <Compare expression="grp_r3_s5_r3s2_temp_weather_ok">
+                                                <PartText x="2" y="70" width="77" height="62">
+                                                    <Text align="END">
+                                                        <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00"><Template>%s<Parameter expression="[WEATHER.TEMPERATURE]" /></Template></Font>
+                                                    </Text>
+                                                </PartText>
+                                            </Compare>
+                                            <Default>
+                                                <PartText x="2" y="70" width="77" height="62">
+                                                    <Text align="END">
+                                                        <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00">--°</Font>
+                                                    </Text>
+                                                </PartText>
+                                            </Default>
+                                        </Condition>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s2_battery">
+                                    <Group name="grp_r3_s5_r3s2_battery" x="0" y="0" width="82" height="204">
+                                        <PartDraw x="0" y="0" width="82" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="2" y="24" width="78" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="0" y="64" width="82" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="2" y="66" width="78" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="2" y="21" width="78" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">BAT</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="77" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FF666600">88</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="77" height="62">
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00"><Template>%s<Parameter expression="[BATTERY_PERCENT]" /></Template></Font>
+                                            </Text>
+                                        </PartText>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s2_heart">
+                                    <Group name="grp_r3_s5_r3s2_heart" x="0" y="0" width="82" height="204">
+                                        <PartDraw x="0" y="0" width="82" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="2" y="24" width="78" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="0" y="64" width="82" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="2" y="66" width="78" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="2" y="21" width="78" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">BPM</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="77" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FF666600">88</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="77" height="62">
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00"><Template>%s<Parameter expression="[HEART_RATE]" /></Template></Font>
+                                            </Text>
+                                        </PartText>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s2_day">
+                                    <Group name="grp_r3_s5_r3s2_day" x="0" y="0" width="82" height="204">
+                                        <PartDraw x="0" y="0" width="82" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="2" y="24" width="78" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="0" y="64" width="82" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="2" y="66" width="78" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="2" y="21" width="78" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">DAY</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="77" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg14_classic_bold" size="62" color="#FF666600">~~</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="77" height="62">
+                                            <Text align="END">
+                                                <Font family="dseg14_classic_bold" size="62" color="#FFFFFF00"><Upper><Template>%s<Parameter expression="[DAY_OF_WEEK_S]" /></Template></Upper></Font>
+                                            </Text>
+                                        </PartText>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s2_date">
+                                    <Group name="grp_r3_s5_r3s2_date" x="0" y="0" width="82" height="204">
+                                        <PartDraw x="0" y="0" width="82" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="2" y="24" width="78" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="0" y="64" width="82" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="2" y="66" width="78" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="2" y="21" width="78" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">DAY</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="77" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FF666600">88</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="77" height="62">
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00"><Template>%s<Parameter expression="[DAY_Z]" /></Template></Font>
+                                            </Text>
+                                        </PartText>
+                                    </Group>
+                                </ListOption>
+                            </ListConfiguration>
+                        </Group>
+                        <Group name="r3_s5_r3_slot_3" x="235" y="0" width="196" height="204">
+                            <ListConfiguration id="r3_slot_3">
+                                <ListOption id="r3s3_steps">
+                                    <Group name="grp_r3_s5_r3s3_steps" x="0" y="0" width="196" height="204">
+                                        <PartDraw x="0" y="0" width="196" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="44" y="24" width="108" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="0" y="64" width="196" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="2" y="66" width="192" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="44" y="21" width="108" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">STEPS</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="191" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FF666600">88888</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="191" height="62">
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00"><Template>%s<Parameter expression="[STEP_COUNT]" /></Template></Font>
+                                            </Text>
+                                        </PartText>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s3_year">
+                                    <Group name="grp_r3_s5_r3s3_year" x="0" y="0" width="196" height="204">
+                                        <PartDraw x="0" y="0" width="196" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="44" y="24" width="108" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="19" y="64" width="158" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="21" y="66" width="154" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="44" y="21" width="108" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">YEAR</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="21" y="70" width="153" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FF666600">8888</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="21" y="70" width="153" height="62">
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00"><Template>%s<Parameter expression="[YEAR]" /></Template></Font>
+                                            </Text>
+                                        </PartText>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s3_battery">
+                                    <Group name="grp_r3_s5_r3s3_battery" x="0" y="0" width="196" height="204">
+                                        <PartDraw x="0" y="0" width="196" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="52" y="24" width="92" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="38" y="64" width="120" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="40" y="66" width="116" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="52" y="21" width="92" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">BATT</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="40" y="70" width="115" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg14_classic_bold" size="62" color="#FF666600">88~</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="40" y="70" width="115" height="62">
+                                            <Text align="END">
+                                                <Font family="dseg14_classic_bold" size="62" color="#FFFFFF00"><Template>%s%%<Parameter expression="[BATTERY_PERCENT]" /></Template></Font>
+                                            </Text>
+                                        </PartText>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s3_temp">
+                                    <Group name="grp_r3_s5_r3s3_temp" x="0" y="0" width="196" height="204">
+                                        <PartDraw x="0" y="0" width="196" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="50" y="24" width="96" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="38" y="64" width="120" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="40" y="66" width="116" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="50" y="21" width="96" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">TEMP</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="40" y="70" width="115" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FF666600">88°</Font>
+                                            </Text>
+                                        </PartText>
+                                        <Condition>
+                                            <Expressions>
+                                                <Expression name="grp_r3_s5_r3s3_temp_weather_ok">[WEATHER.IS_AVAILABLE]</Expression>
+                                            </Expressions>
+                                            <Compare expression="grp_r3_s5_r3s3_temp_weather_ok">
+                                                <PartText x="40" y="70" width="115" height="62">
+                                                    <Text align="END">
+                                                        <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00"><Template>%s°<Parameter expression="[WEATHER.TEMPERATURE]" /></Template></Font>
+                                                    </Text>
+                                                </PartText>
+                                            </Compare>
+                                            <Default>
+                                                <PartText x="40" y="70" width="115" height="62">
+                                                    <Text align="END">
+                                                        <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00">--°</Font>
+                                                    </Text>
+                                                </PartText>
+                                            </Default>
+                                        </Condition>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s3_heart">
+                                    <Group name="grp_r3_s5_r3s3_heart" x="0" y="0" width="196" height="204">
+                                        <PartDraw x="0" y="0" width="196" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="44" y="24" width="108" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="38" y="64" width="120" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="40" y="66" width="116" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="44" y="21" width="108" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">HEART</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="40" y="70" width="115" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FF666600">888</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="40" y="70" width="115" height="62">
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00"><Template>%s<Parameter expression="[HEART_RATE]" /></Template></Font>
+                                            </Text>
+                                        </PartText>
+                                    </Group>
+                                </ListOption>
+                            </ListConfiguration>
+                        </Group>
+                        <Group name="r3_s5_r3_slot_4" x="437" y="0" width="82" height="204">
+                            <ListConfiguration id="r3_slot_4">
+                                <ListOption id="r3s4_heart">
+                                    <Group name="grp_r3_s5_r3s4_heart" x="0" y="0" width="82" height="204">
+                                        <PartDraw x="0" y="0" width="82" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="2" y="24" width="78" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="0" y="64" width="82" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="2" y="66" width="78" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="2" y="21" width="78" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">BPM</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="77" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FF666600">88</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="77" height="62">
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00"><Template>%s<Parameter expression="[HEART_RATE]" /></Template></Font>
+                                            </Text>
+                                        </PartText>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s4_hour">
+                                    <Group name="grp_r3_s5_r3s4_hour" x="0" y="0" width="82" height="204">
+                                        <PartDraw x="0" y="0" width="82" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="2" y="24" width="78" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="0" y="64" width="82" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="2" y="66" width="78" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="2" y="21" width="78" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">HOUR</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="77" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FF666600">88</Font>
+                                            </Text>
+                                        </PartText>
+                                        <DigitalClock x="0" y="0" width="82" height="204">
+                                            <TimeText x="2" y="70" width="77" height="62" format="hh" hourFormat="24" align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00" />
+                                            </TimeText>
+                                        </DigitalClock>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s4_temp">
+                                    <Group name="grp_r3_s5_r3s4_temp" x="0" y="0" width="82" height="204">
+                                        <PartDraw x="0" y="0" width="82" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="2" y="24" width="78" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="0" y="64" width="82" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="2" y="66" width="78" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="2" y="21" width="78" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">TEMP</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="77" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FF666600">88</Font>
+                                            </Text>
+                                        </PartText>
+                                        <Condition>
+                                            <Expressions>
+                                                <Expression name="grp_r3_s5_r3s4_temp_weather_ok">[WEATHER.IS_AVAILABLE]</Expression>
+                                            </Expressions>
+                                            <Compare expression="grp_r3_s5_r3s4_temp_weather_ok">
+                                                <PartText x="2" y="70" width="77" height="62">
+                                                    <Text align="END">
+                                                        <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00"><Template>%s<Parameter expression="[WEATHER.TEMPERATURE]" /></Template></Font>
+                                                    </Text>
+                                                </PartText>
+                                            </Compare>
+                                            <Default>
+                                                <PartText x="2" y="70" width="77" height="62">
+                                                    <Text align="END">
+                                                        <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00">--°</Font>
+                                                    </Text>
+                                                </PartText>
+                                            </Default>
+                                        </Condition>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s4_date">
+                                    <Group name="grp_r3_s5_r3s4_date" x="0" y="0" width="82" height="204">
+                                        <PartDraw x="0" y="0" width="82" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="2" y="24" width="78" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="0" y="64" width="82" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="2" y="66" width="78" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="2" y="21" width="78" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">DAY</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="77" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FF666600">88</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="77" height="62">
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00"><Template>%s<Parameter expression="[DAY_Z]" /></Template></Font>
+                                            </Text>
+                                        </PartText>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s4_alerts">
+                                    <Group name="grp_r3_s5_r3s4_alerts" x="0" y="0" width="82" height="204">
+                                        <PartDraw x="0" y="0" width="82" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="2" y="24" width="78" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="0" y="64" width="82" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="2" y="66" width="78" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="2" y="21" width="78" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">ALRT</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="77" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FF666600">88</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="77" height="62">
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00"><Template>%s<Parameter expression="[UNREAD_NOTIFICATION_COUNT]" /></Template></Font>
+                                            </Text>
+                                        </PartText>
+                                    </Group>
+                                </ListOption>
+                            </ListConfiguration>
+                        </Group>
+                        <Group name="r3_s5_r3_slot_5" x="525" y="0" width="82" height="204">
+                            <ListConfiguration id="r3_slot_5">
+                                <ListOption id="r3s5_min">
+                                    <Group name="grp_r3_s5_r3s5_min" x="0" y="0" width="82" height="204">
+                                        <PartDraw x="0" y="0" width="82" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="3" y="24" width="76" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="0" y="64" width="82" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="2" y="66" width="78" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="3" y="21" width="76" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">MIN</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="77" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FF666600">88</Font>
+                                            </Text>
+                                        </PartText>
+                                        <DigitalClock x="0" y="0" width="82" height="204">
+                                            <TimeText x="2" y="70" width="77" height="62" format="mm" align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00" />
+                                            </TimeText>
+                                        </DigitalClock>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s5_sec">
+                                    <Group name="grp_r3_s5_r3s5_sec" x="0" y="0" width="82" height="204">
+                                        <PartDraw x="0" y="0" width="82" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="3" y="24" width="76" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="0" y="64" width="82" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="2" y="66" width="78" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="3" y="21" width="76" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">SEC</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="77" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FF666600">88</Font>
+                                            </Text>
+                                        </PartText>
+                                        <DigitalClock x="0" y="0" width="82" height="204">
+                                            <TimeText x="2" y="70" width="77" height="62" format="ss" align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00" />
+                                            </TimeText>
+                                        </DigitalClock>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s5_date">
+                                    <Group name="grp_r3_s5_r3s5_date" x="0" y="0" width="82" height="204">
+                                        <PartDraw x="0" y="0" width="82" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="2" y="24" width="78" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="0" y="64" width="82" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="2" y="66" width="78" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="2" y="21" width="78" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">DAY</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="77" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FF666600">88</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="77" height="62">
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00"><Template>%s<Parameter expression="[DAY_Z]" /></Template></Font>
+                                            </Text>
+                                        </PartText>
+                                    </Group>
+                                </ListOption>
+                                <ListOption id="r3s5_alerts">
+                                    <Group name="grp_r3_s5_r3s5_alerts" x="0" y="0" width="82" height="204">
+                                        <PartDraw x="0" y="0" width="82" height="204" alpha="255">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Rectangle x="2" y="24" width="78" height="34"><Fill color="#FF660000" /></Rectangle>
+                                            <Rectangle x="0" y="64" width="82" height="74"><Fill color="#FF111111" /></Rectangle>
+                                            <Rectangle x="2" y="66" width="78" height="70"><Fill color="#FF333300" /></Rectangle>
+                                        </PartDraw>
+                                        <PartText x="2" y="21" width="78" height="40">
+                                            <Text align="CENTER">
+                                                <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">ALRT</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="77" height="62">
+                                            <Variant mode="AMBIENT" target="alpha" value="0" />
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FF666600">88</Font>
+                                            </Text>
+                                        </PartText>
+                                        <PartText x="2" y="70" width="77" height="62">
+                                            <Text align="END">
+                                                <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00"><Template>%s<Parameter expression="[UNREAD_NOTIFICATION_COUNT]" /></Template></Font>
+                                            </Text>
+                                        </PartText>
+                                    </Group>
+                                </ListOption>
+                            </ListConfiguration>
+                        </Group>
+                    </Group>
+                </ListOption>
+            </ListConfiguration>
+
+            <!-- Shared Row 3 Footer Badge & Label: LAST TIME DEPARTED -->
+            <PartDraw x="0" y="0" width="636" height="204" alpha="255">
+                <Variant mode="AMBIENT" target="alpha" value="0" />
                 <Rectangle x="150" y="146" width="336" height="34"><Fill color="#FF222222" /></Rectangle>
             </PartDraw>
-
-            <!-- Header Labels: MONTH, DAY, YEAR, HOUR, MIN -->
-            <PartText x="28" y="21" width="116" height="40">
-                <Text align="CENTER">
-                    <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">MONTH</Font>
-                </Text>
-            </PartText>
-            <PartText x="156" y="21" width="78" height="40">
-                <Text align="CENTER">
-                    <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">DAY</Font>
-                </Text>
-            </PartText>
-            <PartText x="269" y="21" width="108" height="40">
-                <Text align="CENTER">
-                    <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">YEAR</Font>
-                </Text>
-            </PartText>
-            <PartText x="433" y="21" width="92" height="40">
-                <Text align="CENTER">
-                    <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">HOUR</Font>
-                </Text>
-            </PartText>
-            <PartText x="531" y="21" width="76" height="40">
-                <Text align="CENTER">
-                    <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">MIN</Font>
-                </Text>
-            </PartText>
-
-            <!-- Inactive 14-Segment ('~~~') & 7-Segment ('88'/'8888') Ghost Background Layer (#FF666600) -->
-            <PartText x="28" y="70" width="115" height="62">
-                <Variant mode="AMBIENT" target="alpha" value="0" />
-                <Text align="END">
-                    <Font family="dseg14_classic_bold" size="62" color="#FF666600">~~~</Font>
-                </Text>
-            </PartText>
-            <PartText x="156" y="70" width="77" height="62">
-                <Variant mode="AMBIENT" target="alpha" value="0" />
-                <Text align="END">
-                    <Font family="dseg7_classic_bold" size="62" color="#FF666600">88</Font>
-                </Text>
-            </PartText>
-            <PartText x="246" y="70" width="153" height="62">
-                <Variant mode="AMBIENT" target="alpha" value="0" />
-                <Text align="END">
-                    <Font family="dseg7_classic_bold" size="62" color="#FF666600">8888</Font>
-                </Text>
-            </PartText>
-            <PartText x="440" y="70" width="77" height="62">
-                <Variant mode="AMBIENT" target="alpha" value="0" />
-                <Text align="END">
-                    <Font family="dseg7_classic_bold" size="62" color="#FF666600">88</Font>
-                </Text>
-            </PartText>
-            <PartText x="530" y="70" width="77" height="62">
-                <Variant mode="AMBIENT" target="alpha" value="0" />
-                <Text align="END">
-                    <Font family="dseg7_classic_bold" size="62" color="#FF666600">88</Font>
-                </Text>
-            </PartText>
-
-            <!-- Active Digital Readouts (#FFFFFF00, size=62, 4 px padding on all 4 sides) -->
-            <PartText x="28" y="70" width="115" height="62">
-                <Text align="END">
-                    <Font family="dseg14_classic_bold" size="62" color="#FFFFFF00">
-                        <Upper>
-                            <Template>%s<Parameter expression="[MONTH_S]" /></Template>
-                        </Upper>
-                    </Font>
-                </Text>
-            </PartText>
-            <PartText x="156" y="70" width="77" height="62">
-                <Text align="END">
-                    <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00">
-                        <Template>%s<Parameter expression="[DAY_Z]" /></Template>
-                    </Font>
-                </Text>
-            </PartText>
-            <PartText x="246" y="70" width="153" height="62">
-                <Text align="END">
-                    <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00">
-                        <Template>%s<Parameter expression="[YEAR]" /></Template>
-                    </Font>
-                </Text>
-            </PartText>
-            <DigitalClock x="0" y="0" width="636" height="204">
-                <TimeText x="440" y="70" width="77" height="62" format="hh" hourFormat="24" align="END">
-                    <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00" />
-                </TimeText>
-                <TimeText x="530" y="70" width="77" height="62" format="mm" align="END">
-                    <Font family="dseg7_classic_bold" size="62" color="#FFFFFF00" />
-                </TimeText>
-            </DigitalClock>
-
-            <!-- AM/PM Colon Indicator Dots (Upper = AM, Lower = PM) -->
-            <Condition>
-                <Expressions>
-                    <Expression name="row3_is_am">[AMPM_POSITION] == 0</Expression>
-                </Expressions>
-                <Compare expression="row3_is_am">
-                    <PartDraw x="412" y="66" width="16" height="70">
-                        <Ellipse x="0" y="13" width="16" height="16"><Fill color="#FFFFFF00" /></Ellipse>
-                        <Ellipse x="0" y="41" width="16" height="16"><Fill color="#FF4D4D00" /></Ellipse>
-                    </PartDraw>
-                </Compare>
-                <Default>
-                    <PartDraw x="412" y="66" width="16" height="70">
-                        <Ellipse x="0" y="13" width="16" height="16"><Fill color="#FF4D4D00" /></Ellipse>
-                        <Ellipse x="0" y="41" width="16" height="16"><Fill color="#FFFFFF00" /></Ellipse>
-                    </PartDraw>
-                </Default>
-            </Condition>
-
-            <!-- Footer Label: LAST TIME DEPARTED -->
             <PartText x="150" y="143" width="336" height="40">
                 <Text align="CENTER">
                     <Font family="SYNC_TO_DEVICE" size="30" weight="NORMAL" color="#FFFFFFFF">LAST TIME DEPARTED</Font>

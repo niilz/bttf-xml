@@ -1,4 +1,4 @@
-# Specification (Phase 2): Configurable Digital Slots in Middle Row (`row_2_present`)
+# Specification (Phase 2 & 3): Configurable Digital Slots in Middle Row (`row_2_present`) & Bottom Row (`row_3_departed`)
 
 - **Status:** Approved & Finalized (Includes `time`, `slots_3`, `slots_4`, and `slots_5`)
 - **Branch:** `feat/phase2-middle-row-slots`
@@ -16,8 +16,10 @@
      1. In `res/raw/watchface.xml`, `displayName` and `screenReaderText` reference string resources **without** the `@string/` prefix (e.g. `displayName="cfg_slot_1"`).
      2. In `res/values/strings.xml`, configuration display strings must **never** contain unescaped `%` characters (e.g. `"Battery (%)"` causes Android's `Resources.getString()` formatter in `InteractiveWatchFaceImpl.getUserStyleSchema()` to throw `UnknownFormatConversionException: Conversion = ')'`).
    - No Kotlin `Activity` or background service needed; long-pressing the watch face opens the native Wear OS editor.
-2. **S2 — Flexible Row 2 Mode Switcher (`row2_mode`) + Individual Slot Selectors (`slot_1` .. `slot_5`):**
-   - Outer `<ListConfiguration id="row2_mode">` selects the Row 2 layout mode (`time`, `slots_3`, `slots_4`, `slots_5`), and `slot_1..slot_5` configure the individual slots.
+2. **S2 — Flexible Mode Switchers (`row2_mode` & `row3_mode`) + Individual Slot Selectors (`slot_1..5` & `r3_slot_1..5`):**
+   - Outer `<ListConfiguration id="row2_mode">` selects the Row 2 (Green `#FF00FF00`) layout mode (`time`, `slots_3`, `slots_4`, `slots_5`), and `slot_1..slot_5` configure the individual Row 2 slots.
+   - Outer `<ListConfiguration id="row3_mode">` selects the Row 3 (Yellow `#FFFFFF00`) layout mode (`r3_time` [default], `r3_slots_3`, `r3_slots_4`, `r3_slots_5`), and `r3_slot_1..r3_slot_5` configure the individual Row 3 slots.
+   - Every `<ListOption>` sizes its inner value box to `38 * len(ghost) + 2` so that 2-char, 3-char, 4-char, and 5-char options are always completely filled by their ghost segments with no empty un-shadowed space on the left.
 3. **S3 — Units in Digital Font:**
    - `BATTERY`: `[BATTERY_PERCENT]%` rendered in `dseg14_classic_bold` (supports `0-9` and `%`), ghost `888~` (4-char) or `88~` (3-char).
    - `TEMP`: `[WEATHER.TEMPERATURE]°` (degree symbol only, without `C`) rendered in `dseg7_classic_bold` (supports `0-9`, `-`, `°`), ghost `88°`.
