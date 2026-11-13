@@ -318,19 +318,21 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
             self.assertEqual(row.attrib.get("width"), "636")
             self.assertEqual(row.attrib.get("height"), "204")
 
-            # For row_2_present, the standard 5-slot time view lives inside <ListOption id="time">
+            # For row_2_present and row_3_departed, the standard 5-slot time view lives inside <ListOption id="time"> / <ListOption id="r3_time">
             time_scope = row
-            if row_name == "row_2_present":
-                mode_cfg = row.find("ListConfiguration[@id='row2_mode']")
+            if row_name in ("row_2_present", "row_3_departed"):
+                mode_id = "row2_mode" if row_name == "row_2_present" else "row3_mode"
+                time_opt_id = "time" if row_name == "row_2_present" else "r3_time"
+                mode_cfg = row.find(f"ListConfiguration[@id='{mode_id}']")
                 self.assertIsNotNone(
                     mode_cfg,
-                    "row_2_present must contain <ListConfiguration id='row2_mode'>",
+                    f"{row_name} must contain <ListConfiguration id='{mode_id}'>",
                 )
                 assert mode_cfg is not None
-                time_opt = mode_cfg.find("ListOption[@id='time']/Group")
+                time_opt = mode_cfg.find(f"ListOption[@id='{time_opt_id}']/Group")
                 self.assertIsNotNone(
                     time_opt,
-                    "row2_mode must have <ListOption id='time'><Group ...>",
+                    f"{mode_id} must have <ListOption id='{time_opt_id}'><Group ...>",
                 )
                 assert time_opt is not None
                 time_scope = time_opt
@@ -938,6 +940,94 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
             any("°" in tmpl and "C" not in tmpl for tmpl in row2_templates),
             "Temperature template must include '°' symbol without 'C'",
         )
+
+    def test_row3_configurable_slots(self) -> None:
+        root = ET.parse(WATCHFACE_XML_PATH).getroot()
+        user_configs = root.find("UserConfigurations")
+        assert user_configs is not None
+        declared_configs = {
+            lc.attrib.get("id"): [o.attrib.get("id") for o in lc.findall("ListOption")]
+            for lc in user_configs.findall("ListConfiguration")
+        }
+
+        self.assertIn("row3_mode", declared_configs)
+        for mode_id in ("r3_time", "r3_slots_3", "r3_slots_4", "r3_slots_5"):
+            self.assertIn(
+                mode_id,
+                declared_configs["row3_mode"],
+                f"row3_mode must include ListOption id='{mode_id}'",
+            )
+
+        for slot_id in ("r3_slot_1", "r3_slot_2", "r3_slot_3", "r3_slot_4", "r3_slot_5"):
+            self.assertIn(
+                slot_id,
+                declared_configs,
+                f"UserConfigurations missing ListConfiguration id='{slot_id}'",
+            )
+
+        scene = root.find("Scene")
+        assert scene is not None
+        row3 = scene.find("Group[@name='row_3_departed']")
+        self.assertIsNotNone(row3)
+        assert row3 is not None
+
+        row3_mode = row3.find("ListConfiguration[@id='row3_mode']")
+        self.assertIsNotNone(row3_mode)
+        assert row3_mode is not None
+
+        scene_mode_opts = {
+            o.attrib.get("id"): o for o in row3_mode.findall("ListOption")
+        }
+        for mode_id, expected_count in (
+            ("r3_slots_3", 3),
+            ("r3_slots_4", 4),
+            ("r3_slots_5", 5),
+        ):
+            self.assertIn(mode_id, scene_mode_opts)
+            mode_group = scene_mode_opts[mode_id].find("Group")
+            self.assertIsNotNone(mode_group)
+            assert mode_group is not None
+            slot_containers = mode_group.findall("Group")
+            self.assertEqual(
+                len(slot_containers),
+                expected_count,
+                f"Row 3 mode '{mode_id}' must contain {expected_count} local <Group> slot containers",
+            )
+            for container in slot_containers:
+                slc = container.find("ListConfiguration")
+                self.assertIsNotNone(slc)
+                assert slc is not None
+                sid = slc.attrib.get("id")
+                self.assertIn(sid, declared_configs)
+                scene_opt_ids = [o.attrib.get("id") for o in slc.findall("ListOption")]
+                self.assertEqual(scene_opt_ids, declared_configs[sid])
+                for opt in slc.findall("ListOption"):
+                    opt_group = opt.find("Group")
+                    assert opt_group is not None
+                    header_w = None
+                    box_w = None
+                    for r in opt_group.iter("Rectangle"):
+                        fill = r.find("Fill")
+                        if fill is None:
+                            continue
+                        col = fill.attrib.get("color", "").upper()
+                        if col == "#FF660000":
+                            header_w = int(r.attrib["width"])
+                        elif col == "#FF333300":
+                            box_w = int(r.attrib["width"])
+                    self.assertIsNotNone(header_w)
+                    self.assertIsNotNone(box_w)
+                    assert header_w is not None and box_w is not None
+                    self.assertLessEqual(header_w, box_w)
+                    ghost_texts = [
+                        pt.find(".//Font").text.strip()
+                        for pt in opt_group.findall("PartText")
+                        if pt.find("Variant") is not None
+                        and pt.find(".//Font") is not None
+                        and pt.find(".//Font").text
+                    ]
+                    self.assertEqual(len(ghost_texts), 1)
+                    self.assertEqual(box_w, 38 * len(ghost_texts[0]) + 2)
 
 
 if __name__ == "__main__":

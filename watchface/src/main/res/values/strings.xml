@@ -1,7 +1,7 @@
 <resources>
     <string name="watch_face_name">BTTF Time Circuit</string>
 
-    <!-- User Configuration Titles -->
+    <!-- Middle Row User Configuration Titles -->
     <string name="cfg_row2_mode">Middle Row Mode</string>
     <string name="cfg_slot_1">Middle Row — Slot 1</string>
     <string name="cfg_slot_2">Middle Row — Slot 2</string>
@@ -9,8 +9,16 @@
     <string name="cfg_slot_4">Middle Row — Slot 4</string>
     <string name="cfg_slot_5">Middle Row — Slot 5</string>
 
-    <!-- Middle Row Mode Options -->
-    <string name="mode_time">Present Time (Default)</string>
+    <!-- Bottom Row User Configuration Titles -->
+    <string name="cfg_row3_mode">Bottom Row Mode</string>
+    <string name="cfg_r3_slot_1">Bottom Row — Slot 1</string>
+    <string name="cfg_r3_slot_2">Bottom Row — Slot 2</string>
+    <string name="cfg_r3_slot_3">Bottom Row — Slot 3 (Wide)</string>
+    <string name="cfg_r3_slot_4">Bottom Row — Slot 4</string>
+    <string name="cfg_r3_slot_5">Bottom Row — Slot 5</string>
+
+    <!-- Row Mode Options -->
+    <string name="mode_time">Time Circuit (Default)</string>
     <string name="mode_slots_3">3 Custom Slots</string>
     <string name="mode_slots_4">4 Custom Slots</string>
     <string name="mode_slots_5">5 Custom Slots</string>
