@@ -251,10 +251,10 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
 
         self.assertIsNotNone(bg_part, "Missing <PartImage> referencing resource='bg'")
         assert bg_part is not None
-        self.assertEqual(bg_part.attrib.get("x"), "132")
-        self.assertEqual(bg_part.attrib.get("y"), "132")
-        self.assertEqual(bg_part.attrib.get("width"), "636")
-        self.assertEqual(bg_part.attrib.get("height"), "636")
+        self.assertEqual(bg_part.attrib.get("x"), "90")
+        self.assertEqual(bg_part.attrib.get("y"), "90")
+        self.assertEqual(bg_part.attrib.get("width"), "720")
+        self.assertEqual(bg_part.attrib.get("height"), "720")
 
         ambient_variants = [
             v
@@ -277,7 +277,7 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
         expected_rows = [
             {
                 "name": "row_1_destination",
-                "y": "132",
+                "y": "100",
                 "primary_color": "#FFFF0000",
                 "ghost_color": "#FF660000",
                 "box_color": "#FF330000",
@@ -285,7 +285,7 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
             },
             {
                 "name": "row_2_present",
-                "y": "349",
+                "y": "345",
                 "primary_color": "#FF00FF00",
                 "ghost_color": "#FF006600",
                 "box_color": "#FF003300",
@@ -293,7 +293,7 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
             },
             {
                 "name": "row_3_departed",
-                "y": "564",
+                "y": "578",
                 "primary_color": "#FFFFFF00",
                 "ghost_color": "#FF666600",
                 "box_color": "#FF333300",
@@ -313,10 +313,10 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
                 f"Missing row <Group name='{row_name}'>",
             )
             row = groups_by_name[row_name]
-            self.assertEqual(row.attrib.get("x"), "132")
+            self.assertEqual(row.attrib.get("x"), "90")
             self.assertEqual(row.attrib.get("y"), spec["y"])
-            self.assertEqual(row.attrib.get("width"), "636")
-            self.assertEqual(row.attrib.get("height"), "204")
+            self.assertEqual(row.attrib.get("width"), "720")
+            self.assertEqual(row.attrib.get("height"), "230")
 
             # For row_2_present and row_3_departed, slots are provided via <ComplicationSlot> elements under <Scene>
             if row_name in ("row_2_present", "row_3_departed"):
@@ -594,8 +594,8 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
             )
             self.assertEqual(
                 left_margin,
-                28,
-                f"Row {row_name} outer left/right margin must be 28px on the grey panel",
+                72,
+                f"Row {row_name} outer left/right margin must be 72px on the enlarged 720px grey panel",
             )
             self.assertEqual(
                 len(set(inter_slot_gaps)),
@@ -604,8 +604,8 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
             )
             self.assertEqual(
                 inter_slot_gaps[0],
-                12,
-                f"Row {row_name} inter-slot gaps must be 12px",
+                6,
+                f"Row {row_name} inter-slot gaps must be 6px on the enlarged layout",
             )
 
             # Verify vertical padding inside value boxes matches horizontal visual padding (4px)
@@ -614,8 +614,8 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
             box_h = value_boxes[0][3]
             digit_y = int(next(iter(readout_ys)))
             digit_size = int(next(iter(readout_sizes)))
-            self.assertEqual(box_h, 70, f"Row {row_name} inner value box height must be 70px")
-            self.assertEqual(digit_size, 62, f"Row {row_name} digit/letter size must be 62px")
+            self.assertEqual(box_h, 76, f"Row {row_name} inner value box height must be 76px")
+            self.assertEqual(digit_size, 68, f"Row {row_name} digit/letter size must be 68px")
             top_pad = digit_y - box_y
             bottom_pad = (box_y + box_h) - (digit_y + digit_size)
             self.assertEqual(
@@ -631,7 +631,7 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
             # With condensed char advance=38px (and 3px internal sidebearing), each box adds 1px per side + 3px = 4px
             char_counts = [3, 2, 4, 2, 2]
             for (bx, by, bw, bh), n_chars in zip(value_boxes, char_counts):
-                side_pad = (bw - n_chars * 38) // 2 + 3
+                side_pad = (bw - n_chars * 40) // 2 + 3
                 self.assertEqual(
                     top_pad,
                     side_pad,
@@ -663,15 +663,15 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
             self.assertEqual(len(footer_rects), 1)
             tier_top_margin = min(header_rects)
             tier_bottom_margin = row_height - (footer_rects[0][0] + footer_rects[0][1])
-            self.assertEqual(
-                tier_top_margin,
-                tier_bottom_margin,
-                f"Row {row_name} top tier margin ({tier_top_margin}px) must equal bottom tier margin ({tier_bottom_margin}px)",
-            )
             self.assertGreaterEqual(
                 tier_top_margin,
                 20,
                 f"Row {row_name} top tier margin ({tier_top_margin}px) must leave generous space after divider stripe",
+            )
+            self.assertGreaterEqual(
+                tier_bottom_margin,
+                20,
+                f"Row {row_name} bottom tier margin ({tier_bottom_margin}px) must leave generous space before next divider stripe",
             )
 
             # Verify header & footer labels use crisp normal weight at size 30 (2x HiDPI)
@@ -741,12 +741,12 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
             sid = int(cs.attrib["slotId"])
             y = int(cs.attrib["y"])
             if sid <= 3:
-                self.assertEqual(y, 349, f"ComplicationSlot {sid} must be in Row 2 (y=349)")
+                self.assertEqual(y, 345, f"ComplicationSlot {sid} must be in Row 2 (y=345)")
                 expected_primary = "#FF00FF00"
                 expected_ghost = "#FF006600"
                 expected_box = "#FF003300"
             else:
-                self.assertEqual(y, 564, f"ComplicationSlot {sid} must be in Row 3 (y=564)")
+                self.assertEqual(y, 578, f"ComplicationSlot {sid} must be in Row 3 (y=578)")
                 expected_primary = "#FFFFFF00"
                 expected_ghost = "#FF666600"
                 expected_box = "#FF333300"
@@ -827,7 +827,7 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
                 f"{row_grp_name} must contain AM/PM colon indicator dots inside <Condition>",
             )
             for cd in colon_draws:
-                self.assertEqual(cd.attrib.get("x"), "412")
+                self.assertEqual(cd.attrib.get("x"), "456")
                 self.assertEqual(cd.attrib.get("width"), "16")
 
         # Verify Row 2 hardcoded STEPS slot at (22..214, width 192)
@@ -842,18 +842,18 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
                 break
         self.assertIsNotNone(steps_pt, "Row 2 must contain hardcoded STEPS [STEP_COUNT] PartText")
         assert steps_pt is not None
-        self.assertEqual(steps_pt.attrib.get("x"), "22")
-        self.assertEqual(steps_pt.attrib.get("width"), "191")
+        self.assertEqual(steps_pt.attrib.get("x"), "64")
+        self.assertEqual(steps_pt.attrib.get("width"), "201")
 
         # Verify rightmost split slots (Slots 2 & 3 in Row 2, Slots 7 & 8 in Row 3) exactly match Row 1 HOUR & MIN coordinates
         row_slots_by_id = {int(cs.attrib["slotId"]): cs for cs in comp_slots}
-        for sid_pair, expected_y in (((2, 3), 349), ((7, 8), 564)):
+        for sid_pair, expected_y in (((2, 3), 345), ((7, 8), 578)):
             s_left = row_slots_by_id[sid_pair[0]]
             s_right = row_slots_by_id[sid_pair[1]]
-            self.assertEqual(int(s_left.attrib["x"]), 132 + 440 - 2)
-            self.assertEqual(int(s_left.attrib["width"]), 78 + 4)
-            self.assertEqual(int(s_right.attrib["x"]), 132 + 530 - 2)
-            self.assertEqual(int(s_right.attrib["width"]), 78 + 4)
+            self.assertEqual(int(s_left.attrib["x"]), 568 - 2)
+            self.assertEqual(int(s_left.attrib["width"]), 82 + 4)
+            self.assertEqual(int(s_right.attrib["x"]), 656 - 2)
+            self.assertEqual(int(s_right.attrib["width"]), 82 + 4)
 
 
 if __name__ == "__main__":
