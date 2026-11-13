@@ -760,8 +760,10 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
                     f"ComplicationSlot {sid} must support {req_type}",
                 )
 
-            bbox = cs.find("BoundingBox")
-            self.assertIsNotNone(bbox, f"ComplicationSlot {sid} missing <BoundingBox>")
+            bbox = cs.find("BoundingRoundBox")
+            if bbox is None:
+                bbox = cs.find("BoundingBox")
+            self.assertIsNotNone(bbox, f"ComplicationSlot {sid} missing <BoundingRoundBox> or <BoundingBox>")
             policy = cs.find("DefaultProviderPolicy")
             self.assertIsNotNone(
                 policy, f"ComplicationSlot {sid} missing <DefaultProviderPolicy>"
