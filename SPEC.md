@@ -49,7 +49,7 @@ Phase 1 focuses strictly on **visual parity** with the DeLorean time-circuit aes
 | **Min SDK** | `36` (Wear OS 6+) |
 | **WFF Version** | `4` (`com.google.wear.watchface.format.version`) |
 | **Kotlin / Java Code** | Disabled (`enableKotlin = false`, `android:hasCode="false"`) |
-| **Reference Canvas Size** | `450 × 450 px` (circular) |
+| **Reference Canvas Size** | `900 × 900 px` (2x HiDPI supersampled circular canvas) |
 
 ---
 
@@ -82,15 +82,15 @@ watchface/
 ## 5. Visual & Layout Specification
 
 ### 5.1 Canvas, Automatic Scaling & Inscribed Dashboard Square
-In Watch Face Format (WFF), `<WatchFace width="450" height="450">` defines a **virtual coordinate system (reference canvas)**. The Wear OS WFF runtime **automatically scales** all coordinates, shapes, images, and fonts proportionally to the physical pixel resolution of the target watch display (e.g., 384×384, 450×450, 480×480).
+In Watch Face Format (WFF), `<WatchFace width="900" height="900">` defines a **2x HiDPI virtual coordinate system (reference canvas)**. Using `900 × 900` (2× the base `450 × 450` grid) ensures all offscreen `<PartText>` and `<PartDraw>` buffers are rasterized at twice the pixel density before the Wear OS WFF runtime scales the scene to the physical display resolution.
 
-Following `MapperUtil.calcTopLeftCornerOnCirlce` from the legacy project, the square dashboard is inscribed inside the `450 × 450` reference circle (`r = 225`):
-- **Inner Square Size:** $\lfloor 225 \times \sqrt{2} \rfloor = 318\text{ px}$ (`width="318"`, `height="318"`)
-- **Top-Left Origin:** $x = \lfloor 225 - 318 / 2 \rfloor = 66\text{ px}$, $y = 66\text{ px}$
-- **Row Height:** $318 / 3 = 106\text{ px}$ per row:
-  - **Row 1 (Red):** `y = 66`, `height = 106`
-  - **Row 2 (Green):** `y = 172`, `height = 106`
-  - **Row 3 (Yellow):** `y = 278`, `height = 106`
+Following `MapperUtil.calcTopLeftCornerOnCirlce` from the legacy project, the square dashboard is inscribed inside the `900 × 900` reference circle (`r = 450`):
+- **Inner Square Size:** $\lfloor 450 \times \sqrt{2} \rfloor = 636\text{ px}$ (`width="636"`, `height="636"`)
+- **Top-Left Origin:** $x = \lfloor 450 - 636 / 2 \rfloor = 132\text{ px}$, $y = 132\text{ px}$
+- **Panel Tier Height (`204 px` per grey surface between the two divider stripes in `bg.png`):**
+  - **Row 1 (Red):** `y = 132`, `height = 204` (Divider 1 at `336..349`)
+  - **Row 2 (Green):** `y = 349`, `height = 204` (Divider 2 at `553..564`)
+  - **Row 3 (Yellow):** `y = 564`, `height = 204`
 
 ### 5.2 Color Palette & Tokens
 Derived directly from `WatchFaceColors.kt`, `DrawableNumber.kt`, `DrawableColon.kt`, and `WatchFaceRenderer.kt`:
@@ -113,30 +113,33 @@ Derived directly from `WatchFaceColors.kt`, `DrawableNumber.kt`, `DrawableColon.
 | **AM/PM Active Dot** | `Color.YELLOW` | `#FFFFFF00` |
 | **AM/PM Inactive Dot** | `darkenColor(#FFFF00, 0.7f)` | `#FF4D4D00` |
 
-### 5.3 Row Internal Geometry (Per Row, Relative to Row Origin `318 × 106`)
-Derived from `DrawService.updateNumbers(maxNumbersPerRow=19, maxNumbersPerCol=10)` and `DrawableSlot`:
-- **Digit Dimensions:**
-  - `charWidth` = $\lfloor 318 / 19 \rfloor \approx 16\text{ px}$
-  - `charHeight` = $\lfloor 318 / 10 \rfloor \approx 32\text{ px}$
-  - Intra-digit `gap` = $2\text{ px}$, box `padding` = $4\text{ px}$
-- **Vertical Bands (within each `106 px` row):**
-  - **Header Labels (`MONTH`, `DAY`, `YEAR`, `HOUR`, `MIN`):** `y = 6`, `height = 18` (Text `size = 13`, `#FFFFFF` on `#660000` rect)
-  - **Value Boxes:** `y = 28`, `height = 40` (Digits at `y = 32`, `height = 32`)
-  - **Footer Label:** `y = 74`, `height = 18`, horizontally centered:
-    - Row 1: `DESTINATION TIME` (`x = 89`, `width = 140`)
-    - Row 2: `PRESENT TIME` (`x = 104`, `width = 110`)
-    - Row 3: `LAST TIME DEPARTED` (`x = 79`, `width = 160`)
+### 5.3 Row Internal Geometry (Per Row, Relative to Row Origin `636 × 204`)
+- **Digit & Letter Dimensions (`size="62"`):**
+  - Both `dseg7_classic_bold.ttf` and `dseg14_classic_bold.ttf` are horizontally condensed to `advanceWidth = 613 / 1000` (`charWidth = 38 px` at `charHeight = 62 px`, with `3 px` internal sidebearing).
+  - **Symmetric `4 px` Box Padding on All 4 Sides:**
+    - Value Box: `y = 66`, `height = 70` (`66 .. 136`)
+    - Readouts (`size="62"`): `y = 70`, `height = 62` (`70 .. 132`) → **`4 px` top & `4 px` bottom padding**
+    - Box Widths (`38 × N + 2 px`): `1 px` outer margin + `3 px` internal glyph sidebearing → **`4 px` left & `4 px` right padding**
+- **Vertical Bands (Equal `24 px` Top & Bottom Margin within each `204 px` panel tier):**
+  - **Top Tier Margin:** `24 px` (`0 .. 24`)
+  - **Header Labels (`MONTH`, `DAY`, `YEAR`, `HOUR`, `MIN`):** Badge `y = 24`, `height = 34` (Text `size = 30`, `weight = NORMAL`, `#FFFFFF` on `#660000` rect)
+  - **Value Boxes:** `y = 66`, `height = 70` (Outer `#111111` frame `y = 64`, `height = 74`)
+  - **Footer Label:** Badge `y = 146`, `height = 34` (Text `size = 30`, `weight = NORMAL`), horizontally centered:
+    - Row 1: `DESTINATION TIME` (`x = 170`, `width = 296`)
+    - Row 2: `PRESENT TIME` (`x = 202`, `width = 232`)
+    - Row 3: `LAST TIME DEPARTED` (`x = 150`, `width = 336`)
+  - **Bottom Tier Margin:** `24 px` (`180 .. 204`, equal to Top Tier Margin)
 
-- **Horizontal Slot Positions (within `318 px` width):**
+- **Horizontal Slot Positions (`28 px` Outer Left/Right Margin & `12 px` Inter-Slot Gaps across `636 px`):**
 
 | Slot | Header Label | Content / Format | Char Count | Box `x` | Box `width` |
 | :--- | :--- | :--- | :---: | :---: | :---: |
-| **1. Month** | `MONTH` | `<PartText>` + `<Upper><Template>%s<Parameter expression="[MONTH_S]"/></Template></Upper>` | 3 | `7` | `60` |
-| **2. Day** | `DAY` | `<PartText>` + `<Template>%s<Parameter expression="[DAY_Z]"/></Template>` | 2 | `74` | `42` |
-| **3. Year** | `YEAR` | `<PartText>` + `<Template>%s<Parameter expression="[YEAR]"/></Template>` | 4 | `123` | `78` |
-| **4. Colon** | *(none)* | Upper (AM) & Lower (PM) dots (`r = 4 px`) | — | `206` | `10` |
-| **5. Hour** | `HOUR` | `<DigitalClock>` + `<TimeText format="hh" hourFormat="24">` | 2 | `221` | `42` |
-| **6. Minute** | `MIN` | `<DigitalClock>` + `<TimeText format="mm">` | 2 | `270` | `42` |
+| **1. Month** | `MONTH` | `<PartText>` + `<Upper><Template>%s<Parameter expression="[MONTH_S]"/></Template></Upper>` (`dseg14_classic_bold`, ghost `~~~`) | 3 | `28` | `116` |
+| **2. Day** | `DAY` | `<PartText>` + `<Template>%s<Parameter expression="[DAY_Z]"/></Template>` (`dseg7_classic_bold`, ghost `88`) | 2 | `156` | `78` |
+| **3. Year** | `YEAR` | `<PartText>` + `<Template>%s<Parameter expression="[YEAR]"/></Template>` (`dseg7_classic_bold`, ghost `8888`) | 4 | `246` | `154` |
+| **4. Colon** | *(none)* | Upper (AM) & Lower (PM) dots (`d = 16 px`) | — | `412` | `16` |
+| **5. Hour** | `HOUR` | `<DigitalClock>` + `<TimeText format="hh" hourFormat="24">` (`dseg7_classic_bold`, ghost `88`) | 2 | `440` | `78` |
+| **6. Minute** | `MIN` | `<DigitalClock>` + `<TimeText format="mm">` (`dseg7_classic_bold`, ghost `88`) | 2 | `530` | `78` |
 
 ### 5.4 Component Implementation in WFF XML
 
@@ -172,7 +175,7 @@ Derived from `DrawService.updateNumbers(maxNumbersPerRow=19, maxNumbersPerCol=10
 
 ## 7. Finalized Design Decisions
 
-- **D1 — 7-Segment Digit Rendering:** Bundled 7-segment TTF font (`res/font/dseg7_classic_bold.ttf`) referenced via `family="dseg7_classic_bold"` in `<Font>`. (Can be swapped to `<BitmapFont>` later if desired).
+- **D1 — 7-Segment & 14-Segment Digit/Month Rendering:** Bundled 14-segment TTF font (`res/font/dseg14_classic_bold.ttf`) for 3-letter `MONTH` readouts (with `~~~` ghost segments) and 7-segment TTF font (`res/font/dseg7_classic_bold.ttf`) for numeric `DAY`/`YEAR`/`HOUR`/`MIN` readouts (with `88`/`8888` ghost segments). Both fonts share identical `unitsPerEm = 1000` and `yMax = 1000` metrics, ensuring identical character height (`size="24"`, `y="32"`, `height="32"`).
 - **D2 — Footer Text per Row:** Movie-accurate labels:
   - Row 1 (Red): `"DESTINATION TIME"`
   - Row 2 (Green): `"PRESENT TIME"`
