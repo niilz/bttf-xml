@@ -265,7 +265,7 @@
         </PartImage>
 
         <!-- ===================================================================
-             ROW 1: DESTINATION TIME (Red #FFFF3333)
+             ROW 1: DESTINATION TIME (Red #FFFF2200)
              Origin: (90, 125), Size: 720 x 230
              =================================================================== -->
         <Group
@@ -300,12 +300,12 @@
                 <Rectangle x="492" y="58" width="96"  height="88"><Fill color="#FF111111" /></Rectangle>
                 <Rectangle x="592" y="58" width="96"  height="88"><Fill color="#FF111111" /></Rectangle>
 
-                <!-- Inner Darkened Row-Color Value Boxes (#FF330000, y=60, height=84) -->
-                <Rectangle x="34"  y="60" width="136" height="84"><Fill color="#FF330000" /></Rectangle>
-                <Rectangle x="178" y="60" width="92"  height="84"><Fill color="#FF330000" /></Rectangle>
-                <Rectangle x="278" y="60" width="182" height="84"><Fill color="#FF330000" /></Rectangle>
-                <Rectangle x="494" y="60" width="92"  height="84"><Fill color="#FF330000" /></Rectangle>
-                <Rectangle x="594" y="60" width="92"  height="84"><Fill color="#FF330000" /></Rectangle>
+                <!-- Inner Darkened Row-Color Value Boxes (#FF260000, y=60, height=84) -->
+                <Rectangle x="34"  y="60" width="136" height="84"><Fill color="#FF260000" /></Rectangle>
+                <Rectangle x="178" y="60" width="92"  height="84"><Fill color="#FF260000" /></Rectangle>
+                <Rectangle x="278" y="60" width="182" height="84"><Fill color="#FF260000" /></Rectangle>
+                <Rectangle x="494" y="60" width="92"  height="84"><Fill color="#FF260000" /></Rectangle>
+                <Rectangle x="594" y="60" width="92"  height="84"><Fill color="#FF260000" /></Rectangle>
 
                 <!-- Footer Label Background (#FF222222, y=160) -->
                 <Rectangle x="212" y="160" width="296" height="34"><Fill color="#FF222222" /></Rectangle>
@@ -338,42 +338,42 @@
                 </Text>
             </PartText>
 
-            <!-- Inactive Ghost Background Layer (#FF660000, y=64, size=76) -->
+            <!-- Inactive Ghost Background Layer (#FF580000, y=64, size=76) -->
             <PartText x="36" y="64" width="132" height="76">
                 <Variant mode="AMBIENT" target="alpha" value="0" />
                 <Text align="END" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
-                    <Font family="dseg14_classic_bold" size="76" color="#FF660000">~~~</Font>
+                    <Font family="dseg14_classic_bold" size="76" color="#FF580000">~~~</Font>
                 </Text>
             </PartText>
             <PartText x="180" y="64" width="88" height="76">
                 <Variant mode="AMBIENT" target="alpha" value="0" />
                 <Text align="END" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
-                    <Font family="dseg7_classic_bold" size="76" color="#FF660000">88</Font>
+                    <Font family="dseg7_classic_bold" size="76" color="#FF580000">88</Font>
                 </Text>
             </PartText>
             <PartText x="280" y="64" width="178" height="76">
                 <Variant mode="AMBIENT" target="alpha" value="0" />
                 <Text align="END" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
-                    <Font family="dseg7_classic_bold" size="76" color="#FF660000">8888</Font>
+                    <Font family="dseg7_classic_bold" size="76" color="#FF580000">8888</Font>
                 </Text>
             </PartText>
             <PartText x="496" y="64" width="88" height="76">
                 <Variant mode="AMBIENT" target="alpha" value="0" />
                 <Text align="END" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
-                    <Font family="dseg7_classic_bold" size="76" color="#FF660000">88</Font>
+                    <Font family="dseg7_classic_bold" size="76" color="#FF580000">88</Font>
                 </Text>
             </PartText>
             <PartText x="596" y="64" width="88" height="76">
                 <Variant mode="AMBIENT" target="alpha" value="0" />
                 <Text align="END" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
-                    <Font family="dseg7_classic_bold" size="76" color="#FF660000">88</Font>
+                    <Font family="dseg7_classic_bold" size="76" color="#FF580000">88</Font>
                 </Text>
             </PartText>
 
-            <!-- Active Digital Readouts (#FFFF3333, y=64, size=76) -->
+            <!-- Active Digital Readouts (#FFFF2200, y=64, size=76) -->
             <PartText x="36" y="64" width="132" height="76">
                 <Text align="END" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
-                    <Font family="dseg14_classic_bold" size="76" color="#FFFF3333">
+                    <Font family="dseg14_classic_bold" size="76" color="#FFFF2200">
                         <Upper>
                             <Template>%s<Parameter expression="[MONTH_S]" /></Template>
                         </Upper>
@@ -382,24 +382,24 @@
             </PartText>
             <PartText x="180" y="64" width="88" height="76">
                 <Text align="END" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
-                    <Font family="dseg7_classic_bold" size="76" color="#FFFF3333">
+                    <Font family="dseg7_classic_bold" size="76" color="#FFFF2200">
                         <Template>%s<Parameter expression="[DAY_Z]" /></Template>
                     </Font>
                 </Text>
             </PartText>
             <PartText x="280" y="64" width="178" height="76">
                 <Text align="END" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
-                    <Font family="dseg7_classic_bold" size="76" color="#FFFF3333">
+                    <Font family="dseg7_classic_bold" size="76" color="#FFFF2200">
                         <Template>%s<Parameter expression="[YEAR]" /></Template>
                     </Font>
                 </Text>
             </PartText>
             <DigitalClock x="0" y="0" width="720" height="230">
                 <TimeText x="496" y="64" width="88" height="76" format="hh" hourFormat="24" align="END">
-                    <Font family="dseg7_classic_bold" size="76" color="#FFFF3333" />
+                    <Font family="dseg7_classic_bold" size="76" color="#FFFF2200" />
                 </TimeText>
                 <TimeText x="596" y="64" width="88" height="76" format="mm" align="END">
-                    <Font family="dseg7_classic_bold" size="76" color="#FFFF3333" />
+                    <Font family="dseg7_classic_bold" size="76" color="#FFFF2200" />
                 </TimeText>
             </DigitalClock>
 

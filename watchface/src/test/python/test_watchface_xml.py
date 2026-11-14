@@ -278,9 +278,9 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
             {
                 "name": "row_1_destination",
                 "y": "125",
-                "primary_color": "#FFFF3333",
-                "ghost_color": "#FF660000",
-                "box_color": "#FF330000",
+                "primary_color": "#FFFF2200",
+                "ghost_color": "#FF580000",
+                "box_color": "#FF260000",
                 "footer": "DESTINATION TIME",
             },
             {
