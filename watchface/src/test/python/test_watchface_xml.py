@@ -738,6 +738,56 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
             "Scene must contain 8 <ComplicationSlot> elements (3 in Row 2, 5 in Row 3)",
         )
 
+        # Verify UserConfigurations declares slot_1_label .. slot_8_label for Weg A (Auto + manual label override)
+        user_configs = root.find("UserConfigurations")
+        self.assertIsNotNone(
+            user_configs,
+            "WatchFace must include <UserConfigurations> for slot label overrides",
+        )
+        assert user_configs is not None
+        declared_label_configs = {}
+        for lc in user_configs.findall("ListConfiguration"):
+            cid = lc.attrib.get("id", "")
+            opts = [o.attrib.get("id", "") for o in lc.findall("ListOption")]
+            self.assertIn(lc.attrib.get("defaultValue", ""), opts)
+            declared_label_configs[cid] = opts
+
+        for sid in range(1, 9):
+            cid = f"slot_{sid}_label"
+            self.assertIn(cid, declared_label_configs)
+            for req_suffix in (
+                "auto",
+                "batt",
+                "temp",
+                "feels",
+                "rain",
+                "uv",
+                "wind",
+                "bpm",
+                "steps",
+                "stress",
+                "sleep",
+                "spo2",
+                "kcal",
+                "dist",
+                "day",
+                "date",
+                "sun",
+                "time",
+                "alarm",
+                "alrt",
+                "notif",
+                "stopp",
+                "timer",
+                "med",
+                "icon",
+            ):
+                self.assertIn(
+                    f"s{sid}_{req_suffix}",
+                    declared_label_configs[cid],
+                    f"{cid} missing option s{sid}_{req_suffix}",
+                )
+
         slot_ids = [cs.attrib.get("slotId") for cs in comp_slots]
         self.assertEqual(
             slot_ids,
@@ -760,8 +810,15 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
                 expected_box = "#FF333300"
 
             self.assertEqual(cs.attrib.get("isCustomizable"), "TRUE")
-            sup_types = set(cs.attrib.get("supportedTypes", "").split())
-            for req_type in ("SHORT_TEXT", "RANGED_VALUE", "GOAL_PROGRESS"):
+            sup_types_list = cs.attrib.get("supportedTypes", "").split()
+            self.assertGreaterEqual(len(sup_types_list), 4)
+            self.assertEqual(
+                sup_types_list[0],
+                "LONG_TEXT",
+                f"ComplicationSlot {sid} must prioritize LONG_TEXT first in supportedTypes",
+            )
+            sup_types = set(sup_types_list)
+            for req_type in ("LONG_TEXT", "SHORT_TEXT", "RANGED_VALUE", "GOAL_PROGRESS"):
                 self.assertIn(
                     req_type,
                     sup_types,
@@ -785,7 +842,8 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
                 if req_type == "EMPTY":
                     continue
                 comp = comps[req_type]
-                header_w = None
+                # Verify dynamic header badge widths (drawn inside Condition per title length / icon fallback)
+                header_widths = []
                 box_w = None
                 for r in comp.iter("Rectangle"):
                     fill = r.find("Fill")
@@ -793,13 +851,23 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
                         continue
                     col = fill.attrib.get("color", "").upper()
                     if col == "#FF660000":
-                        header_w = int(r.attrib["width"])
+                        header_widths.append(int(r.attrib["width"]))
                     elif col == expected_box:
                         box_w = int(r.attrib["width"])
-                self.assertIsNotNone(header_w)
+                self.assertTrue(header_widths, f"ComplicationSlot {sid} ({req_type}) missing #FF660000 header badges")
                 self.assertIsNotNone(box_w)
-                assert header_w is not None and box_w is not None
-                self.assertLessEqual(header_w, box_w)
+                assert box_w is not None
+                for hw in header_widths:
+                    self.assertLessEqual(
+                        hw,
+                        box_w,
+                        f"ComplicationSlot {sid} ({req_type}) header badge width ({hw}) must not exceed box width ({box_w})",
+                    )
+                self.assertGreater(
+                    len(set(header_widths)),
+                    1,
+                    f"ComplicationSlot {sid} ({req_type}) header badge must adapt its width to text length / icon",
+                )
 
                 params = [p.attrib.get("expression", "") for p in comp.iter("Parameter")]
                 self.assertTrue(
@@ -810,6 +878,59 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
                     any("COMPLICATION.TITLE" in p for p in params),
                     f"ComplicationSlot {sid} ({req_type}) must bind [COMPLICATION.TITLE]",
                 )
+
+                # Verify icon fallback (<PartImage> with [COMPLICATION.MONOCHROMATIC_IMAGE]) when no title is sent
+                part_images = list(comp.iter("PartImage"))
+                self.assertGreaterEqual(
+                    len(part_images),
+                    1,
+                    f"ComplicationSlot {sid} ({req_type}) must fall back to [COMPLICATION.MONOCHROMATIC_IMAGE] icon when title is empty",
+                )
+                for pimg in part_images:
+                    self.assertEqual(pimg.attrib.get("tintColor", "").upper(), "#FFFFFFFF")
+
+                # Verify no hardcoded misleading provider names like 'NYC' in complication header PartTexts
+                static_header_texts = [
+                    (pt.find(".//Font").text or "").strip()
+                    for pt in comp.iter("PartText")
+                    if pt.find(".//Font") is not None
+                    and pt.find(".//Font").attrib.get("family") == "SYNC_TO_DEVICE"
+                ]
+                self.assertNotIn(
+                    "NYC",
+                    static_header_texts,
+                    f"ComplicationSlot {sid} ({req_type}) must not hardcode 'NYC' as a static fallback label",
+                )
+
+                # Verify subText character limit matches slot capacity:
+                #   - Digital value box: expected_chars (4 for slot 1, 3 for slots 4..6, 2 for slots 2,3,7,8)
+                #   - Header label badge: 2 * expected_chars (8 for slot 1, 6 for slots 4..6, 4 for slots 2,3,7,8)
+                expected_chars = 4 if sid == 1 else (3 if sid in (4, 5, 6) else 2)
+                expected_label_chars = 2 * expected_chars
+                self.assertTrue(
+                    any(f"subText([COMPLICATION.TEXT], 0, {expected_chars})" in p for p in params),
+                    f"ComplicationSlot {sid} ({req_type}) must truncate [COMPLICATION.TEXT] to {expected_chars} chars",
+                )
+                self.assertTrue(
+                    any(f"subText([COMPLICATION.TITLE], 0, {expected_label_chars})" in p for p in params),
+                    f"ComplicationSlot {sid} ({req_type}) must truncate [COMPLICATION.TITLE] to {expected_label_chars} label chars (2 per digit)",
+                )
+                for expr_el in comp.iter("Expression"):
+                    self.assertNotIn(
+                        "=~",
+                        expr_el.text or "",
+                        f"ComplicationSlot {sid} ({req_type}) Expression contains unsupported '=~' operator: {expr_el.text}",
+                    )
+                # Verify all dynamic Templates are wrapped in <Upper> (ALL CAPS)
+                for tmpl in comp.iter("Template"):
+                    upper_children = [
+                        t for u in comp.iter("Upper") for t in u.iter("Template")
+                    ]
+                    self.assertIn(
+                        tmpl,
+                        upper_children,
+                        f"ComplicationSlot {sid} ({req_type}) Template must be wrapped in <Upper> for ALL CAPS",
+                    )
 
                 for pt in comp.iter("PartText"):
                     font_el = pt.find(".//Font")
