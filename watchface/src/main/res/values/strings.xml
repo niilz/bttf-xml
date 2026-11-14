@@ -1,39 +1,47 @@
 <resources>
     <string name="watch_face_name">BTTF Time Circuit</string>
 
-    <!-- Middle Row User Configuration Titles -->
-    <string name="cfg_row2_mode">Middle Row Mode</string>
-    <string name="cfg_slot_1">Middle Row — Slot 1</string>
-    <string name="cfg_slot_2">Middle Row — Slot 2</string>
-    <string name="cfg_slot_3">Middle Row — Slot 3 (Wide)</string>
-    <string name="cfg_slot_4">Middle Row — Slot 4</string>
-    <string name="cfg_slot_5">Middle Row — Slot 5</string>
+    <!-- Complication Slot Display Names -->
+    <string name="cfg_slot_1">Slot 1</string>
+    <string name="cfg_slot_2">Slot 2</string>
+    <string name="cfg_slot_3">Slot 3</string>
+    <string name="cfg_slot_4">Slot 4</string>
+    <string name="cfg_slot_5">Slot 5</string>
 
-    <!-- Bottom Row User Configuration Titles -->
-    <string name="cfg_row3_mode">Bottom Row Mode</string>
-    <string name="cfg_r3_slot_1">Bottom Row — Slot 1</string>
-    <string name="cfg_r3_slot_2">Bottom Row — Slot 2</string>
-    <string name="cfg_r3_slot_3">Bottom Row — Slot 3 (Wide)</string>
-    <string name="cfg_r3_slot_4">Bottom Row — Slot 4</string>
-    <string name="cfg_r3_slot_5">Bottom Row — Slot 5</string>
+    <!-- Slot Label Configuration Titles -->
+    <string name="cfg_label_slot_1">Row 2 — Slot 1 Label</string>
+    <string name="cfg_label_slot_2">Row 2 — Slot 2 Label</string>
+    <string name="cfg_label_slot_3">Row 2 — Slot 3 Label</string>
+    <string name="cfg_label_slot_4">Row 3 — Slot 1 Label</string>
+    <string name="cfg_label_slot_5">Row 3 — Slot 2 Label</string>
+    <string name="cfg_label_slot_6">Row 3 — Slot 3 Label</string>
+    <string name="cfg_label_slot_7">Row 3 — Slot 4 Label</string>
+    <string name="cfg_label_slot_8">Row 3 — Slot 5 Label</string>
 
-    <!-- Row Mode Options -->
-    <string name="mode_time">Time Circuit (Default)</string>
-    <string name="mode_slots_3">3 Custom Slots</string>
-    <string name="mode_slots_4">4 Custom Slots</string>
-    <string name="mode_slots_5">5 Custom Slots</string>
-
-    <!-- Slot Metric Options (No '%' characters so Android Resources.getString Formatter does not throw UnknownFormatConversionException) -->
-    <string name="opt_steps">Steps</string>
-    <string name="opt_battery">Battery</string>
-    <string name="opt_temp">Temperature</string>
-    <string name="opt_heart">Heart Rate</string>
-    <string name="opt_day">Day of Week</string>
-    <string name="opt_month">Month</string>
-    <string name="opt_date">Day of Month</string>
-    <string name="opt_year">Year</string>
-    <string name="opt_hour">Hour</string>
-    <string name="opt_min">Minute</string>
-    <string name="opt_sec">Second</string>
-    <string name="opt_alerts">Notifications</string>
+    <!-- Label Choices (No '%' characters so Android Resources.getString Formatter does not fail) -->
+    <string name="lbl_auto">Auto (Title / Smart / Icon)</string>
+    <string name="lbl_batt">BATT</string>
+    <string name="lbl_temp">TEMP</string>
+    <string name="lbl_feels">FEELS</string>
+    <string name="lbl_rain">RAIN</string>
+    <string name="lbl_uv">UV</string>
+    <string name="lbl_wind">WIND</string>
+    <string name="lbl_bpm">BPM</string>
+    <string name="lbl_steps">STEPS</string>
+    <string name="lbl_stress">STRESS</string>
+    <string name="lbl_sleep">SLEEP</string>
+    <string name="lbl_spo2">SPO2</string>
+    <string name="lbl_kcal">KCAL</string>
+    <string name="lbl_dist">DIST</string>
+    <string name="lbl_day">DAY</string>
+    <string name="lbl_date">DATE</string>
+    <string name="lbl_sun">SUN</string>
+    <string name="lbl_time">TIME</string>
+    <string name="lbl_alarm">ALARM</string>
+    <string name="lbl_alrt">ALRT</string>
+    <string name="lbl_notif">NOTIF</string>
+    <string name="lbl_stopp">STOPP</string>
+    <string name="lbl_timer">TIMER</string>
+    <string name="lbl_med">MED</string>
+    <string name="lbl_icon">Icon Only</string>
 </resources>
