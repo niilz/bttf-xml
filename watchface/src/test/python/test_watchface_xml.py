@@ -278,7 +278,7 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
             {
                 "name": "row_1_destination",
                 "y": "125",
-                "primary_color": "#FFFF0000",
+                "primary_color": "#FFFF3333",
                 "ghost_color": "#FF660000",
                 "box_color": "#FF330000",
                 "footer": "DESTINATION TIME",
@@ -476,6 +476,11 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
                         "dseg7_classic_bold",
                         f"Row {row_name} {expr} must use 'dseg7_classic_bold'",
                     )
+                self.assertEqual(
+                    font_el.attrib.get("color", "").upper(),
+                    spec["primary_color"],
+                    f"Row {row_name} {expr} must use primary color {spec['primary_color']}",
+                )
                 readout_sizes.add(font_el.attrib.get("size"))
                 readout_ys.add(pt.attrib.get("y"))
                 readout_heights.add(pt.attrib.get("height"))

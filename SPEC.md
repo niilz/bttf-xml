@@ -101,7 +101,7 @@ Derived directly from `WatchFaceColors.kt`, `DrawableNumber.kt`, `DrawableColon.
 | **Header / Footer Text** | `LabelTextColor` | `#FFFFFFFF` |
 | **Footer Label BG** | `LabelBackgroundColorDark` | `#FF222222` |
 | **Slot Outer Frame** | `frame_color` | `#FF111111` |
-| **Row 1 Primary (Red)** | `NumberColorRow1` | `#FFFF0000` |
+| **Row 1 Primary (Red)** | `NumberColorRow1` | `#FFFF3333` |
 | **Row 1 Ghost `8` (60% black blend)** | `blendARGB(#FF0000, BLACK, 0.6f)` | `#FF660000` |
 | **Row 1 Box BG (80% black blend)** | `darkenColor(#FF0000, 0.8f)` | `#FF330000` |
 | **Row 2 Primary (Green)** | `NumberColorRow2` | `#FF00FF00` |
@@ -155,7 +155,7 @@ Derived directly from `WatchFaceColors.kt`, `DrawableNumber.kt`, `DrawableColon.
    - Value box drawn via `<PartDraw>` with outer `#FF111111` frame and inner darkened row color (`#FF330000` / `#FF003300` / `#FF333300`).
 3. **7-Segment Digits & Ghost Segments:**
    - **Background Layer (Ghost `8`s):** Static `<PartText>` or `<PartImage>` rendering `88` (Day/Hour/Min) or `8888` (Year) using the 7-segment font/bitmap tinted to the row's ghost color (`#FF660000` / `#FF006600` / `#FF666600`).
-   - **Foreground Layer (Active Digits):** `<DigitalClock><TimeText>` or `<PartText><Text><Template>` with `[DAY_Z]`, `[YEAR]`, `[HOUR_0_23_Z]`, `[MINUTE_Z]` rendered in `#FFFF0000` / `#FF00FF00` / `#FFFFFF00` using `<BitmapFont>` (from `number_0..9.png`) or 7-segment `<Font>`.
+   - **Foreground Layer (Active Digits):** `<DigitalClock><TimeText>` or `<PartText><Text><Template>` with `[DAY_Z]`, `[YEAR]`, `[HOUR_0_23_Z]`, `[MINUTE_Z]` rendered in `#FFFF3333` / `#FF00FF00` / `#FFFFFF00` using `<BitmapFont>` (from `number_0..9.png`) or 7-segment `<Font>`.
 4. **AM/PM Colon Dots:**
    - Two `<PartDraw>` circles at `cy = 40` (AM) and `cy = 56` (PM), `r = 4`.
    - Controlled via `<Condition>` on `[AMPM_POSITION] == 0` (AM active when `< 12`, PM active when `>= 12`).

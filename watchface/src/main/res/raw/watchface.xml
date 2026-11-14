@@ -38,7 +38,7 @@
         </PartImage>
 
         <!-- ===================================================================
-             ROW 1: DESTINATION TIME (Red #FFFF0000)
+             ROW 1: DESTINATION TIME (Red #FFFF3333)
              Origin: (90, 125), Size: 720 x 230
              =================================================================== -->
         <Group
@@ -143,10 +143,10 @@
                 </Text>
             </PartText>
 
-            <!-- Active Digital Readouts (#FFFF0000, y=64, size=76) -->
+            <!-- Active Digital Readouts (#FFFF3333, y=64, size=76) -->
             <PartText x="36" y="64" width="132" height="76">
                 <Text align="END" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
-                    <Font family="dseg14_classic_bold" size="76" color="#FFFF0000">
+                    <Font family="dseg14_classic_bold" size="76" color="#FFFF3333">
                         <Upper>
                             <Template>%s<Parameter expression="[MONTH_S]" /></Template>
                         </Upper>
@@ -155,24 +155,24 @@
             </PartText>
             <PartText x="180" y="64" width="88" height="76">
                 <Text align="END" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
-                    <Font family="dseg7_classic_bold" size="76" color="#FFFF0000">
+                    <Font family="dseg7_classic_bold" size="76" color="#FFFF3333">
                         <Template>%s<Parameter expression="[DAY_Z]" /></Template>
                     </Font>
                 </Text>
             </PartText>
             <PartText x="280" y="64" width="178" height="76">
                 <Text align="END" isAutoSize="TRUE" maxLines="1" ellipsis="TRUE">
-                    <Font family="dseg7_classic_bold" size="76" color="#FFFF0000">
+                    <Font family="dseg7_classic_bold" size="76" color="#FFFF3333">
                         <Template>%s<Parameter expression="[YEAR]" /></Template>
                     </Font>
                 </Text>
             </PartText>
             <DigitalClock x="0" y="0" width="720" height="230">
                 <TimeText x="496" y="64" width="88" height="76" format="hh" hourFormat="24" align="END">
-                    <Font family="dseg7_classic_bold" size="76" color="#FFFF0000" />
+                    <Font family="dseg7_classic_bold" size="76" color="#FFFF3333" />
                 </TimeText>
                 <TimeText x="596" y="64" width="88" height="76" format="mm" align="END">
-                    <Font family="dseg7_classic_bold" size="76" color="#FFFF0000" />
+                    <Font family="dseg7_classic_bold" size="76" color="#FFFF3333" />
                 </TimeText>
             </DigitalClock>
 
