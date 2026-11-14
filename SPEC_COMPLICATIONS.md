@@ -9,7 +9,7 @@
 ## 1. Overview & Architecture
 
 Full DeLorean visual parity using maximum font size (`size="62"`) and native Wear OS ComplicationSlots:
-- **Top Row 1 (Red `#FFFF3333`):** Immutable target time circuit (`DESTINATION TIME`).
+- **Top Row 1 (Red `#FFFF2200`):** Immutable target time circuit (`DESTINATION TIME`).
 - **Middle Row 2 (Green `#FF00FF00`):**
   - **Slot 1 (Fixed Native Steps):** Hardcoded native `[STEP_COUNT]` (5 digits, `192 px`, ghost `~~~~~`).
   - **Slot 2 (ComplicationSlot 1):** 4 chars (`154 px`), default `WATCH_BATTERY` (`100` or `80%`).
