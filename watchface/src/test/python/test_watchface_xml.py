@@ -739,21 +739,21 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
         comp_slots = scene.findall("ComplicationSlot")
         self.assertEqual(
             len(comp_slots),
-            8,
-            "Scene must contain 8 <ComplicationSlot> elements (3 in Row 2, 5 in Row 3)",
+            7,
+            "Scene must contain 7 <ComplicationSlot> elements (2 in Row 2, 5 in Row 3)",
         )
 
         slot_ids = [cs.attrib.get("slotId") for cs in comp_slots]
         self.assertEqual(
             slot_ids,
-            ["1", "2", "3", "4", "5", "6", "7", "8"],
-            "ComplicationSlot slotId attributes must be '1'..'8'",
+            ["1", "2", "3", "4", "5", "6", "7"],
+            "ComplicationSlot slotId attributes must be '1'..'7'",
         )
 
         for cs in comp_slots:
             sid = int(cs.attrib["slotId"])
             y = int(cs.attrib["y"])
-            if sid <= 3:
+            if sid <= 2:
                 self.assertEqual(y, 358, f"ComplicationSlot {sid} must be in Row 2 (y=358)")
                 expected_primary = "#FF00FF00"
                 expected_ghost = "#FF006600"
@@ -765,8 +765,15 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
                 expected_box = "#FF333300"
 
             self.assertEqual(cs.attrib.get("isCustomizable"), "TRUE")
-            sup_types = set(cs.attrib.get("supportedTypes", "").split())
-            for req_type in ("SHORT_TEXT", "RANGED_VALUE", "GOAL_PROGRESS"):
+            sup_types_list = cs.attrib.get("supportedTypes", "").split()
+            self.assertGreaterEqual(len(sup_types_list), 4)
+            self.assertEqual(
+                sup_types_list[0],
+                "LONG_TEXT",
+                f"ComplicationSlot {sid} must prioritize LONG_TEXT first in supportedTypes",
+            )
+            sup_types = set(sup_types_list)
+            for req_type in ("LONG_TEXT", "SHORT_TEXT", "RANGED_VALUE", "GOAL_PROGRESS"):
                 self.assertIn(
                     req_type,
                     sup_types,
@@ -790,7 +797,8 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
                 if req_type == "EMPTY":
                     continue
                 comp = comps[req_type]
-                header_w = None
+                # Verify dynamic header badge widths (drawn inside Condition per title length / icon fallback)
+                header_widths = []
                 box_w = None
                 for r in comp.iter("Rectangle"):
                     fill = r.find("Fill")
@@ -798,13 +806,23 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
                         continue
                     col = fill.attrib.get("color", "").upper()
                     if col == "#FF660000":
-                        header_w = int(r.attrib["width"])
+                        header_widths.append(int(r.attrib["width"]))
                     elif col == expected_box:
                         box_w = int(r.attrib["width"])
-                self.assertIsNotNone(header_w)
+                self.assertTrue(header_widths, f"ComplicationSlot {sid} ({req_type}) missing #FF660000 header badges")
                 self.assertIsNotNone(box_w)
-                assert header_w is not None and box_w is not None
-                self.assertLessEqual(header_w, box_w)
+                assert box_w is not None
+                for hw in header_widths:
+                    self.assertLessEqual(
+                        hw,
+                        box_w,
+                        f"ComplicationSlot {sid} ({req_type}) header badge width ({hw}) must not exceed box width ({box_w})",
+                    )
+                self.assertGreater(
+                    len(set(header_widths)),
+                    1,
+                    f"ComplicationSlot {sid} ({req_type}) header badge must adapt its width to text length / icon",
+                )
 
                 params = [p.attrib.get("expression", "") for p in comp.iter("Parameter")]
                 self.assertTrue(
@@ -815,6 +833,59 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
                     any("COMPLICATION.TITLE" in p for p in params),
                     f"ComplicationSlot {sid} ({req_type}) must bind [COMPLICATION.TITLE]",
                 )
+
+                # Verify icon fallback (<PartImage> with [COMPLICATION.MONOCHROMATIC_IMAGE]) when no title is sent
+                part_images = list(comp.iter("PartImage"))
+                self.assertGreaterEqual(
+                    len(part_images),
+                    1,
+                    f"ComplicationSlot {sid} ({req_type}) must fall back to [COMPLICATION.MONOCHROMATIC_IMAGE] icon when title is empty",
+                )
+                for pimg in part_images:
+                    self.assertEqual(pimg.attrib.get("tintColor", "").upper(), "#FFFFFFFF")
+
+                # Verify no hardcoded misleading provider names like 'NYC' in complication header PartTexts
+                static_header_texts = [
+                    (pt.find(".//Font").text or "").strip()
+                    for pt in comp.iter("PartText")
+                    if pt.find(".//Font") is not None
+                    and pt.find(".//Font").attrib.get("family") == "SYNC_TO_DEVICE"
+                ]
+                self.assertNotIn(
+                    "NYC",
+                    static_header_texts,
+                    f"ComplicationSlot {sid} ({req_type}) must not hardcode 'NYC' as a static fallback label",
+                )
+
+                # Verify subText character limit matches slot capacity:
+                #   - Digital value box: expected_chars (4 for slots 1, 2; 3 for slots 3..5; 2 for slots 6, 7)
+                #   - Header label badge: 2 * expected_chars (8 for slots 1, 2; 6 for slots 3..5; 4 for slots 6, 7)
+                expected_chars = 4 if sid in (1, 2) else (3 if sid in (3, 4, 5) else 2)
+                expected_label_chars = 2 * expected_chars
+                self.assertTrue(
+                    any(f"subText([COMPLICATION.TEXT], 0, {expected_chars})" in p for p in params),
+                    f"ComplicationSlot {sid} ({req_type}) must truncate [COMPLICATION.TEXT] to {expected_chars} chars",
+                )
+                self.assertTrue(
+                    any(f"subText([COMPLICATION.TITLE], 0, {expected_label_chars})" in p for p in params),
+                    f"ComplicationSlot {sid} ({req_type}) must truncate [COMPLICATION.TITLE] to {expected_label_chars} label chars (2 per digit)",
+                )
+                for expr_el in comp.iter("Expression"):
+                    self.assertNotIn(
+                        "=~",
+                        expr_el.text or "",
+                        f"ComplicationSlot {sid} ({req_type}) Expression contains unsupported '=~' operator: {expr_el.text}",
+                    )
+                # Verify all dynamic Templates are wrapped in <Upper> (ALL CAPS)
+                for tmpl in comp.iter("Template"):
+                    upper_children = [
+                        t for u in comp.iter("Upper") for t in u.iter("Template")
+                    ]
+                    self.assertIn(
+                        tmpl,
+                        upper_children,
+                        f"ComplicationSlot {sid} ({req_type}) Template must be wrapped in <Upper> for ALL CAPS",
+                    )
 
                 for pt in comp.iter("PartText"):
                     font_el = pt.find(".//Font")
@@ -858,15 +929,35 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
         self.assertEqual(steps_pt.attrib.get("x"), "31")
         self.assertEqual(steps_pt.attrib.get("width"), "223")
 
-        # Verify rightmost split slots (Slots 2 & 3 in Row 2, Slots 7 & 8 in Row 3) exactly match Row 1 HOUR & MIN coordinates
+        # Verify Row 2 merged Slot 2: 4-digit slot centered between AM/PM colon and right edge (784)
         row_slots_by_id = {int(cs.attrib["slotId"]): cs for cs in comp_slots}
-        for sid_pair, expected_y in (((2, 3), 358), ((7, 8), 588)):
-            s_left = row_slots_by_id[sid_pair[0]]
-            s_right = row_slots_by_id[sid_pair[1]]
-            self.assertEqual(int(s_left.attrib["x"]), 586 - 2)
-            self.assertEqual(int(s_left.attrib["width"]), 92 + 4)
-            self.assertEqual(int(s_right.attrib["x"]), 690 - 2)
-            self.assertEqual(int(s_right.attrib["width"]), 92 + 4)
+        s2 = row_slots_by_id[2]
+        self.assertEqual(int(s2.attrib["x"]), 587)
+        self.assertEqual(int(s2.attrib["width"]), 186)
+        # AM/PM colon ends at 90 + 468 + 18 = 576; right boundary of Row 3 rightmost slot is 784
+        colon_right = 90 + 468 + 18  # 576
+        right_boundary = 784
+        margin_left = int(s2.attrib["x"]) - colon_right
+        margin_right = right_boundary - (int(s2.attrib["x"]) + int(s2.attrib["width"]))
+        self.assertEqual(
+            margin_left,
+            margin_right,
+            f"Row 2 Slot 2 must be symmetrically centered between AM/PM colon and right edge: {margin_left} vs {margin_right}",
+        )
+        # Verify default provider policy for Slot 2 is EMPTY
+        dpp2 = s2.find("DefaultProviderPolicy")
+        self.assertIsNotNone(dpp2, "Slot 2 must declare DefaultProviderPolicy")
+        assert dpp2 is not None
+        self.assertEqual(dpp2.attrib.get("defaultSystemProvider"), "EMPTY")
+        self.assertEqual(dpp2.attrib.get("defaultSystemProviderType"), "EMPTY")
+
+        # Verify Row 3 rightmost split slots (Slots 6 & 7) exactly match split coordinates
+        s_left = row_slots_by_id[6]
+        s_right = row_slots_by_id[7]
+        self.assertEqual(int(s_left.attrib["x"]), 586 - 2)
+        self.assertEqual(int(s_left.attrib["width"]), 92 + 4)
+        self.assertEqual(int(s_right.attrib["x"]), 690 - 2)
+        self.assertEqual(int(s_right.attrib["width"]), 92 + 4)
 
 
 if __name__ == "__main__":
