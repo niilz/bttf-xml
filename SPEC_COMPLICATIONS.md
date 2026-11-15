@@ -27,6 +27,26 @@
 - Renumbering Row 3 IDs can require reselecting existing complications
   and label overrides after updating an already configured watch face.
 
+## Per-character segment selection
+
+- For every live complication value (all four supported data types), each
+  visible character independently selects its foreground and ghost font:
+  ASCII `0`–`9` use `dseg7_classic_bold` with `8`; other characters use
+  `dseg14_classic_bold` with `~`. For `85%`, only the percent cell uses
+  the 14-segment pair. Letters, minus signs and degree symbols stay 14-segment.
+- Preserve the existing battery-percent formatting and value truncation
+  before selecting glyphs, including automatically appended percent signs.
+- Fixed right-aligned character cells stay within the existing readout area.
+  WFF requires integer geometry: four-character cells use a uniform 45 px
+  width with alternating 44/45 px advances, avoiding unequal autosizing.
+  Leading unused cells retain their existing 14-segment ghost style.
+- Native STEPS is always numeric, so both its foreground and five ghosts
+  use the 7-segment font. Labels, EMPTY/NO_DATA artwork, colors, depth,
+  row positions and ambient hiding of ghosts remain unchanged.
+- Run `python3 -m unittest discover -s watchface/src/test/python -v`, including
+  the mixed-value, character-selector and geometry checks in
+  `test_character_segments.py`, plus WFF v4 XSD validation.
+
 ## 1. Historical Phase 4 Overview & Architecture
 
 Full DeLorean visual parity using maximum font size (`size="62"`) and native Wear OS ComplicationSlots:
