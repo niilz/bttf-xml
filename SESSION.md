@@ -1,5 +1,11 @@
 # Session Notes
 
+- CONFIRMED on real hardware (Galaxy Watch): nested ternaries as function arguments (`subText(TEXT, 0, (cond) ? 0 : ...)`) render empty — top-level ternaries work. Keep all extractions in the proven flat shape; test_no_nested_ternary_stop_detection_remains guards this.
+
+- The old `is_batt` title lists differ per slot: slots 1–2 include the `/EMPTY/` sentinel, slots 3–7 do not. Unintentional inconsistency from the slot-split history; the flat `is_batt_l*` guards preserve each slot's original list — harmonize when touched next.
+
+- Providers that deliver an empty `[COMPLICATION.TEXT]` with `GOAL_PROGRESS` (number only in the value field) still render blank; the numeric fallback currently covers only RANGED_VALUE (`[COMPLICATION.GOAL_PROGRESS_VALUE]` exists in the runtime — extend analogously when needed).
+
 - Duplicate group names `s<N>_<type>_h_day`: the weekday auto-label group and the manual `day`-option label group share one name per type/slot. Harmless for rendering (names are informational), but confusing when diffing/debugging.
 
 - `RANGED_VALUE`/`GOAL_PROGRESS` render only `[COMPLICATION.TEXT]`/`[COMPLICATION.TITLE]`; providers that expose the value solely via `COMPLICATION.VALUE` would render an empty value row. Not verified against real providers.

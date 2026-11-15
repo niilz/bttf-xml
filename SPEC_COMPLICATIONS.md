@@ -66,18 +66,49 @@ for exactly one `°` in the 14-segment font. Read only the numeric prefix
 that fits before it, stopping before an existing degree sign or separating
 space (including NBSP and narrow NBSP), so `23`, `23°`, `23°C`, and `23 °C`
 all render as `23°` in a sufficiently wide slot. Preserve minus signs and
-decimal punctuation within the available prefix. This label-driven branch
-takes priority over battery/value formatting, without guessing provider
+decimal punctuation within the available prefix. These label-driven branches
+take priority over battery/value formatting, without guessing provider
 identity from its text. Other labels and EMPTY/NO_DATA artwork are unchanged;
 weekday text remains two characters as supplied by the provider.
+
+Implementation: one flat branch per possible prefix length
+(`is_temperature_l<capacity-1>` .. `l1`), guarded by plain string
+comparisons (`is_weekday` style) — never nested ternaries inside function
+arguments, which render empty on real watches (confirmed on a Galaxy Watch:
+only the degree sign showed). Each branch reuses the proven battery-cell
+extraction shape cropped to its length; the value itself is never altered
+by choosing a manual label.
+
+## Numeric fallback for value-only providers
+
+Providers frequently deliver `RANGED_VALUE` with an empty
+`[COMPLICATION.TEXT]` and the number only in the value field. For empty
+text, three extra branches render
+`numberFormat([COMPLICATION.RANGED_VALUE_VALUE], "0.#")` through the same
+per-character cells: `is_numeric_temperature` (manual TEMP/FEELS label:
+number + `°`), `is_numeric_batt` (battery title/label: number + `%`), and
+`is_numeric_default` (bare number). (Token and stringification verified
+against the decompiled DWF runtime.)
 
 ## Per-character segment selection
 
 - For every live complication value (all three supported data types), each
   visible character independently selects its foreground and ghost font:
-  ASCII `0`–`9` use `dseg7_classic_bold` with `8`; other characters use
-  `dseg14_classic_bold` with `~`. For `85%`, only the percent cell uses
-  the 14-segment pair. Letters, minus signs and degree symbols stay 14-segment.
+  ASCII `0`–`9` and empty padding cells use `dseg7_classic_bold` with `8`;
+  other characters use `dseg14_classic_bold` with `~`. For `85%`, only the
+  percent cell uses the 14-segment pair. Letters, minus signs and degree
+  symbols stay 14-segment.
+- The battery percent suffix is label-driven: it fires when the provider
+  title matches Battery/BATT/BAT (provider titles are localized, so a
+  German "Batterie" alone does not qualify) or when the manual `BATT` label
+  is selected. Like temperatures, flat prefix-length branches
+  (`is_batt_l<capacity-1>` .. `l1`) crop the numeric prefix before any stop
+  character (space, NBSP, narrow NBSP, `%`) and append exactly one
+  synthetic `%`, so `85`, `85%`, `85 %` and `8 %` all render flush
+  (`85%`/`8%`). Battery prefixes are always bounded: a number too long for
+  its slot (e.g. `100` in a two-digit-capacity slot) falls through to the
+  raw default rendering instead of being truncated into a misleading
+  value.
 - Preserve the existing battery-percent formatting and value truncation
   before selecting glyphs, including automatically appended percent signs.
 - Fixed right-aligned character cells stay within the existing readout area.

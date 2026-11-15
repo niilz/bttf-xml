@@ -22,15 +22,31 @@ class TestCharacterSegments(unittest.TestCase):
                 with self.subTest(slot=sid, type=complication.attrib["type"]):
                     value = complication.find("Condition")
                     self.assertIsNotNone(value)
-                    # Preserve existing battery formatting and truncation order.
-                    # The former `*_long_val` branch rendered byte-identically to
-                    # Default, so only battery formatting remains a distinct branch.
-                    branches = [
-                        branch for branch in value.findall("Compare")
-                        if not branch.attrib["expression"].endswith("_is_temperature")
-                    ] + value.findall("Default")
-                    self.assertEqual(len(branches), 2)
-                    for branch in branches:
+                    # Flat prefix-length branches: temperature strips units,
+                    # battery strips spaces/percent; both append exactly one
+                    # suffix. RANGED_VALUE additionally carries numeric fallbacks
+                    # for providers that deliver an empty text (value-only data).
+                    branches = value.findall("Compare") + value.findall("Default")
+                    kinds = [
+                        (f"_is_temperature_l{length}", '"°"')
+                        for length in range(capacity - 1, 0, -1)
+                    ] + [
+                        (f"_is_batt_l{length}", '"%"')
+                        for length in range(capacity - 1, 0, -1)
+                    ]
+                    if complication.attrib["type"] == "RANGED_VALUE":
+                        kinds += [
+                            ("_is_numeric_temperature", '"°"'),
+                            ("_is_numeric_batt", '"%"'),
+                            ("_is_numeric_default", None),
+                        ]
+                    kinds.append((None, None))
+                    self.assertEqual(len(branches), len(kinds))
+                    for branch, (kind, literal) in zip(branches, kinds):
+                        if kind is None:
+                            self.assertEqual(branch.tag, "Default")
+                        else:
+                            self.assertTrue(branch.attrib["expression"].endswith(kind))
                         cells = branch.findall("Group")
                         self.assertEqual(len(cells), capacity)
                         for index, cell in enumerate(cells):
@@ -39,14 +55,15 @@ class TestCharacterSegments(unittest.TestCase):
                             self.assertEqual(cell.attrib["y"], "64")
                             condition = cell.find("Condition")
                             if condition is None:
-                                # Constant character cell (synthetic "%" suffix).
+                                # Constant suffix cell (synthetic "%" or "°").
                                 # Its selector compared a literal against digits and
                                 # was therefore unreachable; the cell now statically
-                                # renders the 14-segment pair, so the percent can
-                                # never inherit the battery's numeric font.
-                                self.assertTrue(
-                                    branch is branches[0] and index == capacity - 1,
-                                    "only the battery suffix cell may drop the selector",
+                                # renders the 14-segment pair, so the suffix can
+                                # never inherit the numeric font.
+                                self.assertEqual(index, capacity - 1)
+                                self.assertIsNotNone(
+                                    literal,
+                                    "only suffix branches may drop the selector",
                                 )
                                 parts = cell.findall("PartText")
                                 self.assertEqual(len(parts), 2)
@@ -57,7 +74,7 @@ class TestCharacterSegments(unittest.TestCase):
                                     self.assertEqual(part.find("Text/Font").attrib["family"], "dseg14_classic_bold")
                                     self.assertEqual(part.find("Text/Font").attrib["size"], "76")
                                 self.assertEqual(
-                                    parts[1].find(".//Parameter").attrib["expression"], '"%"'
+                                    parts[1].find(".//Parameter").attrib["expression"], literal
                                 )
                                 continue
                             expression = condition.find("Expressions/Expression")
@@ -78,13 +95,16 @@ class TestCharacterSegments(unittest.TestCase):
                                     self.assertEqual(part.find("Text/Font").attrib["size"], "76")
                             char_expression = digit.find(".//Parameter").attrib["expression"]
                             self.assertEqual(other.find(".//Parameter").attrib["expression"], char_expression)
+                            # Empty cells select the simpler "8" ghost; the dense
+                            # "~" shadow is reserved for letters and other non-digits.
                             self.assertEqual(
                                 expression.text,
-                                " || ".join(f'({char_expression}) == "{number}"' for number in "0123456789"),
+                                " || ".join(f'({char_expression}) == "{number}"' for number in "0123456789")
+                                + f' || ({char_expression}) == ""',
                             )
                             # The guard already bounds the substring length, so the
                             # extraction must not carry provably redundant clamps.
-                            self.assertIn("subText([COMPLICATION.TEXT]", char_expression)
+                            self.assertIn("subText(", char_expression)
                             self.assertNotIn("clamp(", char_expression)
                             self.assertIn(' : ""', char_expression)
 
@@ -96,7 +116,7 @@ class TestCharacterSegments(unittest.TestCase):
             )
             battery = next(
                 branch for branch in value.findall("Compare")
-                if branch.attrib["expression"].endswith("_is_batt")
+                if branch.attrib["expression"].endswith("_is_batt_l1")
             )
             ordinary = value.find("Default")
             for text, branch, formatted in (
@@ -132,12 +152,55 @@ class TestCharacterSegments(unittest.TestCase):
                                 f"{length} - {distance + 1}, {length} - {distance}) : \"\"",
                             )
                             char = cropped[-distance - 1] if len(cropped) > distance else ""
-                        actual.append((char, "7" if char in "0123456789" and char else "14"))
+                        actual.append((char, "7" if char == "" or char in "0123456789" else "14"))
                     expected = [
-                        (char, "7" if char in "0123456789" and char else "14")
+                        (char, "7" if char == "" or char in "0123456789" else "14")
                         for char in [""] * (capacity - len(formatted)) + list(formatted)
                     ]
                     self.assertEqual(actual, expected)
+
+    def test_battery_suffix_is_label_driven_and_never_doubled(self):
+        root = ET.parse(XML).getroot()
+        for slot in root.findall("Scene/ComplicationSlot"):
+            sid = slot.attrib["slotId"]
+            capacity = 4 if sid in ("1", "2") else 3 if sid in ("3", "4", "5") else 2
+            for comp in slot.findall("Complication"):
+                if comp.attrib["type"] == "EMPTY":
+                    continue
+                with self.subTest(slot=sid, type=comp.attrib["type"]):
+                    for length in range(capacity - 1, 0, -1):
+                        guard = comp.find(
+                            f"Condition/Expressions/Expression"
+                            f"[@name='s{sid}_{comp.attrib['type'].lower()}_is_batt_l{length}']"
+                        )
+                        self.assertIsNotNone(guard)
+                        # Provider titles are localized (e.g. German "Batterie"), so the
+                        # percent suffix must also fire for the manual BATT label.
+                        self.assertIn(
+                            f'[CONFIGURATION.slot_{sid}_label] == "s{sid}_batt"', guard.text
+                        )
+                        self.assertIn('"Battery"', guard.text)
+                        self.assertIn(
+                            f"textLength([COMPLICATION.TEXT]) >= {length}", guard.text
+                        )
+                        # The prefix stops at spaces AND at an existing percent
+                        # sign, so the synthetic suffix is appended exactly once
+                        # and '80 %' renders flush as '80%'.
+                        for i in range(length):
+                            self.assertIn(
+                                f'subText([COMPLICATION.TEXT], {i}, {i + 1}) != "%"',
+                                guard.text,
+                            )
+                            self.assertIn(
+                                f'subText([COMPLICATION.TEXT], {i}, {i + 1}) != " "',
+                                guard.text,
+                            )
+                        # Battery prefixes are always bounded: longer numbers
+                        # fall through to the raw Default rendering instead of
+                        # being truncated into a misleading value.
+                        self.assertIn(
+                            f'textLength([COMPLICATION.TEXT]) == {length}', guard.text
+                        )
 
     def test_native_steps_use_numeric_foreground_and_ghosts(self):
         row = ET.parse(XML).getroot().find("Scene/Group[@name='row_2_present']")
