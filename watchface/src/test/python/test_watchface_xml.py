@@ -32,6 +32,7 @@ WATCHFACE_DIR = ROOT_DIR / "watchface" / "src" / "main"
 MANIFEST_PATH = WATCHFACE_DIR / "AndroidManifest.xml"
 RES_DIR = WATCHFACE_DIR / "res"
 WATCHFACE_XML_PATH = RES_DIR / "raw" / "watchface.xml"
+STRINGS_XML_PATH = RES_DIR / "values" / "strings.xml"
 
 ANDROID_NS = "{http://schemas.android.com/apk/res/android}"
 
@@ -739,11 +740,11 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
         comp_slots = scene.findall("ComplicationSlot")
         self.assertEqual(
             len(comp_slots),
-            8,
-            "Scene must contain 8 <ComplicationSlot> elements (3 in Row 2, 5 in Row 3)",
+            7,
+            "Scene must contain 7 <ComplicationSlot> elements (2 in Row 2, 5 in Row 3)",
         )
 
-        # Verify UserConfigurations declares slot_1_label .. slot_8_label for Weg A (Auto + manual label override)
+        # Verify UserConfigurations declares slot_1_label .. slot_7_label for Weg A (Auto + manual label override)
         user_configs = root.find("UserConfigurations")
         self.assertIsNotNone(
             user_configs,
@@ -757,7 +758,7 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
             self.assertIn(lc.attrib.get("defaultValue", ""), opts)
             declared_label_configs[cid] = opts
 
-        for sid in range(1, 9):
+        for sid in range(1, 8):
             cid = f"slot_{sid}_label"
             self.assertIn(cid, declared_label_configs)
             for req_suffix in (
@@ -793,17 +794,27 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
                     f"{cid} missing option s{sid}_{req_suffix}",
                 )
 
+        strings_root = ET.parse(STRINGS_XML_PATH).getroot()
+        lbl_auto_el = strings_root.find("string[@name='lbl_auto']")
+        self.assertIsNotNone(lbl_auto_el)
+        assert lbl_auto_el is not None
+        self.assertEqual(
+            (lbl_auto_el.text or "").strip(),
+            "Auto",
+            "lbl_auto must be 'Auto' without trailing parenthetical description",
+        )
+
         slot_ids = [cs.attrib.get("slotId") for cs in comp_slots]
         self.assertEqual(
             slot_ids,
-            ["1", "2", "3", "4", "5", "6", "7", "8"],
-            "ComplicationSlot slotId attributes must be '1'..'8'",
+            ["1", "2", "3", "4", "5", "6", "7"],
+            "ComplicationSlot slotId attributes must be '1'..'7'",
         )
 
         for cs in comp_slots:
             sid = int(cs.attrib["slotId"])
             y = int(cs.attrib["y"])
-            if sid <= 3:
+            if sid <= 2:
                 self.assertEqual(y, 358, f"ComplicationSlot {sid} must be in Row 2 (y=358)")
                 expected_primary = "#FF00FF00"
                 expected_ghost = "#FF006600"
@@ -847,6 +858,18 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
                 if req_type == "EMPTY":
                     continue
                 comp = comps[req_type]
+                label_config = comp.find(f".//ListConfiguration[@id='slot_{sid}_label']")
+                self.assertIsNotNone(label_config)
+                assert label_config is not None
+                self.assertEqual(
+                    [option.attrib["id"] for option in label_config.findall("ListOption")],
+                    declared_label_configs[f"slot_{sid}_label"],
+                )
+                auto = label_config.find(f"ListOption[@id='s{sid}_auto']")
+                self.assertIsNotNone(auto)
+                assert auto is not None
+                self.assertTrue(any("_is_weekday" in expression.attrib["name"]
+                                    for expression in auto.iter("Expression")))
                 # Verify dynamic header badge widths (drawn inside Condition per title length / icon fallback)
                 header_widths = []
                 box_w = None
@@ -908,9 +931,9 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
                 )
 
                 # Verify subText character limit matches slot capacity:
-                #   - Digital value box: expected_chars (4 for slot 1, 3 for slots 4..6, 2 for slots 2,3,7,8)
-                #   - Header label badge: 2 * expected_chars (8 for slot 1, 6 for slots 4..6, 4 for slots 2,3,7,8)
-                expected_chars = 4 if sid == 1 else (3 if sid in (4, 5, 6) else 2)
+                #   - Digital value box: expected_chars (4 for slots 1, 2; 3 for slots 3..5; 2 for slots 6, 7)
+                #   - Header label badge: 2 * expected_chars (8 for slots 1, 2; 6 for slots 3..5; 4 for slots 6, 7)
+                expected_chars = 4 if sid in (1, 2) else (3 if sid in (3, 4, 5) else 2)
                 expected_label_chars = 2 * expected_chars
                 self.assertTrue(
                     any(f"subText([COMPLICATION.TEXT], 0, {expected_chars})" in p for p in params),
@@ -979,15 +1002,35 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
         self.assertEqual(steps_pt.attrib.get("x"), "31")
         self.assertEqual(steps_pt.attrib.get("width"), "223")
 
-        # Verify rightmost split slots (Slots 2 & 3 in Row 2, Slots 7 & 8 in Row 3) exactly match Row 1 HOUR & MIN coordinates
+        # Verify Row 2 merged Slot 2: 4-digit slot centered between AM/PM colon and right edge (784)
         row_slots_by_id = {int(cs.attrib["slotId"]): cs for cs in comp_slots}
-        for sid_pair, expected_y in (((2, 3), 358), ((7, 8), 588)):
-            s_left = row_slots_by_id[sid_pair[0]]
-            s_right = row_slots_by_id[sid_pair[1]]
-            self.assertEqual(int(s_left.attrib["x"]), 586 - 2)
-            self.assertEqual(int(s_left.attrib["width"]), 92 + 4)
-            self.assertEqual(int(s_right.attrib["x"]), 690 - 2)
-            self.assertEqual(int(s_right.attrib["width"]), 92 + 4)
+        s2 = row_slots_by_id[2]
+        self.assertEqual(int(s2.attrib["x"]), 587)
+        self.assertEqual(int(s2.attrib["width"]), 186)
+        # AM/PM colon ends at 90 + 468 + 18 = 576; right boundary of Row 3 rightmost slot is 784
+        colon_right = 90 + 468 + 18  # 576
+        right_boundary = 784
+        margin_left = int(s2.attrib["x"]) - colon_right
+        margin_right = right_boundary - (int(s2.attrib["x"]) + int(s2.attrib["width"]))
+        self.assertEqual(
+            margin_left,
+            margin_right,
+            f"Row 2 Slot 2 must be symmetrically centered between AM/PM colon and right edge: {margin_left} vs {margin_right}",
+        )
+        # Verify default provider policy for Slot 2 is EMPTY
+        dpp2 = s2.find("DefaultProviderPolicy")
+        self.assertIsNotNone(dpp2, "Slot 2 must declare DefaultProviderPolicy")
+        assert dpp2 is not None
+        self.assertEqual(dpp2.attrib.get("defaultSystemProvider"), "EMPTY")
+        self.assertEqual(dpp2.attrib.get("defaultSystemProviderType"), "EMPTY")
+
+        # Verify Row 3 rightmost split slots (Slots 6 & 7) exactly match split coordinates
+        s_left = row_slots_by_id[6]
+        s_right = row_slots_by_id[7]
+        self.assertEqual(int(s_left.attrib["x"]), 586 - 2)
+        self.assertEqual(int(s_left.attrib["width"]), 92 + 4)
+        self.assertEqual(int(s_right.attrib["x"]), 690 - 2)
+        self.assertEqual(int(s_right.attrib["width"]), 92 + 4)
 
 
 if __name__ == "__main__":

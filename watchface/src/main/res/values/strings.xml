@@ -8,18 +8,17 @@
     <string name="cfg_slot_4">Slot 4</string>
     <string name="cfg_slot_5">Slot 5</string>
 
-    <!-- Slot Label Configuration Titles -->
+    <!-- Slot Label Configuration Titles (2 slots in Row 2, 5 slots in Row 3) -->
     <string name="cfg_label_slot_1">Row 2 — Slot 1 Label</string>
     <string name="cfg_label_slot_2">Row 2 — Slot 2 Label</string>
-    <string name="cfg_label_slot_3">Row 2 — Slot 3 Label</string>
-    <string name="cfg_label_slot_4">Row 3 — Slot 1 Label</string>
-    <string name="cfg_label_slot_5">Row 3 — Slot 2 Label</string>
-    <string name="cfg_label_slot_6">Row 3 — Slot 3 Label</string>
-    <string name="cfg_label_slot_7">Row 3 — Slot 4 Label</string>
-    <string name="cfg_label_slot_8">Row 3 — Slot 5 Label</string>
+    <string name="cfg_label_slot_3">Row 3 — Slot 1 Label</string>
+    <string name="cfg_label_slot_4">Row 3 — Slot 2 Label</string>
+    <string name="cfg_label_slot_5">Row 3 — Slot 3 Label</string>
+    <string name="cfg_label_slot_6">Row 3 — Slot 4 Label</string>
+    <string name="cfg_label_slot_7">Row 3 — Slot 5 Label</string>
 
     <!-- Label Choices (No '%' characters so Android Resources.getString Formatter does not fail) -->
-    <string name="lbl_auto">Auto (Title / Smart / Icon)</string>
+    <string name="lbl_auto">Auto</string>
     <string name="lbl_batt">BATT</string>
     <string name="lbl_temp">TEMP</string>
     <string name="lbl_feels">FEELS</string>
