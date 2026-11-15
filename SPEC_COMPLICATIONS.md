@@ -27,6 +27,17 @@
 - Renumbering Row 3 IDs can require reselecting existing complications
   and label overrides after updating an already configured watch face.
 
+## Complication representation priority
+
+All seven slots request `SHORT_TEXT` first so providers return compact values
+rather than prose that would be truncated to two to four characters.
+`LONG_TEXT` remains a fallback for providers without a short representation;
+`RANGED_VALUE`, `GOAL_PROGRESS`, and `EMPTY` remain supported. Default provider
+policies already request `SHORT_TEXT` (or `EMPTY` for the unassigned slot).
+This changes negotiation only, not label selection or per-character fonts.
+Existing provider assignments may need to be reselected on the watch if the
+runtime retains their previously negotiated `LONG_TEXT` type.
+
 ## Per-character segment selection
 
 - For every live complication value (all four supported data types), each
