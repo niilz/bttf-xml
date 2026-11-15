@@ -53,3 +53,7 @@ Thumbs.db
 AGENTS.md
 tmp/
 .pi/
+
+# Python bytecode caches (test runs)
+__pycache__/
+*.pyc
