@@ -31,12 +31,14 @@
 
 All seven slots request `SHORT_TEXT` first so providers return compact values
 rather than prose that would be truncated to two to four characters.
-`LONG_TEXT` is no longer offered (the subsequent `remove long-value` change);
+`LONG_TEXT` is neither offered nor rendered (the `remove long-value` change
+ dropped it from `supportedTypes`; its rendering blocks were removed later).
 `RANGED_VALUE`, `GOAL_PROGRESS`, and `EMPTY` remain supported. Default provider
 policies already request `SHORT_TEXT` (or `EMPTY` for the unassigned slot).
 This changes negotiation only, not label selection or per-character fonts.
-Existing provider assignments may need to be reselected on the watch if the
-runtime retains their previously negotiated `LONG_TEXT` type.
+Installations whose runtime retains a previously negotiated `LONG_TEXT` type
+show an empty slot area until the complication is reselected, which
+re-negotiates a supported compact type.
 
 ## Manual label choices and order
 

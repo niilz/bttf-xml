@@ -41,8 +41,8 @@ class TestDashboardDepth(unittest.TestCase):
                 self.assertEqual(rectangle_geometry(bottom), (x, y + height - 1, width, 1))
                 self.assertEqual(top.find("Fill").attrib["color"], "#20FFFFFF")
                 self.assertEqual(bottom.find("Fill").attrib["color"], "#40000000")
-        # All branches of all four data types, EMPTY badges, fixed headers and footers.
-        self.assertEqual(badge_count, 7 * (4 * 22 + 2) + 9)
+        # All branches of all three live data types, EMPTY badges, fixed headers and footers.
+        self.assertEqual(badge_count, 7 * (3 * 22 + 2) + 9)
 
     def test_recesses_keep_the_readout_area_clear(self):
         window_count = 0
@@ -64,7 +64,7 @@ class TestDashboardDepth(unittest.TestCase):
                 self.assertEqual(top.find("Fill").attrib["color"], "#70000000")
                 self.assertEqual(left.find("Fill").attrib["color"], "#40000000")
                 self.assertEqual(rim.find("Fill").attrib["color"], "#30FFFFFF")
-        self.assertEqual(window_count, 6 + 7 * 6)
+        self.assertEqual(window_count, 6 + 7 * 5)
 
     def test_grooves_cover_panel_width_at_bitmap_seams(self):
         groove = self.root.find("Scene/PartDraw[@name='chassis_divider_depth']")

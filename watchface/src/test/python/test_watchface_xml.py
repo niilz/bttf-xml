@@ -835,6 +835,13 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
             )
 
             comps = {c.attrib.get("type"): c for c in cs.findall("Complication")}
+            # Stale LONG_TEXT negotiations render nothing on purpose: the provider
+            # must be reselected, which re-negotiates a supported compact type.
+            self.assertNotIn(
+                "LONG_TEXT",
+                comps,
+                f"ComplicationSlot {sid} must not retain a LONG_TEXT rendering block",
+            )
             for req_type in sup_types:
                 self.assertIn(
                     req_type,
