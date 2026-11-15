@@ -43,13 +43,21 @@ class TestTemperatureFormat(unittest.TestCase):
                     self.assertEqual(len(cells), capacity)
                     for index, cell in enumerate(cells):
                         parameters = cell.findall(".//Parameter")
-                        self.assertEqual(len(parameters), 2)
-                        expression = parameters[0].attrib["expression"]
-                        self.assertEqual(parameters[1].attrib["expression"], expression)
                         if index == capacity - 1:
-                            self.assertEqual(expression, '"°"')
-                            self.assertEqual(cell.find(".//Default/PartText/Text/Font").attrib["family"], "dseg14_classic_bold")
+                            # The degree cell is a constant; its digit selector
+                            # compared a literal and was unreachable, so the cell
+                            # statically renders the 14-segment pair.
+                            self.assertEqual(len(parameters), 1)
+                            self.assertEqual(parameters[0].attrib["expression"], '"°"')
+                            fonts = [
+                                part.find("Text/Font").attrib["family"]
+                                for part in cell.findall("PartText")
+                            ]
+                            self.assertEqual(fonts, ["dseg14_classic_bold", "dseg14_classic_bold"])
                         else:
+                            self.assertEqual(len(parameters), 2)
+                            expression = parameters[0].attrib["expression"]
+                            self.assertEqual(parameters[1].attrib["expression"], expression)
                             self.assertIn(temperature_prefix(capacity), expression)
                     # Never append temperature units in the EMPTY/NO_DATA artwork.
                     empty = slot.find("Complication[@type='EMPTY']")

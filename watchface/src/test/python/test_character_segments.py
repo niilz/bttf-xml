@@ -23,11 +23,13 @@ class TestCharacterSegments(unittest.TestCase):
                     value = complication.find("Condition")
                     self.assertIsNotNone(value)
                     # Preserve existing battery formatting and truncation order.
+                    # The former `*_long_val` branch rendered byte-identically to
+                    # Default, so only battery formatting remains a distinct branch.
                     branches = [
                         branch for branch in value.findall("Compare")
                         if not branch.attrib["expression"].endswith("_is_temperature")
                     ] + value.findall("Default")
-                    self.assertEqual(len(branches), 3)
+                    self.assertEqual(len(branches), 2)
                     for branch in branches:
                         cells = branch.findall("Group")
                         self.assertEqual(len(cells), capacity)
@@ -36,6 +38,28 @@ class TestCharacterSegments(unittest.TestCase):
                             self.assertEqual(int(cell.attrib["width"]), math.ceil(text_width / capacity))
                             self.assertEqual(cell.attrib["y"], "64")
                             condition = cell.find("Condition")
+                            if condition is None:
+                                # Constant character cell (synthetic "%" suffix).
+                                # Its selector compared a literal against digits and
+                                # was therefore unreachable; the cell now statically
+                                # renders the 14-segment pair, so the percent can
+                                # never inherit the battery's numeric font.
+                                self.assertTrue(
+                                    branch is branches[0] and index == capacity - 1,
+                                    "only the battery suffix cell may drop the selector",
+                                )
+                                parts = cell.findall("PartText")
+                                self.assertEqual(len(parts), 2)
+                                self.assertEqual(parts[0].find("Text/Font").text, "~")
+                                self.assertIsNotNone(parts[0].find("Variant[@mode='AMBIENT'][@value='0']"))
+                                for part in parts:
+                                    self.assertEqual(part.find("Text").attrib["align"], "END")
+                                    self.assertEqual(part.find("Text/Font").attrib["family"], "dseg14_classic_bold")
+                                    self.assertEqual(part.find("Text/Font").attrib["size"], "76")
+                                self.assertEqual(
+                                    parts[1].find(".//Parameter").attrib["expression"], '"%"'
+                                )
+                                continue
                             expression = condition.find("Expressions/Expression")
                             digit = condition.find("Compare")
                             other = condition.find("Default")
@@ -58,14 +82,11 @@ class TestCharacterSegments(unittest.TestCase):
                                 expression.text,
                                 " || ".join(f'({char_expression}) == "{number}"' for number in "0123456789"),
                             )
-                            # The synthetic percent must go through the same selector,
-                            # not inherit the font of the battery's numeric value.
-                            if branch is branches[0] and index == capacity - 1:
-                                self.assertEqual(char_expression, '"%"')
-                            else:
-                                self.assertIn("subText([COMPLICATION.TEXT]", char_expression)
-                                self.assertIn("clamp(", char_expression)
-                                self.assertIn(' : ""', char_expression)
+                            # The guard already bounds the substring length, so the
+                            # extraction must not carry provably redundant clamps.
+                            self.assertIn("subText([COMPLICATION.TEXT]", char_expression)
+                            self.assertNotIn("clamp(", char_expression)
+                            self.assertIn(' : ""', char_expression)
 
     def test_mixed_values_and_appended_percent_select_per_character(self):
         root = ET.parse(XML).getroot()
@@ -91,23 +112,24 @@ class TestCharacterSegments(unittest.TestCase):
                 with self.subTest(slot=sid, input=text, output=formatted):
                     actual = []
                     for cell in branch.findall("Group"):
-                        expression = cell.find(".//Compare/PartText[2]//Parameter").attrib["expression"]
+                        expression = cell.findall(".//Parameter")[0].attrib["expression"]
                         if expression == '"%"':
                             char = "%"
                         else:
                             match = re.match(
-                                r"textLength\(subText\(\[COMPLICATION.TEXT\], 0, (\d+)\)\) > (\d+) \?",
+                                r"textLength\(\[COMPLICATION.TEXT\]\) > (\d+) \? "
+                                r"subText\(subText\(\[COMPLICATION.TEXT\], 0, (\d+)\), ",
                                 expression,
                             )
                             self.assertIsNotNone(match)
-                            limit, distance = map(int, match.groups())
+                            distance, limit = map(int, match.groups())
                             cropped = text[:limit]
                             length = f"textLength(subText([COMPLICATION.TEXT], 0, {limit}))"
                             self.assertEqual(
                                 expression,
-                                f"{length} > {distance} ? subText(subText([COMPLICATION.TEXT], 0, {limit}), "
-                                f"clamp({length} - {distance + 1}, 0, {limit}), "
-                                f"clamp({length} - {distance}, 0, {limit})) : \"\"",
+                                f"textLength([COMPLICATION.TEXT]) > {distance} ? "
+                                f"subText(subText([COMPLICATION.TEXT], 0, {limit}), "
+                                f"{length} - {distance + 1}, {length} - {distance}) : \"\"",
                             )
                             char = cropped[-distance - 1] if len(cropped) > distance else ""
                         actual.append((char, "7" if char in "0123456789" and char else "14"))
