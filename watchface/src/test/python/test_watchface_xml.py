@@ -830,8 +830,8 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
             self.assertGreaterEqual(len(sup_types_list), 4)
             self.assertEqual(
                 sup_types_list[0],
-                "LONG_TEXT",
-                f"ComplicationSlot {sid} must prioritize LONG_TEXT first in supportedTypes",
+                "SHORT_TEXT",
+                f"ComplicationSlot {sid} must prioritize SHORT_TEXT for compact readouts",
             )
             sup_types = set(sup_types_list)
             for req_type in ("LONG_TEXT", "SHORT_TEXT", "RANGED_VALUE", "GOAL_PROGRESS"):
