@@ -32,6 +32,7 @@ WATCHFACE_DIR = ROOT_DIR / "watchface" / "src" / "main"
 MANIFEST_PATH = WATCHFACE_DIR / "AndroidManifest.xml"
 RES_DIR = WATCHFACE_DIR / "res"
 WATCHFACE_XML_PATH = RES_DIR / "raw" / "watchface.xml"
+STRINGS_XML_PATH = RES_DIR / "values" / "strings.xml"
 
 ANDROID_NS = "{http://schemas.android.com/apk/res/android}"
 
@@ -278,9 +279,9 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
             {
                 "name": "row_1_destination",
                 "y": "125",
-                "primary_color": "#FFFF3333",
-                "ghost_color": "#FF660000",
-                "box_color": "#FF330000",
+                "primary_color": "#FFFF2200",
+                "ghost_color": "#FF580000",
+                "box_color": "#FF260000",
                 "footer": "DESTINATION TIME",
             },
             {
@@ -743,6 +744,66 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
             "Scene must contain 7 <ComplicationSlot> elements (2 in Row 2, 5 in Row 3)",
         )
 
+        # Verify UserConfigurations declares slot_1_label .. slot_7_label for Weg A (Auto + manual label override)
+        user_configs = root.find("UserConfigurations")
+        self.assertIsNotNone(
+            user_configs,
+            "WatchFace must include <UserConfigurations> for slot label overrides",
+        )
+        assert user_configs is not None
+        declared_label_configs = {}
+        for lc in user_configs.findall("ListConfiguration"):
+            cid = lc.attrib.get("id", "")
+            opts = [o.attrib.get("id", "") for o in lc.findall("ListOption")]
+            self.assertIn(lc.attrib.get("defaultValue", ""), opts)
+            declared_label_configs[cid] = opts
+
+        for sid in range(1, 8):
+            cid = f"slot_{sid}_label"
+            self.assertIn(cid, declared_label_configs)
+            for req_suffix in (
+                "auto",
+                "batt",
+                "temp",
+                "feels",
+                "rain",
+                "uv",
+                "wind",
+                "bpm",
+                "steps",
+                "stress",
+                "sleep",
+                "spo2",
+                "kcal",
+                "dist",
+                "day",
+                "date",
+                "sun",
+                "time",
+                "alarm",
+                "alrt",
+                "notif",
+                "stopp",
+                "timer",
+                "med",
+                "icon",
+            ):
+                self.assertIn(
+                    f"s{sid}_{req_suffix}",
+                    declared_label_configs[cid],
+                    f"{cid} missing option s{sid}_{req_suffix}",
+                )
+
+        strings_root = ET.parse(STRINGS_XML_PATH).getroot()
+        lbl_auto_el = strings_root.find("string[@name='lbl_auto']")
+        self.assertIsNotNone(lbl_auto_el)
+        assert lbl_auto_el is not None
+        self.assertEqual(
+            (lbl_auto_el.text or "").strip(),
+            "Auto",
+            "lbl_auto must be 'Auto' without trailing parenthetical description",
+        )
+
         slot_ids = [cs.attrib.get("slotId") for cs in comp_slots]
         self.assertEqual(
             slot_ids,
@@ -797,6 +858,18 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
                 if req_type == "EMPTY":
                     continue
                 comp = comps[req_type]
+                label_config = comp.find(f".//ListConfiguration[@id='slot_{sid}_label']")
+                self.assertIsNotNone(label_config)
+                assert label_config is not None
+                self.assertEqual(
+                    [option.attrib["id"] for option in label_config.findall("ListOption")],
+                    declared_label_configs[f"slot_{sid}_label"],
+                )
+                auto = label_config.find(f"ListOption[@id='s{sid}_auto']")
+                self.assertIsNotNone(auto)
+                assert auto is not None
+                self.assertTrue(any("_is_weekday" in expression.attrib["name"]
+                                    for expression in auto.iter("Expression")))
                 # Verify dynamic header badge widths (drawn inside Condition per title length / icon fallback)
                 header_widths = []
                 box_w = None

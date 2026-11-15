@@ -6,10 +6,24 @@
 
 ---
 
-## 1. Overview & Architecture
+## Current layout (supersedes the historical Phase 4 layout below)
+
+- Row 2 retains native STEPS, complication 1 (four characters), and a
+  merged four-character complication 2 at x=587, width=186. The merged
+  slot defaults to EMPTY and uses the same automatic/manual label logic.
+- Row 3 uses complication IDs 3–7, with capacities 3, 3, 3, 2, 2.
+- All seven complications retain provider-title, weekday, and icon
+  fallback logic plus the full manual label selection. The automatic
+  option is displayed as `Auto`.
+- Row 1 retains active `#FFFF2200`, ghosts `#FF580000`, and boxes
+  `#FF260000`.
+- Renumbering Row 3 IDs can require reselecting existing complications
+  and label overrides after updating an already configured watch face.
+
+## 1. Historical Phase 4 Overview & Architecture
 
 Full DeLorean visual parity using maximum font size (`size="62"`) and native Wear OS ComplicationSlots:
-- **Top Row 1 (Red `#FFFF3333`):** Immutable target time circuit (`DESTINATION TIME`).
+- **Top Row 1 (Red `#FFFF2200`):** Immutable target time circuit (`DESTINATION TIME`).
 - **Middle Row 2 (Green `#FF00FF00`):**
   - **Slot 1 (Fixed Native Steps):** Hardcoded native `[STEP_COUNT]` (5 digits, `192 px`, ghost `~~~~~`).
   - **Slot 2 (ComplicationSlot 1):** 4 chars (`154 px`), default `WATCH_BATTERY` (`100` or `80%`).
