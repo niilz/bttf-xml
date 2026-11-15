@@ -173,6 +173,29 @@ Derived directly from `WatchFaceColors.kt`, `DrawableNumber.kt`, `DrawableColon.
 
 ---
 
+## Dashboard depth styling (current 900 × 900 layout)
+
+- Light comes from the upper left. Every header/footer badge, including
+  automatic title/day/icon branches, manual overrides, and EMPTY badges,
+  casts a translucent black shadow offset by (1, 2) px. Its width follows
+  the existing adaptive badge; 1 px upper/lower bevels add subtle relief.
+- Every LED window has a 3 px top inset shadow and 2 px left inset shadow,
+  plus a 1 px lower rim reflection. These stay in the readout padding;
+  digit colors, ghost visibility, slot geometry, and label logic are unchanged.
+- Divider shadows follow the actual seams in the bundled 320 × 320 bitmap:
+  source y=107 and y=212, scaled by 2.25 at canvas (90, 90), giving rounded
+  canvas y=331 and y=567. The upper bitmap groove and its overlay are moved
+  down together by four source pixels (9 canvas pixels) to increase footer
+  clearance without resizing or repositioning any labels or readouts. Each spans the full 720 px panel width, with
+  a subtle lower-edge reflection inside the existing seam, not a floating
+  second separator between the row groups.
+- Both lit and unlit AM/PM faces retain their existing colors and state
+  expressions. Small curved lower shadows and upper-left glints suggest
+  rounded indicator lenses without adding a glow.
+- All new decoration hides in AMBIENT; the original AOD faces remain.
+- Validate with `python3 -m unittest discover -s watchface/src/test/python -v`
+  (including `test_dashboard_depth.py`) and the WFF v4 XSD 1.1 validator.
+
 ## 7. Finalized Design Decisions
 
 - **D1 — 7-Segment & 14-Segment Digit/Month Rendering:** Bundled 14-segment TTF font (`res/font/dseg14_classic_bold.ttf`) for 3-letter `MONTH` readouts (with `~~~` ghost segments) and 7-segment TTF font (`res/font/dseg7_classic_bold.ttf`) for numeric `DAY`/`YEAR`/`HOUR`/`MIN` readouts (with `88`/`8888` ghost segments). Both fonts share identical `unitsPerEm = 1000` and `yMax = 1000` metrics, ensuring identical character height (`size="24"`, `y="32"`, `height="32"`).

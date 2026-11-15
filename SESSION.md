@@ -1,5 +1,7 @@
 # Session Notes
 
+- Emulator preview install with `tmp/repack_and_install.py` fails with `INSTALL_FAILED_UPDATE_INCOMPATIBLE`: the currently installed watch face uses a different signing key. Do not uninstall it automatically, since that would lose its configured complications.
+
 - Commit formatting is blocked in the container: `./gradlew spotlessApply` cannot download the required JDK 25 from Foojay; no formatter is configured in the Gradle build. A fallback Black installation also fails because the package index is unreachable.
 - Merging the Row 2 slots renumbers Row 3 complication/configuration IDs; existing watch configurations may need to be selected again after installation.
 

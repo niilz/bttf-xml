@@ -977,7 +977,11 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
             row_grp = scene.find(f"Group[@name='{row_grp_name}']")
             self.assertIsNotNone(row_grp)
             assert row_grp is not None
-            colon_draws = row_grp.findall(".//Condition//PartDraw")
+            # Lens overlays hide in AOD; inspect the two underlying state faces.
+            colon_draws = [
+                draw for draw in row_grp.findall(".//Condition//PartDraw")
+                if draw.attrib.get("name") != "indicator_depth"
+            ]
             self.assertEqual(
                 len(colon_draws),
                 2,
