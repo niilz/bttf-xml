@@ -17,30 +17,28 @@
     <string name="cfg_label_slot_6">Row 3 — Slot 4 Label</string>
     <string name="cfg_label_slot_7">Row 3 — Slot 5 Label</string>
 
-    <!-- Label Choices (No '%' characters so Android Resources.getString Formatter does not fail) -->
+    <!-- Match the picker order: related labels, alphabetical within each group. -->
     <string name="lbl_auto">Auto</string>
-    <string name="lbl_batt">BATT</string>
-    <string name="lbl_temp">TEMP</string>
+    <!-- Weather -->
     <string name="lbl_feels">FEELS</string>
     <string name="lbl_rain">RAIN</string>
+    <string name="lbl_temp">TEMP</string>
     <string name="lbl_uv">UV</string>
     <string name="lbl_wind">WIND</string>
+    <!-- Health and fitness -->
     <string name="lbl_bpm">BPM</string>
-    <string name="lbl_steps">STEPS</string>
-    <string name="lbl_stress">STRESS</string>
     <string name="lbl_sleep">SLEEP</string>
     <string name="lbl_spo2">SPO2</string>
-    <string name="lbl_kcal">KCAL</string>
-    <string name="lbl_dist">DIST</string>
-    <string name="lbl_day">DAY</string>
-    <string name="lbl_date">DATE</string>
-    <string name="lbl_sun">SUN</string>
-    <string name="lbl_time">TIME</string>
+    <string name="lbl_steps">STEPS</string>
+    <string name="lbl_stress">STRESS</string>
+    <!-- Battery -->
+    <string name="lbl_batt">BATT</string>
+    <!-- Date and time -->
     <string name="lbl_alarm">ALARM</string>
-    <string name="lbl_alrt">ALRT</string>
-    <string name="lbl_notif">NOTIF</string>
     <string name="lbl_stopp">STOPP</string>
+    <string name="lbl_sun">SUN</string>
     <string name="lbl_timer">TIMER</string>
-    <string name="lbl_med">MED</string>
+    <!-- Notifications -->
+    <string name="lbl_notif">NOTIF</string>
     <string name="lbl_icon">Icon Only</string>
 </resources>

@@ -761,40 +761,25 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
         for sid in range(1, 8):
             cid = f"slot_{sid}_label"
             self.assertIn(cid, declared_label_configs)
-            for req_suffix in (
+            # Keep related options together, alphabetically within each group.
+            expected_suffixes = (
                 "auto",
-                "batt",
-                "temp",
-                "feels",
-                "rain",
-                "uv",
-                "wind",
-                "bpm",
-                "steps",
-                "stress",
-                "sleep",
-                "spo2",
-                "kcal",
-                "dist",
-                "day",
-                "date",
-                "sun",
-                "time",
-                "alarm",
-                "alrt",
-                "notif",
-                "stopp",
-                "timer",
-                "med",
+                "feels", "rain", "temp", "uv", "wind",  # Weather
+                "bpm", "sleep", "spo2", "steps", "stress",  # Health & fitness
+                "batt",  # Battery
+                "alarm", "stopp", "sun", "timer",  # Date & time
+                "notif",  # Notifications
                 "icon",
-            ):
-                self.assertIn(
-                    f"s{sid}_{req_suffix}",
-                    declared_label_configs[cid],
-                    f"{cid} missing option s{sid}_{req_suffix}",
-                )
+            )
+            self.assertEqual(
+                declared_label_configs[cid],
+                [f"s{sid}_{suffix}" for suffix in expected_suffixes],
+                f"{cid} must contain only retained labels in grouped order",
+            )
 
         strings_root = ET.parse(STRINGS_XML_PATH).getroot()
+        for removed in ("day", "date", "time", "alrt", "med", "dist", "kcal"):
+            self.assertIsNone(strings_root.find(f"string[@name='lbl_{removed}']"))
         lbl_auto_el = strings_root.find("string[@name='lbl_auto']")
         self.assertIsNotNone(lbl_auto_el)
         assert lbl_auto_el is not None
@@ -834,7 +819,8 @@ class TestBttfWatchFaceSpec(unittest.TestCase):
                 f"ComplicationSlot {sid} must prioritize SHORT_TEXT for compact readouts",
             )
             sup_types = set(sup_types_list)
-            for req_type in ("LONG_TEXT", "SHORT_TEXT", "RANGED_VALUE", "GOAL_PROGRESS"):
+            self.assertNotIn("LONG_TEXT", sup_types)
+            for req_type in ("SHORT_TEXT", "RANGED_VALUE", "GOAL_PROGRESS"):
                 self.assertIn(
                     req_type,
                     sup_types,

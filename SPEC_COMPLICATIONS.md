@@ -31,16 +31,47 @@
 
 All seven slots request `SHORT_TEXT` first so providers return compact values
 rather than prose that would be truncated to two to four characters.
-`LONG_TEXT` remains a fallback for providers without a short representation;
+`LONG_TEXT` is no longer offered (the subsequent `remove long-value` change);
 `RANGED_VALUE`, `GOAL_PROGRESS`, and `EMPTY` remain supported. Default provider
 policies already request `SHORT_TEXT` (or `EMPTY` for the unassigned slot).
 This changes negotiation only, not label selection or per-character fonts.
 Existing provider assignments may need to be reselected on the watch if the
 runtime retains their previously negotiated `LONG_TEXT` type.
 
+## Manual label choices and order
+
+The picker retains 18 options, grouped in this order and alphabetical within
+each thematic group (groups are contiguous options, not extra UI headings):
+
+1. `Auto`
+2. Weather: `FEELS`, `RAIN`, `TEMP`, `UV`, `WIND`
+3. Health and fitness: `BPM`, `SLEEP`, `SPO2`, `STEPS`, `STRESS`
+4. Battery: `BATT`
+5. Date and time: `ALARM`, `STOPP`, `SUN`, `TIMER`
+6. Notifications: `NOTIF`
+7. `Icon Only`
+
+Remove manual `DAY`, `DATE`, `TIME`, `ALRT`, `MED`, `DIST`, and `KCAL`
+options from all seven declarations, all rendering branches, and string
+resources. Retain IDs of surviving options. This does not remove providers
+or change weekday values; Auto can still display a provider title or DAY.
+Previously selected removed overrides may require choosing another label.
+
+## Manual temperature unit formatting
+
+For manual `TEMP` and `FEELS` labels, always reserve the last character cell
+for exactly one `°` in the 14-segment font. Read only the numeric prefix
+that fits before it, stopping before an existing degree sign or separating
+space (including NBSP and narrow NBSP), so `23`, `23°`, `23°C`, and `23 °C`
+all render as `23°` in a sufficiently wide slot. Preserve minus signs and
+decimal punctuation within the available prefix. This label-driven branch
+takes priority over battery/value formatting, without guessing provider
+identity from its text. Other labels and EMPTY/NO_DATA artwork are unchanged;
+weekday text remains two characters as supplied by the provider.
+
 ## Per-character segment selection
 
-- For every live complication value (all four supported data types), each
+- For every live complication value (all three supported data types), each
   visible character independently selects its foreground and ghost font:
   ASCII `0`–`9` use `dseg7_classic_bold` with `8`; other characters use
   `dseg14_classic_bold` with `~`. For `85%`, only the percent cell uses

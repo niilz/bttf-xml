@@ -1,5 +1,7 @@
 # Session Notes
 
+- The `remove long-value` commit disables LONG_TEXT in supportedTypes but leaves its rendering branches in XML. These unused branches still expand the XML and could be removed separately.
+
 - Per-character segment rendering uses fixed cells. Bundled `.`, `,`, and `:` glyphs have zero advance from the earlier font customization; their optical placement in mixed numeric strings still needs on-device verification (the emulator signing-key mismatch blocks visual validation).
 
 - Emulator preview install with `tmp/repack_and_install.py` fails with `INSTALL_FAILED_UPDATE_INCOMPATIBLE`: the currently installed watch face uses a different signing key. Do not uninstall it automatically, since that would lose its configured complications.
