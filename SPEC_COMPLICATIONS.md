@@ -11,6 +11,13 @@
 - Row 2 retains native STEPS, complication 1 (four characters), and a
   merged four-character complication 2 at x=587, width=186. The merged
   slot defaults to EMPTY and uses the same automatic/manual label logic.
+  Before a provider is selected, Wear OS can report NO_DATA rather than
+  EMPTY. Every slot therefore has a scene-level fallback guarded by its
+  explicit `[COMPLICATION.<slotId>.TYPE]` being NO_DATA or NOT_CONFIGURED.
+  It duplicates that slot's EMPTY artwork (NONE, dashes, ghost segments,
+  frame and depth styling), including its ambient behavior. For a live
+  data type the fallback disappears; EMPTY still uses the normal slot branch.
+  A selected provider temporarily reporting NO_DATA also shows this fallback.
 - Row 3 uses complication IDs 3–7, with capacities 3, 3, 3, 2, 2.
 - All seven complications retain provider-title, weekday, and icon
   fallback logic plus the full manual label selection. The automatic
