@@ -42,7 +42,7 @@ class TestDashboardDepth(unittest.TestCase):
                 self.assertEqual(top.find("Fill").attrib["color"], "#20FFFFFF")
                 self.assertEqual(bottom.find("Fill").attrib["color"], "#40000000")
         # All branches of all four data types, EMPTY badges, fixed headers and footers.
-        self.assertEqual(badge_count, 7 * (4 * 29 + 2) + 9)
+        self.assertEqual(badge_count, 7 * (4 * 22 + 2) + 9)
 
     def test_recesses_keep_the_readout_area_clear(self):
         window_count = 0

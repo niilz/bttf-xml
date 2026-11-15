@@ -23,7 +23,10 @@ class TestCharacterSegments(unittest.TestCase):
                     value = complication.find("Condition")
                     self.assertIsNotNone(value)
                     # Preserve existing battery formatting and truncation order.
-                    branches = value.findall("Compare") + value.findall("Default")
+                    branches = [
+                        branch for branch in value.findall("Compare")
+                        if not branch.attrib["expression"].endswith("_is_temperature")
+                    ] + value.findall("Default")
                     self.assertEqual(len(branches), 3)
                     for branch in branches:
                         cells = branch.findall("Group")
@@ -70,7 +73,10 @@ class TestCharacterSegments(unittest.TestCase):
             value = root.find(
                 f"Scene/ComplicationSlot[@slotId='{sid}']/Complication[@type='SHORT_TEXT']/Condition"
             )
-            battery = value.find("Compare")
+            battery = next(
+                branch for branch in value.findall("Compare")
+                if branch.attrib["expression"].endswith("_is_batt")
+            )
             ordinary = value.find("Default")
             for text, branch, formatted in (
                 ("85%", ordinary, "85%"[:capacity]),
